@@ -9,4 +9,9 @@ public class HomepageController {
     public String home(){
         return "index";
     }
+
+    @GetMapping("/member/loginHome")
+    public  String toMemeberChooseIdentity (){
+      return"member/chooseIdentity";
+    }
 }

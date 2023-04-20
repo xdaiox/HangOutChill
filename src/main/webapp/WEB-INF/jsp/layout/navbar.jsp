@@ -4,22 +4,23 @@
 <html>
 <head>
     <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
+    <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 <meta charset="UTF-8">
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="" type="image/png">
     <title>HangoutChill Holiday</title>
+
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/themify-iconscopy.css">
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="${contextRoot}/css/bootstrap.css">
+    <link rel="stylesheet" href="${contextRoot}/css/themify-iconscopy.css">
+    <link rel="stylesheet" href="${contextRoot}/css/flaticon.css">
+
 
     <!-- main css -->
-    <link rel="stylesheet" href="css/stylecopy.css">
-    <link rel="stylesheet" href="css/responsivecopy.css">
-    <link rel="stylesheet" href="css/contentcopy.css">
+    <link rel="stylesheet" href="${contextRoot}/css/stylecopy.css">
+    <link rel="stylesheet" href="${contextRoot}/css/responsivecopy.css">
+    <link rel="stylesheet" href="${contextRoot}/css/contentcopy.css">
 <title>導覽列</title>
 </head>
 <body>
@@ -38,8 +39,8 @@
                 </div>
             </div>
             <div class="col-6 col-lg-4 col-md-3 col-sm-6 logo-wrapper">
-                <a href="index.html" class="logo">
-                    <img src="img/picwish.png" alt="" style="height: 80px;">
+                <a href="${contextRoot}/" class="logo">
+                    <img src="${contextRoot}/img/picwish.png" alt="" style="height: 80px;">
                 </a>
             </div>
             <div class="col-lg-4 col-md-3 col-sm-6 search-trigger">
@@ -47,7 +48,7 @@
                     <ul>
                         <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
                         <li><a href="#"><i class="ti-btnshopcart"></i></a></li>
-                        <li><a class="btn-login" href="login.html">登入</a></li>
+                        <li><a class="btn-login" href="${contextRoot}/member/loginHome">登入</a></li>
                     </ul>
                 </div>
             </div>
@@ -68,7 +69,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-                        <li class="nav-item active"><a class="nav-link" href="index.html">首頁</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="${contextRoot}/">首頁</a></li>
                         <li class="nav-item"><a class="nav-link" href="article.html">專欄</a></li>
                         <li class="nav-item"><a class="nav-link" href="location.html">精選地點</a></li>
                         <li class="nav-item submenu dropdown">
