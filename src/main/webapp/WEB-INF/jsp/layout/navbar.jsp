@@ -75,7 +75,7 @@
                         <li class="nav-item submenu dropdown">
                             <a href="discussion.html" class="nav-link dropdown-toggle">討論區</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="actandles.html">活動與課程</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${contextRoot}/actandles">活動與課程</a></li>
                         <li class="nav-item"><a class="nav-link" href="commerceIndex.html">商城</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">聯絡我們</a></li>
                     </ul>

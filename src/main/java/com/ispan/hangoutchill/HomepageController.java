@@ -14,4 +14,9 @@ public class HomepageController {
     public  String toMemeberChooseIdentity (){
       return"member/chooseIdentity";
     }
+    
+    @GetMapping("/actandles")
+    public String showAllActAndLes() {
+    	return"aal/showAllAaL";
+    }
 }
