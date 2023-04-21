@@ -3,6 +3,8 @@ package com.ispan.hangoutchill;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.lang.reflect.Member;
+
 @Controller
 public class HomepageController {
   @GetMapping("/")
@@ -12,6 +14,16 @@ public class HomepageController {
 
     @GetMapping("/member/loginHome")
     public  String toMemeberChooseIdentity (){
-      return"member/chooseIdentity";
+    return"member/chooseIdentity";
     }
+    @GetMapping("/member/NormalRegister")
+    public  String toNormalMemberRegister (){
+    return"member/registerNormalMember";
+    }
+
+  @GetMapping("/member/LocationRegister")
+  public  String toLocationMemberRegister (){
+    return"member/registerLocation";
+  }
+
 }
