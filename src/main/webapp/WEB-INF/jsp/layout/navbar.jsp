@@ -84,5 +84,19 @@
         </nav>
     </div>
     </section>
+
+ 	<script src="${contextRoot}/js/jquery-2.2.4.min.js"></script>
+    <script src="${contextRoot}/js/popper.js"></script>
+    <script src="${contextRoot}/js/bootstrap.min.js"></script>
+    <script src="${contextRoot}/js/stellar.js"></script>
+<!--     <script src="vendors/popup/jquery.magnific-popup.min.js"></script> -->
+    <script src="${contextRoot}/js/jquery.ajaxchimp.min.js"></script>
+    <script src="${contextRoot}/js/waypoints.min.js"></script>
+    <script src="${contextRoot}/js/mail-script.js"></script>
+    <script src="${contextRoot}/js/contact.js"></script>
+    <script src="${contextRoot}/js/jquery.form.js"></script>
+    <script src="${contextRoot}/js/jquery.validate.min.js"></script>
+    <script src="${contextRoot}/js/mail-script.js"></script>
+    <script src="${contextRoot}/js/theme.js"></script>
 </body>
 </html>
