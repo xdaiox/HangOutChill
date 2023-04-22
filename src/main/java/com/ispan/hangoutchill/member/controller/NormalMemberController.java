@@ -20,15 +20,15 @@ public class NormalMemberController {
         return nMemberService.findNormalMemberById(id);
     }
 
-    public String registedNormalMember (@ModelAttribute("newNormalMember") NormalMember nMember, Model model){
-
-       nMemberService.registNormalMember(nMember);
-       model.addAttribute("registBlank",nMember);
-
-        NormalMember latestRegister = nMemberService.getLatestRegister();
-        model.addAttribute("latest",latestRegister);
-        return "";
-    }
+//    public String registedNormalMember (@ModelAttribute("newNormalMember") NormalMember nMember, Model model){
+//
+//       nMemberService.registNormalMember(nMember);
+//       model.addAttribute("registBlank",nMember);
+//
+//        NormalMember latestRegister = nMemberService.getLatestRegister();
+//        model.addAttribute("latest",latestRegister);
+//        return "";
+//    }
 
 
 }
