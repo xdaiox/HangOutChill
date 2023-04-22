@@ -28,7 +28,22 @@ public class HomepageController {
 
     @GetMapping("/member/LocationRegister")
     public  String toLocationMemberRegister (){
-    return"member/registerLocation";
-  }
+      return"member/registerLocation";
+    }
+    
+    @GetMapping("/discussion/showAllDiscussion")
+    public  String toShowAllDiscussion (){
+      return"discussion/showAllDiscussion";
+    }
+    
+    @GetMapping("/discussion/newDiscussion")
+    public  String toNewDiscussion (){
+      return"discussion/newDiscussion";
+    }
+    
+    @GetMapping("/discussion/replyDiscussion")
+    public  String toreplyDiscussion (){
+      return"discussion/replyDiscussion";
+    }
 
 }
