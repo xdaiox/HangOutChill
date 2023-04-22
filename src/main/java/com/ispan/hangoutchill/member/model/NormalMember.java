@@ -1,9 +1,9 @@
 package com.ispan.hangoutchill.member.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="normalAccount")
@@ -31,6 +31,17 @@ public class NormalMember {
     @Column(name = "profilephoto")
     private String photoB64;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+    @Column(name="registeration_time")
+    private Date registTime;
+
+    @PrePersist
+    public void onCreate() {
+        if(registTime == null) {
+            registTime = new Date();
+        }
+    }
     public Integer getId() {
         return id;
     }
@@ -109,5 +120,13 @@ public class NormalMember {
 
     public void setPhotoB64(String photoB64) {
         this.photoB64 = photoB64;
+    }
+
+    public Date getRegistTime() {
+        return registTime;
+    }
+
+    public void setRegistTime(Date registTime) {
+        this.registTime = registTime;
     }
 }

@@ -12,12 +12,22 @@ public class NormalMemberService {
     @Autowired
     NormalMemberRepository nMemberRepository;
 
+
+
     public NormalMember findNormalMemberById (Integer id){
         Optional<NormalMember> option = nMemberRepository.findById(id);
         if(option.isPresent()){
             return  option.get();
         }
         return null;
+    }
+
+    public void registNormalMember (NormalMember nMember){
+        nMemberRepository.save(nMember);
+    }
+
+    public NormalMember getLatestRegister(){
+        return nMemberRepository.findFirstByOrderByAddedTimeDesc();
     }
 }
 

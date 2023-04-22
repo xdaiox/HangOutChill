@@ -7,7 +7,7 @@ import java.lang.reflect.Member;
 
 @Controller
 public class HomepageController {
-  @GetMapping("/")
+    @GetMapping("/")
     public String home(){
         return "index";
     }
@@ -26,8 +26,8 @@ public class HomepageController {
     return"member/registerNormalMember";
     }
 
-  @GetMapping("/member/LocationRegister")
-  public  String toLocationMemberRegister (){
+    @GetMapping("/member/LocationRegister")
+    public  String toLocationMemberRegister (){
     return"member/registerLocation";
   }
 
