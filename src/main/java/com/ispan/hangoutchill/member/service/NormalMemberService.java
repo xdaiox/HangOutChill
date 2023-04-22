@@ -25,9 +25,9 @@ public class NormalMemberService {
     public void registNormalMember (NormalMember nMember){
         nMemberRepository.save(nMember);
     }
-
-    public NormalMember getLatestRegister(){
-        return nMemberRepository.findFirstByOrderByAddedTimeDesc();
-    }
+//
+//    public NormalMember getLatestRegister(){
+//        return nMemberRepository.findFirstByOrderByAddedTimeDesc();
+//    }
 }
 
