@@ -37,7 +37,7 @@
         </div>
         <div class="col-md-6 spacer mb-2" >
                 <button class="btn btn-primary btn-lg " class=" bg-light" type="button" >
-                    <a href="${contextRoot}/member/NormalRegister" style="color: white">一般會員註冊</a>
+                    <a href="${contextRoot}/member/registration" style="color: white">一般會員註冊</a>
                 </button>
         </div>
         <div class="col-md-6 spacel mb-2" >
