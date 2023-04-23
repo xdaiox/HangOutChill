@@ -8,42 +8,48 @@ import java.lang.reflect.Member;
 @Controller
 public class HomepageController {
     @GetMapping("/")
-    public String home(){
+    public String home() {
         return "index";
     }
 
     @GetMapping("/member/loginHome")
-    public  String toMemeberChooseIdentity (){
-    return"member/chooseIdentity";
+    public String toMemeberChooseIdentity() {
+        return "member/chooseIdentity";
     }
-    
+
     @GetMapping("/actandles")
     public String showAllActAndLes() {
-    	return"aal/showAllAaL";
+        return "aal/showAllAaL";
     }
+
     @GetMapping("/member/NormalRegister")
-    public  String toNormalMemberRegister (){
-    return"member/registerNormalMember";
+    public String toNormalMemberRegister() {
+        return "member/registerNormalMember";
     }
 
     @GetMapping("/member/LocationRegister")
-    public  String toLocationMemberRegister (){
-      return"member/registerLocation";
+    public String toLocationMemberRegister() {
+        return "member/registerLocation";
     }
-    
+
+    @GetMapping("/location/locationList")
+    public String toLocationList() {
+        return "/location/locationList";
+    }
+
     @GetMapping("/discussion/showAllDiscussion")
-    public  String toShowAllDiscussion (){
-      return"discussion/showAllDiscussion";
+    public String toShowAllDiscussion() {
+        return "discussion/showAllDiscussion";
     }
-    
+
     @GetMapping("/discussion/newDiscussion")
-    public  String toNewDiscussion (){
-      return"discussion/newDiscussion";
+    public String toNewDiscussion() {
+        return "discussion/newDiscussion";
     }
-    
+
     @GetMapping("/discussion/replyDiscussion")
-    public  String toreplyDiscussion (){
-      return"discussion/replyDiscussion";
+    public String toreplyDiscussion() {
+        return "discussion/replyDiscussion";
     }
 
     @GetMapping("/shop/index")
