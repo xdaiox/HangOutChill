@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NormalMemberRepository extends JpaRepository<NormalMember,Integer> {
 
-
+    public NormalMember findFirstByOrderByRegistTimeDesc();
 }

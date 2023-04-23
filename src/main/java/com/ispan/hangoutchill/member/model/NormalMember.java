@@ -1,6 +1,7 @@
 package com.ispan.hangoutchill.member.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
 public class NormalMember {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "member_id")
     private Integer id;
     @Column(name = "normal_account")
@@ -35,6 +37,9 @@ public class NormalMember {
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     @Column(name="registeration_time")
     private Date registTime;
+
+    @Transient
+    private MultipartFile file;
 
     @PrePersist
     public void onCreate() {
@@ -128,5 +133,13 @@ public class NormalMember {
 
     public void setRegistTime(Date registTime) {
         this.registTime = registTime;
+    }
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
 }
