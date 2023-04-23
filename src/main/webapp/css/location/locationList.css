@@ -1,0 +1,319 @@
+/***
+
+====================================================================
+	Listing Section / Sytle Two
+==================0==================================================
+
+***/
+
+.ls-section {
+    background-color: #f9fafc;
+    padding: 60px 0;
+}
+
+.ls-section .content-column,
+.ls-section .filters-column {
+    height: auto;
+    padding: 0 15px;
+    overflow: visible;
+}
+
+.ls-section .filters-column .inner-column {
+    position: relative;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    height: auto;
+}
+
+.ls-section .ls-outer {
+    padding: 0;
+}
+
+.ls-section .ls-pagination {
+    margin-top: 50px;
+}
+
+/***
+====================================================================
+Ls Section
+==================0==================================================
+
+***/
+
+.ls-section {
+    position: relative;
+}
+
+.ls-section .ls-cotainer {
+    position: relative;
+    display: -webkit-box;
+    display: flex;
+    height: 100%;
+}
+
+.ls-section .content-column {
+    position: relative;
+    height: calc(100vh - 85px);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.ls-section ::-webkit-scrollbar {
+    width: 5px;
+    background: #eeeeee;
+}
+
+.ls-section ::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+.ls-section ::-webkit-scrollbar-thumb {
+    background: #eeeeee;
+}
+
+.ls-section .map-column {
+    position: fixed;
+    height: calc(100vh - 85px);
+    right: 0;
+    bottom: 0;
+}
+
+.ls-section .map-column #map {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.ls-section .content-column .upper-box {
+    position: relative;
+    padding: 20px 30px;
+}
+
+.ls-section .filters-backdrop{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 1000%;
+    background: #1b2032;
+    z-index: 90;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 300ms ease;
+}
+
+.active-filters .ls-section .filters-backdrop{
+    opacity: .80;
+    visibility: visible;
+}
+
+.ls-section .filters-column.hide-left{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh !important;
+    max-width: 320px;
+    width: 100%;
+    padding: 0 !important;
+    background: #fff;
+    z-index: 99;
+    overflow-y: auto !important;
+    transition: all 300ms ease;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+
+.ls-section .filters-column.hide-left .inner-column{
+    min-height: 100%;
+}
+
+.active-filters .ls-section .filters-column.hide-left{
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.ls-section .toggle-filters{
+    position: relative;
+    margin-bottom: 20px;
+    color: #ffffff;
+    background: #ffa737;
+    display: none;
+}
+
+.ls-section .toggle-filters.show{
+    display: block;
+}
+
+.ls-section .sort-by.show-filters{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ls-section .sort-by.show-filters .chosen-select{
+    width: auto;
+}
+
+.ls-section .show-filters .toggle-filters{
+    position: relative;
+    margin-bottom: 0;
+    margin-right: 20px;
+    color: #ffffff;
+    background: #ffa737;
+    white-space: nowrap;
+    background: none;
+    display: block;
+    color: #1b2032;
+    top: -4px;
+    font-size: 16px;
+    width: auto;
+}
+
+.ls-section .show-filters .toggle-filters span{
+    margin-right: 10px;
+}
+
+.ls-section .close-filters{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 25px;
+    min-width: auto;
+    height: 25px;
+    border: 1px solid #333;
+    border-radius: 50%;
+    color: #000;
+    line-height: 25px;
+    font-size: 12px;
+    z-index: 99;
+    display: none;
+}
+
+.ls-section .top-filters {
+    position: relative;
+    display: -webkit-box;
+    display: flex;
+    margin-bottom: 30px;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+    border-bottom: 2px solid #e6e8ed;
+}
+
+.ls-section .top-filters li {
+    position: relative;
+    margin-right: 20px;
+}
+
+.ls-section .top-filters li a {
+    position: relative;
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    color: #1b2032;
+    padding: 10px 22px;
+    font-weight: 700;
+    top: 2px;
+    border-bottom: 2px solid transparent;
+}
+
+.ls-section .top-filters li.active a {
+    border-bottom: 2px solid #021f4a;
+}
+
+.ls-section .listing-search-form {
+    border: 0;
+    margin-bottom: 30px;
+}
+
+.ls-section .listing-search-form form {
+    padding: 0;
+}
+
+.ls-section .listing-search-form .row {
+    margin: 0 -10px;
+}
+
+.ls-section .listing-search-form .form-group {
+    border: 0;
+    padding: 0 10px;
+    margin-bottom: 20px;
+}
+
+.ls-section .listing-search-form .form-group:last-child {
+    margin-bottom: 0;
+}
+
+.ls-section .listing-search-form .form-group .icon:after {
+    display: none;
+}
+
+.ls-section .listing-search-form .chosen-container {
+    border: 2px solid #e6e8ed;
+}
+
+.ls-section .listing-search-form .chosen-container-single .chosen-single {
+    height: 50px;
+}
+
+.ls-section .listing-search-form input,
+.ls-section .listing-search-form select,
+.ls-section .listing-search-form button {
+    height: 54px;
+    padding: 10px 20px;
+    line-height: 30px;
+    border: 2px solid #e6e8ed;
+    border-radius: 5px;
+}
+
+.ls-section .switchbox-outer {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+
+/*=== Filters Column ===*/
+
+.ls-section .filters-column {
+    position: relative;
+    min-width: 280px;
+    position: relative;
+    padding: 20px 30px;
+    height: calc(100vh - 85px);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.ls-section .filters-column .btn-box {
+    position: relative;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+.ls-section .filters-column .btn-box .theme-btn {
+    display: block;
+    width: 100%;
+}
+
+.ls-section .map-column .hide-filters {
+    position: absolute;
+    left: 40px;
+    top: 40px;
+}
+
+.hide-filters .theme-btn .flaticon-plus-symbol:before {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    display: block;
+}
