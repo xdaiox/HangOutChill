@@ -76,7 +76,7 @@
                             <a href="${contextRoot}/discussion/showAllDiscussion" class="nav-link dropdown-toggle">討論區</a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="${contextRoot}/actandles">活動與課程</a></li>
-                        <li class="nav-item"><a class="nav-link" href="commerceIndex.html">商城</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${contextRoot}/shop/index">商城</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">聯絡我們</a></li>
                     </ul>
                 </div>

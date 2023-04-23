@@ -46,4 +46,9 @@ public class HomepageController {
       return"discussion/replyDiscussion";
     }
 
+    @GetMapping("/shop/index")
+    public String toShopIndex() {
+    	return "shop/shopIndex";
+    }
+    
 }
