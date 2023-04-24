@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Discussions {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="dscussion_id")
 	private Integer d_id;
 	@Column(name="fk_member_id")

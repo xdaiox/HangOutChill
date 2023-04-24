@@ -54,4 +54,8 @@ public class DiscussionsService {
 		}
 		return null;
 	}
+	
+	public Discussions getLatest() {
+		return dssRepository.findFirstByOrderByPostDateDesc();
+	}
 }
