@@ -2,7 +2,10 @@ package com.ispan.hangoutchill.location.controller;
 
 import com.ispan.hangoutchill.location.dao.LocationListRepository;
 import com.ispan.hangoutchill.location.model.LocationStoreInfo;
+import com.ispan.hangoutchill.location.service.LocationListService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -10,17 +13,26 @@ import java.util.Optional;
 @RestController
 public class LocationListController {
 
-//    private LocationListRepository locRepo;
+    @Autowired
+    private LocationListService locationListServiceService;
 
 
 //    ============================新增修改刪除==================================
 
+    //新增LocationStoreInfo頁面
+    @GetMapping("/location/LocationStoreInfo/addPage")
+    public String addLocationStoreInfo(Model model) {
+        model.addAttribute("locationStoreInfo", new LocationStoreInfo());
+        return "location/addLocationStoreInfoPage";
+    }
+
     //新增地點
-//    @PostMapping("/location/add")
-//    public LocationStoreInfo addLocation(@RequestBody LocationStoreInfo location) {
-//        LocationStoreInfo resLocationStoreInfo = locRepo.save(location);
-//        return resLocationStoreInfo;
-//    }
+    @PostMapping("/location/addLocationStoreInfo/post")
+    public String postLocationStoreInfo(@ModelAttribute("locationStoreInfo") LocationStoreInfo lsi) {
+        locationListServiceService.addLocationStoreInfo(lsi);
+        return "location/addLocationStoreInfoPage";
+    }
+
 //
 //    @DeleteMapping("location/delete")
 //    public
