@@ -13,17 +13,17 @@ public class LocationCategory {
 
 	@Id
     @Column(name = "location_category_Id")
-    private Integer locCatID;
+    private Integer locCatId;
 
     @Column(name = "location_category_name")
     private String locMbrName;
 
 	public Integer getLocCatID() {
-		return locCatID;
+		return locCatId;
 	}
 
-	public void setLocCatID(Integer locCatID) {
-		this.locCatID = locCatID;
+	public void setLocCatID(Integer locCatId) {
+		this.locCatId = locCatId;
 	}
 
 	public String getLocMbrName() {

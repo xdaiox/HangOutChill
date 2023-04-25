@@ -16,38 +16,38 @@ public class LocationStoreInfo {
     private Integer locID;
 
     @Column(name = "locationM_account")
-    private String account;
+    private String mAccount;
     @Column(name = "locationM_password")
-    private String password;
+    private String mPassword;
     @Column(name = "locationM_name")
-    private String name;
+    private String mName;
     @Column(name = "locationM_token")
-    private String token;
+    private String mToken;
     @Column(name = "locationM_legal")
-    private String legal;
+    private String mLegal;
     @Column(name = "locationM_profilephoto")
-    private String photoB64;
+    private String mPhotoB64;
 //=================================================================
     @Column(name = "location_name")
     private String locName;
-    @Column(name = "location_address")
-    private String locAdd;
-    @Column(name = "location_longtitude")
-    private String longtitude;
-    @Column(name = "location_latitude")
-    private String latitude;
-    @Column(name = "location_tel")
-    private String locTel;
     @Column(name = "location_category_id")
-    private String locCatID;
+    private Integer locCatId;
+    @Column(name = "location_tag")
+    private String locTag;
     @Column(name = "location_description")
     private String locDesc;
-    @Column(name = "location_price_rang")
-    private String locPriceRang;
+    @Column(name = "location_address_id")
+    private Integer locAddId;
+    @Column(name = "location_operationTime_id")
+    private Integer locOptId;
+    @Column(name = "location_tel")
+    private String locTel;
     @Column(name = "location_link")
     private String locLink;
-    @Column(name = "location_operationTime_id")
-    private Integer opTimeID;
+    @Column(name = "location_priceLevel")
+    private Integer locPriceLevel;
+    @Column(name = "location_image_id")
+    private Integer locImgId;
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     @Column(name = "location_info_updateTime")
@@ -60,6 +60,7 @@ public class LocationStoreInfo {
         }
     }
 
+
     public Integer getLocID() {
         return locID;
     }
@@ -68,52 +69,52 @@ public class LocationStoreInfo {
         this.locID = locID;
     }
 
-    public String getAccount() {
-        return account;
+    public String getmAccount() {
+        return mAccount;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setmAccount(String mAccount) {
+        this.mAccount = mAccount;
     }
 
-    public String getPassword() {
-        return password;
+    public String getmPassword() {
+        return mPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setmPassword(String mPassword) {
+        this.mPassword = mPassword;
     }
 
-    public String getName() {
-        return name;
+    public String getmName() {
+        return mName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setmName(String mName) {
+        this.mName = mName;
     }
 
-    public String getToken() {
-        return token;
+    public String getmToken() {
+        return mToken;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setmToken(String mToken) {
+        this.mToken = mToken;
     }
 
-    public String getLegal() {
-        return legal;
+    public String getmLegal() {
+        return mLegal;
     }
 
-    public void setLegal(String legal) {
-        this.legal = legal;
+    public void setmLegal(String mLegal) {
+        this.mLegal = mLegal;
     }
 
-    public String getPhotoB64() {
-        return photoB64;
+    public String getmPhotoB64() {
+        return mPhotoB64;
     }
 
-    public void setPhotoB64(String photoB64) {
-        this.photoB64 = photoB64;
+    public void setmPhotoB64(String mPhotoB64) {
+        this.mPhotoB64 = mPhotoB64;
     }
 
     public String getLocName() {
@@ -124,44 +125,20 @@ public class LocationStoreInfo {
         this.locName = locName;
     }
 
-    public String getLocAdd() {
-        return locAdd;
+    public Integer getLocCatId() {
+        return locCatId;
     }
 
-    public void setLocAdd(String locAdd) {
-        this.locAdd = locAdd;
+    public void setLocCatId(Integer locCatId) {
+        this.locCatId = locCatId;
     }
 
-    public String getLongtitude() {
-        return longtitude;
+    public String getLocTag() {
+        return locTag;
     }
 
-    public void setLongtitude(String longtitude) {
-        this.longtitude = longtitude;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLocTel() {
-        return locTel;
-    }
-
-    public void setLocTel(String locTel) {
-        this.locTel = locTel;
-    }
-
-    public String getLocCatID() {
-        return locCatID;
-    }
-
-    public void setLocCatID(String locCatID) {
-        this.locCatID = locCatID;
+    public void setLocTag(String locTag) {
+        this.locTag = locTag;
     }
 
     public String getLocDesc() {
@@ -172,12 +149,28 @@ public class LocationStoreInfo {
         this.locDesc = locDesc;
     }
 
-    public String getLocPriceRang() {
-        return locPriceRang;
+    public Integer getLocAddId() {
+        return locAddId;
     }
 
-    public void setLocPriceRang(String locPriceRang) {
-        this.locPriceRang = locPriceRang;
+    public void setLocAddId(Integer locAddId) {
+        this.locAddId = locAddId;
+    }
+
+    public Integer getLocOptId() {
+        return locOptId;
+    }
+
+    public void setLocOptId(Integer locOptId) {
+        this.locOptId = locOptId;
+    }
+
+    public String getLocTel() {
+        return locTel;
+    }
+
+    public void setLocTel(String locTel) {
+        this.locTel = locTel;
     }
 
     public String getLocLink() {
@@ -188,12 +181,20 @@ public class LocationStoreInfo {
         this.locLink = locLink;
     }
 
-    public Integer getOpTimeID() {
-        return opTimeID;
+    public Integer getLocPriceLevel() {
+        return locPriceLevel;
     }
 
-    public void setOpTimeID(Integer opTimeID) {
-        this.opTimeID = opTimeID;
+    public void setLocPriceLevel(Integer locPriceLevel) {
+        this.locPriceLevel = locPriceLevel;
+    }
+
+    public Integer getLocImgId() {
+        return locImgId;
+    }
+
+    public void setLocImgId(Integer locImgId) {
+        this.locImgId = locImgId;
     }
 
     public Date getLocInfoUpdateTime() {
