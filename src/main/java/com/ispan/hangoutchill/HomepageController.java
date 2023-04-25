@@ -52,4 +52,10 @@ public class HomepageController {
     	return "/article/showAllArticle";
     }
     
+    @GetMapping("/createArticle")
+    public String toCreateArticle() {
+    	return "/article/dbCreateArticle";
+    }
+    
+    
 }
