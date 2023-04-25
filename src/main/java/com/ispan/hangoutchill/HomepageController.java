@@ -1,7 +1,12 @@
 package com.ispan.hangoutchill;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.ispan.hangoutchill.discussion.model.Discussions;
+import com.ispan.hangoutchill.discussion.service.DiscussionsService;
 
 import java.lang.reflect.Member;
 
@@ -31,10 +36,11 @@ public class HomepageController {
       return"member/registerLocation";
     }
     
-    @GetMapping("/discussion/showAllDiscussion")
-    public  String toShowAllDiscussion (){
-    	
-      return"discussion/showAllDiscussion";
-    }
+
+//    @GetMapping("/discussion/allDiscussion")
+//    public  String toShowAllDiscussion (){	
+//    	return"discussion/allDiscussion";
+//    }
+
 
 }

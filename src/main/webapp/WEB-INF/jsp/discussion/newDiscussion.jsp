@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jstl"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <html>
@@ -194,7 +195,7 @@ body {
 								</div>
 								<button type="submit" class="btn btn-primary">發表</button>
 							</form:form>
-							<a href="${contextRoot}/discussion/showAllDiscussion"
+							<a href="${contextRoot}/discussion/allDiscussion"
 								class="btn btn-primary">返回文章列</a>
 						</div>
 					</div>
@@ -202,7 +203,7 @@ body {
 					<div class="card">
 						<div class="card-header">
 							<h5 class="card-title text-center">最新的: ${latest.title}</h5>
-							<h5 class="card-title text-center">${latest.type},${latest.postDate}</h5>
+							<h5 class="card-title text-center">${latest.type},<fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss" value="${latest.postDate}"/></h5>
 						</div>
 						<div class="card-body">
 							${latest.contents}

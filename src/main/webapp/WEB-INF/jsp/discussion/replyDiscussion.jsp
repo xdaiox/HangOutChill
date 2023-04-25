@@ -193,7 +193,7 @@ body {
                                     <textarea class="form-control" id="content" rows="5" placeholder="在此現撈回覆内容"></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary">回覆</button>
-								<a href="${contextRoot}/discussion/showAllDiscussion" class="btn btn-primary">返回文章列</a>
+								<a href="${contextRoot}/discussion/allDiscussion" class="btn btn-primary">返回文章列</a>
                             </form>
                         </div>
                     </div>

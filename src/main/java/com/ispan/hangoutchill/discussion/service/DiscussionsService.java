@@ -38,7 +38,7 @@ public class DiscussionsService {
 	}
 	
 	public Page<Discussions> findByPage(Integer pageNumber){
-		Pageable pgb =PageRequest.of(pageNumber-1, 3, Sort.Direction.DESC, "postDate");
+		Pageable pgb =PageRequest.of(pageNumber-1, 5, Sort.Direction.DESC, "postDate");
 		Page<Discussions> page = dssRepository.findAll(pgb);
 		return page;
 	}
@@ -58,4 +58,9 @@ public class DiscussionsService {
 	public Discussions getLatest() {
 		return dssRepository.findFirstByOrderByPostDateDesc();
 	}
+	
+//	public Discussions getAll() {
+		
+//		return dssRepository.findAllyOrderByPostDateDesc();
+//	}
 }

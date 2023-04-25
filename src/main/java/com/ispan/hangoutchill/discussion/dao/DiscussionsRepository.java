@@ -6,4 +6,5 @@ import com.ispan.hangoutchill.discussion.model.Discussions;
 
 public interface DiscussionsRepository extends JpaRepository<Discussions, Integer> {
 	public Discussions findFirstByOrderByPostDateDesc();
+
 }

@@ -1,11 +1,13 @@
 package com.ispan.hangoutchill.discussion.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ispan.hangoutchill.discussion.model.Discussions;
 import com.ispan.hangoutchill.discussion.service.DiscussionsService;
@@ -15,6 +17,15 @@ public class DiscussionsController {
 	
 	@Autowired
 	private DiscussionsService dService;
+	
+	@GetMapping("/discussion/allDiscussion")
+	public String toShowAllDiscussion(@RequestParam(name="p",defaultValue = "1")Integer pageNumber,Model model) {
+		Page<Discussions> page = dService.findByPage(pageNumber);
+		model.addAttribute("page", page);
+		
+		return"discussion/allDiscussion";
+	}
+	
 	
     @GetMapping("/discussion/newDiscussion")
     public  String toNewDiscussion (Model model){
