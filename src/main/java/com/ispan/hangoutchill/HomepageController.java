@@ -47,8 +47,4 @@ public class HomepageController {
     	return "shop/shopIndex";
     }
     
-    @GetMapping("/article")
-    public String toArticleList() {
-    	return "/article/showAllArticle";
-    }
 }

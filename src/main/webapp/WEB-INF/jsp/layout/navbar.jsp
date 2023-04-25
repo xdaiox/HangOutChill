@@ -70,7 +70,7 @@
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
                         <li class="nav-item active"><a class="nav-link" href="${contextRoot}/">首頁</a></li>
-                        <li class="nav-item"><a class="nav-link" href="${contextRoot}/article">專欄</a></li>
+                        <li class="nav-item"><a class="nav-link" href="article.html">專欄</a></li>
                         <li class="nav-item"><a class="nav-link" href="${contextRoot}/location/locationList">精選地點</a></li>
                         <li class="nav-item submenu dropdown">
                             <a href="${contextRoot}/discussion/showAllDiscussion" class="nav-link dropdown-toggle">討論區</a>
