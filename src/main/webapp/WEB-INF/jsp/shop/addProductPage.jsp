@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>新增產品頁面</title>
-<jstl:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <jsp:include page="../layout/navbar.jsp"/>
 </head>
 
@@ -14,7 +14,7 @@
 	<main class="col-md-9 ms-sm-auto col-lg-10 px-md-3 mt-3">
 		<div class="table-responsive shadow-sm">
 			<h2>請輸入產品資料：</h2>
-			<form:form method="post" action="${contextRoot}/shop/postProduct" modelAttribute="product" modelAttribute="productPhoto"
+			<form:form method="post" action="${contextRoot}/shop/postProduct" modelAttribute="product"
 				enctype="multipart/form-data">
 				<table class="table ">
 <!-- 					<tr> -->
@@ -43,13 +43,13 @@
 					</tr>
 					<tr>
 						<td><span>* </span><label for="content">產品描述 :</label></td>
-						<td><form:input type="text" name="content" id="content" path="productDesc"/><span
+						<td><form:textarea type="text" name="content" id="content" cols="30" rows="10" path="productDesc"/><span
 							id="contenterror" class="error"></span><span
 							id="contentcorrect" class="correct"></span></td>
 					</tr>
 					<tr>
 						<td><span>* </span><label for="content">產品規格 :</label></td>
-						<td><form:input type="text" name="content" id="content" path="productSpect"/><span
+						<td><form:input type="text" name="content" id="content" path="productSpec"/><span
 							id="contenterror" class="error"></span><span
 							id="contentcorrect" class="correct"></span></td>
 					</tr>

@@ -1,6 +1,10 @@
 package com.ispan.hangoutchill.shop.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.ispan.hangoutchill.shop.dao.ProductRepository;
@@ -19,6 +23,12 @@ public class ProductService {
 	
 	public void addProduct(Product product) {
 		productRepository.save(product);
+	}
+	
+	public Page<Product> findByPage(Integer pageNum){
+		Pageable pgb = PageRequest.of(pageNum-1, 10, Sort.Direction.ASC,"productId");
+		Page<Product> page = productRepository.findAll(pgb);
+		return page;
 	}
 	
 	
