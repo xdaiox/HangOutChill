@@ -6,9 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
+<jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
-  <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
 </head>
 <body>
 <footer class="footer-area">
@@ -18,7 +19,7 @@
       <h4>About Us</h4>
       <p>Heaven fruitful doesn't over lesser days appear creeping seasons so behold bearing days open</p>
       <div class="footer-logo">
-        <img src="img/picwish.png" alt="" style="height: 80px;">
+        <img src="${contextRoot}/img/picwish.png" alt="" style="height: 80px;">
       </div>
     </div>
 

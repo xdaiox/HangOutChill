@@ -21,20 +21,8 @@ public class HomepageController {
     public String showAllActAndLes() {
         return "aal/showAllAaL";
     }
-<<<<<<< HEAD
 
-    @GetMapping("/member/NormalRegister")
-    public String toNormalMemberRegister() {
-        return "member/registerNormalMember";
-    }
 
-    @GetMapping("/member/LocationRegister")
-    public String toLocationMemberRegister() {
-        return "member/registerLocation";
-    }
-=======
-
->>>>>>> esther
 
     @GetMapping("/location/locationList")
     public String toLocationList() {
