@@ -11,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Entity
@@ -43,6 +46,13 @@ public class Product {
 	@Column(name="launchdate",columnDefinition = "date")
 	private String launchdate;
 	
+	@Column(name="coverImage",columnDefinition = "varbinary(max)")
+	private byte[] coverImage;
+	
+	@Transient
+	private MultipartFile mainImage;
+	
+	
 	@OneToMany(mappedBy="product",
 		       cascade = CascadeType.PERSIST, orphanRemoval = true)
 	private Set<ProductPhoto> photos = new LinkedHashSet<>();
@@ -61,10 +71,25 @@ public class Product {
 	public Product() {
 	}
 	
+	public byte[] getCoverImage() {
+		return coverImage;
+	}
+	
+	public void setCoverImage(byte[] coverImage) {
+		this.coverImage = coverImage;
+	}
+	
+	public MultipartFile getMainImage() {
+		return mainImage;
+	}
+	
+	public void setMainImage(MultipartFile mainImage) {
+		this.mainImage = mainImage;
+	}
+	
 	public Integer getProductId() {
 		return productId;
 	}
-
 
 
 	public void setProductId(Integer productId) {
