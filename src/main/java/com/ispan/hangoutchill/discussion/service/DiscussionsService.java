@@ -55,12 +55,8 @@ public class DiscussionsService {
 		return null;
 	}
 	
-	public Discussions getLatest() {
-		return dssRepository.findFirstByOrderByPostDateDesc();
-	}
-	
-//	public Discussions getAll() {
-		
-//		return dssRepository.findAllyOrderByPostDateDesc();
+//	public Discussions getLatest() {
+//		return dssRepository.findFirstByOrderByPostDateDesc();
 //	}
+
 }

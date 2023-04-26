@@ -197,9 +197,9 @@ body {
 					<div class="inner-main-header2">
 						<a href="${contextRoot}/discussion/newDiscussion"><button class="btn btn-primary" type="submit">新增文章</button></a>
 						<select class="custom-select custom-select-sm mr-1">
-							<option selected="">顯示10項結果</option>
-							<option value="1">顯示20項結果</option>
-							<option value="2">顯示50項結果</option>
+							<option selected="10">顯示10項結果</option>
+							<option value="20">顯示20項結果</option>
+							<option value="50">顯示50項結果</option>
 						</select>
 							<ul class="pagination pagination-sm pagination-circle justify-content-center mb-1 ml-auto">
 								<jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}">
@@ -207,7 +207,7 @@ body {
 										<jstl:when test="${page.number+1 != pageNumber }">
 											<li class="page-item"><a class="page-link"
 										href="${contextRoot}/discussion/allDiscussion?p=${pageNumber}">${pageNumber}</a></li>
-										
+										<!-- 反正上面這個p 就是DiscussionsController,toShowAllDiscussion內的p -->
 										</jstl:when>
 										<jstl:otherwise>
 											<li class="page-item"><a class="page-link">${pageNumber}</a></li>
