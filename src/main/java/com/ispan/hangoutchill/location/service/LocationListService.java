@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -23,33 +24,35 @@ public class LocationListService {
     //    ========================LocationStoreInfoManager 地點資料管理===============================
 
     //新增單一地點
-//    public void addLocationStoreInfo(LocationStoreInfo locInfo) {
-//        locRepo.save(locInfo);
-//    }
+    public void addLocationStoreInfo(LocationStoreInfo locInfo) {
+        locRepo.save(locInfo);
+    }
 
     //查詢單一地點 by ID
-//    public LocationStoreInfo findLocationStoreInfoById(Integer locId) {
-//        Optional<LocationStoreInfo> option = locRepo.findById(locId);
-//        if (option.isPresent()) {
-//            return option.get();
-//        }
-//        return null;
-//    }
+    public LocationStoreInfo findLocationStoreInfoById(Integer id) {
+        Optional<LocationStoreInfo> option = locRepo.findById(id);
+        if (option.isPresent()) {
+            return option.get();
+        }
+        return null;
+    }
 
-    //查詢所有地點
-//    public List<LocationStoreInfo> findAllLocationStoreInfo() {
-//        return locRepo.findAll();
-//    }
+    //查詢所有地點 透過page
+    public Page<LocationStoreInfo> findAllLocationStoreInfoByPage(Integer pageNumber){
+        Pageable pgb = PageRequest.of(pageNumber-1,5,Sort.Direction.DESC,"locID");
+        Page<LocationStoreInfo> page = locRepo.findAll(pgb);
+        return page;
+    }
 
     //刪除單一地點 By ID
-//    public void deleteLocationStoreInfoById(Integer locId) {
-//        locRepo.deleteById(locId);
-//    }
+    public void deleteLocationStoreInfoById(Integer id) {
+        locRepo.deleteById(id);
+    }
 
     //修改單一地點 By ID
 //    @Transactional
-//    public LocationStoreInfo updateLocationStoreInfoByID() {
-//        public LocationStoreInfo updateLocationStoreInfoById(Integer locId ,)
+//    public LocationStoreInfo updateLocationStoreInfoByID(Integer id ) {
+//        public LocationStoreInfo updateLocationStoreInfoById(Integer id ,)
 //    }
 
 

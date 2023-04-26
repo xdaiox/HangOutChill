@@ -13,7 +13,7 @@ public class LocationStoreInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "location_id")
-    private Integer locID;
+    private Integer locId;
 
     @Column(name = "locationM_account")
     private String mAccount;
@@ -30,8 +30,8 @@ public class LocationStoreInfo {
 //=================================================================
     @Column(name = "location_name")
     private String locName;
-    @Column(name = "location_category_id")
-    private Integer locCatId;
+    @Column(name = "location_category")
+    private String locCat;
     @Column(name = "location_tag")
     private String locTag;
     @Column(name = "location_description")
@@ -62,11 +62,11 @@ public class LocationStoreInfo {
 
 
     public Integer getLocID() {
-        return locID;
+        return locId;
     }
 
     public void setLocID(Integer locID) {
-        this.locID = locID;
+        this.locId = locID;
     }
 
     public String getmAccount() {
@@ -125,12 +125,12 @@ public class LocationStoreInfo {
         this.locName = locName;
     }
 
-    public Integer getLocCatId() {
-        return locCatId;
+    public String getLocCatId() {
+        return locCat;
     }
 
     public void setLocCatId(Integer locCatId) {
-        this.locCatId = locCatId;
+        this.locCat = locCat;
     }
 
     public String getLocTag() {

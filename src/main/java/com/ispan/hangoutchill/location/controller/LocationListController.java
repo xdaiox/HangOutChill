@@ -4,6 +4,8 @@ import com.ispan.hangoutchill.location.dao.LocationListRepository;
 import com.ispan.hangoutchill.location.model.LocationStoreInfo;
 import com.ispan.hangoutchill.location.service.LocationListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +18,7 @@ import java.util.Optional;
 public class LocationListController {
 
     @Autowired
-    private LocationListService locationListServiceService;
+    private LocationListService locationListService;
 
 
 //    ============================主頁頁面跳轉==================================
@@ -38,29 +40,34 @@ public class LocationListController {
 //    }
 
 
-    //查詢所有LocationStoreInfo
-//    @GetMapping("/location/locationManager/locationStoreInfo")
-//    public List<LocationStoreInfo> findAllLocationStoreInfoList(){
-//        return locationListServiceService.findAllLocationStoreInfo();
-//    }
+    //查詢所有LocationStoreInfo 即LocationStoreInfo Manager畫面
+    @GetMapping("/location/locationManager")
+    public String showAllLocationStoreInfo(@RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber,Model model){
+        Page<LocationStoreInfo> page = locationListService.findAllLocationStoreInfoByPage(pageNumber);
+        model.addAttribute("page", page);
+        return "location/locationManagerPage";
+
+    }
+
 
     //查詢單一LocationStoreInfo BY ID
 //    @GetMapping("/location/locationManager/locationStoreInfo/{id}")
 //    public ResponseEntity<LocationStoreInfo> find()
 
     //新增LocationStoreInfo頁面
-//    @GetMapping("/location/locationManager/LocationStoreInfo")
-//    public String addLocationStoreInfo(Model model) {
-//        model.addAttribute("locationStoreInfo", new LocationStoreInfo());
-//        return "location/addLocationStoreInfoPage";
-//    }
+    @GetMapping("/location/locationManager/addLocationStoreInfo")
+    public String toAddLocationStoreInfo(Model model) {
+        model.addAttribute("locationStoreInfo", new LocationStoreInfo());
+        return "location/addLocationStoreInfoPage";
+    }
 
     //新增LocationStoreInfo動作
-//    @PostMapping("/location/locationManager/LocationStoreInfo")
-//    public String postLocationStoreInfo(@ModelAttribute("locationStoreInfo") LocationStoreInfo lsi) {
-//        locationListServiceService.addLocationStoreInfo(lsi);
-//        return "location/addLocationStoreInfoPage";
-//    }
+    @PostMapping("/location/locationManager/addLocationStoreInfo/post")
+    public String postLocationStoreInfo(@ModelAttribute("locationStoreInfo") LocationStoreInfo lsi, Model model) {
+        locationListService.addLocationStoreInfo(lsi);
+        model.addAttribute("locationStoreInfo", new LocationStoreInfo());
+        return "location/addLocationStoreInfoPage";
+    }
 
 
     //刪除LocationStoreInfo BY ID
@@ -71,6 +78,7 @@ public class LocationListController {
 
 //    ========================Show Location List===============================
 
+    //page分頁功能
 
 //    =======================Show Location Single===============================
 
