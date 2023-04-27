@@ -8,6 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="productPhoto")
@@ -24,6 +27,9 @@ public class ProductPhoto {
 	
 	@Column(name="photo")
 	private byte[] photo;
+	
+	@Transient
+	private MultipartFile uploadimg;
 	
 	public ProductPhoto() {
 		

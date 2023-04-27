@@ -13,6 +13,7 @@
 		<div class="row justify-content-center">
 			<h2>產品資料</h2>
 			<h3>${sucessMessage}</h3>
+			<h3></h3>
 			<table>
 				<thead>
 					<tr>
@@ -31,7 +32,7 @@
 				<tbody>
 				<c:forEach var="product" items="${page.content}">
 					<tr>
-						<td>${product.productId}</td>
+						<td><a href="${contextRoot}/shop/edit/product?productid=${product.productId}">${product.productId}</a></td>
 						<td><img width='100' height='100' src='<c:url value="/shop/getPicture/${product.productId}" />' /> </td>
 						<td>${product.productName}</td>
 						<td>${product.category}</td>
@@ -39,13 +40,18 @@
 						<td>${product.unitPrice}</td>
 						<td>${product.discount}</td>
 						<td>${product.launchdate}</td>
-						<td><a href="'<c:url value="/shop/edit/product?productid=${product.productId}" />'" ><input type="button" value="編輯"></a></td>
 						<td>
-						<form action="${contextRoot}/shop/delete/product" method="post">
-						<input type="hidden" name="_method" value="delete" />
-						<input type="hidden" name="productid" value="${product.productId}" />
-						<input type="submit" class="btn btn-danger" value="刪除" />
-						</form>
+							<form action="${contextRoot}/shop/edit/product">
+								<input type="hidden" name="productid" value="${product.productId}" />
+								<input type="submit" class="btn btn-primary" value="編輯" />
+							</form>
+						</td>
+						<td>
+							<form action="${contextRoot}/shop/delete/product" method="post">
+								<input type="hidden" name="_method" value="delete" />
+								<input type="hidden" name="productid" value="${product.productId}" />
+								<input type="submit" class="btn btn-danger" value="刪除" />
+							</form>
 						</td>						
 					</tr>
 				</c:forEach>

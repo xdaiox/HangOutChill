@@ -77,12 +77,23 @@ public class ProductController {
 		return "shop/showProducts";
 	}
 	
+	
+	// 產品刪除
 	@DeleteMapping("/shop/delete/product")
 	public String deleteProductByid(@RequestParam(name="productid") Integer productId) {
 		productService.deleteProductById(productId);
 		return "redirect:/shop/allproducts";
 	}
 	
+	//顯示產品詳細頁面
+	@GetMapping("/shop/product")
+	public String goShowProductDetail(@RequestParam(name="productid") Integer productId, Model model) {
+		Product product = productService.getProductById(productId);
+		model.addAttribute("product", product);
+		return "shop/showProductDetail";
+	}
+	
+	// 產品編輯
 	@GetMapping("/shop/edit/product")
 	public String editProductPage(@RequestParam(name="productid") Integer productId, Model model) {
 		Product p = productService.getProductById(productId);
@@ -90,11 +101,24 @@ public class ProductController {
 		return "shop/editProductPage";
 	}
 	
-	// 待編輯
-//	@PutMapping("/shop/edit/product")
-//	public String editProduct(@ModelAttribute("product") Product product) {
-//		return null;
-//	}
+
+	@PutMapping("/shop/edit/product")
+	public String editProduct(@ModelAttribute("product") Product product) {
+		
+		MultipartFile productImage = product.getMainImage();
+		if(productImage != null && !productImage.isEmpty()) {
+			try {
+				byte[] b = productImage.getBytes();
+				product.setCoverImage(b);
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: "+ e.getMessage());
+			}
+		}
+		
+		productService.updateProductById(product.getProductId(), product);
+		return "redirect:/shop/allproducts";
+	}
 	
 	
 	// 子敬的方法

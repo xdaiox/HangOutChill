@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ispan.hangoutchill.shop.dao.ProductRepository;
 import com.ispan.hangoutchill.shop.model.Product;
@@ -46,7 +47,24 @@ public class ProductService {
 		productRepository.deleteById(productId);
 	}
 	
-	
+	@Transactional
+	public Product updateProductById(Integer productId, Product product) {
+		Optional<Product> option = productRepository.findById(productId);
+		if(option.isPresent()) {
+			Product updateP = option.get();
+			updateP.setProductName(product.getProductName());
+			updateP.setCategory(product.getCategory());
+			updateP.setProductSpec(product.getProductSpec());
+			updateP.setProductDesc(product.getProductDesc());
+			updateP.setUnitPrice(product.getUnitPrice());
+			updateP.setLaunchdate(product.getLaunchdate());
+			updateP.setDiscount(product.getDiscount());
+			updateP.setCoverImage(product.getCoverImage());
+			return updateP;
+		}
+		
+		return null;
+	}
 	
 	
 }

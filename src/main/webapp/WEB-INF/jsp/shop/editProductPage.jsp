@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>新增產品頁面</title>
+<title>編輯產品頁面</title>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <jsp:include page="../layout/navbar.jsp"/>
 </head>
@@ -13,8 +13,8 @@
 <body>
 	<main class="col-md-9 ms-sm-auto col-lg-10 px-md-3 mt-3">
 		<div class="table-responsive shadow-sm">
-			<h2>請輸入產品資料：</h2>
-			<form:form method="post" action="${contextRoot}/shop/postProduct" modelAttribute="product"
+			<h2>產品資料：</h2>
+			<form:form method="put" action="${contextRoot}/shop/edit/product" modelAttribute="product"
 				enctype="multipart/form-data">
 				<table class="table ">
 <!-- 					<tr> -->
@@ -80,14 +80,17 @@
 					<tr>
 					<td>商品封面圖片：</td>
 						<td id="dadtd">
-							<form:input type="file" name="picture1" path="mainImage"/><br />
+							<img width='300' height='300' src='<c:url value="/shop/getPicture/${product.productId}" />' />
+							<label>上傳更新封面圖片：</label> <form:input type="file" name="picture1" path="mainImage"/><br />
 						</td>
 					</tr>
 					<tr>
 						<td></td>
 						<td></td>
-						<td><input type="submit" value="送出" id="submit" /> <a
-							href="../../GetAllProducts"><input
+						<td>
+						<form:input path="productId" type="hidden"/>
+						<input type="submit" value="修改送出" id="submit" /> <a
+							href=""><input
 								type="button" value="取消" /></a></td>
 					</tr>
 				</table>
