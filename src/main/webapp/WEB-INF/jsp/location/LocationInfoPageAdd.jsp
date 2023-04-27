@@ -181,7 +181,7 @@
                             <h5 class="card-title text-center">發表文章</h5>
                         </div>
                         <div class="card-body">
-                            <form:form modelAttribute="locationStoreInfo" method="post" action="${contextRoot}/location/locationManager/addLocationStoreInfo/post">
+                             method="post" action="${contextRoot}/location/locationManager/addLocationStoreInfo/post">
                                 <div class="form-group">
                                     <label for="name">地點名稱</label>
                                 <form:input path="locName" type="text" class="form-control" id="name" placeholder="輸入標題"></form:input>

@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "location")
-public class Location {
+public class LocationInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

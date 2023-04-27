@@ -1,8 +1,8 @@
 package com.ispan.hangoutchill.location.service;
 
 
-import com.ispan.hangoutchill.location.dao.LocationListRepository;
-import com.ispan.hangoutchill.location.model.Location;
+import com.ispan.hangoutchill.location.dao.LocationInfoRepository;
+import com.ispan.hangoutchill.location.model.LocationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,44 +13,53 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class LocationListService {
+public class LocationInfoService {
 
     @Autowired
-    private LocationListRepository locRepo;
+    private LocationInfoRepository locRepo;
 
     //    ========================LocationStoreInfoManager 地點資料管理===============================
 
-    //新增單一地點
-    public void addLocationStoreInfo(Location locInfo) {
-        locRepo.save(locInfo);
-    }
-
-    //查詢單一地點 by ID
-    public Location findLocationStoreInfoById(Integer id) {
-        Optional<Location> option = locRepo.findById(id);
-        if (option.isPresent()) {
-            return option.get();
-        }
-        return null;
-    }
-
     //查詢所有地點 透過page
-    public Page<Location> findAllLocationStoreInfoByPage(Integer pageNumber){
+    public Page<LocationInfo> findAllLocationInfoByPage(Integer pageNumber){
         Pageable pgb = PageRequest.of(pageNumber-1,5,Sort.Direction.DESC,"locID");
-        Page<Location> page = locRepo.findAll(pgb);
+        Page<LocationInfo> page = locRepo.findAll(pgb);
         return page;
     }
 
+    //新增單一地點
+    public void addLocationInfo(LocationInfo locInfo) {
+        locRepo.save(locInfo);
+    }
+
     //刪除單一地點 By ID
-    public void deleteLocationStoreInfoById(Integer id) {
+
+    public void deleteLocationInfoById(Integer id) {
         locRepo.deleteById(id);
     }
+
 
     //修改單一地點 By ID
 //    @Transactional
 //    public LocationStoreInfo updateLocationStoreInfoByID(Integer id ) {
 //        public LocationStoreInfo updateLocationStoreInfoById(Integer id ,)
 //    }
+
+
+    //查詢單一地點 by ID
+    public LocationInfo findLocationInfoById(Integer id) {
+        Optional<LocationInfo> option = locRepo.findById(id);
+        if (option.isPresent()) {
+            return option.get();
+        }
+        return null;
+    }
+
+
+
+
+
+
 
 
 
@@ -61,14 +70,6 @@ public class LocationListService {
     //查詢地點 by Address 地址
     //查詢地點 by Category 分類
     //查詢地點 by Tag 標籤
-
-
-    //分頁數查詢功能
-//    public Page<LocationStoreInfo> findByPage(Integer pageNumber) {
-//        Pageable pgb = PageRequest.of(pageNumber - 1, 6, Sort.Direction.DESC, "locID"); //先暫時用ID排序
-//        Page<LocationStoreInfo> page = locRepo.findAll(pgb);
-//        return page;
-//    }
 
 
 
