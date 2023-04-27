@@ -27,25 +27,6 @@ public class LocationInfoService {
         return page;
     }
 
-    //新增單一地點
-    public void addLocationInfo(LocationInfo locInfo) {
-        locRepo.save(locInfo);
-    }
-
-    //刪除單一地點 By ID
-
-    public void deleteLocationInfoById(Integer id) {
-        locRepo.deleteById(id);
-    }
-
-
-    //修改單一地點 By ID
-//    @Transactional
-//    public LocationStoreInfo updateLocationStoreInfoByID(Integer id ) {
-//        public LocationStoreInfo updateLocationStoreInfoById(Integer id ,)
-//    }
-
-
     //查詢單一地點 by ID
     public LocationInfo findLocationInfoById(Integer id) {
         Optional<LocationInfo> option = locRepo.findById(id);
@@ -55,11 +36,21 @@ public class LocationInfoService {
         return null;
     }
 
+    //刪除單一地點 By ID
+    public void deleteLocationInfoById(Integer id) {
+        locRepo.deleteById(id);
+    }
 
+    //新增單一地點
+    public void addLocationInfo(LocationInfo locInfo) {
+        locRepo.save(locInfo);
+    }
 
-
-
-
+    //修改單一地點 By ID
+//    @Transactional
+//    public LocationStoreInfo updateLocationStoreInfoByID(Integer id ) {
+//        public LocationStoreInfo updateLocationStoreInfoById(Integer id ,)
+//    }
 
 
 
