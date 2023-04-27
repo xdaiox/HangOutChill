@@ -1,7 +1,12 @@
 package com.ispan.hangoutchill;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.ispan.hangoutchill.xdaiox.model.Discussions;
+import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
 
 import java.lang.reflect.Member;
 
@@ -26,6 +31,7 @@ public class HomepageController {
     public String toLocationList() {
         return "/location/locationList";
     }
+<<<<<<< HEAD
 
     @GetMapping("/discussion/showAllDiscussion")
     public String toShowAllDiscussion() {
@@ -48,3 +54,14 @@ public class HomepageController {
     }
     
 }
+=======
+    
+
+//    @GetMapping("/discussion/allDiscussion")
+//    public  String toShowAllDiscussion (){	
+//    	return"discussion/allDiscussion";
+//    }
+
+
+}
+>>>>>>> discussion

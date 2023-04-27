@@ -1,15 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jstl"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <html>
 <head>
-    <jsp:include page="../layout/navbar.jsp" />
+<jsp:include page="../layout/navbar.jsp" />
 <jstl:set var="contextRoot" value="${pageContext.request.contextPath}" />
-
-<link rel="stylesheet" href="${contextRoot}/css/all.min.css"
-	integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o="
-	crossorigin="anonymous" />
 <meta charset="UTF-8">
-<title>回覆文章</title>
+<title>修改文章</title>
 
 <style>
 body {
@@ -52,8 +51,8 @@ body {
 	left: 0px;
 }
 
-.inner-main-footer, .inner-main-header, .inner-main-header2, .inner-sidebar-footer,
-	.inner-sidebar-header {
+.inner-main-footer, .inner-main-header, .inner-main-header2,
+	.inner-sidebar-footer, .inner-sidebar-header {
 	height: 3.5rem;
 	border-bottom: 1px solid #cbd5e0;
 	display: flex;
@@ -63,17 +62,15 @@ body {
 }
 
 .inner-main-body, .inner-sidebar-body {
-
 	position: relative;
 	flex: 1 1 auto;
-
 }
 
 .inner-main-body .sticky-top, .inner-sidebar-body .sticky-top {
 	z-index: 999;
 }
 
-.inner-main-footer, .inner-main-header, .inner-main-header2{
+.inner-main-footer, .inner-main-header, .inner-main-header2 {
 	background-color: #fff;
 }
 
@@ -151,8 +148,9 @@ body {
 	min-height: 1px;
 	padding: 1rem;
 }
+
 .btn.btn-primary {
-   margin: 0 2px;
+	margin: 0 2px;
 }
 
 .inner-main-header2 {
@@ -160,46 +158,56 @@ body {
 }
 
 .custom-select.custom-select-sm.mr-1 {
-   width: 150px; /*分頁選單option*/
-   margin-left: 15px;
+	width: 150px; /*分頁選單option*/
+	margin-left: 15px;
 }
-
 </style>
 
 </head>
 <div class="container">
-    <div class="main-body p-0">
-        <div class="inner-wrapper">
-            <div class="inner-main">
-                <div class="inner-main-body collapse forum-content show">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title text-center">回覆文章</h5>
-                        </div>
-                        <div class="card-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="title">標題</label>
-                                    <input type="text" class="form-control" id="title" placeholder="現撈標題" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="title" placeholder="現撈分類" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control" id="content" rows="5" placeholder="現撈内容"readonly></textarea>
-                                </div>
+	<div class="main-body p-0">
+		<div class="inner-wrapper">
+			<div class="inner-main">
+				<div class="inner-main-body collapse forum-content show">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title text-center">修改文章</h5>
+						</div>
+						<div class="card-body">
+							<form:form modelAttribute="discussion" method="put" action="${contextRoot}/discussion/editDiscussion">
 								<div class="form-group">
-                                    <label for="title">回覆內容</label>
-                                    <textarea class="form-control" id="content" rows="5" placeholder="在此現撈回覆内容"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary">回覆</button>
-								<a href="${contextRoot}/discussion/allDiscussion" class="btn btn-primary">返回文章列</a>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+								<form:input path="d_id" type="hidden"></form:input>
+								</div>
+									<div class="form-group">
+									
+									<label for="title">標題</label> <form:input path="title" type="text"
+										class="form-control" id="title" placeholder="輸入標題"></form:input>
+								</div>
+								<div class="form-group">
+									<label for="category">分類</label> <form:select path="type" class="form-control"
+										id="category">
+										<option>分類1</option>
+										<option>分類2</option>
+										<option>分類3</option>
+										<option>分類4</option>
+									</form:select>
+								</div>
+								<div class="form-group">
+									<label for="content">内容</label>
+									<form:textarea path="contents" class="form-control" id="content" rows="5"
+										placeholder="輸入内容" ></form:textarea>
+								</div>
+								<button type="submit" class="btn btn-primary">發表</button>
+							</form:form>
+							<a href="${contextRoot}/discussion/allDiscussion"
+								class="btn btn-primary">返回文章列</a>
+						</div>
+					</div>
+					
+					
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 </html>

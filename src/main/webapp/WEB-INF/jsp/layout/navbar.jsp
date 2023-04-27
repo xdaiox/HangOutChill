@@ -73,7 +73,7 @@
                         <li class="nav-item"><a class="nav-link" href="article.html">專欄</a></li>
                         <li class="nav-item"><a class="nav-link" href="${contextRoot}/location/locationList">精選地點</a></li>
                         <li class="nav-item submenu dropdown">
-                            <a href="${contextRoot}/discussion/showAllDiscussion" class="nav-link dropdown-toggle">討論區</a>
+                            <a href="${contextRoot}/discussion/allDiscussion" class="nav-link dropdown-toggle">討論區</a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="${contextRoot}/actandles">活動與課程</a></li>
                         <li class="nav-item"><a class="nav-link" href="${contextRoot}/shop/index">商城</a></li>
