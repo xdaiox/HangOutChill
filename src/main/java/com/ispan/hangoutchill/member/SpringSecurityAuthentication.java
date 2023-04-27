@@ -36,27 +36,24 @@ public class SpringSecurityAuthentication {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/actandles").hasRole("USER")
+                .antMatchers("/discussion/newDiscussion","/shop/index").hasRole("USER")
                 .antMatchers("/","/member/registration","/NormalMember/registed").permitAll()
                 .and()
-                .formLogin()
+                .formLogin().loginPage("/member/login")
                 .defaultSuccessUrl("/shop/index").and()
-                .logout();
-
+                .logout().deleteCookies("JSESSSIONID");
         return http.build();
     }
-
 
 
     @Bean
     public PasswordEncoder encoder(){
         return  new BCryptPasswordEncoder();
     }
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/resource/**");
-    }
-
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//        return (web) -> web.ignoring().antMatchers("/resource/**");
+//    }
 
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -64,6 +61,5 @@ public class SpringSecurityAuthentication {
         authProvider.setPasswordEncoder(encoder());
         return authProvider;
     }
-
 
 }

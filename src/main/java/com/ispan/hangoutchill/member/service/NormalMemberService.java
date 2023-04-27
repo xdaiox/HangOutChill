@@ -40,9 +40,15 @@ public class NormalMemberService {
        return nMemberRepository.findNormalMembersByAccount(account);
     }
 
-    //更新會員資料
-
-
-
+    //透過id讓會員更新基本資料
+   public  NormalMember updateById(Integer id, String photoB64, String nickName){
+       Optional<NormalMember> byId = nMemberRepository.findById(id);
+       if (byId.isPresent()){
+           NormalMember normalMember = byId.get();
+           normalMember.setPhotoB64(photoB64);
+           normalMember.setNickName(nickName);
+           return normalMember;
+       }return  null;
+   }
 }
 

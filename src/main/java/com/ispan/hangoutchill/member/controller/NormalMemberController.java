@@ -36,6 +36,11 @@ public class NormalMemberController {
 //        return "member/registerNormalMember";
 //    }
 
+    @GetMapping("/member/login")
+    public  String toNormalMemberLogin(){
+        return "member/normalMemberLogin";
+    }
+
     @GetMapping("/member/LocationRegister")
     public String toLocationMemberRegister() {
         return "member/registerLocation";
@@ -65,9 +70,26 @@ public class NormalMemberController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
+
+    public String toUpdateNormalMember(){
+        return "";
+    }
+
+
+    public String updateNormalMemberInfo(@ModelAttribute("normalMember")NormalMember normalMember,Model model){
+
+        try {
+            byte[] fileBytes = normalMember.getFile().getBytes();
+            String base64File = "data:image/png;base64,"+Base64.getEncoder().encodeToString(fileBytes);
+            NormalMember updateNormalMember = nMemberService.updateById(normalMember.getId(), base64File, normalMember.getNickName());
+            model.addAttribute("updateMember", updateNormalMember);
+            return "/member/updateResult";
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
 }

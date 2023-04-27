@@ -15,7 +15,8 @@ public interface NormalMemberRepository extends JpaRepository<NormalMember,Integ
     @Query(value = "from NormalMember where account= :account")
     public NormalMember findNormalMembersByAccount(@Param(value = "account")String account);
 
-//    @Query(value = "update NormalMember set nickName=: updateNickname ,tel=:updatetel, photoB64 =:updatePhotoB64 where id=:id")
-//    public  NormalMember updatePWDById(@Param( value = "password") String password ,@Param(value="id")String id);
+
+
+
 
 }

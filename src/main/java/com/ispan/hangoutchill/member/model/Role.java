@@ -16,6 +16,9 @@ public class Role {
 
     @OneToMany(mappedBy = "role")
     private Collection<NormalMember> normalMember;
+
+    @OneToMany(mappedBy = "role")
+    private Collection<LocationMember> locationMembers;
     public Integer getRoleId() {
         return roleId;
     }
