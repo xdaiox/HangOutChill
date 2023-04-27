@@ -31,22 +31,6 @@ public class HomepageController {
     public String toLocationList() {
         return "/location/locationList";
     }
-<<<<<<< HEAD
-
-    @GetMapping("/discussion/showAllDiscussion")
-    public String toShowAllDiscussion() {
-        return "discussion/showAllDiscussion";
-    }
-
-    @GetMapping("/discussion/newDiscussion")
-    public String toNewDiscussion() {
-        return "discussion/newDiscussion";
-    }
-
-    @GetMapping("/discussion/replyDiscussion")
-    public String toreplyDiscussion() {
-        return "discussion/replyDiscussion";
-    }
 
     @GetMapping("/shop/index")
     public String toShopIndex() {
@@ -54,14 +38,4 @@ public class HomepageController {
     }
     
 }
-=======
-    
 
-//    @GetMapping("/discussion/allDiscussion")
-//    public  String toShowAllDiscussion (){	
-//    	return"discussion/allDiscussion";
-//    }
-
-
-}
->>>>>>> discussion
