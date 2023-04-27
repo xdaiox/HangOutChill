@@ -1,4 +1,4 @@
-package com.ispan.hangoutchill.discussion.model;
+package com.ispan.hangoutchill.xdaiox.model;
 
 import java.util.Date;
 

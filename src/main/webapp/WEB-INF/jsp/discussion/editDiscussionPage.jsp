@@ -174,8 +174,12 @@ body {
 							<h5 class="card-title text-center">修改文章</h5>
 						</div>
 						<div class="card-body">
-							<form:form modelAttribute="discussion" method="put" action="${contextRoot}/discussion/post">
+							<form:form modelAttribute="discussion" method="put" action="${contextRoot}/discussion/editDiscussion">
 								<div class="form-group">
+								<form:input path="d_id" type="hidden"></form:input>
+								</div>
+									<div class="form-group">
+									
 									<label for="title">標題</label> <form:input path="title" type="text"
 										class="form-control" id="title" placeholder="輸入標題"></form:input>
 								</div>

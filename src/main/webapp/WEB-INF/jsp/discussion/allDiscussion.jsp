@@ -270,7 +270,17 @@ body {
 												class="text-secondary font-weight-bold"><fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss" value="${discussion.postDate}"/></span>
 										</p>
 									</div>
-									<a href="${contextRoot}/discussion/replyDiscussion"><button class="btn btn-primary" type="submit">回覆</button></a>
+									<a href="${contextRoot}/discussion/replyDiscussion"><button class="btn btn-primary" type="submit">回覆
+									</button></a>
+									<!-- <a href="${contextRoot}/discussion/editDiscussion?id=${discussion.d_id}" class="btn btn-primary">修改
+									</button></a> -->
+									<a href="${contextRoot}/discussion/editDiscussion/${discussion.d_id}"><button class="btn btn-primary" type="submit">編輯</button></a>
+
+									<form action="${contextRoot}/discussion/deleteDiscussion/${discussion.d_id}" method="post">
+										<input type="hidden"name="_method" value="delete">
+										<button class="btn btn-primary danger" type="submit">刪除</button>
+									</form>
+									
 									<div class="text-muted small text-center align-self-center">
 										<span class="d-none d-sm-inline-block"><i
 											class="far fa-eye"></i> 19</span> <span><i

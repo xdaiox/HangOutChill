@@ -1,4 +1,4 @@
-package com.ispan.hangoutchill.discussion.service;
+package com.ispan.hangoutchill.xdaiox.service;
 
 import java.util.Optional;
 
@@ -10,8 +10,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ispan.hangoutchill.discussion.dao.DiscussionsRepository;
-import com.ispan.hangoutchill.discussion.model.Discussions;
+import com.ispan.hangoutchill.xdaiox.dao.DiscussionsRepository;
+import com.ispan.hangoutchill.xdaiox.model.Discussions;
 
 
 @Service
@@ -33,7 +33,7 @@ public class DiscussionsService {
 		return option.get();
 	}
 	
-	public void deleteDiscussion(Integer id) {
+	public void deleteDiscussionById(Integer id) {
 		dssRepository.deleteById(id);
 	}
 	
@@ -44,15 +44,23 @@ public class DiscussionsService {
 	}
 	
 	@Transactional
-	public Discussions updateById(Integer id,String newDiscussions) {
+	public Discussions updateById(Integer id,String title,String type,String newDiscussions) {
 		Optional<Discussions> option = dssRepository.findById(id);
 		
 		if(option.isPresent()) {
 			Discussions dss = option.get();
+			dss.setTitle(title);
+			dss.setType(type);
 			dss.setContents(newDiscussions);
 			return dss;
 		}
 		return null;
+	}
+	
+
+	@Transactional
+	public void hiddenDiscussion(Integer id) {
+		dssRepository.deleteById(id);
 	}
 	
 //	public Discussions getLatest() {
