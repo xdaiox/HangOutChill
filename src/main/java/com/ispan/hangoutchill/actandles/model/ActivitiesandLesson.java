@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.PrePersist;
@@ -13,20 +15,21 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.servlet.http.Part;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="ActivitiesandLesson")
 public class ActivitiesandLesson {
 	@Id
-	@Column(name="id",columnDefinition = "nvarchar(50)",nullable = true)
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id",columnDefinition = "int")
+	private Integer id;
 	
 	@Column(name="shop_Id",columnDefinition = "int",nullable = true)
-	private int shop_Id;
+	private Integer shop_Id;
 	
 	@Column(name="name",columnDefinition = "nvarchar(50)",nullable = true)
 	private String name;
@@ -49,19 +52,21 @@ public class ActivitiesandLesson {
 		}
 	}
 	
-	@Column(name="theDayofStarts",columnDefinition = "datetime",nullable = true)
+	@DateTimeFormat(iso = ISO.DATE)
+	@Column(name="theDayofStarts",columnDefinition = "date",nullable = true)
 	private Date theDayofStarts;
 	
 	@Column(name="fee",columnDefinition = "int",nullable = true)
-	private int fee;
+	private Integer fee;
 	
 	@Column(name="quota",columnDefinition = "int",nullable = true)
-	private int quota;
+	private Integer quota;
 	
 	@Column(name="lowerLimit",columnDefinition = "int",nullable = true)
-	private int lowerLimit;
+	private Integer lowerLimit;
 	
-	@Column(name="deadLine",columnDefinition = "datetime",nullable = true)
+	@DateTimeFormat(iso = ISO.DATE)
+	@Column(name="deadLine",columnDefinition = "date",nullable = true)
 	private Date deadLine;
 	
 	@Column(name="currentStatus",columnDefinition = "nvarchar(50)",nullable = true)
@@ -70,20 +75,27 @@ public class ActivitiesandLesson {
 	@Lob
 	@Column(name="image",columnDefinition = "varbinary(MAX)")
 	private byte[] image;
+	
+	@Transient
+	private MultipartFile imageFile;
 
-	public String getId() {
+	@Transient
+	private String base64image;
+	
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getShop_Id() {
+	public Integer getShop_Id() {
 		return shop_Id;
 	}
 
-	public void setShop_Id(int shop_Id) {
+	public void setShop_Id(Integer shop_Id) {
 		this.shop_Id = shop_Id;
 	}
 
@@ -127,27 +139,27 @@ public class ActivitiesandLesson {
 		this.theDayofStarts = theDayofStarts;
 	}
 
-	public int getFee() {
+	public Integer getFee() {
 		return fee;
 	}
 
-	public void setFee(int fee) {
+	public void setFee(Integer fee) {
 		this.fee = fee;
 	}
 
-	public int getQuota() {
+	public Integer getQuota() {
 		return quota;
 	}
 
-	public void setQuota(int quota) {
+	public void setQuota(Integer quota) {
 		this.quota = quota;
 	}
 
-	public int getLowerLimit() {
+	public Integer getLowerLimit() {
 		return lowerLimit;
 	}
 
-	public void setLowerLimit(int lowerLimit) {
+	public void setLowerLimit(Integer lowerLimit) {
 		this.lowerLimit = lowerLimit;
 	}
 
@@ -174,6 +186,22 @@ public class ActivitiesandLesson {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
-	
-	
+
+	public MultipartFile getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(MultipartFile imageFile) {
+		this.imageFile = imageFile;
+	}
+
+	public String getBase64image() {
+		return base64image;
+	}
+
+	public void setBase64image(String base64image) {
+		this.base64image = base64image;
+	}
+
+
 }

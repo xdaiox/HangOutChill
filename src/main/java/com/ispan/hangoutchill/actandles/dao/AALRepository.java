@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
 
-public interface AALRepository extends JpaRepository<ActivitiesandLesson, String> {
+public interface AALRepository extends JpaRepository<ActivitiesandLesson, Integer> {
 
+	
+	 
 }
