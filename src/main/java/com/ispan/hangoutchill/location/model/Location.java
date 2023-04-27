@@ -7,47 +7,43 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "locationStoreInfo")
-public class LocationStoreInfo {
+@Table(name = "location")
+public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "location_id")
     private Integer locId;
-
-    @Column(name = "locationM_account")
-    private String mAccount;
-    @Column(name = "locationM_password")
-    private String mPassword;
-    @Column(name = "locationM_name")
-    private String mName;
-    @Column(name = "locationM_token")
-    private String mToken;
-    @Column(name = "locationM_legal")
-    private String mLegal;
-    @Column(name = "locationM_profilephoto")
-    private String mPhotoB64;
-//=================================================================
     @Column(name = "location_name")
     private String locName;
     @Column(name = "location_category")
     private String locCat;
     @Column(name = "location_tag")
     private String locTag;
+    @Column(name = "location_priceLevel")
+    private Integer locPriceLevel;
     @Column(name = "location_description")
     private String locDesc;
-    @Column(name = "location_address_id")
-    private Integer locAddId;
+    @Column(name = "location_image_id")
+    private Integer locImgId;
     @Column(name = "location_operationTime_id")
     private Integer locOptId;
+    @Column(name = "location_city")
+    private String locCity;
+    @Column(name = "location_district")
+    private String locDist;
+    @Column(name = "location_address")
+    private String locAdd;
+    @Column(name = "location_latitude")
+    private Integer locLat;
+    @Column(name = "location_longitude")
+    private String locLng;
     @Column(name = "location_tel")
     private String locTel;
     @Column(name = "location_link")
     private String locLink;
-    @Column(name = "location_priceLevel")
-    private Integer locPriceLevel;
-    @Column(name = "location_image_id")
-    private Integer locImgId;
+    @Column(name = "member_id")
+    private String locMemberId;
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     @Column(name = "location_info_updateTime")
@@ -60,61 +56,12 @@ public class LocationStoreInfo {
         }
     }
 
-
-    public Integer getLocID() {
+    public Integer getLocId() {
         return locId;
     }
 
-    public void setLocID(Integer locID) {
-        this.locId = locID;
-    }
-
-    public String getmAccount() {
-        return mAccount;
-    }
-
-    public void setmAccount(String mAccount) {
-        this.mAccount = mAccount;
-    }
-
-    public String getmPassword() {
-        return mPassword;
-    }
-
-    public void setmPassword(String mPassword) {
-        this.mPassword = mPassword;
-    }
-
-    public String getmName() {
-        return mName;
-    }
-
-    public void setmName(String mName) {
-        this.mName = mName;
-    }
-
-    public String getmToken() {
-        return mToken;
-    }
-
-    public void setmToken(String mToken) {
-        this.mToken = mToken;
-    }
-
-    public String getmLegal() {
-        return mLegal;
-    }
-
-    public void setmLegal(String mLegal) {
-        this.mLegal = mLegal;
-    }
-
-    public String getmPhotoB64() {
-        return mPhotoB64;
-    }
-
-    public void setmPhotoB64(String mPhotoB64) {
-        this.mPhotoB64 = mPhotoB64;
+    public void setLocId(Integer locId) {
+        this.locId = locId;
     }
 
     public String getLocName() {
@@ -125,11 +72,11 @@ public class LocationStoreInfo {
         this.locName = locName;
     }
 
-    public String getLocCatId() {
+    public String getLocCat() {
         return locCat;
     }
 
-    public void setLocCatId(Integer locCatId) {
+    public void setLocCat(String locCat) {
         this.locCat = locCat;
     }
 
@@ -141,6 +88,14 @@ public class LocationStoreInfo {
         this.locTag = locTag;
     }
 
+    public Integer getLocPriceLevel() {
+        return locPriceLevel;
+    }
+
+    public void setLocPriceLevel(Integer locPriceLevel) {
+        this.locPriceLevel = locPriceLevel;
+    }
+
     public String getLocDesc() {
         return locDesc;
     }
@@ -149,12 +104,12 @@ public class LocationStoreInfo {
         this.locDesc = locDesc;
     }
 
-    public Integer getLocAddId() {
-        return locAddId;
+    public Integer getLocImgId() {
+        return locImgId;
     }
 
-    public void setLocAddId(Integer locAddId) {
-        this.locAddId = locAddId;
+    public void setLocImgId(Integer locImgId) {
+        this.locImgId = locImgId;
     }
 
     public Integer getLocOptId() {
@@ -163,6 +118,46 @@ public class LocationStoreInfo {
 
     public void setLocOptId(Integer locOptId) {
         this.locOptId = locOptId;
+    }
+
+    public String getLocCity() {
+        return locCity;
+    }
+
+    public void setLocCity(String locCity) {
+        this.locCity = locCity;
+    }
+
+    public String getLocDist() {
+        return locDist;
+    }
+
+    public void setLocDist(String locDist) {
+        this.locDist = locDist;
+    }
+
+    public String getLocAdd() {
+        return locAdd;
+    }
+
+    public void setLocAdd(String locAdd) {
+        this.locAdd = locAdd;
+    }
+
+    public Integer getLocLat() {
+        return locLat;
+    }
+
+    public void setLocLat(Integer locLat) {
+        this.locLat = locLat;
+    }
+
+    public String getLocLng() {
+        return locLng;
+    }
+
+    public void setLocLng(String locLng) {
+        this.locLng = locLng;
     }
 
     public String getLocTel() {
@@ -181,20 +176,12 @@ public class LocationStoreInfo {
         this.locLink = locLink;
     }
 
-    public Integer getLocPriceLevel() {
-        return locPriceLevel;
+    public String getLocMemberId() {
+        return locMemberId;
     }
 
-    public void setLocPriceLevel(Integer locPriceLevel) {
-        this.locPriceLevel = locPriceLevel;
-    }
-
-    public Integer getLocImgId() {
-        return locImgId;
-    }
-
-    public void setLocImgId(Integer locImgId) {
-        this.locImgId = locImgId;
+    public void setLocMemberId(String locMemberId) {
+        this.locMemberId = locMemberId;
     }
 
     public Date getLocInfoUpdateTime() {

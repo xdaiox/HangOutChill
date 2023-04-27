@@ -2,17 +2,14 @@ package com.ispan.hangoutchill.location.service;
 
 
 import com.ispan.hangoutchill.location.dao.LocationListRepository;
-import com.ispan.hangoutchill.location.model.LocationStoreInfo;
+import com.ispan.hangoutchill.location.model.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,13 +21,13 @@ public class LocationListService {
     //    ========================LocationStoreInfoManager 地點資料管理===============================
 
     //新增單一地點
-    public void addLocationStoreInfo(LocationStoreInfo locInfo) {
+    public void addLocationStoreInfo(Location locInfo) {
         locRepo.save(locInfo);
     }
 
     //查詢單一地點 by ID
-    public LocationStoreInfo findLocationStoreInfoById(Integer id) {
-        Optional<LocationStoreInfo> option = locRepo.findById(id);
+    public Location findLocationStoreInfoById(Integer id) {
+        Optional<Location> option = locRepo.findById(id);
         if (option.isPresent()) {
             return option.get();
         }
@@ -38,9 +35,9 @@ public class LocationListService {
     }
 
     //查詢所有地點 透過page
-    public Page<LocationStoreInfo> findAllLocationStoreInfoByPage(Integer pageNumber){
+    public Page<Location> findAllLocationStoreInfoByPage(Integer pageNumber){
         Pageable pgb = PageRequest.of(pageNumber-1,5,Sort.Direction.DESC,"locID");
-        Page<LocationStoreInfo> page = locRepo.findAll(pgb);
+        Page<Location> page = locRepo.findAll(pgb);
         return page;
     }
 

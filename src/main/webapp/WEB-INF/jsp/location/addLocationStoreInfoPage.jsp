@@ -206,14 +206,14 @@
 <%--                                    <input type="checkbox" id="tag3" name="locTag" value="選項3">--%>
 <%--                                </form:checkboxes>--%>
 <%--                                </div>--%>
-                                <div class="form-group">
-                                    <label for="description">簡介</label>
-                                    <form:textarea path="locDesc" class="form-control" id="description" rows="5" placeholder="簡介内容" ></form:textarea>
-                                </div>
-                                <div class="form-group">
-                                <label for="name">地點名稱</label>
-                                <form:input path="locName" type="text" class="form-control" id="name" placeholder="輸入標題"></form:input>
-                                </div>
+<%--                                <div class="form-group">--%>
+<%--                                    <label for="description">簡介</label>--%>
+<%--                                    <form:textarea path="locDesc" class="form-control" id="description" rows="5" placeholder="簡介内容" ></form:textarea>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                <label for="name">地點名稱</label>--%>
+<%--                                <form:input path="locName" type="text" class="form-control" id="name" placeholder="輸入標題"></form:input>--%>
+<%--                                </div>--%>
 <%--                                <button type="submit" class="btn btn-primary">發表</button>--%>
 <%--                            </form:form>--%>
 <%--                            <a href="${contextRoot}/discussion/allDiscussion"--%>
