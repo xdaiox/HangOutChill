@@ -54,7 +54,7 @@ public class Product {
 	
 	
 	@OneToMany(mappedBy="product",
-		       cascade = CascadeType.PERSIST, orphanRemoval = true)
+		       cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ProductPhoto> photos = new LinkedHashSet<>();
 	
 	
@@ -180,5 +180,30 @@ public class Product {
 		this.launchdate = launchdate;
 	}
 
+	public Set<ProductPhoto> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(Set<ProductPhoto> photos) {
+		this.photos = photos;
+	}
+
+	public Set<OrderDetail> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(Set<OrderDetail> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
+	public Set<ShoppingCart> getShoppingCarts() {
+		return shoppingCarts;
+	}
+
+	public void setShoppingCarts(Set<ShoppingCart> shoppingCarts) {
+		this.shoppingCarts = shoppingCarts;
+	}
+
+	
 	
 }

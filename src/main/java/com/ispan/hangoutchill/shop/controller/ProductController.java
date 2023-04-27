@@ -1,6 +1,8 @@
 package com.ispan.hangoutchill.shop.controller;
 
 import java.io.IOException;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ispan.hangoutchill.shop.model.Product;
+import com.ispan.hangoutchill.shop.model.ProductPhoto;
+import com.ispan.hangoutchill.shop.model.ProductPhotoPK;
 import com.ispan.hangoutchill.shop.service.ProductService;
 
 @Controller
@@ -44,11 +48,12 @@ public class ProductController {
 	
 	@PostMapping("/shop/postProduct")
 	public String postProduct(
-			@ModelAttribute Product product, 
+			@ModelAttribute Product product,
+			@RequestParam(name="extraphoto", required=false) MultipartFile[] extraphotos,
 			Model model,
 			RedirectAttributes redirectAttributes) {
 		
-		// 商品圖片存取
+		// 商品封面圖片存放
 		MultipartFile productImage = product.getMainImage();
 		if(productImage != null && !productImage.isEmpty()) {
 			try {
@@ -59,8 +64,36 @@ public class ProductController {
 				throw new RuntimeException("檔案上傳發生異常: "+ e.getMessage());
 			}
 		}
-		productService.addProduct(product);
+
+		// 其餘商商品圖片存放
+		Set<ProductPhoto> photosets = new LinkedHashSet<>();
+		ProductPhoto pp;
+		ProductPhotoPK pPK;
 		
+		for(MultipartFile photo : extraphotos) {
+			pp = new ProductPhoto();
+			pPK = new ProductPhotoPK();
+			pp.setProduct(product);
+			
+			// 這行應該是不用存
+//			pPK.setProductId(product.getProductId());
+			
+			try {
+				byte[] b = photo.getBytes();
+				pp.setPhoto(b);
+				pPK.setPhotoName(photo.getOriginalFilename());
+				System.out.println(photo.getOriginalFilename());
+//				pPK.setPhotoName("TEST"); 
+				pp.setProductPhotoPK(pPK);
+				photosets.add(pp);
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: "+ e.getMessage());
+			}
+		}
+		
+		product.setPhotos(photosets);
+		productService.addProduct(product);
 		redirectAttributes.addFlashAttribute("sucessMessage", "新增產品成功 !");
 		return "redirect:/shop/allproducts";
 	}
@@ -114,8 +147,10 @@ public class ProductController {
 				e.printStackTrace();
 				throw new RuntimeException("檔案上傳發生異常: "+ e.getMessage());
 			}
+		}else {
+			Product originalProduct = productService.getProductById(product.getProductId());
+			product.setCoverImage(originalProduct.getCoverImage());
 		}
-		
 		productService.updateProductById(product.getProductId(), product);
 		return "redirect:/shop/allproducts";
 	}

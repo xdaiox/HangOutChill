@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Embeddable
 public class ProductPhotoPK implements Serializable {
@@ -21,7 +18,7 @@ public class ProductPhotoPK implements Serializable {
 	private Integer productId;
 	
 	
-	@Column(name="product_name",columnDefinition = "nvarchar(20)")
+	@Column(name="photo_name",columnDefinition = "nvarchar(20)")
 	private String photoName;
 	
 	public ProductPhotoPK() {

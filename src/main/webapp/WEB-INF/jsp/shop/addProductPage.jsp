@@ -74,14 +74,14 @@
 					</tr>
 					<tr>
 					<td>商品封面圖片：</td>
-						<td id="dadtd">
-							<form:input type="file" name="picture1" path="mainImage"/><br />
+						<td >
+							<form:input type="file" path="mainImage"/><br />
 						</td>
 					</tr>
 					<tr>
 						<td>商品圖片：</td>
 						<td id="dadtd"><input type="button" value="+ 圖片" id="addfile" /><br />
-							<form:input type="file" name="picture1" path=""/><br /></td>
+							<form:input type="file" name="extraphoto" path=""/><br /></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -103,7 +103,7 @@
         let addinput = document.createElement("input");
         let addbr = document.createElement("br");
         addinput.setAttribute("type", "file");
-        addinput.setAttribute("name", "picture" + i);
+        addinput.setAttribute("name", "extraphoto");
         i++;
         dadtd.appendChild(addinput);
         dadtd.appendChild(addbr);

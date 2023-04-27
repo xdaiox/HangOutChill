@@ -1,5 +1,6 @@
 package com.ispan.hangoutchill.shop.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -19,13 +20,12 @@ public class ProductPhoto {
 	@EmbeddedId
 	private ProductPhotoPK productPhotoPK;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
 	@MapsId("productId")
 	@JoinColumn(name="product_id")
 	private Product product;
 	
-	
-	@Column(name="photo")
+	@Column(name="photo",columnDefinition = "varbinary(max)")
 	private byte[] photo;
 	
 	@Transient
@@ -34,7 +34,16 @@ public class ProductPhoto {
 	public ProductPhoto() {
 		
 	}
+	
 
+	public Product getProduct() {
+		return product;
+	}
+	
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
 	public ProductPhotoPK getProductPhotoPK() {
 		return productPhotoPK;
 	}

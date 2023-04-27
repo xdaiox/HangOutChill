@@ -52,6 +52,7 @@ public class ProductService {
 		Optional<Product> option = productRepository.findById(productId);
 		if(option.isPresent()) {
 			Product updateP = option.get();
+			updateP.setCategory(product.getCategory());
 			updateP.setProductName(product.getProductName());
 			updateP.setCategory(product.getCategory());
 			updateP.setProductSpec(product.getProductSpec());
