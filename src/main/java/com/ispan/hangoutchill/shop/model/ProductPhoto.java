@@ -20,6 +20,7 @@ public class ProductPhoto {
 	@EmbeddedId
 	private ProductPhotoPK productPhotoPK;
 	
+	
 	@ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
 	@MapsId("productId")
 	@JoinColumn(name="product_id")

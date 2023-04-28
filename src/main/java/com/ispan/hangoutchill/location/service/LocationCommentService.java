@@ -1,11 +1,11 @@
-package com.ispan.hangoutchill.location.service;
-
-import com.ispan.hangoutchill.location.dao.LocationCommentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+//package com.ispan.hangoutchill.location.service;
+//
+//import com.ispan.hangoutchill.location.dao.LocationCommentRepository;
+//import org.springframework.beans.factory.annotation.Autowired;
 
 
 //@Service
-public class LocationCommentService {
+//public class LocationCommentService {
 //    @Autowired
 //    LocationCommentRepository locCmtRepo;
 //
@@ -14,4 +14,4 @@ public class LocationCommentService {
 //    }
 //
 //    public LocationComment findAllCommentBy
-}
+//}

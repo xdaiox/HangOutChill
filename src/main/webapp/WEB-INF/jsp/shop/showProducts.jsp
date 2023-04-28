@@ -32,7 +32,7 @@
 				<tbody>
 				<c:forEach var="product" items="${page.content}">
 					<tr>
-						<td><a href="${contextRoot}/shop/edit/product?productid=${product.productId}">${product.productId}</a></td>
+						<td><a href="${contextRoot}/shop/singleproduct?productid=${product.productId}">${product.productId}</a></td>
 						<td><img width='100' height='100' src='<c:url value="/shop/getPicture/${product.productId}" />' /> </td>
 						<td>${product.productName}</td>
 						<td>${product.category}</td>

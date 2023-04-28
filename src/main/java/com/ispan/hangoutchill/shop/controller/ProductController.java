@@ -2,6 +2,7 @@ package com.ispan.hangoutchill.shop.controller;
 
 import java.io.IOException;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
@@ -28,16 +29,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ispan.hangoutchill.shop.model.Product;
 import com.ispan.hangoutchill.shop.model.ProductPhoto;
 import com.ispan.hangoutchill.shop.model.ProductPhotoPK;
+import com.ispan.hangoutchill.shop.service.ProductPhotoService;
 import com.ispan.hangoutchill.shop.service.ProductService;
 
 @Controller
 public class ProductController {
 
-	ProductService productService;
+	private ProductService productService;
+	private ProductPhotoService productPhotoService;
+	
 	
 	@Autowired
-	public ProductController(ProductService productService) {
+	public ProductController(ProductService productService, ProductPhotoService productPhotoService) {
 		this.productService = productService;
+		this.productPhotoService = productPhotoService;
 	}
 
 	@GetMapping("/shop/add")
@@ -71,24 +76,26 @@ public class ProductController {
 		ProductPhotoPK pPK;
 		
 		for(MultipartFile photo : extraphotos) {
-			pp = new ProductPhoto();
-			pPK = new ProductPhotoPK();
-			pp.setProduct(product);
-			
-			// 這行應該是不用存
+			if(photo != null && !photo.isEmpty()) {
+				pp = new ProductPhoto();
+				pPK = new ProductPhotoPK();
+				pp.setProduct(product);
+				
+				// 這行應該是不用存
 //			pPK.setProductId(product.getProductId());
-			
-			try {
-				byte[] b = photo.getBytes();
-				pp.setPhoto(b);
-				pPK.setPhotoName(photo.getOriginalFilename());
-				System.out.println(photo.getOriginalFilename());
+				
+				try {
+					byte[] b = photo.getBytes();
+					pp.setPhoto(b);
+					pPK.setPhotoName(photo.getOriginalFilename());
+					System.out.println(photo.getOriginalFilename());
 //				pPK.setPhotoName("TEST"); 
-				pp.setProductPhotoPK(pPK);
-				photosets.add(pp);
-			} catch (IOException e) {
-				e.printStackTrace();
-				throw new RuntimeException("檔案上傳發生異常: "+ e.getMessage());
+					pp.setProductPhotoPK(pPK);
+					photosets.add(pp);
+				} catch (IOException e) {
+					e.printStackTrace();
+					throw new RuntimeException("檔案上傳發生異常: "+ e.getMessage());
+				}
 			}
 		}
 		
@@ -119,12 +126,26 @@ public class ProductController {
 	}
 	
 	//顯示產品詳細頁面
-	@GetMapping("/shop/product")
-	public String goShowProductDetail(@RequestParam(name="productid") Integer productId, Model model) {
-		Product product = productService.getProductById(productId);
-		model.addAttribute("product", product);
-		return "shop/showProductDetail";
+//	@GetMapping("/shop/product")
+//	public String goShowProductsDetail(@RequestParam(name="productid") Integer productId, Model model) {
+//		Product product = productService.getProductById(productId);
+//		model.addAttribute("product", product);
+//		return "shop/showProductDetail";
+//	}
+	
+	
+	// 顯示後台單獨產品頁面
+	@GetMapping("/shop/singleproduct")
+	public String goShowSingleProduct(@RequestParam(name="productid") Integer productId, Model model) {
+		Product p = productService.getProductById(productId);
+		List<ProductPhoto> photos = productPhotoService.findPhotosById(productId);
+		model.addAttribute("product", p);
+		model.addAttribute("photos", photos);
+		return "shop/productInfo";
 	}
+	
+	
+	
 	
 	// 產品編輯
 	@GetMapping("/shop/edit/product")
@@ -196,6 +217,39 @@ public class ProductController {
 		
 		return responseEntity;
 	}
+	
+	
+	// ExtraImg 取得
+	@GetMapping("/shop/getExtraPicture")
+	public ResponseEntity<byte[]> getPicture(
+			HttpServletResponse resp,
+			@RequestParam(name="productid") Integer productId,
+			@RequestParam(name="productName") String productName){
+		
+		HttpHeaders headers = new HttpHeaders();
+		byte[] media = null;
+		ProductPhotoPK ppk = new ProductPhotoPK();
+		ppk.setPhotoName(productName);
+		ppk.setProductId(productId);
+		ProductPhoto photo = productPhotoService.findById(ppk);
+//		Product product = productService.getProductById(productId);
+		
+		if (photo != null) {
+			byte[] imageBytes = photo.getPhoto();
+			if(imageBytes != null) {
+				media = imageBytes;
+			}
+		}
+		
+		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+		MediaType mediaType = MediaType.valueOf("image/png");
+		headers.setContentType(mediaType);
+		ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
+		
+		return responseEntity;
+	}
+	
+	
 	
 	
 	
