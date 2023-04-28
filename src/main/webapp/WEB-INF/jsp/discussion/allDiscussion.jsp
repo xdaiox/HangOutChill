@@ -266,7 +266,8 @@ body {
 										</h6>
 										<p class="text-secondary">${discussion.contents}</p>
 										<p class="text-muted">
-											<a href="javascript:void(0)">drewdan</a> posted <span
+											<h5>Author:
+											<a href="#">${discussion.normalMmeber.nickName}</a> posted </h5><span
 												class="text-secondary font-weight-bold"><fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss" value="${discussion.postDate}"/></span>
 										</p>
 									</div>

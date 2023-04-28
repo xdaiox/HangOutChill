@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.ispan.hangoutchill.member.model.NormalMember;
+
 @Entity
 @Table(name="discussion")
 public class Discussions {
@@ -55,10 +57,27 @@ public class Discussions {
 	
 	
 	
-//	@OneToMany
-//	@JoinColumn(name="fk_member_id", nullable = false)
+	@ManyToOne
+	@JoinColumn(name="fk_member_id", nullable = true, insertable = false, updatable = false)
+	private NormalMember normalMmeber;
+	
+	public Discussions() {
+	}
 	
 	
+	
+	public NormalMember getNormalMmeber() {
+		return normalMmeber;
+	}
+
+
+
+	public void setNormalMmeber(NormalMember normalMmeber) {
+		this.normalMmeber = normalMmeber;
+	}
+
+
+
 	public Integer getD_id() {
 		return d_id;
 	}
@@ -215,7 +234,6 @@ public class Discussions {
 
 
 
-	public Discussions() {
-	}
+
 
 }
