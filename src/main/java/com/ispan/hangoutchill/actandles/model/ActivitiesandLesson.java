@@ -34,7 +34,7 @@ public class ActivitiesandLesson {
 	@Column(name="name",columnDefinition = "nvarchar(50)",nullable = true)
 	private String name;
 	
-	@Column(name="aalContent",columnDefinition = "nvarchar(50)",nullable = true)
+	@Column(name="aalContent",columnDefinition = "nvarchar(50)")
 	private String aalContent;
 	
 	@Column(name="topic",columnDefinition = "nvarchar(50)",nullable = true)

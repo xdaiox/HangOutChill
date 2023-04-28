@@ -26,7 +26,7 @@
 						<div class="card-body">
 							<form:form class="" modelAttribute="aal"
 								enctype="multipart/form-data" method="POST"
-								action="${contextRoot}/actandles/post">
+								action="${contextRoot}/actandles/shop/post">
 <!-- 								<p>項目ID:</p> -->
 <%-- 								<form:input path="id" class="form-control" type="text"></form:input> --%>
 								<p>提交者ID:</p>
@@ -50,7 +50,8 @@
 								<form:input path="currentStatus" class="form-control"
 											type="hidden" value="審核中"></form:input>
 								<p>預覽圖:</p>
-								<form:input path="imageFile" class="form-control" type="file"></form:input>
+								<form:input path="imageFile" id="target" class="form-control" type="file"></form:input>
+											<span><img id="preview" src=""></span>
 								<p>文案內容:</p>
 								<form:textarea path="aalContent" class="form-control" style="height:200px;" ></form:textarea>
 								<button type="submit" class="btn btn-primary">送出</button>
@@ -63,5 +64,25 @@
 		</div>
 	</div>
 	<jsp:include page="../layout/footer.jsp" />
+	
+	<script >
+	//圖片上傳前預覽
+	const input = document.getElementById("target")
+	const preview = document.getElementById("preview")
+	input.addEventListener('change', () => {
+		const file = input.files[0];
+		const reader = new FileReader();
+
+		reader.addEventListener('load', () => {
+			preview.src = reader.result;
+		});
+
+		if (file) {
+			reader.readAsDataURL(file);
+		} else {
+			preview.src = "";
+		}
+	});
+	</script>
 </body>
 </html>

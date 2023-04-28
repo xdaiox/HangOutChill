@@ -23,7 +23,7 @@ public class AALcontroller {
 	private AALservice aalService;
 
 	
-	@GetMapping("/actandles/add")
+	@GetMapping("/actandles/shop/add")
 	public String addAAL(Model model) {
 		
 		model.addAttribute("aal", new ActivitiesandLesson());
@@ -31,7 +31,7 @@ public class AALcontroller {
 		return "aal/addAALPage";
 	}
 	
-	@PostMapping("/actandles/post")
+	@PostMapping("/actandles/shop/post")
 	public String postAAL(@RequestParam("imageFile") MultipartFile imageFile, @ModelAttribute("aal") ActivitiesandLesson aal,Model model) {
 		
 		try {
@@ -42,10 +42,10 @@ public class AALcontroller {
 		}
 		aalService.addAAL(aal);
 		
-		return "redirect:/actandles/postall";
+		return "redirect:/actandles/shop/postall";
 	}
 	
-	@GetMapping("/actandles/postall")
+	@GetMapping("/actandles/shop/postall")
 	public String goShowAAL(@RequestParam(name="p",defaultValue = "1") Integer pagenumber, Model model) {
 		Page<ActivitiesandLesson> page = aalService.findByPage(pagenumber);
 		model.addAttribute("page",page);
@@ -53,24 +53,23 @@ public class AALcontroller {
 		return "aal/showMyAaL";
 	}
 	
-	@DeleteMapping("/actandles/delete")
+	@DeleteMapping("/actandles/shop/delete")
 	public String deleteAAL(@RequestParam Integer id) {
 		aalService.deleteAALById(id);
-		return "redirect:/actandles/postall";
+		return "redirect:/actandles/shop/postall";
 	}
 	
-	@GetMapping("/actandles/edit")
+	@GetMapping("/actandles/shop/edit")
 	public String editPage(@RequestParam("id") Integer id,Model model) {
-		ActivitiesandLesson aal = aalService.findMessagesById(id);
+		ActivitiesandLesson aal = aalService.findAALById(id);
 		model.addAttribute("aal",aal);
 		
 		return "aal/editAALPage";
 	}
 	
-	@PutMapping("/actandles/edit")
+	@PutMapping("/actandles/shop/edit")
 	public String putEditedAAL(@ModelAttribute("aal") ActivitiesandLesson aal) {
 		aalService.updateById(aal.getId() , aal);
-		return "redirect:/actandles/postall";
-	
+		return "redirect:/actandles/shop/postall";
 	}
 }
