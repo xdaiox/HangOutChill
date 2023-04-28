@@ -1,23 +1,24 @@
-package com.ispan.hangoutchill.location.controller;
-
-import com.ispan.hangoutchill.location.dao.LocationListRepository;
-import com.ispan.hangoutchill.location.model.LocationStoreInfo;
-import com.ispan.hangoutchill.location.service.LocationListService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
-
-@RestController
-public class LocationListController {
-
-    @Autowired
-    private LocationListService locationListServiceService;
-
+//package com.ispan.hangoutchill.location.controller;
+//
+//import com.ispan.hangoutchill.location.dao.LocationListRepository;
+//import com.ispan.hangoutchill.location.model.LocationStoreInfo;
+//import com.ispan.hangoutchill.location.service.LocationListService;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.stereotype.Controller;
+//import org.springframework.ui.Model;
+//import org.springframework.web.bind.annotation.*;
+//
+//import java.util.List;
+//import java.util.Optional;
+//
+//@RestController
+//public class LocationListController {
+//
+//    @Autowired
+//    private LocationListService locationListServiceService;
+//}
+    
 
 //    ============================主頁頁面跳轉==================================
 
@@ -86,4 +87,3 @@ public class LocationListController {
 //    }
 
 
-}

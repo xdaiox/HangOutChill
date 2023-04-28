@@ -1,24 +1,24 @@
-package com.ispan.hangoutchill.location.service;
-
-
-import com.ispan.hangoutchill.location.dao.LocationListRepository;
-import com.ispan.hangoutchill.location.model.LocationStoreInfo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
-
-@Service
-public class LocationListService {
-
-    @Autowired
-    private LocationListRepository locRepo;
+//package com.ispan.hangoutchill.location.service;
+//
+//
+//import com.ispan.hangoutchill.location.dao.LocationListRepository;
+//import com.ispan.hangoutchill.location.model.LocationStoreInfo;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.data.domain.Page;
+//import org.springframework.data.domain.PageRequest;
+//import org.springframework.data.domain.Pageable;
+//import org.springframework.data.domain.Sort;
+//import org.springframework.stereotype.Service;
+//
+//import javax.transaction.Transactional;
+//import java.util.List;
+//import java.util.Optional;
+//
+//@Service
+//public class LocationListService {
+//
+//    @Autowired
+//    private LocationListRepository locRepo;
 
     //    ========================LocationStoreInfoManager 地點資料管理===============================
 
@@ -76,4 +76,4 @@ public class LocationListService {
 
 
 
-}
+//}
