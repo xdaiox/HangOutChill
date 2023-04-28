@@ -10,9 +10,6 @@ import javax.persistence.Table;
 public class LocationImage {
 
     @Id
-    @Column(name = "location_image_id")
-    private Integer locImgId;
-
     @Column(name = "location_id")
     private Integer locId;
 
@@ -42,14 +39,6 @@ public class LocationImage {
 
     @Column(name = "location_image_gallery_8")
     private String locImgGallery_8;
-
-    public Integer getLocImgId() {
-        return locImgId;
-    }
-
-    public void setLocImgId(Integer locImgId) {
-        this.locImgId = locImgId;
-    }
 
     public Integer getLocId() {
         return locId;

@@ -4,10 +4,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 
 @Entity
-@Table(name = "location")
+@Table(name = "locationInfo")
 public class LocationInfo {
 
     @Id
@@ -24,10 +26,6 @@ public class LocationInfo {
     private Integer locPriceLevel;
     @Column(name = "location_description")
     private String locDesc;
-    @Column(name = "location_image_id")
-    private Integer locImgId;
-    @Column(name = "location_operationTime_id")
-    private Integer locOptId;
     @Column(name = "location_city")
     private String locCity;
     @Column(name = "location_district")
@@ -55,6 +53,17 @@ public class LocationInfo {
             locInfoUpdateTime = new Date();
         }
     }
+
+    //for location operation Time
+    @OneToMany(mappedBy = "locationInfo_opt", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<LocationOperationTime> locationOperationTimes = new LinkedHashSet<>();
+
+    //for location Image
+    @OneToOne(mappedBy = "locationInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+
+
+
+
 
     public Integer getLocId() {
         return locId;
@@ -102,22 +111,6 @@ public class LocationInfo {
 
     public void setLocDesc(String locDesc) {
         this.locDesc = locDesc;
-    }
-
-    public Integer getLocImgId() {
-        return locImgId;
-    }
-
-    public void setLocImgId(Integer locImgId) {
-        this.locImgId = locImgId;
-    }
-
-    public Integer getLocOptId() {
-        return locOptId;
-    }
-
-    public void setLocOptId(Integer locOptId) {
-        this.locOptId = locOptId;
     }
 
     public String getLocCity() {
@@ -191,4 +184,13 @@ public class LocationInfo {
     public void setLocInfoUpdateTime(Date locInfoUpdateTime) {
         this.locInfoUpdateTime = locInfoUpdateTime;
     }
+
+    public Set<LocationOperationTime> getLocationOperationTimes() {
+        return locationOperationTimes;
+    }
+
+    public void setLocationOperationTimes(Set<LocationOperationTime> locationOperationTimes) {
+        this.locationOperationTimes = locationOperationTimes;
+    }
 }
+
