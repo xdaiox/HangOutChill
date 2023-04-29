@@ -14,12 +14,6 @@ public class LocationOperationTime {
     @Column(name = "location_operationTime_id")
     private Integer opTimeID;
 
-
-    @ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name="location_id")
-    private LocationInfo locationInfo_opt;
-    
-
     @Column(name="weekday")
     private Integer weekday;
     @Temporal(TemporalType.TIMESTAMP)
@@ -30,6 +24,17 @@ public class LocationOperationTime {
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     @Column(name = "closeTime")
     private Date closeTime;
+
+    //多對一 對應locationInfo
+    @ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name="location_id")
+    private LocationInfo locationInfo;
+
+
+
+
+    //參數建構子
+    public LocationOperationTime(){}
 
 
 
@@ -67,11 +72,11 @@ public class LocationOperationTime {
         this.closeTime = closeTime;
     }
 
-    public LocationInfo getLocationInfo_opt() {
-        return locationInfo_opt;
+    public LocationInfo getLocationInfo() {
+        return locationInfo;
     }
 
-    public void setLocationInfo_opt(LocationInfo locationInfo_opt) {
-        this.locationInfo_opt = locationInfo_opt;
+    public void setLocationInfo(LocationInfo locationInfo) {
+        this.locationInfo = locationInfo;
     }
 }

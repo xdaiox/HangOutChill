@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -32,16 +33,10 @@ public class LocationInfo {
     private String locDist;
     @Column(name = "location_address")
     private String locAdd;
-    @Column(name = "location_latitude")
-    private Integer locLat;
-    @Column(name = "location_longitude")
-    private String locLng;
     @Column(name = "location_tel")
     private String locTel;
     @Column(name = "location_link")
     private String locLink;
-    @Column(name = "member_id")
-    private String locMemberId;
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     @Column(name = "location_info_updateTime")
@@ -54,12 +49,24 @@ public class LocationInfo {
         }
     }
 
-    //for location operation Time
-    @OneToMany(mappedBy = "locationInfo_opt", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<LocationOperationTime> locationOperationTimes = new LinkedHashSet<>();
 
-    //for location Image
-    @OneToOne(mappedBy = "locationInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+    //關聯 與LocationOerationTime
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "locationInfo",fetch=FetchType.LAZY)
+    private Set<LocationOperationTime> locationOperationTimes = new HashSet<LocationOperationTime>();
+
+    //關聯 與LocationImage
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "locationInfo")
+    private LocationImage locationImage;
+
+    //關聯 與LocationOerationTime
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "locationInfo",fetch=FetchType.LAZY)
+    private Set<LocationComment> locationComments = new HashSet<LocationComment>();
+    //關聯 與LocationImage
+
+
+
+    //參數建構子
+    public LocationInfo(){}
 
 
 
@@ -137,22 +144,6 @@ public class LocationInfo {
         this.locAdd = locAdd;
     }
 
-    public Integer getLocLat() {
-        return locLat;
-    }
-
-    public void setLocLat(Integer locLat) {
-        this.locLat = locLat;
-    }
-
-    public String getLocLng() {
-        return locLng;
-    }
-
-    public void setLocLng(String locLng) {
-        this.locLng = locLng;
-    }
-
     public String getLocTel() {
         return locTel;
     }
@@ -169,14 +160,6 @@ public class LocationInfo {
         this.locLink = locLink;
     }
 
-    public String getLocMemberId() {
-        return locMemberId;
-    }
-
-    public void setLocMemberId(String locMemberId) {
-        this.locMemberId = locMemberId;
-    }
-
     public Date getLocInfoUpdateTime() {
         return locInfoUpdateTime;
     }
@@ -185,12 +168,12 @@ public class LocationInfo {
         this.locInfoUpdateTime = locInfoUpdateTime;
     }
 
-    public Set<LocationOperationTime> getLocationOperationTimes() {
-        return locationOperationTimes;
+    public LocationImage getLocationImage() {
+        return locationImage;
     }
 
-    public void setLocationOperationTimes(Set<LocationOperationTime> locationOperationTimes) {
-        this.locationOperationTimes = locationOperationTimes;
+    public void setLocationImage(LocationImage locationImage) {
+        this.locationImage = locationImage;
     }
 }
 
