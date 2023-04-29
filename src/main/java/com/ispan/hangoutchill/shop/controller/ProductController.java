@@ -146,35 +146,90 @@ public class ProductController {
 	
 	
 	
-	
 	// 產品編輯
 	@GetMapping("/shop/edit/product")
 	public String editProductPage(@RequestParam(name="productid") Integer productId, Model model) {
 		Product p = productService.getProductById(productId);
+		List<ProductPhoto> photos = productPhotoService.findPhotosById(productId);
 		model.addAttribute("product", p);
+		model.addAttribute("photos", photos);
 		return "shop/editProductPage";
 	}
 	
 
-	@PutMapping("/shop/edit/product")
-	public String editProduct(@ModelAttribute("product") Product product) {
+//	@PutMapping("/shop/edit/product")
+//	public String editProduct(@ModelAttribute("product") Product product,
+//								@RequestParam(name="delphotoid", required=false) Integer[] deletePhotoId,
+//								@RequestParam(name="addphoto", required=false) MultipartFile[] addphotos) {
+//		// 封面照片更改處理
+//		MultipartFile productImage = product.getMainImage();
+//		if(productImage != null && !productImage.isEmpty()) {
+//			try {
+//				byte[] b = productImage.getBytes();
+//				product.setCoverImage(b);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//				throw new RuntimeException("檔案上傳發生異常: "+ e.getMessage());
+//			}
+//		}else {
+//			Product originalProduct = productService.getProductById(product.getProductId());
+//			product.setCoverImage(originalProduct.getCoverImage());
+//		}
 		
-		MultipartFile productImage = product.getMainImage();
-		if(productImage != null && !productImage.isEmpty()) {
-			try {
-				byte[] b = productImage.getBytes();
-				product.setCoverImage(b);
-			} catch (IOException e) {
-				e.printStackTrace();
-				throw new RuntimeException("檔案上傳發生異常: "+ e.getMessage());
-			}
-		}else {
-			Product originalProduct = productService.getProductById(product.getProductId());
-			product.setCoverImage(originalProduct.getCoverImage());
-		}
-		productService.updateProductById(product.getProductId(), product);
-		return "redirect:/shop/allproducts";
-	}
+		// 其餘商品圖片處理
+		// 刪除圖片
+//		List<Integer> deleteList = null; 未來再懂 HQL語法可以這樣寫
+//		List<Integer> originalIds = productPhotoService.findPhotosIdByProductId(product.getProductId());
+//		if (deletePhotoId.length > 0) {
+//			for(Integer i : deletePhotoId) {
+//				for(Integer j : originalIds) {
+//					if(i==j) {
+//						break;
+//					}
+//					productPhotoService.deltePhotoByPhotoId(i);
+//				}
+//			}
+//		}
+		
+		
+		// 新增圖片
+		// 這邊的圖片應該要各別存了
+//		Set<ProductPhoto> photosets = new LinkedHashSet<>();
+//		ProductPhoto pp;
+//		ProductPhotoPK pPK;
+//		
+//		for(MultipartFile photo : addphotos) {
+//			if(photo != null && !photo.isEmpty()) {
+//				pp = new ProductPhoto();
+//				pPK = new ProductPhotoPK();
+//				pp.setProduct(product);
+//				// 這行應該是不用存
+////			pPK.setProductId(product.getProductId());
+//				
+//				try {
+//					byte[] b = photo.getBytes();
+//					pp.setPhoto(b);
+//					pPK.setPhotoName(photo.getOriginalFilename());
+////					System.out.println(photo.getOriginalFilename());
+////				pPK.setPhotoName("TEST"); 
+//					pp.setProductPhotoPK(pPK);
+////					photosets.add(pp);
+//					productPhotoService.addProducPhoto(pp);
+//					
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//					throw new RuntimeException("檔案上傳發生異常: "+ e.getMessage());
+//				}
+//			}
+//		}
+
+		
+//		productService.updateProductById(product.getProductId(), product);
+//		
+//		// 新增產品修改成功敘述
+//		
+//		return "redirect:/shop/allproducts";
+//	}
 	
 	
 	// 子敬的方法

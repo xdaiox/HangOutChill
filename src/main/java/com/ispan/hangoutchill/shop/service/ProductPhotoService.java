@@ -25,8 +25,8 @@ public class ProductPhotoService {
 		return productPhotoRepository.findAll();
 	}
 	
-	public List<ProductPhoto> findPhotosById(Integer ProductId){
-		return productPhotoRepository.findPhotosById(ProductId);
+	public List<ProductPhoto> findPhotosById(Integer productId){
+		return productPhotoRepository.findPhotosById(productId);
 	}
 	
 	
@@ -38,7 +38,18 @@ public class ProductPhotoService {
 		return photo.get();
 	}
 
+//	public List<Integer> findPhotosIdByProductId(Integer productId){
+//		
+//		return productPhotoRepository.findPhotosIdByProductId(productId);
+//	}
 	
 	
+//	public Integer deltePhotoByPhotoId(Integer photoId) {
+//		return productPhotoRepository.deletePhotoByPhotoId(photoId);
+//	}
 	
+	
+	public void addProducPhoto(ProductPhoto productPhoto) {
+		productPhotoRepository.save(productPhoto);
+	}
 }

@@ -85,6 +85,22 @@
 						</td>
 					</tr>
 					<tr>
+					<td>其他商品圖片：</td>
+							<c:forEach var="photo" items="${photos}">
+							<td>
+							<img width='300' height='auto' src='<c:url value="/shop/getExtraPicture?productid=${photo.productPhotoPK.productId}&productName=${photo.productPhotoPK.photoName}" />' />
+							<br>
+							<input type="button" value="刪除" id=""/>
+							<input type="hidden" name="delphotoid" value="${photo.photoId}"  />
+							</td>
+							</c:forEach>	
+					</tr>
+					<tr>
+						<td>新增圖片：</td>
+						<td id="dadtd"><input type="button" value="+ 圖片" id="addfile" /><br />
+							<form:input type="file" name="addphoto" path=""/><br /></td>
+					</tr>
+					<tr>
 						<td></td>
 						<td></td>
 						<td>
@@ -111,7 +127,21 @@
         dadtd.appendChild(addinput);
         dadtd.appendChild(addbr);
       });
+      
+      
+   // 刪除對應圖片
+      for (let i = 0; i < 3; i++) {
+     	let theDeletetd = document.getElementById("deletetd"+i);
+     	let deletebutton = document.getElementById("deletebutton"+i);
+     	let theImg = document.getElementById("pictd"+i);
+     	deletebutton.addEventListener("click", function () {
+       	theDeletetd.remove();
+       	theImg.remove();
+     	});
+  	}
 
+      
+      
       // 標籤格式確認
       // binding
       document.getElementById("proid").addEventListener("blur", checkId);

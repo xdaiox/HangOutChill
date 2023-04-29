@@ -5,6 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -32,8 +34,22 @@ public class ProductPhoto {
 	@Transient
 	private MultipartFile uploadimg;
 	
+	@Column(name="photo_id",columnDefinition = "int")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer photoId;
+	
+	
+	public Integer getPhotoId() {
+		return photoId;
+	}
+
+
+	public void setPhotoId(Integer photoId) {
+		this.photoId = photoId;
+	}
+
+
 	public ProductPhoto() {
-		
 	}
 	
 
