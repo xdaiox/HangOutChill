@@ -1,4 +1,4 @@
-package com.ispan.hangoutchill.location.dao;
-
-public class LocationCommentDao {
-}
+//package com.ispan.hangoutchill.location.dao;
+//
+//public class LocationCommentDao {
+//}
