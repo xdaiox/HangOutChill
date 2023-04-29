@@ -19,6 +19,8 @@
 				<div class="row justify-content-center">
 					<div class="" style="margin: auto;">
 						<h1 style="text-align: center;">活動/課程管理</h1>
+						<form action="${contextRoot}/actandles/shop/add">
+						<input type="submit" class="btn btn-outline-info btn-sm"value="新增" /></form>
 						<div class="table-responsive">
 							<table class="table table-hover table-bordered table-light">
 								<thead>
