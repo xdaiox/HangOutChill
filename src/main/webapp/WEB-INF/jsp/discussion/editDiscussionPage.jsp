@@ -162,7 +162,9 @@ body {
 	margin-left: 15px;
 }
 </style>
+<!-- ================================== ck editor ================================== -->
 <script src="${contextRoot}/js/ckeditor/ckeditor.js"></script>
+<!-- ================================== ck editor ================================== -->
 </head>
 <div class="container">
 	<div class="main-body p-0">
@@ -194,8 +196,10 @@ body {
 								</div>
 								<div class="form-group">
 									<label for="content">内容</label>
-									
+									<!-- ================================== ck editor ================================== -->
 									<form:textarea path="contents" id="editor" name="content" placeholder="請在這裡填寫內容"></form:textarea>
+									<!-- ================================== ck editor ================================== -->
+									
 									<!-- <form:textarea path="contents" class="form-control" id="content" rows="5"
 										placeholder="輸入内容" ></form:textarea> -->
 								</div>
@@ -213,6 +217,7 @@ body {
 	</div>
 </div>
 
+<!-- ================================== ck editor ================================== -->
 <script>
 CKEDITOR.replace("editor");
 	// ClassicEditor
@@ -231,5 +236,6 @@ CKEDITOR.replace("editor");
     toolbar: [ 'bold', 'italic' ]
 } )
 </script>
+<!-- ================================== ck editor ================================== -->
 
 </html>
