@@ -30,23 +30,23 @@ public class ProductPhotoService {
 	}
 	
 	
-	public ProductPhoto findById(ProductPhotoPK porductPhotoPK) {
-		Optional<ProductPhoto> photo = productPhotoRepository.findById(porductPhotoPK);
+	public ProductPhoto findById(Integer productId) {
+		Optional<ProductPhoto> photo = productPhotoRepository.findById(productId);
 		if(photo.isEmpty()) {
 			return null;
 		}
 		return photo.get();
 	}
 
-//	public List<Integer> findPhotosIdByProductId(Integer productId){
-//		
-//		return productPhotoRepository.findPhotosIdByProductId(productId);
-//	}
+	public List<Integer> findPhotosIdByProductId(Integer productId){
+		
+		return productPhotoRepository.findPhotosIdByProductId(productId);
+	}
 	
 	
-//	public Integer deltePhotoByPhotoId(Integer photoId) {
-//		return productPhotoRepository.deletePhotoByPhotoId(photoId);
-//	}
+	public Integer deltePhotoByPhotoId(Integer photoId) {
+		return productPhotoRepository.deletePhotoByPhotoId(photoId);
+	}
 	
 	
 	public void addProducPhoto(ProductPhoto productPhoto) {

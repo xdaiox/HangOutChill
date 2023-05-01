@@ -79,7 +79,7 @@
 <!-- 					</tr> -->
 					<tr>
 					<td>商品封面圖片：</td>
-						<td id="dadtd">
+						<td>
 							<img width='300' height='300' src='<c:url value="/shop/getPicture/${product.productId}" />' />
 							<label>上傳更新封面圖片：</label> <form:input type="file" name="picture1" path="mainImage"/><br />
 						</td>
@@ -87,11 +87,11 @@
 					<tr>
 					<td>其他商品圖片：</td>
 							<c:forEach var="photo" items="${photos}">
-							<td>
-							<img width='300' height='auto' src='<c:url value="/shop/getExtraPicture?productid=${photo.productPhotoPK.productId}&productName=${photo.productPhotoPK.photoName}" />' />
+							<td class="deletetd" id="deletetd${photos.indexOf(photo)}">
+							<img width='300' height='auto' src='<c:url value="/shop/getExtraPicture?photoid=${photo.photoId}" />' />
 							<br>
-							<input type="button" value="刪除" id=""/>
-							<input type="hidden" name="delphotoid" value="${photo.photoId}"  />
+							<input type="button" value="刪除" id="deletebutton${photos.indexOf(photo)}"/>
+							<form:input type="hidden" name="delphotoid" value="${photo.photoId}"  path=""/>
 							</td>
 							</c:forEach>	
 					</tr>
@@ -122,7 +122,7 @@
         let addinput = document.createElement("input");
         let addbr = document.createElement("br");
         addinput.setAttribute("type", "file");
-        addinput.setAttribute("name", "picture" + i);
+        addinput.setAttribute("name", "addphoto");
         i++;
         dadtd.appendChild(addinput);
         dadtd.appendChild(addbr);
@@ -130,15 +130,27 @@
       
       
    // 刪除對應圖片
-      for (let i = 0; i < 3; i++) {
-     	let theDeletetd = document.getElementById("deletetd"+i);
-     	let deletebutton = document.getElementById("deletebutton"+i);
-     	let theImg = document.getElementById("pictd"+i);
-     	deletebutton.addEventListener("click", function () {
-       	theDeletetd.remove();
-       	theImg.remove();
-     	});
-  	}
+    let deleteNum = document.querySelectorAll(".deletetd").length;
+    for (let i = 0; i < deleteNum; i++) {
+    	let theDeletetd = document.getElementById("deletetd"+i);
+    	let deletebutton = document.getElementById("deletebutton"+i);
+//     	let theImg = document.getElementById("pictd"+j);
+    	deletebutton.addEventListener("click", function () {
+      	theDeletetd.remove();
+//       	theImg.remove();
+    	});
+ 	}
+   
+   
+//       for (let i = 0; i < 3; i++) {
+//      	let theDeletetd = document.getElementById("deletetd"+i);
+//      	let deletebutton = document.getElementById("deletebutton"+i);
+//      	let theImg = document.getElementById("pictd"+i);
+//      	deletebutton.addEventListener("click", function () {
+//        	theDeletetd.remove();
+//        	theImg.remove();
+//      	});
+//   	}
 
       
       

@@ -1,5 +1,6 @@
 package com.ispan.hangoutchill.shop.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,11 +62,16 @@ public class ProductService {
 			updateP.setLaunchdate(product.getLaunchdate());
 			updateP.setDiscount(product.getDiscount());
 			updateP.setCoverImage(product.getCoverImage());
+			updateP.setPhotos(product.getPhotos());
 			return updateP;
 		}
 		
 		return null;
 	}
 	
+	
+	public List<Product> findProductByCategory(String category){
+		return productRepository.findProductsByCategory(category);
+	}
 	
 }

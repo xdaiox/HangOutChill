@@ -78,7 +78,6 @@ public class ProductController {
 		for(MultipartFile photo : extraphotos) {
 			if(photo != null && !photo.isEmpty()) {
 				pp = new ProductPhoto();
-				pPK = new ProductPhotoPK();
 				pp.setProduct(product);
 				
 				// 這行應該是不用存
@@ -87,10 +86,9 @@ public class ProductController {
 				try {
 					byte[] b = photo.getBytes();
 					pp.setPhoto(b);
-					pPK.setPhotoName(photo.getOriginalFilename());
+					pp.setPhotoName(photo.getOriginalFilename());
 					System.out.println(photo.getOriginalFilename());
 //				pPK.setPhotoName("TEST"); 
-					pp.setProductPhotoPK(pPK);
 					photosets.add(pp);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -157,79 +155,131 @@ public class ProductController {
 	}
 	
 
-//	@PutMapping("/shop/edit/product")
-//	public String editProduct(@ModelAttribute("product") Product product,
-//								@RequestParam(name="delphotoid", required=false) Integer[] deletePhotoId,
-//								@RequestParam(name="addphoto", required=false) MultipartFile[] addphotos) {
+	@PutMapping("/shop/edit/product")
+	public String editProduct(@ModelAttribute("product") Product product,
+								@RequestParam(name="delphotoid", required=false) Integer[] deletePhotoId,
+								@RequestParam(name="addphoto", required=false) MultipartFile[] addphotos) {
 //		// 封面照片更改處理
-//		MultipartFile productImage = product.getMainImage();
-//		if(productImage != null && !productImage.isEmpty()) {
-//			try {
-//				byte[] b = productImage.getBytes();
-//				product.setCoverImage(b);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//				throw new RuntimeException("檔案上傳發生異常: "+ e.getMessage());
-//			}
-//		}else {
-//			Product originalProduct = productService.getProductById(product.getProductId());
-//			product.setCoverImage(originalProduct.getCoverImage());
-//		}
+		MultipartFile productImage = product.getMainImage();
+		if(productImage != null && !productImage.isEmpty()) {
+			try {
+				byte[] b = productImage.getBytes();
+				product.setCoverImage(b);
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: "+ e.getMessage());
+			}
+		}else {
+			Product originalProduct = productService.getProductById(product.getProductId());
+			product.setCoverImage(originalProduct.getCoverImage());
+		}
 		
 		// 其餘商品圖片處理
 		// 刪除圖片
-//		List<Integer> deleteList = null; 未來再懂 HQL語法可以這樣寫
-//		List<Integer> originalIds = productPhotoService.findPhotosIdByProductId(product.getProductId());
-//		if (deletePhotoId.length > 0) {
+		List<Integer> deleteList = null; //未來再懂 HQL語法可以這樣寫
+		List<Integer> originalIds = productPhotoService.findPhotosIdByProductId(product.getProductId());
+		
+//		if(deletePhotoId.length >0) {
 //			for(Integer i : deletePhotoId) {
-//				for(Integer j : originalIds) {
-//					if(i==j) {
-//						break;
+//				if(i!=null) {
+//					for(Integer j : originalIds) {
+//						if(i==j) {
+//							break;
+//						}
+//						productPhotoService.deltePhotoByPhotoId(i);
 //					}
-//					productPhotoService.deltePhotoByPhotoId(i);
+//					
 //				}
+//				
+//			}
+//			
+//		}else if(deletePhotoId==null) {
+//			for(Integer i :originalIds ) {
+//				productPhotoService.deltePhotoByPhotoId(i);
 //			}
 //		}
+		
+		
+		
+		Boolean flag = false;
+		if(deletePhotoId == null) {
+			for(Integer i : originalIds) {
+				productPhotoService.deltePhotoByPhotoId(i);
+			}
+		}else {
+			for(Integer i : originalIds) {
+				for(Integer j : deletePhotoId) {
+					if(j==i) {
+						flag = true;
+						break;
+					}else {
+						flag = false;
+					}
+				}
+				if(!flag) {
+					productPhotoService.deltePhotoByPhotoId(i);
+				}
+					
+			}
+			
+		}
+		
+		
+		
+				
+			
+		
+//		for(Integer i : deletePhotoId) {
+//			if(i!=null) {
+//				for(Integer j : originalIds) {
+//					if(j==i) {
+//						break;
+//						
+//					}
+//					productPhotoService.deltePhotoByPhotoId(j);
+//				}
+//				
+//			}
+//			
+//		}
+//		
 		
 		
 		// 新增圖片
-		// 這邊的圖片應該要各別存了
-//		Set<ProductPhoto> photosets = new LinkedHashSet<>();
-//		ProductPhoto pp;
-//		ProductPhotoPK pPK;
-//		
-//		for(MultipartFile photo : addphotos) {
-//			if(photo != null && !photo.isEmpty()) {
-//				pp = new ProductPhoto();
-//				pPK = new ProductPhotoPK();
-//				pp.setProduct(product);
-//				// 這行應該是不用存
-////			pPK.setProductId(product.getProductId());
-//				
-//				try {
-//					byte[] b = photo.getBytes();
-//					pp.setPhoto(b);
-//					pPK.setPhotoName(photo.getOriginalFilename());
-////					System.out.println(photo.getOriginalFilename());
-////				pPK.setPhotoName("TEST"); 
-//					pp.setProductPhotoPK(pPK);
-////					photosets.add(pp);
-//					productPhotoService.addProducPhoto(pp);
-//					
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//					throw new RuntimeException("檔案上傳發生異常: "+ e.getMessage());
-//				}
-//			}
-//		}
-
+		Set<ProductPhoto> photosets = new LinkedHashSet<>();
+		ProductPhoto pp;
 		
-//		productService.updateProductById(product.getProductId(), product);
+		for(MultipartFile photo : addphotos) {
+			if(photo != null && !photo.isEmpty()) {
+				pp = new ProductPhoto();
+				pp.setProduct(product);
+				// 這行應該是不用存
+//			pPK.setProductId(product.getProductId());
+//				
+				try {
+					byte[] b = photo.getBytes();
+					pp.setPhoto(b);
+					pp.setPhotoName(photo.getOriginalFilename());
+//					System.out.println(photo.getOriginalFilename());
+//				pPK.setPhotoName("TEST"); 
+					photosets.add(pp);
+					productPhotoService.addProducPhoto(pp);
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+					throw new RuntimeException("檔案上傳發生異常: "+ e.getMessage());
+				}
+			}
+		}
 //		
-//		// 新增產品修改成功敘述
-//		
-//		return "redirect:/shop/allproducts";
-//	}
+//		product.setPhotos(photosets);
+		productService.updateProductById(product.getProductId(), product);
+		
+		
+		// 新增產品修改成功敘述
+		
+		return "redirect:/shop/allproducts";
+	}
 	
 	
 	// 子敬的方法
@@ -276,17 +326,13 @@ public class ProductController {
 	
 	// ExtraImg 取得
 	@GetMapping("/shop/getExtraPicture")
-	public ResponseEntity<byte[]> getPicture(
+	public ResponseEntity<byte[]> getExtraPhoto(
 			HttpServletResponse resp,
-			@RequestParam(name="productid") Integer productId,
-			@RequestParam(name="productName") String productName){
+			@RequestParam(name="photoid") Integer photoId){
 		
 		HttpHeaders headers = new HttpHeaders();
 		byte[] media = null;
-		ProductPhotoPK ppk = new ProductPhotoPK();
-		ppk.setPhotoName(productName);
-		ppk.setProductId(productId);
-		ProductPhoto photo = productPhotoService.findById(ppk);
+		ProductPhoto photo = productPhotoService.findById(photoId);
 //		Product product = productService.getProductById(productId);
 		
 		if (photo != null) {
@@ -304,6 +350,16 @@ public class ProductController {
 		return responseEntity;
 	}
 	
+	
+	// 前台渲染
+	// 商品分類 仍須加上分頁功能與分頁按鈕
+	@GetMapping("/shop/products")
+	public String showProductbyCategory(@RequestParam(name="category") String category, Model model) {
+		List<Product> cps = productService.findProductByCategory(category);
+		model.addAttribute("category", category);
+		model.addAttribute("cateProducts", cps);
+		return "shop/shopCategory";
+	}
 	
 	
 	

@@ -54,7 +54,7 @@ public class Product {
 	
 	
 	@OneToMany(mappedBy="product",
-		       cascade = CascadeType.ALL, orphanRemoval = true)
+		       cascade = CascadeType.ALL)
 	private Set<ProductPhoto> photos = new LinkedHashSet<>();
 	
 	

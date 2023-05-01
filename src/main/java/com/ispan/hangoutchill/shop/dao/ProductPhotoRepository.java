@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ispan.hangoutchill.shop.model.ProductPhoto;
 import com.ispan.hangoutchill.shop.model.ProductPhotoPK;
 
-public interface ProductPhotoRepository extends JpaRepository<ProductPhoto, ProductPhotoPK> {
+public interface ProductPhotoRepository extends JpaRepository<ProductPhoto, Integer> {
 
 	@Query("from ProductPhoto where product_id = :productId")
 	public List<ProductPhoto> findPhotosById(@Param(value="productId") Integer productId);
@@ -20,9 +20,9 @@ public interface ProductPhotoRepository extends JpaRepository<ProductPhoto, Prod
 	@Query("select photoId from ProductPhoto where product_id = :productId")
 	public List<Integer> findPhotosIdByProductId(@Param(value="productId") Integer productId);
 	
-//	@Transactional
-//	@Modifying
-//	@Query("delete from ProductPhoto where photo_id = :photoId")
-//	public Integer deletePhotoByPhotoId(@Param(value="photoId") Integer photoId);
+	@Transactional
+	@Modifying
+	@Query("delete from ProductPhoto where photo_id = :photoId")
+	public Integer deletePhotoByPhotoId(@Param(value="photoId") Integer photoId);
 	
 }

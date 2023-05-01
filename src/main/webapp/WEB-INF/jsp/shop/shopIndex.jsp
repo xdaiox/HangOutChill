@@ -18,7 +18,7 @@
 <title>商城首頁</title>
 
 <title>首頁</title>
-<jsp:include page="../layout/navbar.jsp" />
+<jsp:include page="layout/navbar.jsp" />
 
 
 </head>

@@ -87,7 +87,7 @@
 					<td>其他商品圖片：</td>
 							<c:forEach var="photo" items="${photos}">
 							<td>
-							<img width='300' height='auto' src='<c:url value="/shop/getExtraPicture?productid=${photo.productPhotoPK.productId}&productName=${photo.productPhotoPK.photoName}" />' />
+							<img width='300' height='auto' src='<c:url value="/shop/getExtraPicture?photoid=${photo.photoId}" />' />
 							</td>
 							</c:forEach>	
 					</tr>
