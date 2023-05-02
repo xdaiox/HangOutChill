@@ -3,10 +3,7 @@ package com.ispan.hangoutchill.location.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 
 @Entity
@@ -21,6 +18,9 @@ public class LocationInfo {
     private String locName;
     @Column(name = "location_category")
     private String locCat;
+//    @ElementCollection
+//    @Column(name = "location_tag")
+//    private List<String> locTag;
     @Column(name = "location_tag")
     private String locTag;
     @Column(name = "location_priceLevel")
@@ -39,14 +39,12 @@ public class LocationInfo {
     private String locLink;
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-    @Column(name = "location_info_updateTime")
+    @Column(name = "location_info_updateTime",columnDefinition = "datetime")
     private Date locInfoUpdateTime;
 
     @PrePersist
     public void onCreate() {
-        if(locInfoUpdateTime == null) {
             locInfoUpdateTime = new Date();
-        }
     }
 
 

@@ -45,10 +45,10 @@ public class LocationInfoController {
 
     //新增LocationStoreInfo動作
     @PostMapping("/location/locationManager/addLocationInfo/post")
-    public String postLocationInfo(@ModelAttribute("locationInfo") LocationInfo lsi, Model model) {
-        locationInfoService.addLocationInfo(lsi);
-        model.addAttribute("locationStoreInfo", new LocationInfo());
-        return "location/locationInfoAdd";
+    public String postLocationInfo(@ModelAttribute("locationInfo") LocationInfo locationInfo, Model model) {
+        locationInfoService.addLocationInfo(locationInfo);
+        model.addAttribute("locationInfo", new LocationInfo());
+        return "redirect:/location/locationInfoAdd";
     }
 
     //刪除LocationInfo BY ID

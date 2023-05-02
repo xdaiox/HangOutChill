@@ -40,7 +40,7 @@ public class LocationImage {
     @Column(name = "location_image_gallery_8",columnDefinition = "varbinary(max)")
     private byte[] locImgGallery_8;
 
-
+    //對應locationInfo
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "location_id")
     private LocationInfo locationInfo;

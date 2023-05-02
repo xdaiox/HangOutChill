@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class LocationInfoService {
 
     //查詢所有地點 透過page
     public Page<LocationInfo> findAllLocationInfoByPage(Integer pageNumber){
-        Pageable pgb = PageRequest.of(pageNumber-1,5,Sort.Direction.DESC,"locID");
+        Pageable pgb = PageRequest.of(pageNumber-1,5,Sort.Direction.DESC,"locId");
         Page<LocationInfo> page = locRepo.findAll(pgb);
         return page;
     }
@@ -48,9 +49,12 @@ public class LocationInfoService {
 
     //修改單一地點 By ID
 //    @Transactional
-//    public LocationStoreInfo updateLocationStoreInfoByID(Integer id ) {
-//        public LocationStoreInfo updateLocationStoreInfoById(Integer id ,)
+//    public LocationInfo updateLocationInfoByID(Integer id ) {
+//        public LocationInfo updateLocationInfoById(Integer id ,)
 //    }
+
+
+
 
 
 

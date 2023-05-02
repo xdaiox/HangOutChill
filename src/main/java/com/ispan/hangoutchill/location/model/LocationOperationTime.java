@@ -19,13 +19,13 @@ public class LocationOperationTime {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "openTime")
-    private Date locInfoUpdateTime;
+    private Date openTime;
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "closeTime")
     private Date closeTime;
 
-    //多對一 對應locationInfo
+    //對應locationInfo
     @ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name="location_id")
     private LocationInfo locationInfo;
@@ -35,9 +35,6 @@ public class LocationOperationTime {
 
     //參數建構子
     public LocationOperationTime(){}
-
-
-
 
 
     public Integer getOpTimeID() {
@@ -56,12 +53,12 @@ public class LocationOperationTime {
         this.weekday = weekday;
     }
 
-    public Date getLocInfoUpdateTime() {
-        return locInfoUpdateTime;
+    public Date getOpenTime() {
+        return openTime;
     }
 
-    public void setLocInfoUpdateTime(Date locInfoUpdateTime) {
-        this.locInfoUpdateTime = locInfoUpdateTime;
+    public void setOpenTime(Date openTime) {
+        this.openTime = openTime;
     }
 
     public Date getCloseTime() {
