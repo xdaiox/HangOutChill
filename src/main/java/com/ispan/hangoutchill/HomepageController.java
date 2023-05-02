@@ -29,10 +29,7 @@ public class HomepageController {
         return "aal/showAllAaL";
     }
 
-    @GetMapping("/location/locationList")
-    public String toLocationList() {
-        return "/location/locationList";
-    }
+
 
     @GetMapping("/shop/index")
     public String toShopIndex() {
