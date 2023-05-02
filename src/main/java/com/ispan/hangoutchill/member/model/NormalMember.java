@@ -11,7 +11,7 @@ import java.util.Date;
 public class NormalMember {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Integer id;
     @Column(name = "normal_account")
@@ -33,10 +33,20 @@ public class NormalMember {
     @Column(name = "profilephoto")
     private String photoB64;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="FK_role_id", foreignKey=@ForeignKey(name = "role_id"))
+    private Role role;
+
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     @Column(name="registeration_time")
     private Date registTime;
+
+    @OneToOne(mappedBy = "normalMember")
+    private SecuredToken securedToken;
+
+    @Column(name="enabled")
+    private boolean enabled;
 
     @Transient
     private MultipartFile file;
@@ -141,5 +151,29 @@ public class NormalMember {
 
     public void setFile(MultipartFile file) {
         this.file = file;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public SecuredToken getSecuredToken() {
+        return securedToken;
+    }
+
+    public void setSecuredToken(SecuredToken securedToken) {
+        this.securedToken = securedToken;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

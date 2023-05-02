@@ -36,17 +36,17 @@
 
 </footer>
 
-<script src="${contextRoot}/js/jquery-2.2.4.min.js"></script>
-<script src="${contextRoot}/js/popper.js"></script>
-<script src="${contextRoot}/js/bootstrap.min.js"></script>
-<script src="${contextRoot}/js/stellar.js"></script>
-<script src="${contextRoot}/js/jquery.ajaxchimp.min.js"></script>
-<script src="${contextRoot}/js/waypoints.min.js"></script>
-<script src="${contextRoot}/js/mail-script.js"></script>
-<script src="${contextRoot}/js/contact.js"></script>
-<script src="${contextRoot}/js/jquery.form.js"></script>
-<script src="${contextRoot}/js/jquery.validate.min.js"></script>
-<script src="${contextRoot}/js/mail-script.js"></script>
-<script src="${contextRoot}/js/theme.js"></script>
+<script src="${contextRoot}/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="${contextRoot}/js/popper.js" type="text/javascript"></script>
+<script src="${contextRoot}/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="${contextRoot}/js/stellar.js" type="text/javascript"></script>
+<script src="${contextRoot}/js/jquery.ajaxchimp.min.js" type="text/javascript"></script>
+<script src="${contextRoot}/js/waypoints.min.js" type="text/javascript"></script>
+<script src="${contextRoot}/js/mail-script.js" type="text/javascript"></script>
+<script src="${contextRoot}/js/contact.js" type="text/javascript"></script>
+<script src="${contextRoot}/js/jquery.form.js" type="text/javascript"></script>
+<script src="${contextRoot}/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="${contextRoot}/js/mail-script.js" type="text/javascript"></script>
+<script src="${contextRoot}/js/theme.js" type="text/javascript"></script>
 </body>
 </html>

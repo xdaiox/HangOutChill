@@ -12,15 +12,15 @@
     <title>HangoutChill Holiday</title>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="${contextRoot}/css/bootstrap.css">
-    <link rel="stylesheet" href="${contextRoot}/css/themify-iconscopy.css">
-    <link rel="stylesheet" href="${contextRoot}/css/flaticon.css">
+    <link rel="stylesheet" href="${contextRoot}/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="${contextRoot}/css/themify-iconscopy.css" type="text/css">
+    <link rel="stylesheet" href="${contextRoot}/css/flaticon.css" type="text/css">
 
 
     <!-- main css -->
-    <link rel="stylesheet" href="${contextRoot}/css/stylecopy.css">
-    <link rel="stylesheet" href="${contextRoot}/css/responsivecopy.css">
-    <link rel="stylesheet" href="${contextRoot}/css/contentcopy.css">
+    <link rel="stylesheet" href="${contextRoot}/css/stylecopy.css" type="text/css">
+    <link rel="stylesheet" href="${contextRoot}/css/responsivecopy.css" type="text/css">
+    <link rel="stylesheet" href="${contextRoot}/css/contentcopy.css" type="text/css">
 <title>導覽列</title>
 </head>
 <body>
@@ -40,7 +40,7 @@
             </div>
             <div class="col-6 col-lg-4 col-md-3 col-sm-6 logo-wrapper">
                 <a href="${contextRoot}/" class="logo">
-                    <img src="${contextRoot}/img/picwish.png" alt="" style="height: 80px;">
+                    <img src="${contextRoot}/img/picwish.png" alt="" style="height: 80px;" >
                 </a>
             </div>
             <div class="col-lg-4 col-md-3 col-sm-6 search-trigger">
@@ -85,18 +85,18 @@
     </div>
     </section>
 
- 	<script src="${contextRoot}/js/jquery-2.2.4.min.js"></script>
-    <script src="${contextRoot}/js/popper.js"></script>
-    <script src="${contextRoot}/js/bootstrap.min.js"></script>
-    <script src="${contextRoot}/js/stellar.js"></script>
+ 	<script src="${contextRoot}/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+    <script src="${contextRoot}/js/popper.js" type="text/javascript" ></script>
+    <script src="${contextRoot}/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="${contextRoot}/js/stellar.js" type="text/javascript"></script>
 <!--     <script src="vendors/popup/jquery.magnific-popup.min.js"></script> -->
-    <script src="${contextRoot}/js/jquery.ajaxchimp.min.js"></script>
-    <script src="${contextRoot}/js/waypoints.min.js"></script>
-    <script src="${contextRoot}/js/mail-script.js"></script>
-    <script src="${contextRoot}/js/contact.js"></script>
-    <script src="${contextRoot}/js/jquery.form.js"></script>
-    <script src="${contextRoot}/js/jquery.validate.min.js"></script>
-    <script src="${contextRoot}/js/mail-script.js"></script>
-    <script src="${contextRoot}/js/theme.js"></script>
+    <script src="${contextRoot}/js/jquery.ajaxchimp.min.js" type="text/javascript"></script>
+    <script src="${contextRoot}/js/waypoints.min.js" type="text/javascript"></script>
+    <script src="${contextRoot}/js/mail-script.js" type="text/javascript"></script>
+    <script src="${contextRoot}/js/contact.js" type="text/javascript"></script>
+    <script src="${contextRoot}/js/jquery.form.js" type="text/javascript"></script>
+    <script src="${contextRoot}/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="${contextRoot}/js/mail-script.js" type="text/javascript"></script>
+    <script src="${contextRoot}/js/theme.js" type="text/javascript"></script>
 </body>
 </html>

@@ -30,7 +30,8 @@
     <div class="row gy-5 " >
 
         <div class="col-md-6 spacer mb-2" >
-            <button class="btn btn-primary btn-lg" class=" bg-light" type="button" >一般會員登入</button>
+            <button class="btn btn-primary btn-lg" class=" bg-light" type="button" >
+                <a href="${contextRoot}/member/login" style="color:white">一般會員登入</a></button>
         </div>
         <div class="col-md-6 spacel mb-2" >
             <button class="btn btn-secondary btn-lg" class=" bg-light" type="button" >商家會員登入</button>
