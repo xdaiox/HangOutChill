@@ -42,6 +42,12 @@ public class NormalMember {
     @Column(name="registeration_time")
     private Date registTime;
 
+    @OneToOne(mappedBy = "normalMember")
+    private SecuredToken securedToken;
+
+    @Column(name="enabled")
+    private boolean enabled;
+
     @Transient
     private MultipartFile file;
 
@@ -153,5 +159,21 @@ public class NormalMember {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public SecuredToken getSecuredToken() {
+        return securedToken;
+    }
+
+    public void setSecuredToken(SecuredToken securedToken) {
+        this.securedToken = securedToken;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

@@ -10,8 +10,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -36,11 +34,11 @@ public class SpringSecurityAuthentication {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/discussion/newDiscussion","/shop/index").hasRole("USER")
+                .antMatchers("/discussion/newDiscussion","/shop/index").hasAuthority("USER")
                 .antMatchers("/","/member/registration","/NormalMember/registed").permitAll()
                 .and()
                 .formLogin().loginPage("/member/login")
-                .defaultSuccessUrl("/shop/index").and()
+                .defaultSuccessUrl("/member/NormalMemberDetail").and()
                 .logout().deleteCookies("JSESSSIONID");
         return http.build();
     }
