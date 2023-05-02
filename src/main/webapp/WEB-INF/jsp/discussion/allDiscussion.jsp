@@ -260,11 +260,13 @@ body {
 										src="https://bootdey.com/img/Content/avatar/avatar1.png"
 										class="mr-3 rounded-circle" width="50" alt="User" /></a>
 									<div class="media-body">
-										<h6>
-											<a href="#" data-toggle="collapse"
-												data-target=".forum-content" class="text-body">${discussion.title}</a>
-										</h6>
-										<p class="text-secondary">${discussion.contents}</p>
+										
+										<div class="text-body" onclick="window.location.href='${contextRoot}/discussion/showSingleDiscussion/${discussion.d_id}'">					
+											<a href="#" data-toggle="collapse" ata-target=".forum-content" class="text-body">
+												<h3>${discussion.title}</h3>
+												<p class="text-secondary">${discussion.contents}</p>
+											</a>
+										</div>
 										<p class="text-muted">
 											<h5>Author:
 											<a href="#">${discussion.normalMmeber.nickName}</a> posted </h5><span

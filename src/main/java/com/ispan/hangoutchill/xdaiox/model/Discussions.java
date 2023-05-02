@@ -32,7 +32,7 @@ public class Discussions {
 	private String readCount;
 	@Column(name="shareCount")
 	private String shareCount;
-
+	
 	@Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     @Column(name="postDate")

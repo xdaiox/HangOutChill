@@ -69,6 +69,14 @@ public class DiscussionsController {
     	return "redirect:/discussion/allDiscussion";
     }
     
+    @GetMapping("/discussion/showSingleDiscussion/{id}")
+    public String toShowSingleDiscussion(@PathVariable("id") Integer id,Model model) {
+    	Discussions dss = dService.findDiscussionById(id);
+    	model.addAttribute("discussion", dss);
+    	return "discussion/showSingleDiscussion";
+    }
+    
+    
     
 //    @PutMapping("/discussion/replyDiscussion")
 //    public String putEditedDiscussion(@ModelAttribute("discussion") Discussions dss) {
