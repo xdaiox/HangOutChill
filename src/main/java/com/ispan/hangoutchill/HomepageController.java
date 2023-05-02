@@ -24,10 +24,6 @@ public class HomepageController {
 
 
 
-    @GetMapping("/location/locationList")
-    public String toLocationList() {
-        return "/location/locationList";
-    }
 
     @GetMapping("/discussion/showAllDiscussion")
     public String toShowAllDiscussion() {
