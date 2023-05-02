@@ -28,7 +28,7 @@
 											<!-- 								<p>項目ID:</p> -->
 											<form:input path="id" value="${aal.id}" class="form-control" type="hidden"></form:input>
 <!-- 											<p>提交者ID:</p> -->
-											<form:input path="shop_Id" value="${aal.shop_Id}" class="form-control"
+											<form:input path="shop_Id" value="${aal.shop_Id.id}" class="form-control"
 												type="hidden"></form:input>
 											<p>活動/課程名稱</p>
 											<form:input path="name" value="${aal.name}" class="form-control"
@@ -53,8 +53,13 @@
 														value="${aal.deadLine}" /></span></p>
 											<form:input path="deadLine" value="${aal.deadLine}" class="form-control"
 												type="date"></form:input>
-											<form:input path="currentStatus" class="form-control" type="hidden"
-												value="審核中"></form:input>
+											<p>狀態:</p>
+											<form:select path="currentStatus" class="form-control">
+												<form:option value="上架中">上架中</form:option>
+												<form:option value="審核中">審核中</form:option>
+												<form:option value="已下架">已下架</form:option>										
+												<form:option value="已刪除">已刪除</form:option>										
+											</form:select>
 											<p>預覽圖-原圖:</p>
 											<img width="200px" height="200px"
 												src="data:image/png;base64,${aal.base64image}">

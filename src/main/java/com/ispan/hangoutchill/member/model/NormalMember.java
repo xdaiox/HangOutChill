@@ -3,8 +3,11 @@ package com.ispan.hangoutchill.member.model;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="normalAccount")
@@ -57,6 +60,21 @@ public class NormalMember {
             registTime = new Date();
         }
     }
+//==================設定課程報名的中介表===================    
+    
+    @ManyToMany(cascade=CascadeType.ALL, mappedBy="accounts")
+    List<ActivitiesandLesson> actandles;
+    
+    
+    public List<ActivitiesandLesson> getAals() {
+		return actandles;
+	}
+
+	public void setAals(List<ActivitiesandLesson> aals) {
+		this.actandles = aals;
+	}
+	
+//===================================================    	
     public Integer getId() {
         return id;
     }

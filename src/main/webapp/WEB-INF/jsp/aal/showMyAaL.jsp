@@ -44,7 +44,7 @@
 									<jstl:forEach var="aal" items="${page.content}">
 										<tr>
 											<td  class="align-middle">${aal.id}
-											<td class="align-middle">${aal.shop_Id}
+											<td class="align-middle">${aal.shop_Id.id}
 											<td class="align-middle">${aal.name}
 											<td class="align-middle">${aal.aalContent}
 											<td class="align-middle"><jstl:if test="${aal.topic=='act'}">活動</jstl:if> <jstl:if
