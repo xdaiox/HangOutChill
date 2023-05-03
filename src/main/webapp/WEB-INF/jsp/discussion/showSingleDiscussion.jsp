@@ -192,7 +192,7 @@
 										<div class="card-header">
 											<h5 class="card-title text-center">文章</h5>
 										</div>
-										<div class="inner-main-header">
+										<div class="card-body">
 											<form:form modelAttribute="discussion" method="post"
 												action="${contextRoot}/discussion/post">
 												<div class="form-group">
@@ -208,21 +208,23 @@
 													<p>${discussion.contents}</p>
 												</div>
 											</form:form>
-											<form:form modelAttribute="discussion" method="post"
+										</div>
+									</div>
+									<div class="card">
+										<div class="card-header">
+											<h5 class="card-title text-center">回覆</h5>
+									</div>
+									<div class="card">123</div>
+									<div class="card">123</div>
+									<div class="card">123</div>
+									<div class="card">123</div>
+
+									<div class="card">
+												<form:form modelAttribute="replyDiscussion" method="post"
 												action="${contextRoot}/discussion/post">
-												<div class="inner-main-header">
-													<div class="form-group">回覆討論
-														<form:input path="d_id" type="hidden"></form:input>
-													</div>
-													<div class="form-group">
-
-														<label for="title">標題</label>
-														<form:input path="title" type="text" class="form-control"
-															id="title" placeholder="輸入標題"></form:input>
-													</div>
 
 													<div class="form-group">
-														<label for="content">内容</label>
+
 														<!-- ================================== ck editor ================================== -->
 														<form:textarea path="contents" id="editor" name="content"
 															placeholder="請在這裡填寫內容"></form:textarea>
@@ -231,13 +233,14 @@
 														<!-- <form:textarea path="contents" class="form-control" id="content" rows="5"
 											placeholder="輸入内容" ></form:textarea> -->
 													</div>
-													<button type="submit" class="btn btn-primary">發表</button>
-												</div>
-											</form:form>
+													<button type="submit" class="btn btn-primary">發表回覆</button>
+												</form:form>
+											
 											<a href="${contextRoot}/discussion/allDiscussion"
 												class="btn btn-primary">返回文章列</a>
-										</div>
 									</div>
+										
+									
 
 
 								</div>
@@ -245,5 +248,14 @@
 						</div>
 					</div>
 				</div>
+<!-- ================================== ck editor ================================== -->
+<script>
+	CKEDITOR.replace("editor");
+	ClassicEditor.create( document.querySelector( '#editor' ), {
+    plugins: [ Essentials, Paragraph, Bold, Italic ],
+    toolbar: [ 'bold', 'italic' ]
+} )
+</script>
+<!-- ================================== ck editor ================================== -->
 
 				</html>

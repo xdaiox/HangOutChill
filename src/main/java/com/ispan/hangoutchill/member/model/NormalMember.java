@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
+import com.ispan.hangoutchill.xdaiox.model.Messages;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -56,6 +57,10 @@ public class NormalMember {
     					cascade = {CascadeType.PERSIST},orphanRemoval = false)
     private Set<Discussions> discussions = new LinkedHashSet<>();
     
+    @OneToMany(mappedBy = "normalMmeber",fetch=FetchType.EAGER,
+			cascade = {CascadeType.PERSIST},orphanRemoval = false)
+    private Set<Messages> messages = new LinkedHashSet<>();
+
     
     public Integer getId() {
         return id;

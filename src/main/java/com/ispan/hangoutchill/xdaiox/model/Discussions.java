@@ -1,6 +1,8 @@
 package com.ispan.hangoutchill.xdaiox.model;
 
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -60,6 +62,10 @@ public class Discussions {
 	@ManyToOne
 	@JoinColumn(name="fk_member_id", nullable = true, insertable = false, updatable = false)
 	private NormalMember normalMmeber;
+	
+    @OneToMany(mappedBy = "discussions",fetch=FetchType.EAGER,
+	cascade = {CascadeType.PERSIST},orphanRemoval = false)
+    private Set<Messages> messages = new LinkedHashSet<>();
 	
 	public Discussions() {
 	}

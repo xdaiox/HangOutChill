@@ -73,6 +73,7 @@ public class DiscussionsController {
     public String toShowSingleDiscussion(@PathVariable("id") Integer id,Model model) {
     	Discussions dss = dService.findDiscussionById(id);
     	model.addAttribute("discussion", dss);
+    	model.addAttribute("replyDiscussion", new Discussions());
     	return "discussion/showSingleDiscussion";
     }
     
