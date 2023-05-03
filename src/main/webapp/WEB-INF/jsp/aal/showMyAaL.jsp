@@ -20,7 +20,9 @@
 					<div class="" style="margin: auto;">
 						<h1 style="text-align: center;">活動/課程管理</h1>
 						<form action="${contextRoot}/actandles/shop/add">
-						<input type="submit" class="btn btn-outline-info btn-sm"value="新增" /></form>
+							<input type="submit" class="btn btn-outline-info btn-sm"
+								value="新增" />
+						</form>
 						<div class="table-responsive">
 							<table class="table table-hover table-bordered table-light">
 								<thead>
@@ -43,23 +45,26 @@
 								<tbody>
 									<jstl:forEach var="aal" items="${page.content}">
 										<tr>
-											<td  class="align-middle">${aal.id}
-											<td class="align-middle">${aal.shop_Id.id}
+											<td class="align-middle">${aal.id}
+											<td class="align-middle">${aal.normalMember.id}
 											<td class="align-middle">${aal.name}
 											<td class="align-middle">${aal.aalContent}
-											<td class="align-middle"><jstl:if test="${aal.topic=='act'}">活動</jstl:if> <jstl:if
+											<td class="align-middle"><jstl:if
+													test="${aal.topic=='act'}">活動</jstl:if> <jstl:if
 													test="${aal.topic=='les'}">課程</jstl:if>
-											<td class="align-middle"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
+											<td class="align-middle"><fmt:formatDate
+													pattern="yyyy-MM-dd HH:mm:ss"
 													value="${aal.theDayofSubmission}" />
-											<td class="align-middle"><span><fmt:formatDate pattern="yyyy-MM-dd"
-														value="${aal.theDayofStarts}" /></span>
+											<td class="align-middle"><span><fmt:formatDate
+														pattern="yyyy-MM-dd" value="${aal.theDayofStarts}" /></span>
 											<td class="align-middle">${aal.fee}
 											<td class="align-middle">${aal.quota}
 											<td class="align-middle">${aal.lowerLimit}
-											<td class="align-middle"><span><fmt:formatDate pattern="yyyy-MM-dd"
-														value="${aal.deadLine}" /></span>
+											<td class="align-middle"><span><fmt:formatDate
+														pattern="yyyy-MM-dd" value="${aal.deadLine}" /></span>
 											<td class="align-middle">${aal.currentStatus}
-											<td class="align-middle"><img width="200px" height="200px"
+											<td class="align-middle"><img width="200px"
+												height="200px"
 												src="data:image/png;base64,${aal.base64image}"> <br />
 											<td class="align-middle">
 												<div style="display: flex">
@@ -80,21 +85,23 @@
 									</jstl:forEach>
 								</tbody>
 							</table>
+
 						</div>
 						<br />
-						<div  style="text-align:center;" >
-						<jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}">
-							<%-- 					<jstl:if test="${page.number == pageNumber-1}"><span>${pageNumber}</span></jstl:if> --%>
-							<%-- 					<jstl:if test="${page.number != pageNumber-1}"><a href="${contextRoot}/messages?p=${pageNumber}">${pageNumber}</a></jstl:if> --%>
-							<jstl:choose>
-								<jstl:when test="${page.number == pageNumber-1}">
-									<span>${pageNumber}</span>
-								</jstl:when>
-								<jstl:otherwise>
-									<a href="${contextRoot}/actandles/shop/postall?p=${pageNumber}">${pageNumber}</a>
-								</jstl:otherwise>
-							</jstl:choose>
-						</jstl:forEach>
+						<div style="text-align: center;">
+							<jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+								<%-- 					<jstl:if test="${page.number == pageNumber-1}"><span>${pageNumber}</span></jstl:if> --%>
+								<%-- 					<jstl:if test="${page.number != pageNumber-1}"><a href="${contextRoot}/messages?p=${pageNumber}">${pageNumber}</a></jstl:if> --%>
+								<jstl:choose>
+									<jstl:when test="${page.number == pageNumber-1}">
+										<span>${pageNumber}</span>
+									</jstl:when>
+									<jstl:otherwise>
+										<a
+											href="${contextRoot}/actandles/shop/postall?p=${pageNumber}">${pageNumber}</a>
+									</jstl:otherwise>
+								</jstl:choose>
+							</jstl:forEach>
 						</div>
 					</div>
 				</div>

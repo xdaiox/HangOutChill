@@ -28,7 +28,7 @@
 											<!-- 								<p>項目ID:</p> -->
 											<form:input path="id" value="${aal.id}" class="form-control" type="hidden"></form:input>
 <!-- 											<p>提交者ID:</p> -->
-											<form:input path="shop_Id" value="${aal.shop_Id.id}" class="form-control"
+											<form:input path="normalMember.id" value="${aal.normalMember.id}" class="form-control"
 												type="hidden"></form:input>
 											<p>活動/課程名稱</p>
 											<form:input path="name" value="${aal.name}" class="form-control"

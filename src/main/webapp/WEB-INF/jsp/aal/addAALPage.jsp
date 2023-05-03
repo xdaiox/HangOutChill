@@ -30,7 +30,7 @@
 <!-- 								<p>項目ID:</p> -->
 <%-- 								<form:input path="id" class="form-control" type="text"></form:input> --%>
 								<p>提交者ID:</p>
-								<form:input path="shop_Id" class="form-control" type="text"></form:input>
+								<form:input path="normalMember.id" class="form-control" type="text"    ></form:input>
 								<p>活動/課程名稱</p>
 								<form:input path="name" class="form-control" type="text"></form:input>
 								<p>類別:</p>

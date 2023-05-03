@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,10 +37,14 @@ public class ActivitiesandLesson {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id",columnDefinition = "int")
 	private Integer id;
+
 	
+	
+//	@Column(name="shop_Id",columnDefinition = "int",nullable = false)
+//	private Integer shop_Id;
 	@OneToOne
-	@JoinColumn(name = "shop_Id",referencedColumnName = "member_id", nullable = false)
-	private NormalMember shop_Id;
+	@JoinColumn(name = "shop_Id",foreignKey =@ForeignKey(name="member_id"))
+	private NormalMember normalMember;
 	
 	@Column(name="name",columnDefinition = "nvarchar(50)",nullable = false )
 	private String name;
@@ -119,13 +124,22 @@ public class ActivitiesandLesson {
 	}
 
 
-	public NormalMember getShop_Id() {
-		return shop_Id;
+
+	public NormalMember getNormalMember() {
+		return normalMember;
 	}
 
-	public void setShop_Id(NormalMember shop_Id) {
-		this.shop_Id = shop_Id;
+	public void setNormalMember(NormalMember normalMember) {
+		this.normalMember = normalMember;
 	}
+
+//	public Integer getShop_Id() {
+//		return shop_Id;
+//	}
+//
+//	public void setShop_Id(Integer shop_Id) {
+//		this.shop_Id = shop_Id;
+//	}
 
 	public String getName() {
 		return name;
