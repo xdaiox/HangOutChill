@@ -15,6 +15,7 @@ public class Messages {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="discussionMessage_id")
+	
 	private Integer dm_id;
 	@Column(name="contents")
 	private String contents;

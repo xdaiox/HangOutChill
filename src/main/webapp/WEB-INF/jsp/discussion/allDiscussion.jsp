@@ -261,7 +261,8 @@ body {
 										class="mr-3 rounded-circle" width="50" alt="User" /></a>
 									<div class="media-body">
 										
-										<div class="text-body" onclick="window.location.href='${contextRoot}/discussion/showSingleDiscussion/${discussion.d_id}'">					
+										<div class="text-body" onclick="window.location.href='${contextRoot}/message/allMessages/${discussion.d_id}'">	
+										
 											<a href="#" data-toggle="collapse" ata-target=".forum-content" class="text-body">
 												<h3>${discussion.title}</h3>
 												<p class="text-secondary">${discussion.contents}</p>

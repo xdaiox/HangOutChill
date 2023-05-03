@@ -186,6 +186,32 @@
 				<div class="container">
 					<div class="main-body p-0">
 						<div class="inner-wrapper">
+
+							<div class="inner-main-header">
+									<ul class="pagination pagination-sm pagination-circle justify-content-center mb-1 ml-auto">
+										<jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+											<jstl:choose>
+												<jstl:when test="${page.number+1 != pageNumber }">
+													<li class="page-item"><a class="page-link"
+												href="${contextRoot}/discussion/allDiscussion?p=${pageNumber}">${pageNumber}</a></li>
+												<!-- 反正上面這個p 就是DiscussionsController,toShowAllDiscussion內的p -->
+												</jstl:when>
+												<jstl:otherwise>
+													<li class="page-item"><a class="page-link">${pageNumber}</a></li>
+												
+												</jstl:otherwise>
+											</jstl:choose>
+		
+										</jstl:forEach>
+											<!-- <li class="page-item active"><span class="page-link">G</span></li>
+											<li class="page-item"><a class="page-link"
+												href="javascript:void(0)">G</a></li>
+											<li class="page-item"><a class="page-link has-icon"
+												href="javascript:void(0)"><i class="material-icons">chevron_right</i></a>
+											</li> -->
+									</ul>
+							</div>
+
 							<div class="inner-main">
 								<div class="inner-main-body collapse forum-content show">
 									<div class="card">
@@ -221,8 +247,8 @@
 
 									<div class="card">
 												<form:form modelAttribute="replyDiscussion" method="post"
-												action="${contextRoot}/discussion/post">
-
+												action="${contextRoot}/message/post">
+													<input type="hidden" name="d_id" value="${discussion.d_id}"/>
 													<div class="form-group">
 
 														<!-- ================================== ck editor ================================== -->

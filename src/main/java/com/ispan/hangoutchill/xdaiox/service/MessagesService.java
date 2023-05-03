@@ -24,6 +24,10 @@ public class MessagesService {
 		mssRepository.save(dss);
 	}
 	
+	public void addMessageByDid() {
+		
+	}
+	
 	public Messages findMessageById(Integer id) {
 		Optional<Messages> option = mssRepository.findById(id);
 		
