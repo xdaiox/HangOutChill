@@ -15,7 +15,7 @@
     <jsp:include page="../layout/navbar.jsp"/>
     <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
     <meta charset="UTF-8">
-    <title>發表文章</title>
+    <title>新增地點</title>
 </head>
 
 <body>
@@ -29,10 +29,10 @@
                 <div class="card">
                     <div class="card-header">新增地點</div>
                     <div class="card-body">
-                        <form:form class="" modelAttribute="locationInfo" enctype="multipart/form-data" method="POST" action="${contextRoot}/location/locationManager/addLocationInfo/post">
+                        <form:form class="" modelAttribute="locationInfo" enctype="multipart/form-data" method="POST" action="${contextRoot}/location/locationManager/addPage/post">
                             <p>地點名稱:</p>
                             <form:input path="locName" class="form-control" type="text"></form:input>
-                            <p>地點名稱:</p>
+                            <p>地點分類:</p>
                             <form:select path="locCat" Class="form-control">
                                 <form:option value="-1" label="請選擇分類..."/>
                                 <form:option value="分類1" label="分類1"/>
@@ -64,7 +64,6 @@
                             <form:input path="locLink" class="form-control" type="text"></form:input>
 
                             <p>營業時間:</p>
-<%--                            <form:input path="locationOperationTime.locationInfo" type="hidden" value="${locId}"></form:input>--%>
                             <sapn>星期一 : </sapn>
                             <span>開始</span>
                             <form:input path="locationOperationTime.mondayOpen" type="time" ></form:input>
@@ -82,10 +81,33 @@
                             <form:input path="locationOperationTime.wednesdayOpen" type="time" ></form:input>
                             <span>結束</span>
                             <form:input path="locationOperationTime.wednesdayClose" type="time" ></form:input>
+                            <br>
+                            <sapn>星期四 : </sapn>
+                            <span>開始</span>
+                            <form:input path="locationOperationTime.thursdayOpen" type="time" ></form:input>
+                            <span>結束</span>
+                            <form:input path="locationOperationTime.thursdayClose" type="time" ></form:input>
+                            <br>
+                            <sapn>星期五 : </sapn>
+                            <span>開始</span>
+                            <form:input path="locationOperationTime.fridayOpen" type="time" ></form:input>
+                            <span>結束</span>
+                            <form:input path="locationOperationTime.fridayClose" type="time" ></form:input>
+                            <br>
+                            <sapn>星期六 : </sapn>
+                            <span>開始</span>
+                            <form:input path="locationOperationTime.saturdayOpen" type="time" ></form:input>
+                            <span>結束</span>
+                            <form:input path="locationOperationTime.saturdayClose" type="time" ></form:input>
+                            <br>
+                            <sapn>星期日 : </sapn>
+                            <span>開始</span>
+                            <form:input path="locationOperationTime.sundayOpen" type="time" ></form:input>
+                            <span>結束</span>
+                            <form:input path="locationOperationTime.sundayClose" type="time" ></form:input>
 
 
-<%--                            <form:input path="locationOperationTime.openTime" type="date" ></form:input>--%>
-<%--                            <input type="time" name="MonOpt">--%>
+
 
 
                             <br><button type="submit" class="btn btn-primary">送出</button>

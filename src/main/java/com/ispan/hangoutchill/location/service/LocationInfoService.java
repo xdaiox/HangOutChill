@@ -33,8 +33,8 @@ public class LocationInfoService {
     }
 
     //查詢單一地點 by ID
-    public LocationInfo findLocationInfoById(Integer id) {
-        Optional<LocationInfo> option = locRepo.findById(id);
+    public LocationInfo findLocationInfoById(Integer locId) {
+        Optional<LocationInfo> option = locRepo.findById(locId);
         if (option.isPresent()) {
             return option.get();
         }
@@ -50,14 +50,29 @@ public class LocationInfoService {
     public void addLocationInfo(LocationInfo locInfo) {
         locRepo.save(locInfo);
     }
-    public void addLocationOperationTime(LocationOperationTime locOpt){ locOptRepo.save(locOpt);}
 
 
     //修改單一地點 By ID
-//    @Transactional
-//    public LocationInfo updateLocationInfoByID(Integer id ) {
-//        public LocationInfo updateLocationInfoById(Integer id ,)
-//    }
+    @Transactional
+    public LocationInfo updateLocationInfoById(Integer locId , LocationInfo locationInfo ) {
+        Optional<LocationInfo> option = locRepo.findById(locId);
+        if (option.isPresent()){
+            LocationInfo locOriginal = option.get();
+            locOriginal.setLocName(locationInfo.getLocName());
+            locOriginal.setLocCat(locationInfo.getLocCat());
+            locOriginal.setLocTag(locationInfo.getLocTag());
+            locOriginal.setLocPriceLevel(locationInfo.getLocPriceLevel());
+            locOriginal.setLocDesc(locationInfo.getLocDesc());
+            locOriginal.setLocCity(locationInfo.getLocCity());
+            locOriginal.setLocDist(locationInfo.getLocDist());
+            locOriginal.setLocAdd(locationInfo.getLocAdd());
+            locOriginal.setLocTel(locationInfo.getLocTel());
+            locOriginal.setLocLink(locationInfo.getLocLink());
+            locOriginal.setLocationOperationTime(locationInfo.getLocationOperationTime());
+            return locOriginal;
+        }
+        return null;
+    }
 
 
 

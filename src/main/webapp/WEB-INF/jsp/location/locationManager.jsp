@@ -26,7 +26,7 @@
             <div class="row justify-content-center">
                 <div class="" style="margin: auto;">
                     <h1 style="text-align: center;">地點管理</h1>
-                    <form action="${contextRoot}/location/locationManager/addLocationInfo">
+                    <form action="${contextRoot}/location/locationManager/addPage">
                         <input type="submit" class="btn btn-outline-info btn-sm"value="新增" /></form>
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered table-light">
@@ -49,9 +49,9 @@
                                 <td  class="align-middle"><span><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${locationInfo.locInfoUpdateTime}"/></span>
                                 <td class="align-middle">
                                     <div style="display: flex">
-<%--                                        <form action="${contextRoot}/location/locationManager/edit">--%>
-<%--                                            <input type="hidden" name="id" value="${locationInfo.locId}" /> <input type="submit" class="btn btn-outline-info btn-sm" value="編輯" />--%>
-<%--                                        </form>--%>
+                                        <form action="${contextRoot}/location/locationManager/editPage">
+                                            <input type="hidden" name="locId" value="${locationInfo.locId}" /> <input type="submit" class="btn btn-outline-info btn-sm" value="編輯" />
+                                        </form>
                                         <form action="${contextRoot}/location/locationManager/delete" method="post">
                                             <input type="hidden" name="_method" value="delete" /> <input
                                                 type="hidden" name="locId" value="${locationInfo.locId}" /> <input

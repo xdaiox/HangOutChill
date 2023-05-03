@@ -38,15 +38,15 @@ public class LocationInfoController {
     }
 
     //前往新增LocationInfo頁面
-    @GetMapping("/location/locationManager/addLocationInfo")
+    @GetMapping("/location/locationManager/addPage")
     public String toAddLocationInfo(Model model) {
         model.addAttribute("locationInfo", new LocationInfo());
         return "/location/locationInfoAdd";
     }
 
     //新增LocationInfo動作
-    @PostMapping("/location/locationManager/addLocationInfo/post")
-    public String postLocationInfo(@ModelAttribute("locationInfo") LocationInfo locationInfo, Model model) {
+    @PostMapping("/location/locationManager/addPage/post")
+    public String postAddLocationInfo(@ModelAttribute("locationInfo") LocationInfo locationInfo, Model model) {
         locationInfoService.addLocationInfo(locationInfo);
         model.addAttribute("locationInfo", new LocationInfo());
         return "redirect:/location/locationManager";
@@ -59,7 +59,23 @@ public class LocationInfoController {
         return "redirect:/location/locationManager";
     }
 
-    //編輯LocationInfo BY ID
+    //前往編輯LocationInfo頁面
+    @GetMapping("/location/locationManager/editPage")
+    public String toEditLocationInfo(@RequestParam("locId") Integer locId,Model model){
+        LocationInfo locationInfo = locationInfoService.findLocationInfoById(locId);
+        model.addAttribute("locationInfo", locationInfo);
+
+        return "location/locationInfoEdit";
+    }
+
+    //編輯LocationInfo動作
+    @PutMapping("/location/locationManager/editPage")
+    public String putEditLocationInfo(@ModelAttribute("locationInfo") LocationInfo locationInfo){
+        locationInfoService.updateLocationInfoById(locationInfo.getLocId(), locationInfo);
+        return "redirect:/location/locationManager";
+    }
+
+
 
 
     //查看該地點所有評論 find all comment by locationInfo Id
