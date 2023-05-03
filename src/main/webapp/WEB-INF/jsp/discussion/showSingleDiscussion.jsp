@@ -248,7 +248,7 @@
 									<div class="card">
 												<form:form modelAttribute="replyDiscussion" method="post"
 												action="${contextRoot}/message/post">
-													<input type="hidden" name="d_id" value="${discussion.d_id}"/>
+													<form:hidden path="discussions" value="${discussion.d_id}" />
 													<div class="form-group">
 
 														<!-- ================================== ck editor ================================== -->
