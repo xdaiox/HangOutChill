@@ -1,6 +1,5 @@
 package com.ispan.hangoutchill.member.controller;
 
-import com.ispan.hangoutchill.member.UserDetail;
 import com.ispan.hangoutchill.member.UserDetailServiceImpl;
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.model.Role;
@@ -10,6 +9,7 @@ import com.ispan.hangoutchill.member.service.NormalMemberService;
 import com.ispan.hangoutchill.member.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 
 @Controller
 public class NormalMemberController {
@@ -89,13 +90,14 @@ public class NormalMemberController {
 
     @GetMapping("/member/NormalMemberDetail")
     //目前登入的人到會員中心
-    public String toMemberCenterPage(@CurrentSecurityContext(expression="authentication")
+    public String toMemberCenterPage(@CurrentSecurityContext(expression = "authentication")
                                      Authentication authentication, Model model) {
         String name = authentication.getName();
         NormalMember result = nMemberService.findNormalUserByAccount(name);
-        model.addAttribute("result",result);
+        model.addAttribute("result", result);
         return "/member/normalMemberCenter";
     }
+
     public String updateNormalMemberInfo(@ModelAttribute("normalMember") NormalMember normalMember, Model model) {
 
         try {
@@ -111,7 +113,7 @@ public class NormalMemberController {
     }
 
     @GetMapping("/registrationConfirm")
-    public String memberRegistrationConfirm (@RequestParam String token, Model model){
+    public String memberRegistrationConfirm(@RequestParam String token, Model model) {
         SecuredToken securedToken = nMemberService.findSecuredToken(token);
         NormalMember normalMember = securedToken.getNormalMember();
         normalMember.setEnabled(true);
@@ -119,9 +121,33 @@ public class NormalMemberController {
         return "redirect:/member/login";
     }
 
-    public String toUpdateNormalMember() {
-        return "";
+    @GetMapping("/back/members")
+    public String findAllMmeber(@RequestParam(name = "p", defaultValue = "1") Integer pageNum, Model model,Model model2) {
+        List<NormalMember> findallmember = nMemberService.findallmember(pageNum);
+        for (NormalMember members:
+             findallmember) {
+            Role role = members.getRole();
+            String roleName = role.getRoleName();
+            members.setIdentity(roleName);
+        }
+        model.addAttribute("members", findallmember);
+
+        Page<NormalMember> pages = nMemberService.findPages(pageNum);
+        model2.addAttribute("page",pages);
+        return "/member/showMembers";
+    }
+    @GetMapping("/back/backUpdateMember")
+    public String updateMemberInfoByBack(@RequestParam(name = "id")Integer id,Model model){
+        NormalMember normalMemberById = nMemberService.findNormalMemberById(id);
+        model.addAttribute("updateMember",normalMemberById);
+        return "/member/backUpdate";
     }
 
+    @PutMapping("/back/backUpdateMember")
+    public  String putUpdate(@ModelAttribute("updateMember")NormalMember member){
+        Integer id = member.getId();
+        nMemberService.updateActByIdForBack(id,member);
+        return "redirect:/back/members";
+    }
 
 }

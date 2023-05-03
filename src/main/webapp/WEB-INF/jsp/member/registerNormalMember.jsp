@@ -60,10 +60,6 @@
                             <form:input  path="birthdate" type="date" name="birthdate" class="form-control"/>
                         </div>
                         <div class="form-group">
-                            <label class="fw">假的tokens</label>
-                            <form:input  path="token" type="text" name="token" class="form-control"/>
-                        </div>
-                        <div class="form-group">
                             <label class="fw">大頭貼</label>
                             <form:input path="file" type="file" name="profilePhoto" class="form-control"/>
                         </div>

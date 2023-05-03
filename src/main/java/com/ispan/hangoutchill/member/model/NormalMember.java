@@ -26,8 +26,7 @@ public class NormalMember {
     private String birthdate;
     @Column(name="gender")
     private String gender;
-    @Column(name="encrypted_token")
-    private String token;
+
     @Column(name = "nomal_tel")
     private String tel;
     @Column(name = "profilephoto")
@@ -50,6 +49,10 @@ public class NormalMember {
 
     @Transient
     private MultipartFile file;
+
+    @Transient
+    private String identity;
+
 
     @PrePersist
     public void onCreate() {
@@ -113,14 +116,6 @@ public class NormalMember {
         this.gender = gender;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     public String getTel() {
         return tel;
     }
@@ -175,5 +170,13 @@ public class NormalMember {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
     }
 }

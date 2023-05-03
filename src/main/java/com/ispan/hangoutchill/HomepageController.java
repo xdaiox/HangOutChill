@@ -29,8 +29,6 @@ public class HomepageController {
         return "aal/showAllAaL";
     }
 
-
-
     @GetMapping("/shop/index")
     public String toShopIndex() {
     	return "shop/shopIndex";
