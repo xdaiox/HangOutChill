@@ -2,7 +2,9 @@ package com.ispan.hangoutchill.location.service;
 
 
 import com.ispan.hangoutchill.location.dao.LocationInfoRepository;
+import com.ispan.hangoutchill.location.dao.LocationOperationTimeRepository;
 import com.ispan.hangoutchill.location.model.LocationInfo;
+import com.ispan.hangoutchill.location.model.LocationOperationTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +20,8 @@ public class LocationInfoService {
 
     @Autowired
     private LocationInfoRepository locRepo;
+    @Autowired
+    private LocationOperationTimeRepository locOptRepo;
 
     //    ========================LocationStoreInfoManager 地點資料管理===============================
 
@@ -46,6 +50,8 @@ public class LocationInfoService {
     public void addLocationInfo(LocationInfo locInfo) {
         locRepo.save(locInfo);
     }
+    public void addLocationOperationTime(LocationOperationTime locOpt){ locOptRepo.save(locOpt);}
+
 
     //修改單一地點 By ID
 //    @Transactional

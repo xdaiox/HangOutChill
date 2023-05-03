@@ -47,8 +47,7 @@
 								<form:input path="lowerLimit" class="form-control" type="text"></form:input>
 								<p>報名截止日:</p>
 								<form:input path="deadLine" class="form-control" type="date"></form:input>
-								<form:input path="currentStatus" class="form-control"
-											type="hidden" value="審核中"></form:input>
+								<form:input path="currentStatus" class="form-control" type="hidden" value="審核中"></form:input>
 								<p>預覽圖:</p>
 								<form:input path="imageFile" id="target" class="form-control" type="file"></form:input>
 											<span><img id="preview" src=""></span>

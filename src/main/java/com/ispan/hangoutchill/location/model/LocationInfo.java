@@ -48,27 +48,33 @@ public class LocationInfo {
     }
 
 
-    //關聯 與LocationOerationTime
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "locationInfo",fetch=FetchType.LAZY)
-    private Set<LocationOperationTime> locationOperationTimes = new HashSet<LocationOperationTime>();
+    //關聯 與LocationOperationTime
+//    @OneToMany(cascade = CascadeType.ALL,mappedBy = "locationInfo",fetch=FetchType.LAZY)
+//    private Set<LocationOperationTime> locationOperationTime = new HashSet<LocationOperationTime>();
+
+    //關聯 與LocationOperationTime
+//    @OneToOne(cascade = CascadeType.ALL,mappedBy = "locationInfo")
+//    private LocationOperationTime locationOperationTime;
+
+    //關聯 與LocationOperationTime
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "location_operationTime_id")
+    private LocationOperationTime locationOperationTime;
+
 
     //關聯 與LocationImage
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "locationInfo")
     private LocationImage locationImage;
 
-    //關聯 與LocationOerationTime
+    //關聯 與LocationComment
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "locationInfo",fetch=FetchType.LAZY)
     private Set<LocationComment> locationComments = new HashSet<LocationComment>();
-    //關聯 與LocationImage
+
 
 
 
     //參數建構子
     public LocationInfo(){}
-
-
-
-
 
     public Integer getLocId() {
         return locId;
@@ -166,12 +172,28 @@ public class LocationInfo {
         this.locInfoUpdateTime = locInfoUpdateTime;
     }
 
+    public LocationOperationTime getLocationOperationTime() {
+        return locationOperationTime;
+    }
+
+    public void setLocationOperationTime(LocationOperationTime locationOperationTime) {
+        this.locationOperationTime = locationOperationTime;
+    }
+
     public LocationImage getLocationImage() {
         return locationImage;
     }
 
     public void setLocationImage(LocationImage locationImage) {
         this.locationImage = locationImage;
+    }
+
+    public Set<LocationComment> getLocationComments() {
+        return locationComments;
+    }
+
+    public void setLocationComments(Set<LocationComment> locationComments) {
+        this.locationComments = locationComments;
     }
 }
 

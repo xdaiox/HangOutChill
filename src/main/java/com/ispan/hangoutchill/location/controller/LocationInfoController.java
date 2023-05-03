@@ -2,6 +2,7 @@ package com.ispan.hangoutchill.location.controller;
 
 import com.ispan.hangoutchill.location.model.LocationComment;
 import com.ispan.hangoutchill.location.model.LocationInfo;
+import com.ispan.hangoutchill.location.model.LocationOperationTime;
 import com.ispan.hangoutchill.location.service.LocationCommentService;
 import com.ispan.hangoutchill.location.service.LocationInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class LocationInfoController {
 
     @Autowired
     private LocationInfoService locationInfoService;
-    private LocationCommentService locationCommentService;
+
 
 
 //    ========================Admin LocationInfoManager 地點資料管理(後台)===============================
@@ -43,12 +44,12 @@ public class LocationInfoController {
         return "/location/locationInfoAdd";
     }
 
-    //新增LocationStoreInfo動作
+    //新增LocationInfo動作
     @PostMapping("/location/locationManager/addLocationInfo/post")
     public String postLocationInfo(@ModelAttribute("locationInfo") LocationInfo locationInfo, Model model) {
         locationInfoService.addLocationInfo(locationInfo);
         model.addAttribute("locationInfo", new LocationInfo());
-        return "redirect:/location/locationInfoAdd";
+        return "redirect:/location/locationManager";
     }
 
     //刪除LocationInfo BY ID
