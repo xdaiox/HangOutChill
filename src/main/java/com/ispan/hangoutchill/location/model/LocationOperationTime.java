@@ -79,33 +79,6 @@ public class LocationOperationTime {
     private Date sundayClose;
 
 
-//    @OneToOne(cascade = CascadeType.ALL)
-////    @JoinColumn (name = "location_id",foreignKey=@ForeignKey(name="location_id"))
-////    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @JoinColumn (name = "location_id")
-//    private LocationInfo locationInfo;
-
-
-
-//    @Column(name="weekday")
-//    private Integer weekday;
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @DateTimeFormat(pattern = "HH:mm")
-//    @Column(name = "openTime")
-//    private Date openTime;
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @DateTimeFormat(pattern = "HH:mm")
-//    @Column(name = "closeTime")
-//    private Date closeTime;
-//
-//    //對應locationInfo
-//    @ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
-//    @JoinColumn(name="location_id")
-//    private LocationInfo locationInfo;
-
-
-
-
     //參數建構子
     public LocationOperationTime(){}
 

@@ -48,15 +48,6 @@ public class LocationInfo {
     }
 
 
-
-    //關聯 與LocationOperationTime
-//    @OneToMany(cascade = CascadeType.ALL,mappedBy = "locationInfo",fetch=FetchType.LAZY)
-//    private Set<LocationOperationTime> locationOperationTime = new HashSet<LocationOperationTime>();
-
-    //關聯 與LocationOperationTime
-//    @OneToOne(cascade = CascadeType.ALL,mappedBy = "locationInfo")
-//    private LocationOperationTime locationOperationTime;
-
     //關聯 與LocationOperationTime
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "location_operationTime_id")
