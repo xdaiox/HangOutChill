@@ -40,25 +40,27 @@
 							<tr>
 								<th>產品名稱</th>
 								<th class="text-center">數量</th>
-								<th class="text-center">小計</th>
+								<th class="text-center">單價</th>
 								<th class="text-center">折扣</th>
+								<th class="text-center">小計</th>
 								<th class="text-center"><a
 									class="btn btn-sm btn-outline-danger" href="#">刪除產品</a></th>
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach var="cartItem" items="${shoppingCartItems}">
 							<tr>
 								<td>
 									<div class="product-item">
 										<a class="product-thumb" href="#"><img
-											src="https://www.bootdey.com/image/220x180/FF0000/000000"
+											width='100' height='100'
+											src='<c:url value="/shop/getPicture/${cartItem.product.productId}" />'
 											alt="Product"></a>
 										<div class="product-info">
 											<h4 class="product-title">
-												<a href="#">Unionbay Park</a>
+												<a href="#">${cartItem.product.productName}</a>
 											</h4>
-											<span><em>Size:</em> 10.5</span><span><em>Color:</em>
-												Dark Blue</span>
+											<span>${cartItem.product.productSpec}</span>
 										</div>
 									</div>
 								</td>
@@ -69,7 +71,7 @@
 											<button class="btn btn-outline-primary js-btn-minus"
 												type="button">&minus;</button>
 										</div>
-										<input type="text" class="form-control text-center" value="1"
+										<input type="text" class="form-control text-center" value="${cartItem.amount}"
 											placeholder="" aria-label="Example text with button addon"
 											aria-describedby="button-addon1">
 										<div class="input-group-append">
@@ -78,90 +80,14 @@
 										</div>
 									</div>
 								</td>
-								<td class="text-center text-lg text-medium">$43.90</td>
-								<td class="text-center text-lg text-medium">$18.00</td>
+								<td class="text-center text-lg text-medium">$ ${cartItem.product.unitPrice}</td>
+								<td class="text-center text-lg text-medium">${cartItem.product.discount}</td>
+								<td class="text-center text-lg text-medium">$ </td>
 								<td class="text-center"><a class="remove-from-cart"
 									href="#" data-toggle="tooltip" title=""
 									data-original-title="Remove item"><i class="fa fa-trash"></i></a></td>
 							</tr>
-							<tr>
-								<td>
-									<div class="product-item">
-										<a class="product-thumb" href="#"><img
-											src="https://www.bootdey.com/image/220x180/5F9EA0/000000"
-											alt="Product"></a>
-										<div class="product-info">
-											<h4 class="product-title">
-												<a href="#">Daily Fabric Cap</a>
-											</h4>
-											<span><em>Size:</em> XL</span><span><em>Color:</em>
-												Black</span>
-										</div>
-									</div>
-								</td>
-								<td class="text-center">
-								
-										<div class="input-group mb-3"
-											style="max-width: 120px; margin: auto;">
-											<div class="input-group-prepend">
-												<button class="btn btn-outline-primary js-btn-minus"
-													type="button">&minus;</button>
-											</div>
-											<input type="text" class="form-control text-center" value="1"
-												placeholder="" aria-label="Example text with button addon"
-												aria-describedby="button-addon1">
-											<div class="input-group-append">
-												<button class="btn btn-outline-primary js-btn-plus"
-													type="button">&plus;</button>
-											</div>
-										</div>
-									
-								</td>
-								<td class="text-center text-lg text-medium">$24.89</td>
-								<td class="text-center">—</td>
-								<td class="text-center"><a class="remove-from-cart"
-									href="#" data-toggle="tooltip" title=""
-									data-original-title="Remove item"><i class="fa fa-trash"></i></a></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="product-item">
-										<a class="product-thumb" href="#"><img
-											src="https://www.bootdey.com/image/220x180/9932CC/000000"
-											alt="Product"></a>
-										<div class="product-info">
-											<h4 class="product-title">
-												<a href="#">Cole Haan Crossbody</a>
-											</h4>
-											<span><em>Size:</em> -</span><span><em>Color:</em>
-												Turquoise</span>
-										</div>
-									</div>
-								</td>
-								<td class="text-center">
-									
-										<div class="input-group mb-3"
-											style="max-width: 120px; margin: auto;">
-											<div class="input-group-prepend">
-												<button class="btn btn-outline-primary js-btn-minus"
-													type="button">&minus;</button>
-											</div>
-											<input type="text" class="form-control text-center" value="1"
-												placeholder="" aria-label="Example text with button addon"
-												aria-describedby="button-addon1">
-											<div class="input-group-append">
-												<button class="btn btn-outline-primary js-btn-plus"
-													type="button">&plus;</button>
-											</div>
-										</div>
-									
-								</td>
-								<td class="text-center text-lg text-medium">$200.00</td>
-								<td class="text-center">—</td>
-								<td class="text-center"><a class="remove-from-cart"
-									href="#" data-toggle="tooltip" title=""
-									data-original-title="Remove item"><i class="fa fa-trash"></i></a></td>
-							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>

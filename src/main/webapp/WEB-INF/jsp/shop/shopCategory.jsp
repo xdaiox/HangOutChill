@@ -55,8 +55,11 @@
                             </div>
                             
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-comment"></i>加入購物車</a>
-                                <a href="#"><i class="ti-heart"></i> 0 like</a>
+                                
+                                    <!-- <a href="#"><i class="ti-comment">加入購物車</i></a> -->
+                                    <button id="submitBtn">加入購物車</button>
+                                    <input type="hidden" value="${product.productId}" id="productid">
+                                
                             </div>
                         </div>
                     </div> 
@@ -99,17 +102,43 @@
 
 <!-- 	<footer class="footer-area"> </footer> -->
 	<jsp:include page="../layout/footer.jsp" />
-	<script src="${contextRoot}/js/jquery-2.2.4.min.js"></script>
-	<script src="${contextRoot}/js/popper.js"></script>
-	<script src="${contextRoot}/js/bootstrap.min.js"></script>
-	<script src="${contextRoot}/js/stellar.js"></script>
-	<script src="${contextRoot}/js/jquery.ajaxchimp.min.js"></script>
-	<script src="${contextRoot}/js/waypoints.min.js"></script>
-	<script src="${contextRoot}/js/mail-script.js"></script>
-	<script src="${contextRoot}/js/contact.js"></script>
-	<script src="${contextRoot}/js/jquery.form.js"></script>
-	<script src="${contextRoot}/js/jquery.validate.min.js"></script>
-	<script src="${contextRoot}/js/mail-script.js"></script>
-	<script src="${contextRoot}/js/theme.js"></script>
+	<!-- <script src="${contextRoot}/js/theme.js"></script> -->
+	<script>
+		$(document).ready(function(){
+            $('#submitBtn').click(function(event) {
+                event.preventDefault();
+                let productId = document.getElementById('productid').value;
+                let amount = 1;
+                $.ajax({
+                    url: 'http://localhost:8080/hangoutchill/shop/addcart',
+                    type: 'POST',
+                    contentType: "application/json;charset=UTF-8",
+                    datatype: 'json',
+                    data: JSON.stringify({
+                        'productId':productId,
+                        'amount' : amount
+                    }),
+                    success: function(result){
+                        console.log(result);
+                    },
+                    error: function(err){
+                        console.log(err);
+                    }
+                })
+
+            })
+        })
+        </script>
+        <script src="${contextRoot}/js/jquery-2.2.4.min.js"></script>
+        <script src="${contextRoot}/js/popper.js"></script>
+        <script src="${contextRoot}/js/bootstrap.min.js"></script>
+        <script src="${contextRoot}/js/stellar.js"></script>
+        <script src="${contextRoot}/js/jquery.ajaxchimp.min.js"></script>
+        <script src="${contextRoot}/js/waypoints.min.js"></script>
+        <script src="${contextRoot}/js/mail-script.js"></script>
+        <script src="${contextRoot}/js/contact.js"></script>
+        <script src="${contextRoot}/js/jquery.form.js"></script>
+        <script src="${contextRoot}/js/jquery.validate.min.js"></script>
+        <script src="${contextRoot}/js/mail-script.js"></script>
 </body>
 </html>

@@ -98,5 +98,6 @@
     <script src="${contextRoot}/js/jquery.validate.min.js"></script>
     <script src="${contextRoot}/js/mail-script.js"></script>
     <script src="${contextRoot}/js/theme.js"></script>
+    <script src="${contextRoot}/js/jquery-3.6.4.min.js"></script>
 </body>
 </html>
