@@ -1,5 +1,6 @@
 package com.ispan.hangoutchill.location.controller;
 
+import com.ispan.hangoutchill.location.dao.LocationInfoRepository;
 import com.ispan.hangoutchill.location.model.LocationComment;
 import com.ispan.hangoutchill.location.model.LocationImage;
 import com.ispan.hangoutchill.location.model.LocationInfo;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -22,6 +24,8 @@ public class LocationInfoController {
 
     @Autowired
     private LocationInfoService locationInfoService;
+    @Autowired
+    private LocationInfoRepository locationInfoRepository;
 
 
 
@@ -36,7 +40,7 @@ public class LocationInfoController {
     }
 
     //顯示單一LocationInfo BY ID
-    @GetMapping("/location/locationManager/locationInfo/{id}")
+    @GetMapping("/location/locationManager/locationInfo")
     public String showDetailLocationInfo(@RequestParam(name = "locId") Integer locId, Model model){
         LocationInfo locationInfo = locationInfoService.findLocationInfoById(locId);
         model.addAttribute("locId", locId);
@@ -52,7 +56,7 @@ public class LocationInfoController {
 
     //新增LocationInfo動作    等待上傳圖片處理
     @PostMapping("/location/locationManager/addPage/post")
-    public String postAddLocationInfo(@ModelAttribute("locationInfo") LocationInfo locationInfo,@RequestParam("imageFile") MultipartFile imageFile, Model model) throws IOException {
+    public String postAddLocationInfo(@ModelAttribute("locationInfo") LocationInfo locationInfo, Model model)  {
 
 //        LocationImage locationImage = new LocationImage();
 //        locationImage.setLocImgMain(imageFile.getBytes());
@@ -95,6 +99,34 @@ public class LocationInfoController {
         return "redirect:/location/locationManager";
     }
 
+    //搜索BY locName
+//    @GetMapping("/location/locationManager/findByName")
+//    public String findLocationInfoByLocName(@RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber,Model model){
+//
+//    }
+
+    @GetMapping("/location/locationManager/findByName")
+    public List<LocationInfo> findLocationInfoByLocName(@RequestParam("locName") String locName){
+        return locationInfoRepository.findLocationInfoByLocName(locName);
+    }
+
+
+
+//    @GetMapping("/location/locationManager")
+//    public String showAllLocationInfo(@RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber,Model model){
+//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber);
+//        model.addAttribute("page", page);
+//        return "/location/locationManager";
+//    }
+
+//============================================================================
+
+
+    //LocationDetail view 預覽測試
+    @GetMapping("/location/locationList/detail/test")
+    public String toDetailLocationInfoTEST(){
+        return "/location/locationInfoDetailTest";
+    }
 
 
 
@@ -104,6 +136,10 @@ public class LocationInfoController {
 
 
     //搜尋功能 By name
+
+
+
+
 
 
 

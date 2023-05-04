@@ -27,7 +27,11 @@
                 <div class="" style="margin: auto;">
                     <h1 style="text-align: center;">地點管理</h1>
                     <form action="${contextRoot}/location/locationManager/addPage">
-                        <input type="submit" class="btn btn-outline-info btn-sm"value="新增" /></form>
+                        <input type="submit" class="btn btn-outline-info btn-sm" value="新增" /></form>
+                    <br>
+                    <form action=""><input type="text" name="search" placeholder="輸入地點名稱">
+                        <button type="submit">搜尋</button></form>
+                    <br>
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered table-light">
                             <thead>
