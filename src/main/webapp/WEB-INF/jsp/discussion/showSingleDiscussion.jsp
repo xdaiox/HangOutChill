@@ -236,6 +236,16 @@
 												</div>
 											</form:form>
 										</div>
+										<div class="inner-main-header">
+											<a href="${contextRoot}/discussion/editDiscussion/${discussion.d_id}"><button
+													class="btn btn-primary" type="submit">編輯</button></a>
+
+											<form action="${contextRoot}/discussion/deleteDiscussion/${discussion.d_id}"
+												method="post">
+												<input type="hidden" name="_method" value="delete">
+												<button class="btn btn-primary danger" type="submit">刪除</button>
+											</form>
+										</div>
 									</div>
 									<div class="card">
 										<div class="card-header">
@@ -252,7 +262,7 @@
 																src="https://bootdey.com/img/Content/avatar/avatar1.png"
 																class="mr-3 rounded-circle" width="50" alt="User" /></a>
 														<div class="media-body">
-																	<h3>${message.contents}</h3>
+															<h3>${message.contents}</h3>
 															<p class="text-muted">
 															<h5>Author:
 																<a href="#">${discussion.normalMmeber.nickName}</a>
@@ -263,16 +273,20 @@
 															</span>
 															</p>
 														</div>
-														<!-- <a href="${contextRoot}/discussion/replyDiscussion"><button class="btn btn-primary" type="submit">回覆
-														</button></a>
+														<div>
+															<a
+																href="${contextRoot}/message/editMessage/${message.dm_id}"><button
+																	class="btn btn-primary"
+																	type="submit">編輯</button></a>
 
-														<a href="${contextRoot}/discussion/editDiscussion/${discussion.d_id}"><button class="btn btn-primary" type="submit">編輯</button></a>
-
-														<form action="${contextRoot}/discussion/deleteDiscussion/${discussion.d_id}" method="post">
-															<input type="hidden"name="_method" value="delete">
-															<button class="btn btn-primary danger" type="submit">刪除</button>
-														</form> -->
-
+															<form
+																action="${contextRoot}/message/deleteMessage/${message.dm_id}"
+																method="post">
+																<input type="hidden" name="_method" value="delete">
+																<button class="btn btn-primary danger"
+																	type="submit">刪除</button>
+															</form>
+														</div>
 														<div class="text-muted small text-center align-self-center">
 															<span class="d-none d-sm-inline-block"><i
 																	class="far fa-eye"></i> 19</span> <span><i
@@ -286,13 +300,13 @@
 										<div class="card">
 											<form:form modelAttribute="replyDiscussion" method="post"
 												action="${contextRoot}/message/post/${discussion.d_id}">
-												
+
 												<form:input type="hidden" path="discussions"
 													value="${discussion.d_id}" />
 												<div class="form-group">
 
 													<!-- ================================== ck editor ================================== -->
-													<form:textarea path="contents" id="editor" placeholder="請在這裡填寫內容"/>
+													<form:textarea path="contents" id="editor" placeholder="請在這裡填寫內容" />
 													<!-- ================================== ck editor ================================== -->
 
 													<!-- <form:textarea path="contents" class="form-control" id="content" rows="5"

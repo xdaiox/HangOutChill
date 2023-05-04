@@ -176,7 +176,7 @@ body {
 							<h5 class="card-title text-center">修改文章</h5>
 						</div>
 						<div class="card-body">
-							<form:form modelAttribute="discussion" method="put" action="${contextRoot}/discussion/editDiscussion">
+							<form:form modelAttribute="discussion" method="put" action="${contextRoot}/discussion/editDiscussion/${discussion.d_id}">
 								<div class="form-group">
 								<form:input path="d_id" type="hidden"></form:input>
 								</div>

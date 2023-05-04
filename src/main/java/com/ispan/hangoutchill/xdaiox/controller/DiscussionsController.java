@@ -57,10 +57,10 @@ public class DiscussionsController {
         return "discussion/editDiscussionPage";
     }
     
-    @PutMapping("/discussion/editDiscussion")
-    public String toEditedDiscussion(@ModelAttribute("discussion") Discussions dss) {
+    @PutMapping("/discussion/editDiscussion/{id}")
+    public String toEditedDiscussion(@ModelAttribute("discussion") Discussions dss,@PathVariable("id") Integer id) {
     	dService.updateById(dss.getD_id(),dss.getTitle(),dss.getType(),dss.getContents());
-    	return "redirect:/discussion/allDiscussion";
+    	return "redirect:/message/allMessages/{id}";
     }
     
     @DeleteMapping("/discussion/deleteDiscussion/{id}")
