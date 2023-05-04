@@ -51,7 +51,7 @@ public class Messages {
     private NormalMember normalMmeber;
 	
     @ManyToOne
-    @JoinColumn(name="fk_dscussion_id", nullable = true, insertable = false, updatable = false)
+    @JoinColumn(name="fk_dscussion_id", nullable = true)
     private Discussions discussions;
 
 	public Integer getDm_id() {

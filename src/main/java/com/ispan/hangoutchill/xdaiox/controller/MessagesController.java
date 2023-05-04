@@ -31,17 +31,16 @@ public class MessagesController {
 		model.addAttribute("discussion", dss);
 		model.addAttribute("page", page);
 		model.addAttribute("replyDiscussion",new Messages());
-		
 		return"/discussion/showSingleDiscussion";
 	}
 	
-    @PostMapping("/message/post")
-    public String postMessage(@ModelAttribute("replyDiscussion") Messages mss, Model model) {
+    @PostMapping("/message/post/{id}")
+    public String postMessage(@ModelAttribute("replyDiscussion") Messages mss, Model model,@PathVariable(name="id")Integer d_id) {
     	
     	mService.addMessage(mss);
     	model.addAttribute("message", new Messages());
     	
-    	return"redirect:/discussion/allDiscussion";
+    	return"redirect:/message/allMessages/{id}";
     }
 
 }

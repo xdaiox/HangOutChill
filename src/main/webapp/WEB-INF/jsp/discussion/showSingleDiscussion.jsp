@@ -187,32 +187,33 @@
 					<div class="main-body p-0">
 						<div class="inner-wrapper">
 
-							<div class="inner-main-header">
-									<ul class="pagination pagination-sm pagination-circle justify-content-center mb-1 ml-auto">
+							<div class="inner-main">
+								<div class="inner-main-header">
+									<ul
+										class="pagination pagination-sm pagination-circle justify-content-center mb-1 ml-auto">
 										<jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}">
 											<jstl:choose>
 												<jstl:when test="${page.number+1 != pageNumber }">
 													<li class="page-item"><a class="page-link"
-												href="${contextRoot}/discussion/allDiscussion?p=${pageNumber}">${pageNumber}</a></li>
-												<!-- 反正上面這個p 就是DiscussionsController,toShowAllDiscussion內的p -->
+															href="${contextRoot}/message/allMessages/${discussion.d_id}?p=${pageNumber}">${pageNumber}</a>
+													</li>
+													<!-- p 是DiscussionsController,toShowAllDiscussion內的p -->
 												</jstl:when>
 												<jstl:otherwise>
 													<li class="page-item"><a class="page-link">${pageNumber}</a></li>
-												
+
 												</jstl:otherwise>
 											</jstl:choose>
-		
+
 										</jstl:forEach>
-											<!-- <li class="page-item active"><span class="page-link">G</span></li>
+										<!-- <li class="page-item active"><span class="page-link">G</span></li>
 											<li class="page-item"><a class="page-link"
 												href="javascript:void(0)">G</a></li>
 											<li class="page-item"><a class="page-link has-icon"
 												href="javascript:void(0)"><i class="material-icons">chevron_right</i></a>
 											</li> -->
 									</ul>
-							</div>
-
-							<div class="inner-main">
+								</div>
 								<div class="inner-main-body collapse forum-content show">
 									<div class="card">
 										<div class="card-header">
@@ -239,49 +240,87 @@
 									<div class="card">
 										<div class="card-header">
 											<h5 class="card-title text-center">回覆</h5>
-									</div>
-									<div class="card">123</div>
-									<div class="card">123</div>
-									<div class="card">123</div>
-									<div class="card">123</div>
+										</div>
 
-									<div class="card">
-												<form:form modelAttribute="replyDiscussion" method="post"
-												action="${contextRoot}/message/post">
-												<form:input type="hidden" path="discussions.d_id" value="${discussion.d_id}" />
-													<div class="form-group">
+										<!-- ========================顯示回覆訊息======================== -->
+										<jstl:forEach var="message" items="${page.content}">
+											<div class="card">
+												<div class="card-body p-2 p-sm-3">
+													<div class="media forum-item">
+														<a href="#" data-toggle="collapse"
+															data-target=".forum-content"><img
+																src="https://bootdey.com/img/Content/avatar/avatar1.png"
+																class="mr-3 rounded-circle" width="50" alt="User" /></a>
+														<div class="media-body">
+																	<h3>${message.contents}</h3>
+															<p class="text-muted">
+															<h5>Author:
+																<a href="#">${discussion.normalMmeber.nickName}</a>
+																posted
+															</h5><span class="text-secondary font-weight-bold">
+																<fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss"
+																	value="${message.postDate}" />
+															</span>
+															</p>
+														</div>
+														<!-- <a href="${contextRoot}/discussion/replyDiscussion"><button class="btn btn-primary" type="submit">回覆
+														</button></a>
 
-														<!-- ================================== ck editor ================================== -->
-														<form:textarea path="contents" id="editor" name="content"
-															placeholder="請在這裡填寫內容"></form:textarea>
-														<!-- ================================== ck editor ================================== -->
+														<a href="${contextRoot}/discussion/editDiscussion/${discussion.d_id}"><button class="btn btn-primary" type="submit">編輯</button></a>
 
-														<!-- <form:textarea path="contents" class="form-control" id="content" rows="5"
-											placeholder="輸入内容" ></form:textarea> -->
+														<form action="${contextRoot}/discussion/deleteDiscussion/${discussion.d_id}" method="post">
+															<input type="hidden"name="_method" value="delete">
+															<button class="btn btn-primary danger" type="submit">刪除</button>
+														</form> -->
+
+														<div class="text-muted small text-center align-self-center">
+															<span class="d-none d-sm-inline-block"><i
+																	class="far fa-eye"></i> 19</span> <span><i
+																	class="far fa-comment ml-2"></i> 3</span>
+														</div>
 													</div>
-													<button type="submit" class="btn btn-primary">發表回覆</button>
-												</form:form>
-											
+												</div>
+											</div>
+										</jstl:forEach>
+
+										<div class="card">
+											<form:form modelAttribute="replyDiscussion" method="post"
+												action="${contextRoot}/message/post/${discussion.d_id}">
+												
+												<form:input type="hidden" path="discussions"
+													value="${discussion.d_id}" />
+												<div class="form-group">
+
+													<!-- ================================== ck editor ================================== -->
+													<form:textarea path="contents" id="editor" placeholder="請在這裡填寫內容"/>
+													<!-- ================================== ck editor ================================== -->
+
+													<!-- <form:textarea path="contents" class="form-control" id="content" rows="5"
+											placeholder="輸入内容" ></form:textarea> -->
+												</div>
+												<button type="submit" class="btn btn-primary">發表回覆</button>
+											</form:form>
+
 											<a href="${contextRoot}/discussion/allDiscussion"
 												class="btn btn-primary">返回文章列</a>
+										</div>
+
+
+
+
 									</div>
-										
-									
-
-
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-<!-- ================================== ck editor ================================== -->
-<script>
-	CKEDITOR.replace("editor");
-	ClassicEditor.create( document.querySelector( '#editor' ), {
-    plugins: [ Essentials, Paragraph, Bold, Italic ],
-    toolbar: [ 'bold', 'italic' ]
-} )
-</script>
-<!-- ================================== ck editor ================================== -->
+					<!-- ================================== ck editor ================================== -->
+					<script>
+						CKEDITOR.replace("editor");
+						ClassicEditor.create(document.querySelector('#editor'), {
+							plugins: [Essentials, Paragraph, Bold, Italic],
+							toolbar: ['bold', 'italic']
+						})
+					</script>
+					<!-- ================================== ck editor ================================== -->
 
 				</html>
