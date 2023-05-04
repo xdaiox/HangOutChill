@@ -106,6 +106,7 @@ public class ActivitiesandLesson {
 	    )
 	    private List<NormalMember> accounts;
 	
+	
 
 	public List<NormalMember> getAccounts() {
 		return accounts;

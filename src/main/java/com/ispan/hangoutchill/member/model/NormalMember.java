@@ -1,13 +1,30 @@
 package com.ispan.hangoutchill.member.model;
 
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
-
-import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name="normalAccount")
@@ -64,17 +81,16 @@ public class NormalMember {
     
     @ManyToMany(cascade=CascadeType.ALL, mappedBy="accounts")
     List<ActivitiesandLesson> actandles;
-    
-    
-    public List<ActivitiesandLesson> getAals() {
+
+	public List<ActivitiesandLesson> getActandles() {
 		return actandles;
 	}
 
-	public void setAals(List<ActivitiesandLesson> aals) {
-		this.actandles = aals;
+	public void setActandles(List<ActivitiesandLesson> actandles) {
+		this.actandles = actandles;
 	}
-	
-//===================================================    	
+
+	//===================================================    	
     public Integer getId() {
         return id;
     }

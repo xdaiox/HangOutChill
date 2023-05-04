@@ -19,7 +19,7 @@
 				style="background-color: #ffffff00; height: 100%;">
 				<div class="row justify-content-center">
 					<div class="" style="margin: auto;">
-						<h1 style="text-align: center;">活動/課程管理</h1>
+						<h1 style="text-align: center;">會員報名管理</h1>
 						<form action="${contextRoot}/actandles/shop/add">
 							<input type="submit" class="btn btn-outline-info btn-sm"
 								value="新增" />
@@ -68,25 +68,7 @@
 												height="200px"
 												src="data:image/png;base64,${aal.base64image}"> <br />
 											<td class="align-middle">
-												<div style="display: flex">
-													<form action="${contextRoot}/actandles/shop/edit">
-														<input type="hidden" name="id" value="${aal.id}" /> <input
-															type="submit" class="btn btn-outline-info btn-sm"
-															value="編輯" />
-													</form>
-
-													<form action="${contextRoot}/actandles/shop/delete"
-														method="post">
-														<input type="hidden" name="_method" value="delete" /> <input
-															type="hidden" name="id" value="${aal.id}" /> <input
-															type="submit" class="btn btn-outline-danger btn-sm"
-															value="刪除" onclick="return confirm('確定刪除?')" />
-													</form>
-													<form:form method="POST" action="${contextRoot}/actandles/detail/lessignup">
-												<input value="${aal.id}" type="hidden" name="id" />
-												<button type="submit" class="btn btn-primary" >報名</button>
-										</form:form>
-												</div>
+									 	
 									</jstl:forEach>
 								</tbody>
 							</table>
