@@ -42,13 +42,13 @@
 			<div class="col-md-6 col-lg-3">
                     <div class="single-category">
                         <div class="thumb">
+                         <a class="d-block" href="/hangoutchill/shop/productdetail?productid=${product.productId}">
                             <img class="img-fluid" src='<c:url value="/shop/getPicture/${product.productId}" />' alt="">
+                            </a>
                         </div>
                         <!-- Style 更改 -->
                         <div class="short_details" style="padding:10px; margin-top: 0;" >
-                            <a class="d-block" href="single-blog.html">
                                 <h4>${product.productName}</h4>
-                            </a>
                             <div class="meta-top d-flex">
                                 <!-- <a href="#">shoes </a>/ -->
                                 <a href="#"> $ ${product.unitPrice}</a>

@@ -48,7 +48,7 @@
                 <div class="right-button">
                     <ul>
                         <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
-                        <li><a href="#"><i class="ti-btnshopcart"></i></a></li>
+                        <li><a href="${contextRoot}/shop/shoppingCart"><i class="ti-btnshopcart"></i></a></li>
                         <li><a class="btn-login" href="${contextRoot}/member/loginHome">登入</a></li>
                     </ul>
                 </div>

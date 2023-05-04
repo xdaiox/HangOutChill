@@ -361,6 +361,13 @@ public class ProductController {
 		return "shop/shopCategory";
 	}
 	
+	// 商品單獨頁面
+	@GetMapping("/shop/productdetail")
+	public String showProductDetail(@RequestParam(name="productid") Integer productId, Model model) {
+		Product product = productService.getProductById(productId);
+		model.addAttribute("product", product);
+		return "shop/productDetail";
+	}
 	
 	
 	
