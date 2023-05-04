@@ -20,8 +20,8 @@ public class MessagesService {
 	@Autowired
 	private MessagesRepository mssRepository;
 	
-	public void addMessage(Messages dss) {
-		mssRepository.save(dss);
+	public void addMessage(Messages mss) {
+		mssRepository.save(mss);
 	}
 	
 	public void addMessageByDid() {

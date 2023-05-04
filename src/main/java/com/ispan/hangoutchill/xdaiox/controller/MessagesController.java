@@ -36,7 +36,8 @@ public class MessagesController {
 	}
 	
     @PostMapping("/message/post")
-    public String postMessage(@ModelAttribute("replyDiscussion") Messages mss, Model model, @RequestParam("discussions") Integer discussionsId) {
+    public String postMessage(@ModelAttribute("replyDiscussion") Messages mss, Model model) {
+    	
     	mService.addMessage(mss);
     	model.addAttribute("message", new Messages());
     	
