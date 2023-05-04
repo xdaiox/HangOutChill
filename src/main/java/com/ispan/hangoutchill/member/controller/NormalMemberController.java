@@ -150,4 +150,13 @@ public class NormalMemberController {
         return "redirect:/back/members";
     }
 
+    @PutMapping("/back/authority")
+    public  String putUpdateEnabled(@RequestParam(name="id") Integer id){
+        System.out.println(id);
+        nMemberService.updateEnable(id);
+        return "redirect:/back/members";
+    }
+
+
+
 }

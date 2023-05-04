@@ -8,7 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
@@ -18,7 +18,7 @@
 <body>
 <jsp:include page="../layout/navbar.jsp"/>
 <div class="container">
-    <form:form modelAttribute="members" method="get">
+
         <table class="table table-hover">
             <thead>
             <tr>
@@ -33,32 +33,35 @@
             </tr>
             </thead>
             <tbody>
+
             <jstl:forEach var="allMember" items="${members}">
+
                 <tr>
-                    <th scope="row">${members.indexOf(allMember)+1}</th>
-                    <td class="align-middle">${allMember.identity}
-                    <td class="align-middle">${allMember.account}
-                    <td class="align-middle">${allMember.reallName}
-                    <td class="align-middle">${allMember.birthdate}
-                    <td class="align-middle">${allMember.gender}
-                    <td class="align-middle">
-                        <jstl:choose>
-                        <jstl:when test="${allMember.enabled == 'true'}">
-                            <form action="#">
-                                <input type="hidden" name="id" value="${allMember.id}">
-                                <input type="submit" class="btn btn-outline-danger" value="關閉" onclick="return confirm('確定關閉權限')">
-                            </form>
-                        </jstl:when>
-                        <jstl:otherwise>
-                            <form action="#">
-                                <input type="hidden" name="id" value="${allMember.id}">
-                                <input type="submit" class="btn btn-outline-success" value="開啟" >
-                            </form>
-                        </jstl:otherwise>
-                        </jstl:choose>
+                    <th scope="row" class="align-middle">${members.indexOf(allMember)+1}</th>
+                    <td class="align-middle">${allMember.identity}</td>
+                    <td class="align-middle">${allMember.account}</td>
+                    <td class="align-middle">${allMember.reallName}</td>
+                    <td class="align-middle">${allMember.birthdate}</td>
+                    <td class="align-middle">${allMember.gender}</td>
                     <td class="align-middle">
                         <div style="display: flex">
-                            <form method="get" action="${contextRoot}/back/backUpdateMember">
+                                <form method="post" action="${contextRoot}/back/authority" >
+                                <input type="hidden" name="_method" value="PUT">
+                                <input type="hidden" name="id" value="${allMember.id}">
+                        <jstl:choose>
+                            <jstl:when test="${allMember.enabled == false}">
+                                <input type="submit" class="btn btn-outline-success" value="開啟" >
+                            </jstl:when>
+                        <jstl:otherwise >
+                                <input type="submit" class="btn btn-outline-danger" value="關閉" onclick="return confirm('確定關閉權限')">
+                        </jstl:otherwise>
+                        </jstl:choose>
+                            </form>
+                        </div>
+                </td>
+                    <td class="align-middle">
+                        <div style="display: flex">
+                            <form method="get" action="${contextRoot}/back/backUpdateMember" >
                                 <input type="hidden" name="id" value="${allMember.id}">
                                 <input type="submit" class="btn btn-outline-primary btn-sm" value="編輯資料">
                             </form>
@@ -67,11 +70,12 @@
                                 <input type="submit" class="btn btn-outline-secondary btn-sm" value="重寄驗證信">
                             </form>
                         </div>
+                    </td>
                 </tr>
             </jstl:forEach>
             </tbody>
         </table>
-    </form:form>
+
     <br/>
     <div style="text-align:center;">
         <jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}">
