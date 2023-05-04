@@ -1,6 +1,7 @@
 package com.ispan.hangoutchill.location.controller;
 
 import com.ispan.hangoutchill.location.model.LocationComment;
+import com.ispan.hangoutchill.location.model.LocationImage;
 import com.ispan.hangoutchill.location.model.LocationInfo;
 import com.ispan.hangoutchill.location.model.LocationOperationTime;
 import com.ispan.hangoutchill.location.service.LocationCommentService;
@@ -10,6 +11,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Controller
 public class LocationInfoController {
@@ -44,9 +50,23 @@ public class LocationInfoController {
         return "/location/locationInfoAdd";
     }
 
-    //新增LocationInfo動作
+    //新增LocationInfo動作    等待上傳圖片處理
     @PostMapping("/location/locationManager/addPage/post")
-    public String postAddLocationInfo(@ModelAttribute("locationInfo") LocationInfo locationInfo, Model model) {
+    public String postAddLocationInfo(@ModelAttribute("locationInfo") LocationInfo locationInfo,@RequestParam("imageFile") MultipartFile imageFile, Model model) throws IOException {
+
+//        LocationImage locationImage = new LocationImage();
+//        locationImage.setLocImgMain(imageFile.getBytes());
+//        locationImage.setLocImgGallery_1(imageFile.getBytes());
+//        locationImage.setLocImgGallery_2(imageFile.getBytes());
+//        locationImage.setLocImgGallery_3(imageFile.getBytes());
+//        locationImage.setLocImgGallery_4(imageFile.getBytes());
+//        locationImage.setLocImgGallery_5(imageFile.getBytes());
+//        locationImage.setLocImgGallery_6(imageFile.getBytes());
+//        locationImage.setLocImgGallery_7(imageFile.getBytes());
+//        locationImage.setLocImgGallery_8(imageFile.getBytes());
+
+//        locationInfo.setLocationImage(locationImage);
+
         locationInfoService.addLocationInfo(locationInfo);
         model.addAttribute("locationInfo", new LocationInfo());
         return "redirect:/location/locationManager";

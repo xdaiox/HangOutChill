@@ -69,6 +69,7 @@ public class LocationInfoService {
             locOriginal.setLocTel(locationInfo.getLocTel());
             locOriginal.setLocLink(locationInfo.getLocLink());
             locOriginal.setLocationOperationTime(locationInfo.getLocationOperationTime());
+//            locOriginal.setLocationImage(locationInfo.getLocationImage());
             return locOriginal;
         }
         return null;

@@ -30,18 +30,21 @@
                     <div class="card-header">新增地點</div>
                     <div class="card-body">
                         <form:form class="" modelAttribute="locationInfo" enctype="multipart/form-data" method="POST" action="${contextRoot}/location/locationManager/addPage/post">
-                            <p>地點名稱:</p>
+                            <p>地點名稱 : </p>
                             <form:input path="locName" class="form-control" type="text"></form:input>
-                            <p>地點分類:</p>
+                            <br>
+                            <p>地點分類 : </p>
                             <form:select path="locCat" Class="form-control">
                                 <form:option value="-1" label="請選擇分類..."/>
                                 <form:option value="分類1" label="分類1"/>
                                 <form:option value="分類2" label="分類2"/>
                                 <form:option value="分類3" label="分類3"/>
                             </form:select>
+
 <%--                            <p>地點標籤:</p>--%>
 <%--                            <form:checkbox path="locTag" name="locTag"/>--%>
-                            <p>消費水準:</p>
+                            <br>
+                            <p>消費水準 : </p>
                             <form:select path="locPriceLevel" Class="form-control">
                                 <form:option value="-1" label="請選擇分類..."/>
                                 <form:option value="1" label="$"/>
@@ -50,20 +53,26 @@
                                 <form:option value="3" label="$ $ $ $"/>
                                 <form:option value="3" label="$ $ $ $ $"/>
                             </form:select>
-                            <p>地點簡介:</p>
+                            <br>
+                            <p>地點簡介 : </p>
                             <form:textarea path="locDesc" class="form-control" style="height:200px;" ></form:textarea>
-                            <p>城市:</p>
+                            <br>
+                            <p>城市 : </p>
                             <form:input path="locCity" class="form-control" type="text"></form:input>
-                            <p>區域:</p>
+                            <br>
+                            <p>區域 : </p>
                             <form:input path="locDist" class="form-control" type="text"></form:input>
-                            <p>地址:</p>
+                            <br>
+                            <p>地址 : </p>
                             <form:input path="locAdd" class="form-control" type="text"></form:input>
-                            <p>電話:</p>
+                            <br>
+                            <p>電話 : </p>
                             <form:input path="locTel" class="form-control" type="text"></form:input>
-                            <p>網址連結:</p>
+                            <br>
+                            <p>網址連結 : </p>
                             <form:input path="locLink" class="form-control" type="text"></form:input>
-
-                            <p>營業時間:</p>
+                            <br>
+                            <p>營業時間 : </p>
                             <sapn>星期一 : </sapn>
                             <span>開始</span>
                             <form:input path="locationOperationTime.mondayOpen" type="time" ></form:input>
@@ -105,7 +114,27 @@
                             <form:input path="locationOperationTime.sundayOpen" type="time" ></form:input>
                             <span>結束</span>
                             <form:input path="locationOperationTime.sundayClose" type="time" ></form:input>
-
+                            <br>
+                            <br>
+                            <p>上傳圖片 : </p>
+                            <span>封面照片 :</span>
+                            <form:input path="locationImage.locImgMain" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <span>相簿照片1 :</span>
+                            <form:input path="locationImage.locImgGallery_1" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <span>相簿照片2 :</span>
+                            <form:input path="locationImage.locImgGallery_2" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <span>相簿照片3 :</span>
+                            <form:input path="locationImage.locImgGallery_3" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <span>相簿照片4 :</span>
+                            <form:input path="locationImage.locImgGallery_4" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <span>相簿照片5 :</span>
+                            <form:input path="locationImage.locImgGallery_5" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <span>相簿照片6 :</span>
+                            <form:input path="locationImage.locImgGallery_6" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <span>相簿照片7 :</span>
+                            <form:input path="locationImage.locImgGallery_7" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <span>相簿照片8 :</span>
+                            <form:input path="locationImage.locImgGallery_8" class="form-control" type="file" accept="image/png, image/jpeg" />
 
 
 

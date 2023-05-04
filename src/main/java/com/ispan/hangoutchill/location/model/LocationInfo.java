@@ -55,7 +55,8 @@ public class LocationInfo {
 
 
     //關聯 與LocationImage
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "locationInfo")
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "location_image_id")
     private LocationImage locationImage;
 
     //關聯 與LocationComment

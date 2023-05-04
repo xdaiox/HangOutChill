@@ -41,19 +41,18 @@ public class LocationImage {
     private byte[] locImgGallery_8;
 
     //對應locationInfo
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn (name = "location_id")
-    private LocationInfo locationInfo;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn (name = "location_id")
+//    private LocationInfo locationInfo;
 
 
     @Transient
-    private MultipartFile uploadImg;
+    private MultipartFile imageFile;
 
 
 
     //參數建構子
     public LocationImage(){}
-
 
     public Integer getLocImgId() {
         return locImgId;
@@ -135,19 +134,11 @@ public class LocationImage {
         this.locImgGallery_8 = locImgGallery_8;
     }
 
-    public LocationInfo getLocationInfo() {
-        return locationInfo;
+    public MultipartFile getImageFile() {
+        return imageFile;
     }
 
-    public void setLocationInfo(LocationInfo locationInfo) {
-        this.locationInfo = locationInfo;
-    }
-
-    public MultipartFile getUploadImg() {
-        return uploadImg;
-    }
-
-    public void setUploadImg(MultipartFile uploadImg) {
-        this.uploadImg = uploadImg;
+    public void setImageFile(MultipartFile imageFile) {
+        this.imageFile = imageFile;
     }
 }
