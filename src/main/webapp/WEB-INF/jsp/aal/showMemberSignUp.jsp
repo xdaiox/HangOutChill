@@ -20,9 +20,9 @@
 				<div class="row justify-content-center">
 					<div class="" style="margin: auto;">
 						<h1 style="text-align: center;">會員報名管理</h1>
-						<form action="${contextRoot}/actandles/shop/add">
+						<form action="${contextRoot}/actandles/shop/postall">
 							<input type="submit" class="btn btn-outline-info btn-sm"
-								value="新增" />
+								value="瀏覽活動" />
 						</form>
 						<div class="table-responsive">
 							<table class="table table-hover table-bordered table-light">
@@ -68,6 +68,13 @@
 												height="200px"
 												src="data:image/png;base64,${aal.base64image}"> <br />
 											<td class="align-middle">
+											<form action="${contextRoot}/actandles/detail/cancal"
+														method="post">
+														<input type="hidden" name="_method" value="delete" /> <input
+															type="hidden" name="id" value="${aal.id}" /> <input
+															type="submit" class="btn btn-outline-danger btn-sm"
+															value="取消報名" onclick="return confirm('確定取消?')" />
+													</form>
 									 	
 									</jstl:forEach>
 								</tbody>
