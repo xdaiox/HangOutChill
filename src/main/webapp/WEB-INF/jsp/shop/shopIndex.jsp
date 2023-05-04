@@ -18,30 +18,30 @@
 <title>商城首頁</title>
 
 <title>首頁</title>
-<jsp:include page="../layout/navbar.jsp" />
-<jsp:include page="../layout/footer.jsp" />
+<jsp:include page="layout/navbar.jsp" />
+
 
 </head>
 <body>
-	<section class="header-top"></section>
+	<main>
+		<section class="header-top"></section>
+		<header id="header" class="header_area"> </header>
+
+		<section class="editors_pick">
+			<div class="content_box">
+				<div class="content_title">廣告輪播</div>
+				<div class="content_title">編輯嚴選</div>
+				<div class="content">新品上市</div>
+			</div>
+			<br>
+		</section>
+	</main>
 
 
-	<header id="header" class="header_area"> </header>
-
-	<section class="editors_pick">
-	<div class="content_box">
-		<div class="content_title">廣告輪播</div>
-		<div class="content_title">編輯嚴選</div>
-		<div class="content">新品上市</div>
-	</div>
-	<br>
-	</section>
 
 
-
-
-	<footer class="footer-area"> </footer>
-
+<!-- 	<footer class="footer-area"> </footer> -->
+	<jsp:include page="../layout/footer.jsp" />
 	<script src="${contextRoot}/js/jquery-2.2.4.min.js"></script>
 	<script src="${contextRoot}/js/popper.js"></script>
 	<script src="${contextRoot}/js/bootstrap.min.js"></script>

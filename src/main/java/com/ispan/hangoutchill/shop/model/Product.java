@@ -11,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Entity
@@ -43,8 +46,15 @@ public class Product {
 	@Column(name="launchdate",columnDefinition = "date")
 	private String launchdate;
 	
+	@Column(name="coverImage",columnDefinition = "varbinary(max)")
+	private byte[] coverImage;
+	
+	@Transient
+	private MultipartFile mainImage;
+	
+	
 	@OneToMany(mappedBy="product",
-		       cascade = CascadeType.PERSIST, orphanRemoval = true)
+		       cascade = CascadeType.ALL)
 	private Set<ProductPhoto> photos = new LinkedHashSet<>();
 	
 	
@@ -61,10 +71,25 @@ public class Product {
 	public Product() {
 	}
 	
+	public byte[] getCoverImage() {
+		return coverImage;
+	}
+	
+	public void setCoverImage(byte[] coverImage) {
+		this.coverImage = coverImage;
+	}
+	
+	public MultipartFile getMainImage() {
+		return mainImage;
+	}
+	
+	public void setMainImage(MultipartFile mainImage) {
+		this.mainImage = mainImage;
+	}
+	
 	public Integer getProductId() {
 		return productId;
 	}
-
 
 
 	public void setProductId(Integer productId) {
@@ -155,5 +180,30 @@ public class Product {
 		this.launchdate = launchdate;
 	}
 
+	public Set<ProductPhoto> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(Set<ProductPhoto> photos) {
+		this.photos = photos;
+	}
+
+	public Set<OrderDetail> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(Set<OrderDetail> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
+	public Set<ShoppingCart> getShoppingCarts() {
+		return shoppingCarts;
+	}
+
+	public void setShoppingCarts(Set<ShoppingCart> shoppingCarts) {
+		this.shoppingCarts = shoppingCarts;
+	}
+
+	
 	
 }
