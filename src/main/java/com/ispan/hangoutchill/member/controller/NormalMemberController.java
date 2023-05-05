@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Base64;
@@ -155,6 +156,24 @@ public class NormalMemberController {
         System.out.println(id);
         nMemberService.updateEnable(id);
         return "redirect:/back/members";
+    }
+
+
+    @PutMapping("/member/updateInfo")
+    public String putUpdateForMember(@ModelAttribute("result")NormalMember member) throws IOException {
+        Integer id = member.getId();
+        MultipartFile file = member.getFile();
+        byte[] fileBytes =  file.getBytes();
+        String base64 = Base64.getEncoder().encodeToString(fileBytes);
+        String base64File = "data:image/png;base64," + base64;
+        if(base64File.equals("data:image/png;base64,")){
+            NormalMember normalMemberById = nMemberService.findNormalMemberById(id);
+            nMemberService.updateActByIdForMemberP(id,member,normalMemberById.getPhotoB64());
+        }else{
+           nMemberService.updateActByIdForMemberP(id,member,base64File);
+        }
+
+      return"redirect:/member/NormalMemberDetail";
     }
 
 

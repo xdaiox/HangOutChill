@@ -129,5 +129,20 @@ public class NormalMemberService implements INormalMemberService {
         nMemberRepository.save(normalMember);
         return  normalMember;
     }
+
+
+    //會員更改基本資料(有圖)
+    public NormalMember updateActByIdForMemberP(Integer id, NormalMember updateMM,String base64){
+        Optional<NormalMember> byId = nMemberRepository.findById(id);
+        NormalMember normalMember = byId.get();
+        normalMember.setReallName(updateMM.getReallName());
+        normalMember.setNickName(updateMM.getNickName());
+        normalMember.setBirthdate(updateMM.getBirthdate());
+        normalMember.setTel(updateMM.getTel());
+        normalMember.setGender(updateMM.getGender());
+        normalMember.setPhotoB64(base64);
+        nMemberRepository.save(normalMember);
+        return normalMember;
+    }
 }
 

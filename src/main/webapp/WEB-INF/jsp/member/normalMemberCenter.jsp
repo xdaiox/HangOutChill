@@ -43,7 +43,8 @@
                                     <div class="card-body">
                                         <h3 class="card-title">會員資訊</h3>
                                         <table class="table table-borderless" >
-                                            <form:form modelAttribute="result">
+                                            <form:form modelAttribute="result" method="PUT" action="${contextRoot}/member/updateInfo" enctype="multipart/form-data">
+                                                <form:input path="id" value="${result.id}" type="hidden"/>
                                             <thead>
                                             <tr>
                                                 <th scope="col"></th>
@@ -60,7 +61,7 @@
                                             <tr>
                                                 <th scope="row" style="width: 160px">會員真實姓名：</th>
                                                 <td style=" text-align: left; "><form:input path="reallName" value="${result.reallName}"/></td>
-                                                <td rowspan="6"><img src="${result.photoB64}" id="preview"><form:input path="photoB64" value="${result.photoB64}" type="file" id="target"/></td>
+                                                <td rowspan="5"><img src="${result.photoB64}" id="preview"><form:input path="file" type="file" id="target"/></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 160px">會員暱稱：</th>
@@ -92,10 +93,15 @@
                                                     </jstl:otherwise>
                                                     </jstl:choose></td>
                                             </tr>
+                                            <tr>
+                                                <th scope="row" style="width: 160px"></th>
+                                                <td style=" text-align: left; "><button type="submit" class="btn btn-primary">送出修改</button></td>
+                                                <td><a href="#" class="link">修改密碼</a></td>
+                                            </tr>
                                             </tbody>
                                             </form:form>
                                         </table>
-                                        <a href="#" class="btn btn-primary">送出修改</a>
+
                                     </div>
                                 </div>
                             </div>
