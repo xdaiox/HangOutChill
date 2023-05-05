@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="${contextRoot}/css/stylecopy.css">
     <link rel="stylesheet" href="${contextRoot}/css/responsivecopy.css">
     <link rel="stylesheet" href="${contextRoot}/css/contentcopy.css">
+    
+<!--     test css -->
+    <link rel="stylesheet" href="${contextRoot}/css/shop/cartitem.css">
 <title>導覽列</title>
 </head>
 <body>
@@ -48,7 +51,12 @@
                 <div class="right-button">
                     <ul>
                         <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
-                        <li><a href="${contextRoot}/shop/shoppingCart"><i class="ti-btnshopcart"></i></a></li>
+                        <li><a href="${contextRoot}/shop/shoppingCart" class="site-cart">
+                        
+                         <span class="icon icon-shopping_cart"></span>
+                      	<span class="count">2</span>
+                        </a>
+                        </li>
                         <li><a class="btn-login" href="${contextRoot}/member/loginHome">登入</a></li>
                     </ul>
                 </div>
@@ -89,7 +97,7 @@
     <script src="${contextRoot}/js/popper.js"></script>
     <script src="${contextRoot}/js/bootstrap.min.js"></script>
     <script src="${contextRoot}/js/stellar.js"></script>
-<!--     <script src="vendors/popup/jquery.magnific-popup.min.js"></script> -->
+    <script src="vendors/popup/jquery.magnific-popup.min.js"></script>
     <script src="${contextRoot}/js/jquery.ajaxchimp.min.js"></script>
     <script src="${contextRoot}/js/waypoints.min.js"></script>
     <script src="${contextRoot}/js/mail-script.js"></script>
@@ -98,6 +106,6 @@
     <script src="${contextRoot}/js/jquery.validate.min.js"></script>
     <script src="${contextRoot}/js/mail-script.js"></script>
     <script src="${contextRoot}/js/theme.js"></script>
-    <script src="${contextRoot}/js/jquery-3.6.4.min.js"></script>
+<%--     <script src="${contextRoot}/js/jquery-3.6.4.min.js"></script> --%>
 </body>
 </html>
