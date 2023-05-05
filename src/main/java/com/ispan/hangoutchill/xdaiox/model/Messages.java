@@ -117,13 +117,13 @@ public class Messages {
 		this.floor = floor;
 	}
 
-	public NormalMember getNormalMmeber() {
-		return normalMmeber;
-	}
-
-	public void setNormalMmeber(NormalMember normalMmeber) {
-		this.normalMmeber = normalMmeber;
-	}
+//	public NormalMember getNormalMmeber() {
+//		return normalMmeber;
+//	}
+//
+//	public void setNormalMmeber(NormalMember normalMmeber) {
+//		this.normalMmeber = normalMmeber;
+//	}
 
 	public Discussions getDiscussions() {
 		return discussions;
