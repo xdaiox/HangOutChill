@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
 import com.ispan.hangoutchill.xdaiox.model.Messages;
-import com.ispan.hangoutchill.xdaiox.service.MessagesService;
 import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
+import com.ispan.hangoutchill.xdaiox.service.MessagesService;
 
 @Controller
 public class MessagesController {
@@ -49,6 +48,7 @@ public class MessagesController {
     
     @DeleteMapping("/message/deleteMessage/{id}/{m_id}")
     public String toDeleteButItsNotActuallyDeleteItsHiddenMessage(@PathVariable("id") Integer id,@PathVariable("m_id")Integer m_id) {
+    	System.out.println("==============================="+m_id+"================================");
     	mService.deleteMessageById(m_id);
     	return "redirect:/message/allMessages/{id}";
     }

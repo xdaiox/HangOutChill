@@ -66,10 +66,10 @@ public class MessagesService {
 	}
 	
 
-	@Transactional
-	public void hiddenMessage(Integer id) {
-		mssRepository.deleteById(id);
-	}
+//	@Transactional
+//	public void hiddenMessage(Integer id) {
+//		mssRepository.deleteById(id);
+//	}
 	
 //	public Discussions getLatest() {
 //		return dssRepository.findFirstByOrderByPostDateDesc();

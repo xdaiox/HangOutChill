@@ -63,8 +63,8 @@ public class Discussions {
 	@JoinColumn(name="fk_member_id", nullable = true, insertable = false, updatable = false)
 	private NormalMember normalMmeber;
 	
-    @OneToMany(mappedBy = "discussions",fetch=FetchType.EAGER,
-	cascade = {CascadeType.PERSIST},orphanRemoval = false)
+    @OneToMany(mappedBy = "discussions",fetch=FetchType.LAZY,
+	cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Messages> messages = new LinkedHashSet<>();
 	
 	public Discussions() {
