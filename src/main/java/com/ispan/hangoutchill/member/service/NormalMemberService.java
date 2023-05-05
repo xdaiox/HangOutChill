@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -96,7 +98,8 @@ public class NormalMemberService implements INormalMemberService {
         NormalMember normalMember = byId.get();
         return normalMember;
     }
-
+    //管理者修改會員資料actual
+    @Transactional
     public NormalMember updateActByIdForBack(Integer id, NormalMember updateM){
         Optional<NormalMember> byId = nMemberRepository.findById(id);
         if (byId.isPresent()){
@@ -109,6 +112,22 @@ public class NormalMemberService implements INormalMemberService {
             return normalMember;
         }
         return null;
+    }
+
+    //管理者更改會員權限
+    @Transactional
+    public NormalMember updateEnable(Integer id){
+        Optional<NormalMember> byId = nMemberRepository.findById(id);
+        NormalMember normalMember = byId.get();
+        System.out.println(id);
+        if (normalMember.isEnabled()){
+            normalMember.setEnabled(false);
+        }else {
+            normalMember.setEnabled(true);
+        }
+
+        nMemberRepository.save(normalMember);
+        return  normalMember;
     }
 }
 
