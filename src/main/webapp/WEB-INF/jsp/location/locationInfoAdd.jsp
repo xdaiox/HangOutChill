@@ -15,95 +15,140 @@
     <jsp:include page="../layout/navbar.jsp"/>
     <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
     <meta charset="UTF-8">
-    <title>發表文章</title>
-    <body>
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-3 mt-3">
-    <div class="table-responsive shadow-sm">
-        <h2>請輸入地點資料：</h2>
-        <form:form method="post" action="${contextRoot}/locationManager/addLocationInfo/post" modelAttribute="locationInfo"
-                   enctype="multipart/form-data">
-            <table class="table">
+    <title>新增地點</title>
+</head>
 
-                <tr>
-                    <td><span>*</span> <form:label path="locName">地點名稱 :</form:label></td>
-                    <td><form:input name="locName" id="locNmae" path="locName"/><span
-                            id="nerror" class="error"></span><span
-                            id="ncorrect" class="correct"></span></td>
-                </tr>
-                <tr>
-                    <td><span>*</span> <form:label path="locCat">地點分類 :</form:label></td>
-                    <td><form:select name="locCat" id="locCat" path="locCat">
-                        <form:option value="-1" label="請選擇..."/>
-                        <form:option value="分類1" label="分類1"/>
-                        <form:option value="分類2" label="分類1"/>
-                        <form:option value="分類3" label="分類1"/>
-                    </form:select><span id="catgerror" class="error"></span><span id="catgcorrect" class="correct"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span>*</span> <form:label path="locTag">地點標籤 :</form:label></td>
-                    <td>
-                        <form:checkbox path="locTag" value="標籤1" label="標籤1" />
-                        <form:checkbox path="locTag" value="標籤2" label="標籤2" />
-                        <form:checkbox path="locTag" value="標籤3" label="標籤3" />
-                        <form:checkbox path="locTag" value="標籤4" label="標籤4" />
-                        <form:checkbox path="locTag" value="標籤5" label="標籤5" />
-                    </td>
-                </tr>
-                <tr>
-                    <td><span>* </span><form:label path="locPriceLevel">消費水準:</form:label></td>
-                    <td>
-                        <form:radiobutton path="locPriceLevel" value="1" label="$" />
-                        <form:radiobutton path="locPriceLevel" value="2" label="$$" />
-                        <form:radiobutton path="locPriceLevel" value="3" label="$$$" />
-                        <form:radiobutton path="locPriceLevel" value="4" label="$$$$" />
-                        <form:radiobutton path="locPriceLevel" value="5" label="$$$$$" />
-                    </td>
-                </tr>
-                <tr>
-                    <td><span>* </span><form:label path="locDesc">地點簡介 :</form:label></td>
-                    <td><form:textarea type="text" name="locDesc" id="locDesc" cols="30" rows="10"
-                                       path="locDesc"/><span
-                            id="contenterror" class="error"></span><span
-                            id="contentcorrect" class="correct"></span></td>
-                </tr>
-                <tr>
-                    <td><span>*</span> <form:label path="locCity">地點城市 :</form:label></td>
-                    <td><form:input name="locCity" id="locCity" path="locCity"/><span
-                            id="nerror" class="error"></span><span
-                            id="ncorrect" class="correct"></span></td>
-                </tr>
-                <tr>
-                    <td><span>*</span> <form:label path="locDist">地點區域 :</form:label></td>
-                    <td><form:input name="locDist" id="locDist" path="locDist"/><span
-                            id="nerror" class="error"></span><span
-                            id="ncorrect" class="correct"></span></td>
-                </tr>
-                <tr>
-                    <td><span>*</span> <form:label path="locAdd">地點地址 :</form:label></td>
-                    <td><form:input name="locAdd" id="locAdd" path="locAdd"/><span
-                            id="nerror" class="error"></span><span
-                            id="ncorrect" class="correct"></span></td>
-                </tr>
-                <tr>
-                    <td><span>*</span> <form:label path="locTel">地點電話 :</form:label></td>
-                    <td><form:input name="locTel" id="locTel" path="locTel"/><span
-                            id="nerror" class="error"></span><span
-                            id="ncorrect" class="correct"></span></td>
-                </tr>
-                <tr>
-                    <td><span>*</span> <form:label path="locLink">網址連結 :</form:label></td>
-                    <td><form:input name="locLink" id="locLink" path="locLink"/><span
-                            id="nerror" class="error"></span><span
-                            id="ncorrect" class="correct"></span></td>
-                </tr>
-                <tr>
-                    <td><span>*</span> <form:label path="locOpt">營業時間 :</form:label></td>
+<body>
 
-                </tr>
-            </table>
-        </form:form>
+<div class="container content_view"
+     style="background-color: #ffffff00;">
+    <div class="content_box ">
+        <div class="content"
+             style="background-color: #ffffff00; height: 100%">
+            <div class="col-8" style="margin:auto">
+                <div class="card">
+                    <div class="card-header">新增地點</div>
+                    <div class="card-body">
+                        <form:form class="" modelAttribute="locationInfo" enctype="multipart/form-data" method="POST" action="${contextRoot}/location/locationManager/addPage/post">
+                            <p>地點名稱 : </p>
+                            <form:input path="locName" class="form-control" type="text"></form:input>
+                            <br>
+                            <p>地點分類 : </p>
+                            <form:select path="locCat" Class="form-control">
+                                <form:option value="-1" label="請選擇分類..."/>
+                                <form:option value="分類1" label="分類1"/>
+                                <form:option value="分類2" label="分類2"/>
+                                <form:option value="分類3" label="分類3"/>
+                            </form:select>
+
+<%--                            <p>地點標籤:</p>--%>
+<%--                            <form:checkbox path="locTag" name="locTag"/>--%>
+                            <br>
+                            <p>消費水準 : </p>
+                            <form:select path="locPriceLevel" Class="form-control">
+                                <form:option value="-1" label="請選擇分類..."/>
+                                <form:option value="1" label="$"/>
+                                <form:option value="2" label="$ $"/>
+                                <form:option value="3" label="$ $ $"/>
+                                <form:option value="3" label="$ $ $ $"/>
+                                <form:option value="3" label="$ $ $ $ $"/>
+                            </form:select>
+                            <br>
+                            <p>地點簡介 : </p>
+                            <form:textarea path="locDesc" class="form-control" style="height:200px;" ></form:textarea>
+                            <br>
+                            <p>城市 : </p>
+                            <form:input path="locCity" class="form-control" type="text"></form:input>
+                            <br>
+                            <p>區域 : </p>
+                            <form:input path="locDist" class="form-control" type="text"></form:input>
+                            <br>
+                            <p>地址 : </p>
+                            <form:input path="locAdd" class="form-control" type="text"></form:input>
+                            <br>
+                            <p>電話 : </p>
+                            <form:input path="locTel" class="form-control" type="text"></form:input>
+                            <br>
+                            <p>網址連結 : </p>
+                            <form:input path="locLink" class="form-control" type="text"></form:input>
+                            <br>
+                            <p>營業時間 : </p>
+                            <sapn>星期一 : </sapn>
+                            <span>開始</span>
+                            <form:input path="locationOperationTime.mondayOpen" type="time" ></form:input>
+                            <span>結束</span>
+                            <form:input path="locationOperationTime.mondayClose" type="time" ></form:input>
+                            <br>
+                            <sapn>星期二 : </sapn>
+                            <span>開始</span>
+                            <form:input path="locationOperationTime.tuesdayOpen" type="time" ></form:input>
+                            <span>結束</span>
+                            <form:input path="locationOperationTime.tuesdayClose" type="time" ></form:input>
+                            <br>
+                            <sapn>星期三 : </sapn>
+                            <span>開始</span>
+                            <form:input path="locationOperationTime.wednesdayOpen" type="time" ></form:input>
+                            <span>結束</span>
+                            <form:input path="locationOperationTime.wednesdayClose" type="time" ></form:input>
+                            <br>
+                            <sapn>星期四 : </sapn>
+                            <span>開始</span>
+                            <form:input path="locationOperationTime.thursdayOpen" type="time" ></form:input>
+                            <span>結束</span>
+                            <form:input path="locationOperationTime.thursdayClose" type="time" ></form:input>
+                            <br>
+                            <sapn>星期五 : </sapn>
+                            <span>開始</span>
+                            <form:input path="locationOperationTime.fridayOpen" type="time" ></form:input>
+                            <span>結束</span>
+                            <form:input path="locationOperationTime.fridayClose" type="time" ></form:input>
+                            <br>
+                            <sapn>星期六 : </sapn>
+                            <span>開始</span>
+                            <form:input path="locationOperationTime.saturdayOpen" type="time" ></form:input>
+                            <span>結束</span>
+                            <form:input path="locationOperationTime.saturdayClose" type="time" ></form:input>
+                            <br>
+                            <sapn>星期日 : </sapn>
+                            <span>開始</span>
+                            <form:input path="locationOperationTime.sundayOpen" type="time" ></form:input>
+                            <span>結束</span>
+                            <form:input path="locationOperationTime.sundayClose" type="time" ></form:input>
+                            <br>
+                            <br>
+                            <p>上傳圖片 : </p>
+                            <span>封面照片 :</span>
+                            <form:input path="locationImage.imagCover" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <span>相簿照片1 :</span>
+                            <form:input path="locationImage.imagG1" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <span>相簿照片2 :</span>
+                            <form:input path="locationImage.imagG2" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <span>相簿照片3 :</span>
+                            <form:input path="locationImage.imagG3" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <span>相簿照片4 :</span>
+                            <form:input path="locationImage.imagG4" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <span>相簿照片5 :</span>
+                            <form:input path="locationImage.imagG5" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <span>相簿照片6 :</span>
+                            <form:input path="locationImage.imagG6" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <span>相簿照片7 :</span>
+                            <form:input path="locationImage.imagG7" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <span>相簿照片8 :</span>
+                            <form:input path="locationImage.imagG8" class="form-control" type="file" accept="image/png, image/jpeg" />
+
+
+
+
+                            <br><button type="submit" class="btn btn-primary">送出</button>
+                        </form:form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</main>
+</div>
+<jsp:include page="../layout/footer.jsp" />
+
+
 </body>
 </html>

@@ -15,14 +15,17 @@
     <title>精選地點</title>
 </head>
 <body>
+    <div class="container">
+        <div class="row" style="margin: auto">
+            <div class="col-1"></div>
+            <div class="col-lg-3 col-md-12 col-sm-12">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem maxime nemo saepe vero debitis corrupti quos laborum facere aperiam voluptatibus. Explicabo cumque commodi ea a aliquam! Suscipit placeat facilis qui.</div>
+            <div class="col-lg-7 col-md-6 col-sm-12">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, id. Omnis nobis praesentium eveniet, atque, esse quos qui unde neque laboriosam libero mollitia ducimus exercitationem asperiores excepturi temporibus aliquid nihil.</div>
+            <div class="col-1"></div>
+        </div>
 
-<section>
-    <div>
-        test
-    </div>
-
-</section>
 
 
+
+<jsp:include page="../layout/footer.jsp" />
 </body>
 </html>
