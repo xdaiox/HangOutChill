@@ -57,10 +57,11 @@ public class ShoppingCartController {
 		String name = authentication.getName();
 		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
 		List<Integer> productItems = shoppingCartService.findMemberCartProductIds(currentmember.getId());
-//		List<Integer> productItems = shoppingCartService.findMemberCartProductIds(52);
-//		NormalMember currentmember = nMemberService.findNormalMemberById(52);
+//		List<Integer> productItems = shoppingCartService.findMemberCartProductIds(18);
+//		NormalMember currentmember = nMemberService.findNormalMemberById(18);
 		
 		Integer productId = requestData.get("productid");
+		System.out.println(productId);
 		Integer amount = requestData.get("amount");
 		
 		// 判斷購物車是否有該項商品
@@ -75,11 +76,6 @@ public class ShoppingCartController {
 		
 		newAdded.setMember(currentmember);
 		newAdded.setProduct(currentProduct);
-//		if(amount != null) {
-//			newAdded.setAmount(amount);
-//		}else {
-//			newAdded.setAmount(1);
-//		}
 		newAdded.setAmount(amount);
 		
 		shoppingCartService.addShoppingCartItem(newAdded);

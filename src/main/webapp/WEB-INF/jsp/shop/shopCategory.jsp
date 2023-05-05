@@ -115,7 +115,7 @@
                     contentType: "application/json;charset=UTF-8",
                     datatype: 'json',
                     data: JSON.stringify({
-                        'productId':productId,
+                        'productid':productId,
                         'amount' : amount
                     }),
                     success: function(result){
