@@ -280,7 +280,7 @@
 																	type="submit">編輯</button></a>
 
 															<form
-																action="${contextRoot}/message/deleteMessage/${message.dm_id}"
+																action="${contextRoot}/message/deleteMessage/${discussion.d_id}/${message.dm_id}"
 																method="post">
 																<input type="hidden" name="_method" value="delete">
 																<button class="btn btn-primary danger"

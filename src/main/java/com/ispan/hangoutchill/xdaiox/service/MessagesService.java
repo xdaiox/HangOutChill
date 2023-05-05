@@ -10,7 +10,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ispan.hangoutchill.xdaiox.dao.DiscussionsRepository;
 import com.ispan.hangoutchill.xdaiox.dao.MessagesRepository;
+import com.ispan.hangoutchill.xdaiox.model.Discussions;
 import com.ispan.hangoutchill.xdaiox.model.Messages;
 
 
@@ -19,6 +21,9 @@ public class MessagesService {
 
 	@Autowired
 	private MessagesRepository mssRepository;
+	
+	@Autowired
+	private DiscussionsRepository dssRepository;
 	
 	public void addMessage(Messages mss) {
 		mssRepository.save(mss);
@@ -41,9 +46,10 @@ public class MessagesService {
 		mssRepository.deleteById(id);
 	}
 	
-	public Page<Messages> findMessageByPage(Integer pageNumber){
-		Pageable pgb =PageRequest.of(pageNumber-1, 5, Sort.Direction.DESC, "postDate");
-		Page<Messages> page = mssRepository.findAll(pgb);
+	public Page<Messages> findMessageByPage(Integer pageNumber,Integer d_id){
+		Pageable pgb =PageRequest.of(pageNumber-1, 5, Sort.Direction.ASC, "postDate");
+		Discussions id = dssRepository.findById(d_id).orElse(null);
+		Page<Messages> page = mssRepository.findContentsByDiscussions(id,pgb);
 		return page;
 	}
 	

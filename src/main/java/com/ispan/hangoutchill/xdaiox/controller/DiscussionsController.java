@@ -71,12 +71,7 @@ public class DiscussionsController {
     
    
     
-    
-//    @PutMapping("/discussion/replyDiscussion")
-//    public String putEditedDiscussion(@ModelAttribute("discussion") Discussions dss) {
-//    	dService.updateById(dss.getD_id(),dss.getTitle(),dss.getType(),dss.getContents());
-//    	return "redirect:/discussion/allDiscussion";
-//    }
+   
 //    
 //    
 //    
