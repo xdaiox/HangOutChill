@@ -10,9 +10,10 @@
 <head>
 <meta charset="UTF-8">
 <title>個人活動管理</title>
+	<jsp:include page="../layout/navbar.jsp" />
+	
 </head>
 <body>
-	<jsp:include page="../layout/navbar.jsp" />
 	<div class="container content_view" style="background-color: #ffffff00">
 		<div class="content_box" style="width: 100%">
 			<div class="content"

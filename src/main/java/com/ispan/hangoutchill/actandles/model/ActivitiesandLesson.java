@@ -49,7 +49,7 @@ public class ActivitiesandLesson {
 	@Column(name="name",columnDefinition = "nvarchar(50)",nullable = false )
 	private String name;
 	
-	@Column(name="aalContent",columnDefinition = "nvarchar(50)")
+	@Column(name="aalContent",columnDefinition = "nvarchar(max)")
 	private String aalContent;
 	
 	@Column(name="topic",columnDefinition = "nvarchar(50)",nullable = false)
