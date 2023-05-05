@@ -14,7 +14,7 @@ public class LocationImage {
     private Integer locImgId;
 
     @Column(name = "location_image_cover",columnDefinition = "varbinary(max)")
-    private byte[] locImgMain;
+    private byte[] locImgCover;
 
     @Column(name = "location_image_gallery_1",columnDefinition = "varbinary(max)")
     private byte[] locImgGallery_1;
@@ -47,7 +47,23 @@ public class LocationImage {
 
 
     @Transient
-    private MultipartFile imageFile;
+    private MultipartFile imagCover;
+    @Transient
+    private MultipartFile imagG1;
+    @Transient
+    private MultipartFile imagG2;
+    @Transient
+    private MultipartFile imagG3;
+    @Transient
+    private MultipartFile imagG4;
+    @Transient
+    private MultipartFile imagG5;
+    @Transient
+    private MultipartFile imagG6;
+    @Transient
+    private MultipartFile imagG7;
+    @Transient
+    private MultipartFile imagG8;
 
 
 
@@ -62,12 +78,12 @@ public class LocationImage {
         this.locImgId = locImgId;
     }
 
-    public byte[] getLocImgMain() {
-        return locImgMain;
+    public byte[] getLocImgCover() {
+        return locImgCover;
     }
 
-    public void setLocImgMain(byte[] locImgMain) {
-        this.locImgMain = locImgMain;
+    public void setLocImgCover(byte[] locImgCover) {
+        this.locImgCover = locImgCover;
     }
 
     public byte[] getLocImgGallery_1() {
@@ -134,11 +150,76 @@ public class LocationImage {
         this.locImgGallery_8 = locImgGallery_8;
     }
 
-    public MultipartFile getImageFile() {
-        return imageFile;
+    public MultipartFile getImagCover() {
+        return imagCover;
     }
 
-    public void setImageFile(MultipartFile imageFile) {
-        this.imageFile = imageFile;
+    public void setImagCover(MultipartFile imagCover) {
+        this.imagCover = imagCover;
     }
+
+    public MultipartFile getImagG1() {
+        return imagG1;
+    }
+
+    public void setImagG1(MultipartFile imagG1) {
+        this.imagG1 = imagG1;
+    }
+
+    public MultipartFile getImagG2() {
+        return imagG2;
+    }
+
+    public void setImagG2(MultipartFile imagG2) {
+        this.imagG2 = imagG2;
+    }
+
+    public MultipartFile getImagG3() {
+        return imagG3;
+    }
+
+    public void setImagG3(MultipartFile imagG3) {
+        this.imagG3 = imagG3;
+    }
+
+    public MultipartFile getImagG4() {
+        return imagG4;
+    }
+
+    public void setImagG4(MultipartFile imagG4) {
+        this.imagG4 = imagG4;
+    }
+
+    public MultipartFile getImagG5() {
+        return imagG5;
+    }
+
+    public void setImagG5(MultipartFile imagG5) {
+        this.imagG5 = imagG5;
+    }
+
+    public MultipartFile getImagG6() {
+        return imagG6;
+    }
+
+    public void setImagG6(MultipartFile imagG6) {
+        this.imagG6 = imagG6;
+    }
+
+    public MultipartFile getImagG7() {
+        return imagG7;
+    }
+
+    public void setImagG7(MultipartFile imagG7) {
+        this.imagG7 = imagG7;
+    }
+
+    public MultipartFile getImagG8() {
+        return imagG8;
+    }
+
+    public void setImagG8(MultipartFile imagG8) {
+        this.imagG8 = imagG8;
+    }
+
 }

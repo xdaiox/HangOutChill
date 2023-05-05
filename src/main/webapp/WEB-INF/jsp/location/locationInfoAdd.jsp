@@ -118,23 +118,23 @@
                             <br>
                             <p>上傳圖片 : </p>
                             <span>封面照片 :</span>
-                            <form:input path="locationImage.locImgMain" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <form:input path="locationImage.imagCover" class="form-control" type="file" accept="image/png, image/jpeg" />
                             <span>相簿照片1 :</span>
-                            <form:input path="locationImage.locImgGallery_1" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <form:input path="locationImage.imagG1" class="form-control" type="file" accept="image/png, image/jpeg" />
                             <span>相簿照片2 :</span>
-                            <form:input path="locationImage.locImgGallery_2" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <form:input path="locationImage.imagG2" class="form-control" type="file" accept="image/png, image/jpeg" />
                             <span>相簿照片3 :</span>
-                            <form:input path="locationImage.locImgGallery_3" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <form:input path="locationImage.imagG3" class="form-control" type="file" accept="image/png, image/jpeg" />
                             <span>相簿照片4 :</span>
-                            <form:input path="locationImage.locImgGallery_4" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <form:input path="locationImage.imagG4" class="form-control" type="file" accept="image/png, image/jpeg" />
                             <span>相簿照片5 :</span>
-                            <form:input path="locationImage.locImgGallery_5" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <form:input path="locationImage.imagG5" class="form-control" type="file" accept="image/png, image/jpeg" />
                             <span>相簿照片6 :</span>
-                            <form:input path="locationImage.locImgGallery_6" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <form:input path="locationImage.imagG6" class="form-control" type="file" accept="image/png, image/jpeg" />
                             <span>相簿照片7 :</span>
-                            <form:input path="locationImage.locImgGallery_7" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <form:input path="locationImage.imagG7" class="form-control" type="file" accept="image/png, image/jpeg" />
                             <span>相簿照片8 :</span>
-                            <form:input path="locationImage.locImgGallery_8" class="form-control" type="file" accept="image/png, image/jpeg" />
+                            <form:input path="locationImage.imagG8" class="form-control" type="file" accept="image/png, image/jpeg" />
 
 
 

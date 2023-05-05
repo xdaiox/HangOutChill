@@ -55,26 +55,37 @@ public class LocationInfoController {
     }
 
     //新增LocationInfo動作    等待上傳圖片處理
+//    @PostMapping("/location/locationManager/addPage/post")
+//    public String postAddLocationInfo(@ModelAttribute("locationInfo") LocationInfo locationInfo, Model model)  {
+//        locationInfoService.addLocationInfo(locationInfo);
+//        model.addAttribute("locationInfo", new LocationInfo());
+//        return "redirect:/location/locationManager";
+//    }
+
     @PostMapping("/location/locationManager/addPage/post")
     public String postAddLocationInfo(@ModelAttribute("locationInfo") LocationInfo locationInfo, Model model)  {
 
-//        LocationImage locationImage = new LocationImage();
-//        locationImage.setLocImgMain(imageFile.getBytes());
-//        locationImage.setLocImgGallery_1(imageFile.getBytes());
-//        locationImage.setLocImgGallery_2(imageFile.getBytes());
-//        locationImage.setLocImgGallery_3(imageFile.getBytes());
-//        locationImage.setLocImgGallery_4(imageFile.getBytes());
-//        locationImage.setLocImgGallery_5(imageFile.getBytes());
-//        locationImage.setLocImgGallery_6(imageFile.getBytes());
-//        locationImage.setLocImgGallery_7(imageFile.getBytes());
-//        locationImage.setLocImgGallery_8(imageFile.getBytes());
+        //處理圖片
+        locationInfoService.handleLocationImagCover(locationInfo);
+        locationInfoService.handleLocationImagG1(locationInfo);
+        locationInfoService.handleLocationImagG2(locationInfo);
+        locationInfoService.handleLocationImagG3(locationInfo);
+        locationInfoService.handleLocationImagG4(locationInfo);
+        locationInfoService.handleLocationImagG5(locationInfo);
+        locationInfoService.handleLocationImagG6(locationInfo);
+        locationInfoService.handleLocationImagG7(locationInfo);
+        locationInfoService.handleLocationImagG8(locationInfo);
 
-//        locationInfo.setLocationImage(locationImage);
 
         locationInfoService.addLocationInfo(locationInfo);
         model.addAttribute("locationInfo", new LocationInfo());
         return "redirect:/location/locationManager";
     }
+
+
+
+
+
 
     //刪除LocationInfo BY ID
     @DeleteMapping("/location/locationManager/delete")
@@ -99,15 +110,12 @@ public class LocationInfoController {
         return "redirect:/location/locationManager";
     }
 
+    //    ========================Admin LocationInfoManager 地點資ㄙ料管理(後台)===============================
     //搜索BY locName
-//    @GetMapping("/location/locationManager/findByName")
-//    public String findLocationInfoByLocName(@RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber,Model model){
-//
-//    }
-
-    @GetMapping("/location/locationManager/findByName")
+    @ResponseBody
+    @GetMapping("/location/locationManager/findByNameLike")
     public List<LocationInfo> findLocationInfoByLocName(@RequestParam("locName") String locName){
-        return locationInfoRepository.findLocationInfoByLocName(locName);
+        return locationInfoRepository.findLocationInfoByLocNameLike(locName);
     }
 
 
