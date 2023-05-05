@@ -162,7 +162,9 @@ body {
 	margin-left: 15px;
 }
 </style>
-
+<!-- ================================== ck editor ================================== -->
+<script src="${contextRoot}/js/ckeditor/ckeditor.js"></script>
+<!-- ================================== ck editor ================================== -->
 </head>
 <div class="container">
 	<div class="main-body p-0">
@@ -174,7 +176,7 @@ body {
 							<h5 class="card-title text-center">修改文章</h5>
 						</div>
 						<div class="card-body">
-							<form:form modelAttribute="discussion" method="put" action="${contextRoot}/discussion/editDiscussion">
+							<form:form modelAttribute="discussion" method="put" action="${contextRoot}/discussion/editDiscussion/${discussion.d_id}">
 								<div class="form-group">
 								<form:input path="d_id" type="hidden"></form:input>
 								</div>
@@ -194,8 +196,12 @@ body {
 								</div>
 								<div class="form-group">
 									<label for="content">内容</label>
-									<form:textarea path="contents" class="form-control" id="content" rows="5"
-										placeholder="輸入内容" ></form:textarea>
+									<!-- ================================== ck editor ================================== -->
+									<form:textarea path="contents" id="editor" name="content" placeholder="請在這裡填寫內容"></form:textarea>
+									<!-- ================================== ck editor ================================== -->
+									
+									<!-- <form:textarea path="contents" class="form-control" id="content" rows="5"
+										placeholder="輸入内容" ></form:textarea> -->
 								</div>
 								<button type="submit" class="btn btn-primary">發表</button>
 							</form:form>
@@ -210,4 +216,26 @@ body {
 		</div>
 	</div>
 </div>
+
+<!-- ================================== ck editor ================================== -->
+<script>
+CKEDITOR.replace("editor");
+	// ClassicEditor
+    // .create( document.querySelector( '#editor' ), {
+    //     plugins: [ Essentials, Paragraph, Bold, Italic ],
+    //     toolbar: [ 'bold', 'italic' ]
+    // } )
+    // .then( editor => {
+    //     console.log( 'Editor was initialized', editor );
+    // } )
+    // .catch( error => {
+    //     console.error( error.stack );
+    // } );
+	ClassicEditor.create( document.querySelector( '#editor' ), {
+    plugins: [ Essentials, Paragraph, Bold, Italic ],
+    toolbar: [ 'bold', 'italic' ]
+} )
+</script>
+<!-- ================================== ck editor ================================== -->
+
 </html>

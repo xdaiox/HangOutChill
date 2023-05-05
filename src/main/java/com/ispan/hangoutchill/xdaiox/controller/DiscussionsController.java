@@ -2,7 +2,6 @@ package com.ispan.hangoutchill.xdaiox.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
 import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
 
@@ -60,10 +57,10 @@ public class DiscussionsController {
         return "discussion/editDiscussionPage";
     }
     
-    @PutMapping("/discussion/editDiscussion")
-    public String toEditedDiscussion(@ModelAttribute("discussion") Discussions dss) {
+    @PutMapping("/discussion/editDiscussion/{id}")
+    public String toEditedDiscussion(@ModelAttribute("discussion") Discussions dss,@PathVariable("id") Integer id) {
     	dService.updateById(dss.getD_id(),dss.getTitle(),dss.getType(),dss.getContents());
-    	return "redirect:/discussion/allDiscussion";
+    	return "redirect:/message/allMessages/{id}";
     }
     
     @DeleteMapping("/discussion/deleteDiscussion/{id}")
@@ -72,12 +69,9 @@ public class DiscussionsController {
     	return "redirect:/discussion/allDiscussion";
     }
     
+   
     
-//    @PutMapping("/discussion/replyDiscussion")
-//    public String putEditedDiscussion(@ModelAttribute("discussion") Discussions dss) {
-//    	dService.updateById(dss.getD_id(),dss.getTitle(),dss.getType(),dss.getContents());
-//    	return "redirect:/discussion/allDiscussion";
-//    }
+   
 //    
 //    
 //    

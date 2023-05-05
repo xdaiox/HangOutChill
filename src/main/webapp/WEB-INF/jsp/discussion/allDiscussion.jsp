@@ -260,26 +260,29 @@ body {
 										src="https://bootdey.com/img/Content/avatar/avatar1.png"
 										class="mr-3 rounded-circle" width="50" alt="User" /></a>
 									<div class="media-body">
-										<h6>
-											<a href="#" data-toggle="collapse"
-												data-target=".forum-content" class="text-body">${discussion.title}</a>
-										</h6>
-										<p class="text-secondary">${discussion.contents}</p>
+										
+										<div class="text-body" onclick="window.location.href='${contextRoot}/message/allMessages/${discussion.d_id}'">	
+										
+											<a href="#" data-toggle="collapse" ata-target=".forum-content" class="text-body">
+												<h3>${discussion.title}</h3>
+												<p class="text-secondary">${discussion.contents}</p>
+											</a>
+										</div>
 										<p class="text-muted">
-											<a href="javascript:void(0)">drewdan</a> posted <span
+											<h5>Author:
+											<a href="#">${discussion.normalMmeber.nickName}</a> posted </h5><span
 												class="text-secondary font-weight-bold"><fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss" value="${discussion.postDate}"/></span>
 										</p>
 									</div>
-									<a href="${contextRoot}/discussion/replyDiscussion"><button class="btn btn-primary" type="submit">回覆
+									<!-- <a href="${contextRoot}/discussion/replyDiscussion"><button class="btn btn-primary" type="submit">回覆
 									</button></a>
-									<!-- <a href="${contextRoot}/discussion/editDiscussion?id=${discussion.d_id}" class="btn btn-primary">修改
-									</button></a> -->
+
 									<a href="${contextRoot}/discussion/editDiscussion/${discussion.d_id}"><button class="btn btn-primary" type="submit">編輯</button></a>
 
 									<form action="${contextRoot}/discussion/deleteDiscussion/${discussion.d_id}" method="post">
 										<input type="hidden"name="_method" value="delete">
 										<button class="btn btn-primary danger" type="submit">刪除</button>
-									</form>
+									</form> -->
 									
 									<div class="text-muted small text-center align-self-center">
 										<span class="d-none d-sm-inline-block"><i

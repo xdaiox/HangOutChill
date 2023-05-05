@@ -1,10 +1,14 @@
 package com.ispan.hangoutchill.xdaiox.model;
 
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.ispan.hangoutchill.member.model.NormalMember;
 
 @Entity
 @Table(name="discussion")
@@ -30,7 +34,7 @@ public class Discussions {
 	private String readCount;
 	@Column(name="shareCount")
 	private String shareCount;
-
+	
 	@Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     @Column(name="postDate")
@@ -55,10 +59,31 @@ public class Discussions {
 	
 	
 	
-//	@OneToMany
-//	@JoinColumn(name="fk_member_id", nullable = false)
+	@ManyToOne
+	@JoinColumn(name="fk_member_id", nullable = true, insertable = false, updatable = false)
+	private NormalMember normalMmeber;
+	
+    @OneToMany(mappedBy = "discussions",fetch=FetchType.EAGER,
+	cascade = {CascadeType.PERSIST},orphanRemoval = false)
+    private Set<Messages> messages = new LinkedHashSet<>();
+	
+	public Discussions() {
+	}
 	
 	
+	
+	public NormalMember getNormalMmeber() {
+		return normalMmeber;
+	}
+
+
+
+	public void setNormalMmeber(NormalMember normalMmeber) {
+		this.normalMmeber = normalMmeber;
+	}
+
+
+
 	public Integer getD_id() {
 		return d_id;
 	}
@@ -215,7 +240,6 @@ public class Discussions {
 
 
 
-	public Discussions() {
-	}
+
 
 }

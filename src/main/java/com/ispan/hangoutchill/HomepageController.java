@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
-import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
+import com.ispan.hangoutchill.xdaiox.service.MessagesService;
 
 import java.lang.reflect.Member;
 
