@@ -1,7 +1,7 @@
 package com.ispan.hangoutchill.member.listener;
 
 import com.ispan.hangoutchill.member.model.NormalMember;
-import com.ispan.hangoutchill.member.registration.OnRegistrationCompleteEvent;
+import com.ispan.hangoutchill.member.event.OnRegistrationCompleteEvent;
 import com.ispan.hangoutchill.member.service.INormalMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
