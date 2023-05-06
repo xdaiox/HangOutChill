@@ -33,4 +33,8 @@ public class ShoppingCartService {
 		shoppingCartRepository.save(cartItem);
 	}
 	
+	public Integer findCartItemsNum(Integer memberId) {
+		return shoppingCartRepository.findProductNumInCart(memberId);
+	}
+	
 }

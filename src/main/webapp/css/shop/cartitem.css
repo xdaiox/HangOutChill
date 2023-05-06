@@ -53,7 +53,7 @@ ul li a.site-cart .count {
   position: absolute;
   top: 0;
   right: 0;
-  margin-right: -15px;
+  margin-right: -20px;
   margin-top: -20px;
   font-size: 13px;
   width: 24px;
@@ -62,7 +62,7 @@ ul li a.site-cart .count {
   border-radius: 50%;
   display: block;
   text-align: center;
-  background: #7971ea;
+  background: #a481c0;
   color: #fff;
   -webkit-transition: .2s all ease-in-out;
   -o-transition: .2s all ease-in-out;

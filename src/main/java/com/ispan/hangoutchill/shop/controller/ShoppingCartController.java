@@ -1,7 +1,9 @@
 package com.ispan.hangoutchill.shop.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -44,9 +46,22 @@ public class ShoppingCartController {
 	public String goShoppingCartPage(@CurrentSecurityContext(expression = "authentication") Authentication authentication, Model model) {
 		String name = authentication.getName();
 		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
-		model.addAttribute("shoppingCartItems", currentmember.getShoppingCart());
+		Set<ShoppingCart> cartItems = currentmember.getShoppingCart();
+		List<ShoppingCart> carItemsList = new ArrayList<>(cartItems);
+		model.addAttribute("shoppingCartItems", carItemsList);
 		return "shop/shoppingCart";
 	}
+	
+	@ResponseBody
+	@GetMapping("/shop/get/shoppingCartItemNum")
+	public Integer getCartItemNums(@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
+		String name = authentication.getName();
+		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
+		return shoppingCartService.findCartItemsNum(currentmember.getId());
+	}
+	
+	
+	
 	
 	
 	@ResponseBody

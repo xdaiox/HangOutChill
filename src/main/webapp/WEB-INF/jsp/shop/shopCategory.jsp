@@ -34,6 +34,7 @@
                             <div class="row">
 
                                 <!-- 			商品陳列迴圈開始 -->
+                               	
                                 <c:forEach var="product" items="${cateProducts}">
                                     <div class="col-md-6 col-lg-3">
                                         <div class="single-category">
@@ -42,7 +43,7 @@
                                                     href="/hangoutchill/shop/productdetail?productid=${product.productId}">
                                                     <img class="img-fluid"
                                                         src='<c:url value="/shop/getPicture/${product.productId}" />'
-                                                        alt="">
+                                                        alt="" style="width:95%; height:auto">
                                                 </a>
                                             </div>
                                             <!-- Style 更改 -->
@@ -107,6 +108,33 @@
                     <%-- <script src="${contextRoot}/js/theme.js"></script> --%>
                         <script>
                             $(document).ready(function () {
+                            	
+                            	// 購物車上的小圖示
+                            	$.ajax({
+                                    url: 'http://localhost:8080/hangoutchill/shop/get/shoppingCartItemNum',
+                                    type: 'GET',
+                                    contentType: "application/json;charset=UTF-8",
+                                    datatype: 'json',
+                                    success: function (result) {
+                                        console.log(result);
+                                     	if(result == 0){
+                                     		$('.count').hide();
+                                     	}else{
+                                        $('.count').text(result);
+                                     	}
+                                     	
+                                    },
+                                    error: function (err) {
+                                        console.log(err);
+                                        $('.count').hide();
+                                    }
+                                })
+                            	
+                            	
+                            	
+                            	
+                            	// 點擊新增購物車
+                            	
                                 $('.submitBtn').click(function (event) {
                                     console.log(this.value);
                                     event.preventDefault();
@@ -124,15 +152,44 @@
                                         success: function (result) {
                                             console.log(result);
                                             alert(result);
+                                            
+                                            // 同步更新購物車按鈕
+                                            $.ajax({
+                                                url: 'http://localhost:8080/hangoutchill/shop/get/shoppingCartItemNum',
+                                                type: 'GET',
+                                                contentType: "application/json;charset=UTF-8",
+                                                datatype: 'json',
+                                                success: function (result) {
+                                                    console.log(result);
+                                                    if(result == 0){
+                                                 		$('.count').hide();
+                                                 	}else{
+                                                    $('.count').text(result);
+                                                 	}
+                                                },
+                                                error: function (err) {
+                                                    console.log(err);
+                                                    $('.count').hide();
+                                                }
+                                            })
+                                            
+                                            // 同步更新購物車按鈕結束
+                                            
+                                            
+                                            
                                         },
                                         error: function (err) {
                                             console.log(err);
                                             alert(err);
                                         }
-                                    })
+                                    });
+                                    
 
                                 })
                             })
+                        </script>
+                        <script>
+                        	
                         </script>
                         <script src="${contextRoot}/js/popper.js"></script>
                         <script src="${contextRoot}/js/bootstrap.min.js"></script>

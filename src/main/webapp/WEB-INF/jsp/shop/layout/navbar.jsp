@@ -53,8 +53,8 @@
                         <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
                         <li><a href="${contextRoot}/shop/shoppingCart" class="site-cart">
                         
-                         <span class="icon icon-shopping_cart"></span>
-                      	<span class="count">2</span>
+                         <i class="ti-btnshopcart"></i>
+                      		<span class="count"></span>
                         </a>
                         </li>
                         <li><a class="btn-login" href="${contextRoot}/member/loginHome">登入</a></li>
