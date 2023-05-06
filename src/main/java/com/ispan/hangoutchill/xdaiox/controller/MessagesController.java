@@ -48,7 +48,6 @@ public class MessagesController {
     
     @DeleteMapping("/message/deleteMessage/{id}/{m_id}")
     public String toDeleteButItsNotActuallyDeleteItsHiddenMessage(@PathVariable("id") Integer id,@PathVariable("m_id")Integer m_id) {
-    	System.out.println("==============================="+m_id+"================================");
     	mService.deleteMessageById(m_id);
     	return "redirect:/message/allMessages/{id}";
     }

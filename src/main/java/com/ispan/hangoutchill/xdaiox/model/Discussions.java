@@ -67,6 +67,11 @@ public class Discussions {
 	cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Messages> messages = new LinkedHashSet<>();
 	
+    @OneToMany(mappedBy = "fkImgDiscussions",fetch=FetchType.LAZY,
+	cascade = {CascadeType.PERSIST},orphanRemoval = true)
+    private Set<Images> images = new LinkedHashSet<>();
+	
+    
 	public Discussions() {
 	}
 	

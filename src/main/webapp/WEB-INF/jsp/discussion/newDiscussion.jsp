@@ -163,7 +163,8 @@ body {
 }
 </style>
 					<!-- ================================== ck editor ================================== -->
-					<script src="${contextRoot}/js/ckeditor/ckeditor.js"></script>
+					<!-- <script src="${contextRoot}/js/ckeditor/ckeditor.js"></script> -->
+					<script src="${contextRoot}/js/ckeditor5-build-classic/ckeditor.js"></script>
 					<!-- ================================== ck editor ================================== -->
 </head>
 <div class="container">
@@ -178,8 +179,8 @@ body {
 						<div class="card-body">
 							<form:form modelAttribute="discussion" method="post" action="${contextRoot}/discussion/post">
 								<div class="form-group">
-									<label for="title">標題</label> <form:input path="title" type="text"
-										class="form-control" id="title" placeholder="輸入標題"></form:input>
+									<label for="title">標題</label> <form:input id="titleInput" path="title" type="text"
+										class="form-control" placeholder="輸入標題"></form:input>
 								</div>
 								<div class="form-group">
 									<label for="category">分類</label> <form:select path="type" class="form-control"
@@ -213,11 +214,81 @@ body {
 
 <!-- ================================== ck editor ================================== -->
 <script>
-	CKEDITOR.replace("editor");
-	ClassicEditor.create( document.querySelector( '#editor' ), {
-    plugins: [ Essentials, Paragraph, Bold, Italic ],
-    toolbar: [ 'bold', 'italic' ]
-} )
+    // ClassicEditor
+    //     .create(document.querySelector('#editor'))
+    //     .then(editor => {
+    //         console.log(editor);
+    //     })
+    //     .catch(error => {
+    //         console.error(error);
+    //     });
+
+ClassicEditor
+.create(document.querySelector('#editor'), {
+    extraPlugins: [CustomUploadAdapterPlugin],
+
+
+    customUploadAdapter: {
+        uploadUrl: '${contextRoot}/upload/image'
+    }
+})
+.then(editor => {
+    console.log(editor);
+})
+.catch(error => {
+    console.error(error);
+});
+
+function CustomUploadAdapterPlugin(editor) {
+editor.plugins.get('FileRepository').createUploadAdapter = loader => {
+    return new CustomUploadAdapter(loader, editor.config.get('customUploadAdapter.uploadUrl'));
+};
+}
+
+
+
+
+
+class CustomUploadAdapter {
+    constructor(loader, uploadUrl) {
+        this.loader = loader;
+        this.uploadUrl = uploadUrl;
+    }
+
+    upload() {
+        return this.loader.file
+            .then(file => new Promise((resolve, reject) => {
+                this._uploadFile(file).then(response => {
+                    if (response.url) {
+                        resolve({ default: response.url });
+                    } else {
+                        reject(`Upload failed: ${response.message}`);
+                    }
+                });
+            }));
+    }
+
+    _uploadFile(file) {
+        const data = new FormData();
+
+		const title = document.getElementById('titleInput').value;
+    	const content = document.getElementById('editor').value;
+
+        data.append('file', file);
+		 // 在這裡添加 data 參數
+		data.append('data', JSON.stringify({ title: title , content: content }));
+    
+        return fetch(this.uploadUrl, {
+            method: 'POST',
+            body: data
+        })
+            .then(response => response.json())
+            .catch(error => {
+                console.error('Upload error:', error);
+                throw error;
+            });
+    }
+}
 </script>
 <!-- ================================== ck editor ================================== -->
 </html>
