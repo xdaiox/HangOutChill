@@ -1,4 +1,4 @@
-package com.ispan.hangoutchill.member.registration;
+package com.ispan.hangoutchill.member.event;
 
 import com.ispan.hangoutchill.member.model.NormalMember;
 import org.springframework.context.ApplicationEvent;

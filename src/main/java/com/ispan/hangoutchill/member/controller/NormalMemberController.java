@@ -1,10 +1,11 @@
 package com.ispan.hangoutchill.member.controller;
 
 import com.ispan.hangoutchill.member.UserDetailServiceImpl;
+import com.ispan.hangoutchill.member.event.OnForgotPassWord;
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.model.Role;
 import com.ispan.hangoutchill.member.model.SecuredToken;
-import com.ispan.hangoutchill.member.registration.OnRegistrationCompleteEvent;
+import com.ispan.hangoutchill.member.event.OnRegistrationCompleteEvent;
 import com.ispan.hangoutchill.member.service.NormalMemberService;
 import com.ispan.hangoutchill.member.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,11 @@ public class NormalMemberController {
         return "member/registerLocation";
     }
 
+    @GetMapping("/member/forgetPwd")
+    public String toFogetPassword(){
+        return"member/forgetPwdAlter";
+    }
+
     @GetMapping("/member/registration")
     public String addMessage(Model model) {
         model.addAttribute("newNormalMember", new NormalMember());
@@ -88,6 +94,38 @@ public class NormalMemberController {
         }
     }
 
+    @GetMapping("/registrationConfirm")
+    public String memberRegistrationConfirm(@RequestParam String token) {
+        SecuredToken securedToken = nMemberService.findSecuredToken(token);
+        NormalMember normalMember = securedToken.getNormalMember();
+        normalMember.setEnabled(true);
+        nMemberService.registNormalMember(normalMember);
+        return "redirect:/member/login";
+    }
+
+    @GetMapping("/member/ForgetPwd")
+    public String memberForgetPwd(@RequestParam(name="account")String account){
+        NormalMember normalUserByAccount = nMemberService.findNormalUserByAccount(account);
+        eventPublisher.publishEvent( new OnForgotPassWord(normalUserByAccount));
+        return "/member/forgetPwdAlert";
+    }
+
+    @GetMapping("/forgetPassword")
+    public  String memberForgetPwdConfirm(@RequestParam String token,Model model){
+        SecuredToken securedToken = nMemberService.findSecuredToken(token);
+        if( securedToken!= null){
+            NormalMember normalMemberById = nMemberService.findNormalMemberById(securedToken.getNormalMember().getId());
+            model.addAttribute("forgotM",normalMemberById);
+            return "/member/forgetPwdUpdate";
+        }
+        return "";
+    }
+    @PutMapping("/member/updatePwdForget")
+    public  String memberForgetPwdAct(@RequestParam(name = "password") String password, @RequestParam(name="id")Integer id){
+        String passwordEncoded = passwordEncoder.encode(password);
+        nMemberService.updatePassword(id, passwordEncoded);
+        return "redirect:/back/members";
+    }
 
     @GetMapping("/member/NormalMemberDetail")
     //目前登入的人到會員中心
@@ -99,28 +137,7 @@ public class NormalMemberController {
         return "/member/normalMemberCenter";
     }
 
-    public String updateNormalMemberInfo(@ModelAttribute("normalMember") NormalMember normalMember, Model model) {
 
-        try {
-            byte[] fileBytes = normalMember.getFile().getBytes();
-            String base64File = "data:image/png;base64," + Base64.getEncoder().encodeToString(fileBytes);
-            NormalMember updateNormalMember = nMemberService.updateById(normalMember.getId(), base64File, normalMember.getNickName());
-            model.addAttribute("updateMember", updateNormalMember);
-            return "/member/updateResult";
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    @GetMapping("/registrationConfirm")
-    public String memberRegistrationConfirm(@RequestParam String token, Model model) {
-        SecuredToken securedToken = nMemberService.findSecuredToken(token);
-        NormalMember normalMember = securedToken.getNormalMember();
-        normalMember.setEnabled(true);
-        nMemberService.registNormalMember(normalMember);
-        return "redirect:/member/login";
-    }
 
     @GetMapping("/back/members")
     public String findAllMmeber(@RequestParam(name = "p", defaultValue = "1") Integer pageNum, Model model,Model model2) {
@@ -153,7 +170,6 @@ public class NormalMemberController {
 
     @PutMapping("/back/authority")
     public  String putUpdateEnabled(@RequestParam(name="id") Integer id){
-        System.out.println(id);
         nMemberService.updateEnable(id);
         return "redirect:/back/members";
     }
