@@ -1,9 +1,7 @@
 package com.ispan.hangoutchill.location.service;
 
 
-import com.ispan.hangoutchill.location.dao.LocationImageRepository;
 import com.ispan.hangoutchill.location.dao.LocationInfoRepository;
-import com.ispan.hangoutchill.location.dao.LocationOperationTimeRepository;
 import com.ispan.hangoutchill.location.model.LocationImage;
 import com.ispan.hangoutchill.location.model.LocationInfo;
 import com.ispan.hangoutchill.location.model.LocationOperationTime;
@@ -12,12 +10,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,19 +25,15 @@ public class LocationInfoService {
 
     @Autowired
     private LocationInfoRepository locRepo;
-    @Autowired
-    private LocationOperationTimeRepository locOptRepo;
-    @Autowired
-    private LocationImageRepository locationImageRepository;
 
     //    ========================LocationStoreInfoManager 地點資料管理===============================
 
     //查詢所有地點 透過page
-    public Page<LocationInfo> findAllLocationInfoByPage(Integer pageNumber){
-        Pageable pgb = PageRequest.of(pageNumber-1,5,Sort.Direction.DESC,"locId");
-        Page<LocationInfo> page = locRepo.findAll(pgb);
-        return page;
-    }
+//    public Page<LocationInfo> findAllLocationInfoByPage(Integer pageNumber){
+//        Pageable pgb = PageRequest.of(pageNumber-1,5,Sort.Direction.DESC,"locId");
+//        Page<LocationInfo> page = locRepo.findAll(pgb);
+//        return page;
+//    }
 
     //查詢單一地點 by ID
     public LocationInfo findLocationInfoById(Integer locId) {
@@ -240,6 +236,33 @@ public class LocationInfoService {
         }
     }
 
+    //=============================測試=================================
+
+//    public List<LocationInfo> searchLocationInfo(String name, String category , String price,
+//                                                 String city, String dist){
+//        List<LocationInfo> locationInfo = locRepo.searchLocationInfo(name,category,price,city,dist);
+//        return  locationInfo;
+//    }
+
+//    public List<LocationInfo> searchLocationInfo(String name, String category, Integer price, String city, String dist) {
+//
+//        return locRepo.searchLocationInfo(name, category, price, city, dist);
+//    }
+
+    public Page<LocationInfo> findAllLocationInfoByPage(Integer pageNumber, String name, String category, Integer price, String city, String dist) {
+        if (name != null || category != null || price != null || city != null || dist != null) {
+            return searchLocationInfo(name, category, price, city, dist, pageNumber);
+        }
+        Pageable pageable = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "locId");  //此處透過jpa搜尋 所以排序properties要用實體類屬性
+        Page<LocationInfo> page = locRepo.findAll(pageable);
+        return page;
+    }
+
+    private Page<LocationInfo> searchLocationInfo(String name, String category, Integer price, String city, String dist, Integer pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "location_id"); //此處透過SQL原生語法搜尋 所以排序properties要用資料庫資料表欄位名
+        Page<LocationInfo> page = locRepo.searchLocationInfo(name, category, price, city, dist, pageable);
+        return page;
+    }
 
 
 

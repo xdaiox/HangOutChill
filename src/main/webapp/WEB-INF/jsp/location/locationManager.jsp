@@ -28,9 +28,31 @@
                     <h1 style="text-align: center;">地點管理</h1>
                     <form action="${contextRoot}/location/locationManager/addPage">
                         <input type="submit" class="btn btn-outline-info btn-sm" value="新增" /></form>
+
                     <br>
-                    <form action=""><input type="text" name="search" placeholder="輸入地點名稱">
-                        <button type="submit">搜尋</button></form>
+                    <p>搜索功能</p>
+                    <form action="${contextRoot}/location/locationManager/search">
+                        <label>
+                            <input type="text" name="name" placeholder="輸入地點名稱"/>
+                        </label><br>
+                        <label>
+                            <select>
+                                <option value="" label="請選擇分類..."></option>
+                                <option value="分類1" label="分類1"></option>
+                                <option value="分類2" label="分類2"></option>
+                                <option value="分類3" label="分類3"></option>
+                            </select>
+                        </label><br>
+                        <label>
+                            <input type="text" name="city" placeholder="輸入地點城市"/>
+                        </label><br>
+                        <label>
+                            <input type="text" name="dist" placeholder="輸入地點區域"/>
+                        </label><br>
+                    </form>
+
+
+
                     <br>
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered table-light">

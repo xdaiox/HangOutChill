@@ -40,8 +40,9 @@
                                 <form:option value="分類2" label="分類2"/>
                                 <form:option value="分類3" label="分類3"/>
                             </form:select>
-<%--                            &lt;%&ndash;                            <p>地點標籤:</p>&ndash;%&gt;--%>
-<%--                            &lt;%&ndash;                            <form:checkbox path="locTag" name="locTag"/>&ndash;%&gt;--%>
+                            <p>地點標籤:</p>
+<%--                            <form:checkbox path="locTag" label="標籤1" value="${locationInfo.locTag}"/>--%>
+<%--                            <form:checkbox path="locTag" label="標籤2" value="${locationInfo.locTag}"/>--%>
                             <p>消費水準:</p>
                             <form:select path="locPriceLevel" value="${locationInfo.locPriceLevel}" Class="form-control">
                                 <form:option value="-1" label="請選擇分類..."/>

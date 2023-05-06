@@ -18,9 +18,6 @@ public class LocationInfo {
     private String locName;
     @Column(name = "location_category")
     private String locCat;
-//    @ElementCollection
-//    @Column(name = "location_tag")
-//    private List<String> locTag;
     @Column(name = "location_tag")
     private String locTag;
     @Column(name = "location_priceLevel")
@@ -60,8 +57,8 @@ public class LocationInfo {
     private LocationImage locationImage;
 
     //關聯 與LocationComment
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "locationInfo",fetch=FetchType.LAZY)
-    private Set<LocationComment> locationComments = new HashSet<LocationComment>();
+//    @OneToMany(cascade = CascadeType.ALL,mappedBy = "locationInfo",fetch=FetchType.LAZY)
+//    private Set<LocationComment> locationComments = new HashSet<LocationComment>();
 
 
 
@@ -181,12 +178,5 @@ public class LocationInfo {
         this.locationImage = locationImage;
     }
 
-    public Set<LocationComment> getLocationComments() {
-        return locationComments;
-    }
-
-    public void setLocationComments(Set<LocationComment> locationComments) {
-        this.locationComments = locationComments;
-    }
 }
 

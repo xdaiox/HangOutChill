@@ -1,14 +1,15 @@
 package com.ispan.hangoutchill.location.controller;
 
 import com.ispan.hangoutchill.location.dao.LocationInfoRepository;
-import com.ispan.hangoutchill.location.model.LocationComment;
+
 import com.ispan.hangoutchill.location.model.LocationImage;
 import com.ispan.hangoutchill.location.model.LocationInfo;
 import com.ispan.hangoutchill.location.model.LocationOperationTime;
-import com.ispan.hangoutchill.location.service.LocationCommentService;
+
 import com.ispan.hangoutchill.location.service.LocationInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,14 +33,14 @@ public class LocationInfoController {
 //    ========================Admin LocationInfoManager 地點資料管理(後台)===============================
 
     //顯示所有LocationInfo 透過page 即LocationInfo Manager畫面
-    @GetMapping("/location/locationManager")
-    public String showAllLocationInfo(@RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber,Model model){
-        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber);
-        model.addAttribute("page", page);
-        return "/location/locationManager";
-    }
+//    @GetMapping("/location/locationManager")
+//    public String showAllLocationInfo(@RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber,Model model){
+//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber);
+//        model.addAttribute("page", page);
+//        return "/location/locationManager";
+//    }
 
-    //顯示單一LocationInfo BY ID
+//    顯示單一LocationInfo BY ID
     @GetMapping("/location/locationManager/locationInfo")
     public String showDetailLocationInfo(@RequestParam(name = "locId") Integer locId, Model model){
         LocationInfo locationInfo = locationInfoService.findLocationInfoById(locId);
@@ -55,13 +56,6 @@ public class LocationInfoController {
     }
 
     //新增LocationInfo動作    等待上傳圖片處理
-//    @PostMapping("/location/locationManager/addPage/post")
-//    public String postAddLocationInfo(@ModelAttribute("locationInfo") LocationInfo locationInfo, Model model)  {
-//        locationInfoService.addLocationInfo(locationInfo);
-//        model.addAttribute("locationInfo", new LocationInfo());
-//        return "redirect:/location/locationManager";
-//    }
-
     @PostMapping("/location/locationManager/addPage/post")
     public String postAddLocationInfo(@ModelAttribute("locationInfo") LocationInfo locationInfo, Model model)  {
 
@@ -112,11 +106,11 @@ public class LocationInfoController {
 
     //    ========================Admin LocationInfoManager 地點資ㄙ料管理(後台)===============================
     //搜索BY locName
-    @ResponseBody
-    @GetMapping("/location/locationManager/findByNameLike")
-    public List<LocationInfo> findLocationInfoByLocName(@RequestParam("locName") String locName){
-        return locationInfoRepository.findLocationInfoByLocNameLike(locName);
-    }
+//    @ResponseBody
+//    @GetMapping("/location/locationManager/findByNameLike")
+//    public List<LocationInfo> findLocationInfoByLocName(@RequestParam("locName") String locName){
+//        return locationInfoRepository.findLocationInfoByLocNameLike(locName);
+//    }
 
 
 
@@ -144,9 +138,36 @@ public class LocationInfoController {
 
 
     //搜尋功能 By name
+//    @GetMapping("/location/locationManager/search")
 
 
 
+
+//    @ResponseBody
+//    @GetMapping("/location/locationManager/search")
+//    public List<LocationInfo> searchLocationInfo(
+//            @RequestParam(name = "name", required = false) String name,
+//            @RequestParam(name = "category", required = false) String category ,
+//            @RequestParam(name = "price", required = false) Integer price,
+//            @RequestParam(name = "city", required = false) String city,
+//            @RequestParam(name = "dist", required = false) String dist){
+//        return locationInfoService.searchLocationInfo(name,category,price,city,dist);
+//    }
+
+
+    @GetMapping("/location/locationManager")
+    public String showAllLocationInfo(@RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber,
+                                      @RequestParam(name = "name", required = false) String name,
+                                      @RequestParam(name = "category", required = false) String category,
+                                      @RequestParam(name = "price", required = false) Integer price,
+                                      @RequestParam(name = "city", required = false) String city,
+                                      @RequestParam(name = "dist", required = false) String dist,
+                                      Model model){
+        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(
+                pageNumber, name, category, price, city, dist);
+        model.addAttribute("page", page);
+        return "/location/locationManager";
+    }
 
 
 
