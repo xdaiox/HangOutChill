@@ -264,6 +264,4 @@ public class LocationInfoService {
         return page;
     }
 
-
-
 }

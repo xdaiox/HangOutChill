@@ -40,6 +40,22 @@ public class LocationInfoController {
 //        return "/location/locationManager";
 //    }
 
+    //顯示所有locationInfo 加入動態查詢功能
+    @GetMapping("/location/locationManager")
+    public String showAllLocationInfo(@RequestParam(name = "p" ,defaultValue = "1") Integer pageNumber,
+                                      @RequestParam(name = "name", required = false) String name,
+                                      @RequestParam(name = "category", required = false) String category,
+                                      @RequestParam(name = "price", required = false) Integer price,
+                                      @RequestParam(name = "city", required = false) String city,
+                                      @RequestParam(name = "dist", required = false) String dist,
+                                      Model model){
+        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(
+                pageNumber, name, category, price, city, dist);
+        model.addAttribute("page", page);
+        return "/location/locationManager";
+    }
+
+
 //    顯示單一LocationInfo BY ID
     @GetMapping("/location/locationManager/locationInfo")
     public String showDetailLocationInfo(@RequestParam(name = "locId") Integer locId, Model model){
@@ -155,19 +171,19 @@ public class LocationInfoController {
 //    }
 
 
-    @GetMapping("/location/locationManager")
-    public String showAllLocationInfo(@RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber,
-                                      @RequestParam(name = "name", required = false) String name,
-                                      @RequestParam(name = "category", required = false) String category,
-                                      @RequestParam(name = "price", required = false) Integer price,
-                                      @RequestParam(name = "city", required = false) String city,
-                                      @RequestParam(name = "dist", required = false) String dist,
-                                      Model model){
-        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(
-                pageNumber, name, category, price, city, dist);
-        model.addAttribute("page", page);
-        return "/location/locationManager";
-    }
+//    @GetMapping("/location/locationManager")
+//    public String showAllLocationInfo(@RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber,
+//                                      @RequestParam(name = "name", required = false) String name,
+//                                      @RequestParam(name = "category", required = false) String category,
+//                                      @RequestParam(name = "price", required = false) Integer price,
+//                                      @RequestParam(name = "city", required = false) String city,
+//                                      @RequestParam(name = "dist", required = false) String dist,
+//                                      Model model){
+//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(
+//                pageNumber, name, category, price, city, dist);
+//        model.addAttribute("page", page);
+//        return "/location/locationManager";
+//    }
 
 
 
