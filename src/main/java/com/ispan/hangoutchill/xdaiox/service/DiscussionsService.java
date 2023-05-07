@@ -43,7 +43,7 @@ public class DiscussionsService {
 	}
 	
 	public Page<Discussions> findByPage(Integer pageNumber){
-		Pageable pgb =PageRequest.of(pageNumber-1, 5, Sort.Direction.DESC, "postDate");
+		Pageable pgb =PageRequest.of(pageNumber-1, 20, Sort.Direction.DESC, "postDate");
 		Page<Discussions> page = dssRepository.findAll(pgb);
 		return page;
 	}

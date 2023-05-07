@@ -22,7 +22,7 @@ import com.ispan.hangoutchill.xdaiox.model.Messages;
 import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
 import com.ispan.hangoutchill.xdaiox.service.MessagesService;
 @Controller
-public class DiscussionsController {
+public class BackEndDiscussionsAndMessagesController {
 	
 	@Autowired
 	private DiscussionsService dService;
@@ -33,72 +33,75 @@ public class DiscussionsController {
     @Autowired
     NormalMemberService nMemberService;
 	
-	@GetMapping("/discussion/allDiscussion")
-	public String toShowAllDiscussion(@RequestParam(name="p",defaultValue = "1")Integer pageNumber,Model model,
+
+    //==============後台顯示全部討論==============  
+	@GetMapping("/back/allDiscussions")
+	public String toBackShowAllDiscussion(@RequestParam(name="p",defaultValue = "1")Integer pageNumber,Model model,
 										@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
-//		上面的p是在allDiscussion.jsp的href="${contextRoot}/discussion/allDiscussion?p=${pageNumber}">${pageNumber}</a></li>
+		String name = authentication.getName();
+		NormalMember result = nMemberService.findNormalUserByAccount(name);
+		model.addAttribute("result", result);
+		
 		Page<Discussions> page = dService.findByPage(pageNumber);
 		model.addAttribute("page", page);
-		
-        String name = authentication.getName();
-        NormalMember result = nMemberService.findNormalUserByAccount(name);
-        model.addAttribute("result", result);
-		
-		return"discussion/allDiscussion";
+		return"/discussion/backEndAllDiscussion";
 	}
 	
-	
-    @GetMapping("/discussion/newDiscussion")
-    public  String toNewDiscussion (@CurrentSecurityContext(expression = "authentication")
-    								Authentication authentication,Model model){
+	//==============後台查看單一討論及回覆==============
+	@GetMapping("/back/backCheckDiscussion/{id}")
+	public String toEditBackDiscussionAndMessage(@RequestParam(name="p",defaultValue = "1")Integer pageNumber,@PathVariable("id") Integer d_id,Model model,
+									@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+									
     	String name = authentication.getName();
         NormalMember result = nMemberService.findNormalUserByAccount(name);
         model.addAttribute("result", result);
-    	model.addAttribute("discussion", new Discussions());
-    	
-    	return"discussion/newDiscussion";
-    }
-    @PostMapping("/discussion/post")
-    public String postDiscussion(@ModelAttribute("discussion") Discussions dss,Model model) {
-    	System.out.println("==================================================="+dss.getD_id()+dss.getD_id()+dss.getD_id()+dss.getD_id()+"===================================================");
-    	dService.addDiscussions(dss);
-    	
-//    	Discussions discussion = dService.getLatest();
-    	
-//    	Images image = new Images();
-//    	image.setFkImgDiscussions(discussion);
-    	
-    	model.addAttribute("discussion", new Discussions());
-    	return"redirect:/discussion/allDiscussion";
-    }
+		
+		Page<Messages> page = mService.findMessageByPage(pageNumber,d_id);
+		Discussions dss = dService.findDiscussionById(d_id);
+		model.addAttribute("discussion", dss);
+		model.addAttribute("page", page);
+		model.addAttribute("replyDiscussion",new Messages());
+		return"/discussion/backEndShowDiscussionAndMessage";
+	}
     
-//    @GetMapping("/discussion/editDiscussion")
-//    public String editDiscussion(@RequestParam("id") Integer id,Model model){
-//    	Discussions dss = dService.findDiscussionById(id);
-//    	model.addAttribute("discussion", dss);
-//    	return "discussion/editDiscussionPage";
-//    }
-//    
-    @GetMapping("/discussion/editDiscussion/{id}")
+	//==============後台編輯討論==============
+    @GetMapping("/back/backEndEditDiscussion/{id}")
     public String editDiscussion(@PathVariable("id") Integer id, Model model) {
         Discussions dss = dService.findDiscussionById(id);
         model.addAttribute("discussion", dss);
-        return "discussion/editDiscussionPage";
+        return "discussion/backEndEditDiscussionPage";
     }
     
-    @PutMapping("/discussion/editDiscussion/{id}")
+	//==============後台put編輯討論==============
+    @PutMapping("/back/backEndEditDiscussion/{id}")
     public String toEditedDiscussion(@ModelAttribute("discussion") Discussions dss,@PathVariable("id") Integer id) {
     	dService.updateById(dss.getD_id(),dss.getTitle(),dss.getType(),dss.getContents());
-    	return "redirect:/message/allMessages/{id}";
+    	return "redirect:/back/backCheckDiscussion/{id}";
     }
     
+	//==============後台刪除單一討論及回覆==============
     @Transactional
-    @DeleteMapping("/discussion/deleteDiscussion/{id}")
+    @DeleteMapping("/back/deleteDiscussion/{id}")
     public String toDeleteButItsNotActuallyDeleteItsHiddenDiscussion(@PathVariable("id") Integer id) {
     	dService.deleteDiscussionById(id);
     	System.out.println("========================after delete========================"+id+"========================after delete========================");
-    	return "redirect:/discussion/allDiscussion";
+    	return "redirect:/back/allDiscussions";
     }
+
+	//==============後台post新增回覆==============
+    @PostMapping("/back/post/{id}")
+    public String postMessage(@ModelAttribute("replyDiscussion") Messages mss, Model model,@PathVariable(name="id")Integer d_id) {
+    	
+    	mService.addMessage(mss);
+    	model.addAttribute("message", new Messages());
+    	
+    	return"redirect:/back/backCheckDiscussion/{id}";
+    }
+    
+    
+    
+    
+    
 //    
 //    
 //    

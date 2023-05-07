@@ -257,21 +257,20 @@ body {
 							<div class="card-body p-2 p-sm-3">
 								<div class="media forum-item">
 									<!-- 先從自己的discussion model 外鍵entity名稱 normalMember 再去找到normalMmeber對應的table裡photoB64欄位 -->
-									<a href="#" data-toggle="collapse" data-target=".forum-content"><img src="${discussion.normalMember.photoB64}" class="mr-3 rounded-circle" width="50" alt="User" /></a>
+									<a data-toggle="collapse" data-target=".forum-content"><img src="${discussion.normalMember.photoB64}" class="mr-3 rounded-circle" width="50" alt="User" /></a>
 									<div class="media-body">
-										
 										<div class="text-body" onclick="window.location.href='${contextRoot}/message/allMessages/${discussion.d_id}'">	
-										
 											<a href="#" data-toggle="collapse" ata-target=".forum-content" class="text-body">
 												<h3>${discussion.title}</h3>
 												<p class="text-secondary">${discussion.contents}</p>
+												<p class="text-muted">
+													<h5>作者: ${discussion.normalMember.nickName}</h5>
+												</p>
 											</a>
 										</div>
-										<p class="text-muted">
-											<h5>作者:
-											<a>${discussion.normalMember.nickName}</a> </h5>
-											<span class="text-secondary font-weight-bold">發布於 <fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss" value="${discussion.postDate}"/></span>
-										</p>
+										<span class="text-secondary font-weight-bold">發布於 
+											<fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss" value="${discussion.postDate}"/>
+										</span>
 									</div>
 									<!-- <a href="${contextRoot}/discussion/replyDiscussion"><button class="btn btn-primary" type="submit">回覆
 									</button></a>

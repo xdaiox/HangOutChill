@@ -66,7 +66,7 @@
         </a>
         <div class="collapse" id="tables">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="#">Buttons</a></li>
+            <li class="nav-item"> <a class="nav-link" href="${contextRoot}/back/allDiscussions">顯示所有討論</a></li>
             <li class="nav-item"> <a class="nav-link" href="#">Dropdowns</a></li>
             <li class="nav-item"> <a class="nav-link" href="#">Typography</a></li>
           </ul>
