@@ -30,6 +30,7 @@ public class LessonSignUpDetailController {
 	@Autowired
 	NormalMemberService nMemberService;
 	
+	
 	@PostMapping("/actandles/detail/lessignup")
 	public String lessignup(@RequestParam("id") Integer id ,@CurrentSecurityContext(expression="authentication")
     Authentication authentication) {

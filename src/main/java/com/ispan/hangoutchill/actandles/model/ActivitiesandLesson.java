@@ -100,9 +100,9 @@ public class ActivitiesandLesson {
 	 @ManyToMany(cascade = CascadeType.ALL)
 	    @JoinTable(
 	        name = "lessonSignUpDetail",
-	        joinColumns = @JoinColumn(name = "aal_id"),
-	        inverseJoinColumns = @JoinColumn(name = "account_id"),
-	        uniqueConstraints = @UniqueConstraint(columnNames = {"aal_id", "account_id"})
+	        joinColumns = @JoinColumn(name = "les_id"),
+	        inverseJoinColumns = @JoinColumn(name = "account_id")
+//	        ,uniqueConstraints = @UniqueConstraint(columnNames = {"les_id", "account_id"})
 	    )
 	    private List<NormalMember> accounts;
 	

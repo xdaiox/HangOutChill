@@ -90,7 +90,7 @@ public class NormalMember {
 		this.actandles = actandles;
 	}
 
-	//===================================================    	
+//===================================================    	
     public Integer getId() {
         return id;
     }
