@@ -239,30 +239,36 @@ public class LocationInfoService {
 
     //=============================測試=================================
 
-//    public List<LocationInfo> searchLocationInfo(String name, String category , String price,
-//                                                 String city, String dist){
-//        List<LocationInfo> locationInfo = locRepo.searchLocationInfo(name,category,price,city,dist);
-//        return  locationInfo;
-//    }
-
-//    public List<LocationInfo> searchLocationInfo(String name, String category, Integer price, String city, String dist) {
-//
-//        return locRepo.searchLocationInfo(name, category, price, city, dist);
-//    }
-
     public Page<LocationInfo> findAllLocationInfoByPage(Integer pageNumber, String name, String category, Integer price, String city, String dist) {
         if (name != null || category != null || price != null || city != null || dist != null) {
-            return searchLocationInfo(name, category, price, city, dist, pageNumber);
+            return searchLocationInfo(pageNumber, name, category, price, city, dist);
         }
         Pageable pageable = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "locId");  //此處透過jpa搜尋 所以排序properties要用實體類屬性
         Page<LocationInfo> page = locRepo.findAll(pageable);
         return page;
     }
 
-    private Page<LocationInfo> searchLocationInfo(String name, String category, Integer price, String city, String dist, Integer pageNumber) {
+    private Page<LocationInfo> searchLocationInfo(Integer pageNumber, String name, String category, Integer price, String city, String dist) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "location_id"); //此處透過SQL原生語法搜尋 所以排序properties要用資料庫資料表欄位名
         Page<LocationInfo> page = locRepo.searchLocationInfo(name, category, price, city, dist, pageable);
         return page;
     }
+
+
+
+////    public Page<LocationInfo> findAllLocationInfoByPage(Integer pageNumber, String name, String category, Integer price, String city, String dist) {
+////        if (name != null || category != null || price != null || city != null || dist != null) {
+////            return searchLocationInfo(name, category, price, city, dist, pageNumber);
+////        }
+////        Pageable pageable = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "locId");  //此處透過jpa搜尋 所以排序properties要用實體類屬性
+////        Page<LocationInfo> page = locRepo.findAll(pageable);
+////        return page;
+////    }
+//
+//    public Page<LocationInfo> searchLocationInfo(String name, String category, Integer price, String city, String dist, Integer pageNumber) {
+//        Pageable pageable = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "location_id"); //此處透過SQL原生語法搜尋 所以排序properties要用資料庫資料表欄位名
+//        Page<LocationInfo> page = locRepo.searchLocationInfo(name, category, price, city, dist, pageable);
+//        return page;
+//    }
 
 }
