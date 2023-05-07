@@ -14,11 +14,12 @@
 	<div class="container content_view" style="background-color: #ffffff00">
 		<div class="content_box">
 
-			<div class="content_title" style="background-color: #ffffff00">
-				<h1>主頁面</h1>
-				<br>
+			<div class="content" style="background-color: #ffffff00;">
+				<h1>輪播圖</h1>
+			
 			</div>
-			<div class="content" style="background-color: #ffffff00">
+			<div class="content" style="background-color: #ffffff00;">
+			<p>活動總攬
 				<form action="${contextRoot}/actandles/shop/postall">
 					<input type="submit" class="btn btn-outline-info btn-sm" value="活動總覽" />
 				</form>

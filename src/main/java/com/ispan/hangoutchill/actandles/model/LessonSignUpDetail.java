@@ -25,6 +25,7 @@ public class LessonSignUpDetail {
 	    @JoinColumn(name = "account_id")
 	    private NormalMember normalMember;
 	    
+	   
 
 }
 

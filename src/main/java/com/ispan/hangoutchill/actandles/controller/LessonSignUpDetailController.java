@@ -30,7 +30,17 @@ public class LessonSignUpDetailController {
 	@Autowired
 	NormalMemberService nMemberService;
 	
-	
+	@GetMapping("/actandles/detail/lessignup")
+	public String lessignuppage(@CurrentSecurityContext(expression="authentication")
+    Authentication authentication,@RequestParam("id") Integer id,Model model) {
+		ActivitiesandLesson aal = aalservice.findAALById(id);
+		String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+		model.addAttribute("result",result);
+		model.addAttribute("aal",aal);
+		
+		return "aal/user/signUpPage";
+	}
 	@PostMapping("/actandles/detail/lessignup")
 	public String lessignup(@RequestParam("id") Integer id ,@CurrentSecurityContext(expression="authentication")
     Authentication authentication) {
