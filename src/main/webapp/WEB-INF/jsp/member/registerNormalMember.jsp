@@ -61,7 +61,8 @@
                         </div>
                         <div class="form-group">
                             <label class="fw">大頭貼</label>
-                            <form:input path="file" type="file" name="profilePhoto" class="form-control"/>
+                            <form:input path="file" type="file" name="profilePhoto" class="form-control" id="target"/>
+                            <p><img src="" id="preview"></p>
                         </div>
                         <div class="form-group text-right">
                             <button class="btn btn-primary btn-block" type="submit">註冊</button>
@@ -73,5 +74,24 @@
                 </div>
                 </div>
         </div>
+        <script >
+            //圖片上傳前預覽
+            const input = document.getElementById("target")
+            const preview = document.getElementById("preview")
+            input.addEventListener('change', () => {
+                const file = input.files[0];
+                const reader = new FileReader();
+
+                reader.addEventListener('load', () => {
+                    preview.src = reader.result;
+                });
+
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                    preview.src = "";
+                }
+            });
+        </script>
 </body>
 </html>

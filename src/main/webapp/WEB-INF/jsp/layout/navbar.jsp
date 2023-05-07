@@ -77,7 +77,7 @@
                         </li>
                         <li class="nav-item"><a class="nav-link" href="${contextRoot}/actandles">活動與課程</a></li>
                         <li class="nav-item"><a class="nav-link" href="${contextRoot}/shop/index">商城</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html">聯絡我們</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${contextRoot}/dashboard">後臺管理</a></li>
                     </ul>
                 </div>
             </div>

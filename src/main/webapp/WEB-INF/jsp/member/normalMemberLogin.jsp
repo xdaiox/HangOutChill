@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group">
                         <label class="fw">密碼
-                            <a href="#" class="pull-right">忘記密碼</a>
+                            <a href="${contextRoot}/member/forgetPwd" class="pull-right">忘記密碼</a>
                         </label>
                         <input type="password" name="password" class="form-control">
                     </div>

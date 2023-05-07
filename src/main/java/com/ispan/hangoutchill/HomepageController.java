@@ -1,17 +1,18 @@
 package com.ispan.hangoutchill;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
+<<<<<<< HEAD
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
 import com.ispan.hangoutchill.xdaiox.service.MessagesService;
 
 import java.lang.reflect.Member;
 
 
+=======
+>>>>>>> e73a2aa1b0b16c1a8d8cc2850ccba275ec854ce0
 @Controller
 public class HomepageController {
     @GetMapping("/")
@@ -33,6 +34,12 @@ public class HomepageController {
     public String toShopIndex() {
     	return "shop/shopIndex";
     }
+
+    @GetMapping("/dashboard")
+    public  String toBackStage(){
+        return "/dashboard";
+    }
+
     
 }
 

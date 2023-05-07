@@ -11,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Transient;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +28,13 @@ public class NormalMemberService implements INormalMemberService {
     public void createVerificationTokenForUser(NormalMember normalMember, String token) {
         SecuredToken securedToken = new SecuredToken(normalMember, token);
         securedTokenRepository.save(securedToken);
+    }
+
+    //使用舊Token
+    public  SecuredToken  getVerificationofUser(NormalMember normalMember){
+        SecuredToken byToken = securedTokenRepository.findByToken(normalMember.getSecuredToken().getToken());
+        return  byToken;
+
     }
 
     @Override
@@ -72,11 +78,13 @@ public class NormalMemberService implements INormalMemberService {
     }
 
     //透過Token找到member
+    @Override
     public SecuredToken findSecuredToken(String token) {
         return securedTokenRepository.findByToken(token);
     }
 
     //後臺所有會員
+    @Override
     public List<NormalMember> findallmember(Integer pageNum) {
         Pageable pgb = PageRequest.of(pageNum - 1, 10, Sort.Direction.DESC, "registTime");
         Page<NormalMember> page = nMemberRepository.findAll(pgb);
@@ -85,6 +93,7 @@ public class NormalMemberService implements INormalMemberService {
 
     }
 
+    @Override
     public Page<NormalMember> findPages(Integer pageNum) {
         Pageable pgb = PageRequest.of(pageNum - 1, 10, Sort.Direction.DESC, "registTime");
         Page<NormalMember> page = nMemberRepository.findAll(pgb);
@@ -93,12 +102,15 @@ public class NormalMemberService implements INormalMemberService {
     }
 
     //管理者修改會員資料
+    @Override
+    @Transactional
     public NormalMember updateByIdForBack(Integer id) {
         Optional<NormalMember> byId = nMemberRepository.findById(id);
         NormalMember normalMember = byId.get();
         return normalMember;
     }
     //管理者修改會員資料actual
+    @Override
     @Transactional
     public NormalMember updateActByIdForBack(Integer id, NormalMember updateM){
         Optional<NormalMember> byId = nMemberRepository.findById(id);
@@ -115,6 +127,7 @@ public class NormalMemberService implements INormalMemberService {
     }
 
     //管理者更改會員權限
+    @Override
     @Transactional
     public NormalMember updateEnable(Integer id){
         Optional<NormalMember> byId = nMemberRepository.findById(id);
@@ -126,6 +139,34 @@ public class NormalMemberService implements INormalMemberService {
             normalMember.setEnabled(true);
         }
 
+        nMemberRepository.save(normalMember);
+        return  normalMember;
+    }
+
+
+    //會員更改基本資料(有圖)
+    @Override
+    @Transactional
+    public NormalMember updateActByIdForMemberP(Integer id, NormalMember updateMM, String base64){
+        Optional<NormalMember> byId = nMemberRepository.findById(id);
+        NormalMember normalMember = byId.get();
+        normalMember.setReallName(updateMM.getReallName());
+        normalMember.setNickName(updateMM.getNickName());
+        normalMember.setBirthdate(updateMM.getBirthdate());
+        normalMember.setTel(updateMM.getTel());
+        normalMember.setGender(updateMM.getGender());
+        normalMember.setPhotoB64(base64);
+        nMemberRepository.save(normalMember);
+        return normalMember;
+    }
+
+
+    @Transactional
+    //會員修改密碼
+    public  NormalMember updatePassword (Integer id,String password){
+        Optional<NormalMember> byId = nMemberRepository.findById(id);
+        NormalMember normalMember = byId.get();
+        normalMember.setPassword(password);
         nMemberRepository.save(normalMember);
         return  normalMember;
     }
