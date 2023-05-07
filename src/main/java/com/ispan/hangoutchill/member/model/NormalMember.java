@@ -3,6 +3,7 @@ package com.ispan.hangoutchill.member.model;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -32,6 +35,8 @@ import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import com.ispan.hangoutchill.shop.model.ShoppingCart;
+
+import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
 
 @Entity
 @Table(name="normalAccount")
@@ -125,6 +130,20 @@ public class NormalMember {
  		this.images = images;
  	}
     
+//==================設定課程報名的中介表===================    
+    
+    @ManyToMany(cascade=CascadeType.ALL, mappedBy="accounts")
+    List<ActivitiesandLesson> actandles;
+
+	public List<ActivitiesandLesson> getActandles() {
+		return actandles;
+	}
+
+	public void setActandles(List<ActivitiesandLesson> actandles) {
+		this.actandles = actandles;
+	}
+
+//===================================================    	
     public Integer getId() {
         return id;
     }

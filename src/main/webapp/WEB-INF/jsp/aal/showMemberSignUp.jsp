@@ -10,20 +10,19 @@
 <head>
 <meta charset="UTF-8">
 <title>個人活動管理</title>
-	<jsp:include page="../layout/navbar.jsp" />
-	
 </head>
 <body>
+	<jsp:include page="../layout/navbar.jsp" />
 	<div class="container content_view" style="background-color: #ffffff00">
 		<div class="content_box" style="width: 100%">
 			<div class="content"
 				style="background-color: #ffffff00; height: 100%;">
 				<div class="row justify-content-center">
 					<div class="" style="margin: auto;">
-						<h1 style="text-align: center;">活動/課程管理</h1>
-						<form action="${contextRoot}/actandles/shop/add">
+						<h1 style="text-align: center;">會員報名管理</h1>
+						<form action="${contextRoot}/actandles/shop/postall">
 							<input type="submit" class="btn btn-outline-info btn-sm"
-								value="新增" />
+								value="瀏覽活動" />
 						</form>
 						<div class="table-responsive">
 							<table class="table table-hover table-bordered table-light">
@@ -69,25 +68,14 @@
 												height="200px"
 												src="data:image/png;base64,${aal.base64image}"> <br />
 											<td class="align-middle">
-												<div style="display: flex">
-													<form action="${contextRoot}/actandles/shop/edit">
-														<input type="hidden" name="id" value="${aal.id}" /> <input
-															type="submit" class="btn btn-outline-info btn-sm"
-															value="編輯" />
-													</form>
-
-													<form action="${contextRoot}/actandles/shop/delete"
+											<form action="${contextRoot}/actandles/detail/cancal"
 														method="post">
 														<input type="hidden" name="_method" value="delete" /> <input
 															type="hidden" name="id" value="${aal.id}" /> <input
 															type="submit" class="btn btn-outline-danger btn-sm"
-															value="刪除" onclick="return confirm('確定刪除?')" />
+															value="取消報名" onclick="return confirm('確定取消?')" />
 													</form>
-													<form:form method="post" action="${contextRoot}/actandles/detail/lessignup">
-												<input value="${aal.id}" type="hidden" name="id" />
-												<button type="submit" class="btn btn-primary" >報名</button>
-										</form:form>
-												</div>
+									 	
 									</jstl:forEach>
 								</tbody>
 							</table>

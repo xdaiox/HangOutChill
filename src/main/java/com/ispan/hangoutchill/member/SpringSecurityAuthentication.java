@@ -34,7 +34,7 @@ public class SpringSecurityAuthentication {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/discussion/newDiscussion","/shop/index").hasAuthority("USER")
+                .antMatchers("/discussion/newDiscussion","/shop/index","/actandles/shop/*","/actandles/detail/*").hasAuthority("USER")
                 .antMatchers("/","/member/registration","/NormalMember/registed").permitAll()
                 .and()
                 .formLogin().loginPage("/member/login")

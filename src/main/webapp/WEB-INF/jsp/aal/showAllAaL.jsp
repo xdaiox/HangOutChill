@@ -22,6 +22,9 @@
 				<form action="${contextRoot}/actandles/shop/postall">
 					<input type="submit" class="btn btn-outline-info btn-sm" value="活動總覽" />
 				</form>
+				<form action="${contextRoot}/actandles/detail/showmysignup">
+					<input type="submit" class="btn btn-outline-info btn-sm" value="我的活動/課程" />
+				</form>
 
 			</div>
 		</div>

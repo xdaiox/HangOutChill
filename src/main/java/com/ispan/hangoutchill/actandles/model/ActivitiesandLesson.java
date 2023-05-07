@@ -3,22 +3,32 @@ package com.ispan.hangoutchill.actandles.model;
 
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.ispan.hangoutchill.member.model.NormalMember;
 
 @Entity
 @Table(name="ActivitiesandLesson")
@@ -27,22 +37,27 @@ public class ActivitiesandLesson {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id",columnDefinition = "int")
 	private Integer id;
+
 	
-	@Column(name="shop_Id",columnDefinition = "int",nullable = true)
-	private Integer shop_Id;
 	
-	@Column(name="name",columnDefinition = "nvarchar(50)",nullable = true)
+//	@Column(name="shop_Id",columnDefinition = "int",nullable = false)
+//	private Integer shop_Id;
+	@OneToOne
+	@JoinColumn(name = "shop_Id",foreignKey =@ForeignKey(name="member_id"))
+	private NormalMember normalMember;
+	
+	@Column(name="name",columnDefinition = "nvarchar(50)",nullable = false )
 	private String name;
 	
-	@Column(name="aalContent",columnDefinition = "nvarchar(50)")
+	@Column(name="aalContent",columnDefinition = "nvarchar(max)")
 	private String aalContent;
 	
-	@Column(name="topic",columnDefinition = "nvarchar(50)",nullable = true)
+	@Column(name="topic",columnDefinition = "nvarchar(50)",nullable = false)
 	private String topic;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(iso = ISO.DATE)
-	@Column(name="theDayofSubmission",columnDefinition = "datetime" )
+	@Column(name="theDayofSubmission",columnDefinition = "datetime",nullable = false)
 	private Date theDayofSubmission;
 	
 	@PrePersist
@@ -53,23 +68,23 @@ public class ActivitiesandLesson {
 	}
 	
 	@DateTimeFormat(iso = ISO.DATE)
-	@Column(name="theDayofStarts",columnDefinition = "date",nullable = true)
+	@Column(name="theDayofStarts",columnDefinition = "date",nullable = false)
 	private Date theDayofStarts;
 	
-	@Column(name="fee",columnDefinition = "int",nullable = true)
+	@Column(name="fee",columnDefinition = "int",nullable = false)
 	private Integer fee;
 	
-	@Column(name="quota",columnDefinition = "int",nullable = true)
+	@Column(name="quota",columnDefinition = "int",nullable = false)
 	private Integer quota;
 	
-	@Column(name="lowerLimit",columnDefinition = "int",nullable = true)
+	@Column(name="lowerLimit",columnDefinition = "int",nullable = false)
 	private Integer lowerLimit;
 	
 	@DateTimeFormat(iso = ISO.DATE)
-	@Column(name="deadLine",columnDefinition = "date",nullable = true)
+	@Column(name="deadLine",columnDefinition = "date",nullable = false)
 	private Date deadLine;
 	
-	@Column(name="currentStatus",columnDefinition = "nvarchar(50)",nullable = true)
+	@Column(name="currentStatus",columnDefinition = "nvarchar(50)",nullable = false)
 	private String currentStatus;
 	
 	@Lob
@@ -82,6 +97,24 @@ public class ActivitiesandLesson {
 	@Transient
 	private String base64image;
 	
+	 @ManyToMany(cascade = CascadeType.ALL)
+	    @JoinTable(
+	        name = "lessonSignUpDetail",
+	        joinColumns = @JoinColumn(name = "les_id"),
+	        inverseJoinColumns = @JoinColumn(name = "account_id")
+//	        ,uniqueConstraints = @UniqueConstraint(columnNames = {"les_id", "account_id"})
+	    )
+	    private List<NormalMember> accounts;
+	
+	
+
+	public List<NormalMember> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(List<NormalMember> accounts) {
+		this.accounts = accounts;
+	}
 
 	public Integer getId() {
 		return id;
@@ -91,13 +124,23 @@ public class ActivitiesandLesson {
 		this.id = id;
 	}
 
-	public Integer getShop_Id() {
-		return shop_Id;
+
+
+	public NormalMember getNormalMember() {
+		return normalMember;
 	}
 
-	public void setShop_Id(Integer shop_Id) {
-		this.shop_Id = shop_Id;
+	public void setNormalMember(NormalMember normalMember) {
+		this.normalMember = normalMember;
 	}
+
+//	public Integer getShop_Id() {
+//		return shop_Id;
+//	}
+//
+//	public void setShop_Id(Integer shop_Id) {
+//		this.shop_Id = shop_Id;
+//	}
 
 	public String getName() {
 		return name;
