@@ -10,24 +10,44 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.ispan.hangoutchill.member.model.NormalMember;
+
 @Entity
 @Table(name="shoppingCart")
 public class ShoppingCart {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="s_id")
 	private Integer sId;
 	
 	
 	
 	// 等Member資料表中加入以下程式碼後執行此項
 		// @OneToMany(mappedBy="member",
-	    //            cascade = CascadeType.PERSIST, orphanRemoval = true)
+	    //            cascade = CascadeType.PERSIST)
 		//private Set<ShoppingCart> shoppingCart = new LinkedHashSet<>();
 	// 加在此類別中
-//	@ManyToOne(fetch = FetchTyle.Lazy)
-//	@JoinColumn(name="member_id")
-//	private Member member;
+	
+	
+	// 購物車測試用加入
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="member_id")
+	private NormalMember member;
+	
+	
+	
+	
+	public NormalMember getMember() {
+		return member;
+	}
+
+	public void setMember(NormalMember member) {
+		this.member = member;
+	}
+
+	// 購物車測試用加入
+	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="product_id")

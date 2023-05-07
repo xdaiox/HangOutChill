@@ -31,18 +31,21 @@ import com.ispan.hangoutchill.shop.model.ProductPhoto;
 import com.ispan.hangoutchill.shop.model.ProductPhotoPK;
 import com.ispan.hangoutchill.shop.service.ProductPhotoService;
 import com.ispan.hangoutchill.shop.service.ProductService;
+import com.ispan.hangoutchill.shop.service.ShoppingCartService;
 
 @Controller
 public class ProductController {
 
 	private ProductService productService;
 	private ProductPhotoService productPhotoService;
+	private ShoppingCartService shoppingCartService;
 	
 	
 	@Autowired
-	public ProductController(ProductService productService, ProductPhotoService productPhotoService) {
+	public ProductController(ProductService productService, ProductPhotoService productPhotoService, ShoppingCartService shoppingCartService) {
 		this.productService = productService;
 		this.productPhotoService = productPhotoService;
+		this.shoppingCartService = shoppingCartService;
 	}
 
 	@GetMapping("/shop/add")
