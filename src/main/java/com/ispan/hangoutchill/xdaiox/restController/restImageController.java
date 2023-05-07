@@ -10,29 +10,38 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.json.JSONObject;
 
+import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.ispan.hangoutchill.xdaiox.dao.DiscussionsRepository;
 import com.ispan.hangoutchill.xdaiox.dao.ImagesRepository;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
 import com.ispan.hangoutchill.xdaiox.model.Images;
+import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
 
 @RestController
 @RequestMapping("/upload")
-public class restUploadController {
+public class restImageController {
 
     @Autowired
     private ImagesRepository imageRepository;
     
     @Autowired
     private DiscussionsRepository dssRepository;
+    
+//    @Autowired
+//    private DiscussionsService dService;
 
     @PostMapping("/image")
     public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("data") String data) {
         try {
             // 解析前端傳送過來的 JSON 字串
             JSONObject jsonObject = new JSONObject(data);
+            
+//            String d_id = jsonObject.getString("discussionId");
+            
             String title = jsonObject.getString("title");
             String content = jsonObject.getString("content");
-            System.out.println("========================================================intoController////intoController////intoController////intoController========================================================");
+            
+            System.out.println("========================================================"+"========================================================");
 
             // 將圖片資料轉換成 byte 陣列
             byte[] bytes = file.getBytes();
@@ -44,6 +53,8 @@ public class restUploadController {
             dssRepository.save(discussion);
             
             Images image = new Images();
+//            Discussions dss = dService.findDiscussionById(d_id);
+//            image.setFkImgDiscussions(dss);
             image.setImg_data(bytes);
             imageRepository.save(image);
             System.out.println("========================================================saveImagesaveImagesaveImagesaveImagesaveImage========================================================");

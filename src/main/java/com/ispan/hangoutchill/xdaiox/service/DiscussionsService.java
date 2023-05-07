@@ -64,7 +64,7 @@ public class DiscussionsService {
 	}
 	
 //	public Discussions getLatest() {
-//		return dssRepository.findFirstByOrderByPostDateDesc();
+//		return dssRepository.findDIdByPostDateDesc();
 //	}
 
 }

@@ -179,6 +179,8 @@ body {
 						<div class="card-body">
 							<form:form modelAttribute="discussion" method="post" action="${contextRoot}/discussion/post">
 								<div class="form-group">
+									<!--  把member_id值設定至discussion的m_id -->
+									<form:hidden path="m_id" value="${result.id}"></form:hidden>
 									<label for="title">標題</label> <form:input id="titleInput" path="title" type="text"
 										class="form-control" placeholder="輸入標題"></form:input>
 								</div>
@@ -276,7 +278,7 @@ class CustomUploadAdapter {
 
         data.append('file', file);
 		 // 在這裡添加 data 參數
-		data.append('data', JSON.stringify({ title: title , content: content }));
+		data.append('data', JSON.stringify({ title: title , content: content}));
     
         return fetch(this.uploadUrl, {
             method: 'POST',
