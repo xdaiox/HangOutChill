@@ -2,6 +2,8 @@ package com.ispan.hangoutchill.xdaiox.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,6 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.ispan.hangoutchill.member.UserDetailServiceImpl;
+import com.ispan.hangoutchill.member.model.NormalMember;
+import com.ispan.hangoutchill.member.service.NormalMemberService;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
 import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
 
@@ -20,11 +26,19 @@ public class DiscussionsController {
 	@Autowired
 	private DiscussionsService dService;
 	
+    @Autowired
+    NormalMemberService nMemberService;
+	
 	@GetMapping("/discussion/allDiscussion")
-	public String toShowAllDiscussion(@RequestParam(name="p",defaultValue = "1")Integer pageNumber,Model model) {
+	public String toShowAllDiscussion(@RequestParam(name="p",defaultValue = "1")Integer pageNumber,Model model,
+										@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
 //		上面的p是在allDiscussion.jsp的href="${contextRoot}/discussion/allDiscussion?p=${pageNumber}">${pageNumber}</a></li>
 		Page<Discussions> page = dService.findByPage(pageNumber);
 		model.addAttribute("page", page);
+		
+        String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
 		
 		return"discussion/allDiscussion";
 	}

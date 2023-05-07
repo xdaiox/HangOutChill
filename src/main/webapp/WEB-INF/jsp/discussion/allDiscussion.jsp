@@ -257,7 +257,7 @@ body {
 							<div class="card-body p-2 p-sm-3">
 								<div class="media forum-item">
 									<a href="#" data-toggle="collapse" data-target=".forum-content"><img
-										src="https://bootdey.com/img/Content/avatar/avatar1.png"
+										src="${result.photoB64}"
 										class="mr-3 rounded-circle" width="50" alt="User" /></a>
 									<div class="media-body">
 										
