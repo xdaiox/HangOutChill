@@ -14,15 +14,9 @@ import com.ispan.hangoutchill.xdaiox.dao.DiscussionsRepository;
 import com.ispan.hangoutchill.xdaiox.dao.MessagesRepository;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
 import com.ispan.hangoutchill.xdaiox.model.Messages;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 
 @Service
 public class MessagesService {
-
-	@PersistenceContext
-    private EntityManager entityManager;
 	
 	@Autowired
 	private MessagesRepository mssRepository;
@@ -35,7 +29,6 @@ public class MessagesService {
 	}
 	
 	public void addMessageByDid() {
-		
 	}
 	
 	public Messages findMessageById(Integer id) {
@@ -49,16 +42,7 @@ public class MessagesService {
 	
 	@Transactional
 	public void deleteMessageById(Integer id) {
-
-	    Messages messageToDelete = mssRepository.findById(id).orElse(null);
-
-	    if (messageToDelete != null) {
-
-	        Discussions discussions = messageToDelete.getDiscussions();
-	        discussions.getMessages().remove(messageToDelete);
-
-	        entityManager.persist(discussions);
-	    }
+		mssRepository.deleteById(id);
 	}
 	
 	public Page<Messages> findMessageByPage(Integer pageNumber,Integer d_id){

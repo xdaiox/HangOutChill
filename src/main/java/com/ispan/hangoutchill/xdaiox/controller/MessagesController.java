@@ -64,6 +64,7 @@ public class MessagesController {
     	System.out.println("============================before delete============================="+m_id+"============================before delete=============================");
 
     	mService.deleteMessageById(m_id);
+    	
     	System.out.println("============================after delete============================="+m_id+"============================after delete=============================");
     	return "redirect:/message/allMessages/{id}";
     }
