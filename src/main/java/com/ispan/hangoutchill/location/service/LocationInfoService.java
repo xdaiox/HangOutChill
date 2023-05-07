@@ -1,9 +1,7 @@
 package com.ispan.hangoutchill.location.service;
 
 
-import com.ispan.hangoutchill.location.dao.LocationImageRepository;
 import com.ispan.hangoutchill.location.dao.LocationInfoRepository;
-import com.ispan.hangoutchill.location.dao.LocationOperationTimeRepository;
 import com.ispan.hangoutchill.location.model.LocationImage;
 import com.ispan.hangoutchill.location.model.LocationInfo;
 import com.ispan.hangoutchill.location.model.LocationOperationTime;
@@ -25,10 +23,7 @@ public class LocationInfoService {
 
     @Autowired
     private LocationInfoRepository locRepo;
-    @Autowired
-    private LocationOperationTimeRepository locOptRepo;
-    @Autowired
-    private LocationImageRepository locationImageRepository;
+
 
     //    ========================LocationStoreInfoManager 地點資料管理===============================
 
