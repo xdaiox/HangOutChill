@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
 
 public interface DiscussionsRepository extends JpaRepository<Discussions, Integer> {
-//	public Discussions findFirstByOrderByPostDateDesc();
+//	public Discussions findDIdByPostDateDesc();
 
 	
 }

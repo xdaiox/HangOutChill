@@ -256,8 +256,13 @@ body {
 						<div class="card">
 							<div class="card-body p-2 p-sm-3">
 								<div class="media forum-item">
+									<!-- 先從自己的discussion model 外鍵entity名稱 normalMember 再去找到normalMmeber對應的table裡photoB64欄位 -->
 									<a href="#" data-toggle="collapse" data-target=".forum-content"><img
+<<<<<<< HEAD
 										src="${result.photoB64}"
+=======
+										src="${discussion.normalMember.photoB64}"
+>>>>>>> xDaiox
 										class="mr-3 rounded-circle" width="50" alt="User" /></a>
 									<div class="media-body">
 										
@@ -269,9 +274,9 @@ body {
 											</a>
 										</div>
 										<p class="text-muted">
-											<h5>Author:
-											<a href="#">${discussion.normalMmeber.nickName}</a> posted </h5><span
-												class="text-secondary font-weight-bold"><fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss" value="${discussion.postDate}"/></span>
+											<h5>作者:
+											<a>${discussion.normalMember.nickName}</a> </h5>
+											<span class="text-secondary font-weight-bold">發布於 <fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss" value="${discussion.postDate}"/></span>
 										</p>
 									</div>
 									<!-- <a href="${contextRoot}/discussion/replyDiscussion"><button class="btn btn-primary" type="submit">回覆

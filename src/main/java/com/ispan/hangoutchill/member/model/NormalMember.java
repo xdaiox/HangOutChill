@@ -25,6 +25,7 @@ import javax.persistence.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
+import com.ispan.hangoutchill.xdaiox.model.Images;
 import com.ispan.hangoutchill.xdaiox.model.Messages;
 import javax.persistence.*;
 import java.util.Date;
@@ -40,7 +41,7 @@ public class NormalMember {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Integer id;
-    @Column(name = "normal_account")
+ 	@Column(name = "normal_account")
     private String account;
     @Column(name="normal_password")
     private String password;
@@ -87,14 +88,42 @@ public class NormalMember {
         }
     }
     
-    @OneToMany(mappedBy = "normalMmeber",fetch=FetchType.EAGER,
-    					cascade = {CascadeType.PERSIST},orphanRemoval = false)
+    @OneToMany(mappedBy = "normalMember",fetch=FetchType.LAZY,
+    					cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Discussions> discussions = new LinkedHashSet<>();
     
-    @OneToMany(mappedBy = "normalMmeber",fetch=FetchType.EAGER,
-			cascade = {CascadeType.PERSIST},orphanRemoval = false)
+    @OneToMany(mappedBy = "normalMmeber",fetch=FetchType.LAZY,
+			cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Messages> messages = new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "fkImgNormalMmeber",fetch=FetchType.LAZY,
+			cascade = {CascadeType.PERSIST},orphanRemoval = true)
+    private Set<Images> images = new LinkedHashSet<>();
+
+    
+    public Set<Discussions> getDiscussions() {
+ 		return discussions;
+ 	}
+
+ 	public void setDiscussions(Set<Discussions> discussions) {
+ 		this.discussions = discussions;
+ 	}
+
+ 	public Set<Messages> getMessages() {
+ 		return messages;
+ 	}
+
+ 	public void setMessages(Set<Messages> messages) {
+ 		this.messages = messages;
+ 	}
+
+ 	public Set<Images> getImages() {
+ 		return images;
+ 	}
+
+ 	public void setImages(Set<Images> images) {
+ 		this.images = images;
+ 	}
     
     public Integer getId() {
         return id;

@@ -15,10 +15,9 @@ import com.ispan.hangoutchill.xdaiox.dao.MessagesRepository;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
 import com.ispan.hangoutchill.xdaiox.model.Messages;
 
-
 @Service
 public class MessagesService {
-
+	
 	@Autowired
 	private MessagesRepository mssRepository;
 	
@@ -30,7 +29,6 @@ public class MessagesService {
 	}
 	
 	public void addMessageByDid() {
-		
 	}
 	
 	public Messages findMessageById(Integer id) {
@@ -42,6 +40,7 @@ public class MessagesService {
 		return option.get();
 	}
 	
+	@Transactional
 	public void deleteMessageById(Integer id) {
 		mssRepository.deleteById(id);
 	}

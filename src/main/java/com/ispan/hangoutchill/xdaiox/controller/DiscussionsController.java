@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,13 +14,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+<<<<<<< HEAD
 
 import com.ispan.hangoutchill.member.UserDetailServiceImpl;
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.service.NormalMemberService;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
 import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
+=======
+>>>>>>> xDaiox
 
+import com.ispan.hangoutchill.member.model.NormalMember;
+import com.ispan.hangoutchill.member.service.NormalMemberService;
+import com.ispan.hangoutchill.xdaiox.model.Discussions;
+import com.ispan.hangoutchill.xdaiox.model.Images;
+import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 @Controller
 public class DiscussionsController {
 	
@@ -45,14 +56,25 @@ public class DiscussionsController {
 	
 	
     @GetMapping("/discussion/newDiscussion")
-    public  String toNewDiscussion (Model model){
+    public  String toNewDiscussion (@CurrentSecurityContext(expression = "authentication")
+    								Authentication authentication,Model model){
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
     	model.addAttribute("discussion", new Discussions());
     	
     	return"discussion/newDiscussion";
     }
     @PostMapping("/discussion/post")
     public String postDiscussion(@ModelAttribute("discussion") Discussions dss,Model model) {
+    	System.out.println("==================================================="+dss.getD_id()+dss.getD_id()+dss.getD_id()+dss.getD_id()+"===================================================");
     	dService.addDiscussions(dss);
+    	
+//    	Discussions discussion = dService.getLatest();
+    	
+//    	Images image = new Images();
+//    	image.setFkImgDiscussions(discussion);
+    	
     	model.addAttribute("discussion", new Discussions());
     	return"redirect:/discussion/allDiscussion";
     }
@@ -77,15 +99,14 @@ public class DiscussionsController {
     	return "redirect:/message/allMessages/{id}";
     }
     
+    @Transactional
     @DeleteMapping("/discussion/deleteDiscussion/{id}")
     public String toDeleteButItsNotActuallyDeleteItsHiddenDiscussion(@PathVariable("id") Integer id) {
     	dService.deleteDiscussionById(id);
+    	System.out.println("========================after delete========================"+id+"========================after delete========================");
     	return "redirect:/discussion/allDiscussion";
     }
-    
-   
-    
-   
+
 //    
 //    
 //    
