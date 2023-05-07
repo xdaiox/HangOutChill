@@ -24,18 +24,13 @@ import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
-
-<<<<<<< HEAD
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
 import com.ispan.hangoutchill.xdaiox.model.Messages;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
-=======
 import com.ispan.hangoutchill.shop.model.ShoppingCart;
->>>>>>> 35c64b0110fb9dc914f0c509f98383c06304f0a1
 
 @Entity
 @Table(name="normalAccount")
