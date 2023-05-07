@@ -14,23 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-<<<<<<< HEAD
-
-import com.ispan.hangoutchill.member.UserDetailServiceImpl;
-import com.ispan.hangoutchill.member.model.NormalMember;
-import com.ispan.hangoutchill.member.service.NormalMemberService;
-import com.ispan.hangoutchill.xdaiox.model.Discussions;
-import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
-=======
->>>>>>> xDaiox
 
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.service.NormalMemberService;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
-import com.ispan.hangoutchill.xdaiox.model.Images;
 import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 @Controller
 public class DiscussionsController {
 	

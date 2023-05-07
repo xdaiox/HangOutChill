@@ -257,13 +257,7 @@ body {
 							<div class="card-body p-2 p-sm-3">
 								<div class="media forum-item">
 									<!-- 先從自己的discussion model 外鍵entity名稱 normalMember 再去找到normalMmeber對應的table裡photoB64欄位 -->
-									<a href="#" data-toggle="collapse" data-target=".forum-content"><img
-<<<<<<< HEAD
-										src="${result.photoB64}"
-=======
-										src="${discussion.normalMember.photoB64}"
->>>>>>> xDaiox
-										class="mr-3 rounded-circle" width="50" alt="User" /></a>
+									<a href="#" data-toggle="collapse" data-target=".forum-content"><img src="${discussion.normalMember.photoB64}" class="mr-3 rounded-circle" width="50" alt="User" /></a>
 									<div class="media-body">
 										
 										<div class="text-body" onclick="window.location.href='${contextRoot}/message/allMessages/${discussion.d_id}'">	

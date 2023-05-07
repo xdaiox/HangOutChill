@@ -179,8 +179,8 @@ body {
 						<div class="card-body">
 							<form:form modelAttribute="discussion" method="post" action="${contextRoot}/discussion/post">
 								<div class="form-group">
-									<!--  把member_id值設定至discussion的m_id -->
-									<form:hidden path="m_id" value="${result.id}"></form:hidden>
+									<!--  把member_id值設定至discussion的normalMember -->
+									<form:hidden path="normalMember" value="${result.id}"></form:hidden>
 									<label for="title">標題</label> <form:input id="titleInput" path="title" type="text"
 										class="form-control" placeholder="輸入標題"></form:input>
 								</div>
