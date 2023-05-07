@@ -33,7 +33,11 @@
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
           <i class="icon-columns menu-icon"></i>
+<<<<<<< HEAD
           <span class="menu-title">活動與課程管理</span>
+=======
+          <span class="menu-title">活動與課程</span>
+>>>>>>> ray
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="form-elements">
@@ -47,7 +51,11 @@
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
           <i class="icon-bar-graph menu-icon"></i>
+<<<<<<< HEAD
           <span class="menu-title">商品管理</span>
+=======
+          <span class="menu-title">商品</span>
+>>>>>>> ray
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="charts">
@@ -61,7 +69,11 @@
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
           <i class="icon-grid-2 menu-icon"></i>
+<<<<<<< HEAD
           <span class="menu-title">討論區管理</span>
+=======
+          <span class="menu-title">討論區</span>
+>>>>>>> ray
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="tables">
@@ -75,7 +87,11 @@
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
           <i class="icon-contract menu-icon"></i>
+<<<<<<< HEAD
           <span class="menu-title">地點管理</span>
+=======
+          <span class="menu-title">地點</span>
+>>>>>>> ray
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="icons">
@@ -89,12 +105,20 @@
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
           <i class="icon-head menu-icon"></i>
+<<<<<<< HEAD
           <span class="menu-title">會員管理</span>
+=======
+          <span class="menu-title">會員</span>
+>>>>>>> ray
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="auth">
           <ul class="nav flex-column sub-menu">
+<<<<<<< HEAD
             <li class="nav-item"> <a class="nav-link" href="${contextRoot}/back/members">顯示所有會員</a></li>
+=======
+            <li class="nav-item"> <a class="nav-link" href="#">Buttons</a></li>
+>>>>>>> ray
             <li class="nav-item"> <a class="nav-link" href="#">Dropdowns</a></li>
             <li class="nav-item"> <a class="nav-link" href="#">Typography</a></li>
           </ul>

@@ -35,14 +35,15 @@
                             <br>
                             <p>地點分類 : </p>
                             <form:select path="locCat" Class="form-control">
-                                <form:option value="-1" label="請選擇分類..."/>
+                                <form:option value="" label="請選擇分類..."/>
                                 <form:option value="分類1" label="分類1"/>
                                 <form:option value="分類2" label="分類2"/>
                                 <form:option value="分類3" label="分類3"/>
                             </form:select>
 
-<%--                            <p>地點標籤:</p>--%>
-<%--                            <form:checkbox path="locTag" name="locTag"/>--%>
+                            <p>地點標籤:</p>
+<%--                            <form:checkbox path="locTag" label="標籤1" value="locTag1"/>--%>
+<%--                            <form:checkbox path="locTag" label="標籤2" value="locTag2"/>--%>
                             <br>
                             <p>消費水準 : </p>
                             <form:select path="locPriceLevel" Class="form-control">
