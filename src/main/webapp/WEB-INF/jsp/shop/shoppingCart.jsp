@@ -75,7 +75,8 @@
 												value="${cartItem.amount}" placeholder=""
 												aria-label="Example text with button addon"
 												aria-describedby="button-addon1"
-												id="amount${shoppingCartItems.indexOf(cartItem)}">
+												id="amount${shoppingCartItems.indexOf(cartItem)}"
+												data-id="${cartItem.sId}">
 											<div class="input-group-append">
 												<button class="btn btn-outline-primary js-btn-plus"
 													type="button">&plus;</button>
@@ -91,7 +92,7 @@
 									<td class="text-center"><a class="remove-from-cart"
 										href="#" data-toggle="tooltip" title=""
 										data-original-title="Remove item"><i class="fa fa-trash"
-											id="deleteBtn${shoppingCartItems.indexOf(cartItem)}"></i></a></td>
+											id="deleteBtn${shoppingCartItems.indexOf(cartItem)}" data-id="${cartItem.sId}"></i></a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -149,13 +150,35 @@
 	<script src="${contextRoot}/js/contact.js"></script>
 	<script src="${contextRoot}/js/jquery.form.js"></script>
 	<script src="${contextRoot}/js/jquery.validate.min.js"></script>
+	<script src="${contextRoot}/js/jquery.validate.min.js"></script>
 	<script src="${contextRoot}/js/mail-script.js"></script>
-
+<script src="${contextRoot}/js/jquery-3.6.4.min.js"></script>
 	<script src="${contextRoot}/js/shop/templatemo.js"></script>
 	<script src="${contextRoot}/js/theme.js"></script>
 	<script>
 		
-
+	// 購物車上的小圖示同步購物車內品項數量
+	$.ajax({
+        url: 'http://localhost:8080/hangoutchill/shop/get/shoppingCartItemNum',
+        type: 'GET',
+        contentType: "application/json;charset=UTF-8",
+        datatype: 'json',
+        success: function (result) {
+            console.log(result);
+         	if(result == 0){
+         		$('.count').hide();
+         	}else{
+            $('.count').text(result);
+         	}
+         	
+        },
+        error: function (err) {
+            console.log(err);
+            $('.count').hide();
+        }
+    })
+	
+	
 		// 計算各項產品價格與總價
 		let cartItems = document.getElementsByClassName('product-title');
 		let cartNum = cartItems.length;
@@ -178,12 +201,11 @@
 			subtotal.innerHTML = Math.round(actprice * discount * amount);
 
 			totalPriceCount += Math.round(actprice * discount * amount);
-			
+
 			if (discount === "1.0") {
 				document.getElementById('discount' + i).innerHTML = "—";
 			}
-			
-			
+
 		}
 		totalPrice.innerHTML = totalPriceCount;
 
@@ -194,8 +216,7 @@
 			console.log(amount.value);
 			amount.addEventListener('change', updatePrice);
 		}
-		
-		
+
 		function updatePrice() {
 			totalPriceCount = 0;
 			for (let i = 0; i < cartNum; i++) {
@@ -225,12 +246,60 @@
 		for (let i = 0; i < cartNum; i++) {
 			let deleteBtn = document.getElementById('deleteBtn' + i);
 			let theItem = document.getElementById('productItem' + i);
-			deleteBtn.addEventListener('click', function() {
-				theItem.remove();
-				updatePrice();
-			});
+			deleteBtn.addEventListener('click',function() {
+						let sId = deleteBtn.dataset.id;
+						console.log(sId);
+						let check = confirm('是否從購物車中刪除這個商品?');
+						if (check) {
+							theItem.remove();
+									// 以AJAX同步更新資料表
+								$.ajax({
+									url : 'http://localhost:8080/hangoutchill/shop/delete/cartItem',    
+									method : 'delete',
+									contentType : "application/json;charset=UTF-8",
+									dataType : 'json',
+									data : JSON.stringify({
+											'cartid':sId
+											}),
+									success : function(result) {
+											console.log(result);
+											alert("本項商品已成功刪除！");
+										},
+									error : function(err) {
+											console.log(err);
+											alert("購物車中無此項商品2222");
+										}
+									});
+									
+									$.ajax({
+        								url: 'http://localhost:8080/hangoutchill/shop/get/shoppingCartItemNum',
+										type: 'GET',
+										contentType: "application/json;charset=UTF-8",
+										datatype: 'json',
+										success: function (result) {
+											console.log(result);
+											if(result == 0){
+												$('.count').hide();
+											}else{
+											$('.count').text(result);
+											}
+         	
+											},
+											error: function (err) {
+												console.log(err);
+												$('.count').hide();
+											}
+										})
+									
+// 									 以AJAX同步更新資料表
+									updatePrice();
+							}
+
+
+						});
+
 		}
-		
+
 		// 點擊數量按鈕增減
 		let plus = document
 				.getElementsByClassName('btn btn-outline-primary js-btn-plus');
@@ -241,8 +310,10 @@
 			plus[i].addEventListener('click', function() {
 				let theAmount = this.parentElement.previousElementSibling;
 				let actValue = parseInt(theAmount.value);
+				let sId = theAmount.dataset.id;
 				actValue++;
 				theAmount.value = actValue;
+				updateAmount(sId,actValue);
 				theAmount.dispatchEvent(new Event('change'));
 			})
 		}
@@ -251,15 +322,40 @@
 			minus[i].addEventListener('click', function() {
 				let theAmount = this.parentElement.nextElementSibling;
 				let actValue = parseInt(theAmount.value);
+				let sId = theAmount.dataset.id;
 				if (actValue > 1) {
 					actValue--;
 					theAmount.value = actValue;
+					updateAmount(sId,actValue);
 					theAmount.dispatchEvent(new Event('change'));
 				}
 			})
 		}
+
+		function updateAmount(sId,updatedAmount){
+			$.ajax({
+				url : 'http://localhost:8080/hangoutchill/shop/put/amountupdate',    
+				method : 'PUT',
+				contentType : "application/json;charset=UTF-8",
+				dataType : 'json',
+				data : JSON.stringify({
+						'cartid':sId,
+						'amount': updatedAmount
+					}),
+				success : function(result) {
+							console.log(result);
+							alert(result);
+										},
+							error : function(err) {
+								console.log(err);
+								alert(err);
+						}
+			});
+		}
+
 		
-		
+
+
 	</script>
 </body>
 </html>

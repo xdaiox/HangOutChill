@@ -6,13 +6,17 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ispan.hangoutchill.member.model.NormalMember;
@@ -60,8 +64,20 @@ public class ShoppingCartController {
 		return shoppingCartService.findCartItemsNum(currentmember.getId());
 	}
 	
-	
-	
+	@ResponseBody
+	@DeleteMapping("shop/delete/cartItem")
+	public String deleteCartItemById(
+			@CurrentSecurityContext(expression = "authentication") Authentication authentication,
+			@RequestBody Map<String,Integer> requestData) {
+		try {
+			Integer cartId = requestData.get("cartid");
+			System.out.println(cartId);
+			shoppingCartService.deleteCartItemById(cartId);
+			return "本項商品已成功刪除！";			
+		}catch (EmptyResultDataAccessException e) {
+			return "購物車中無此項商品";
+		}
+	}
 	
 	
 	@ResponseBody
@@ -99,6 +115,19 @@ public class ShoppingCartController {
 	}
 	
 	
+	@ResponseBody
+	@PutMapping("/shop/put/amountupdate")
+	public String updateProductAmountById(@CurrentSecurityContext(expression = "authentication") Authentication authentication,
+			@RequestBody Map<String,Integer> requestData) {
+		Integer sId = requestData.get("cartid");
+		Integer amount = requestData.get("amount");
+		try {
+			shoppingCartService.updateProductAmount(sId, amount);
+			return "產品數量已成功更改!";
+		}catch (EmptyResultDataAccessException e){
+			return "產品數量無法更改!";
+		}
+	}
 	
 	
 	

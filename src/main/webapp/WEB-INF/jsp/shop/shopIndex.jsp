@@ -54,5 +54,28 @@
 	<script src="${contextRoot}/js/jquery.validate.min.js"></script>
 	<script src="${contextRoot}/js/mail-script.js"></script>
 	<script src="${contextRoot}/js/theme.js"></script>
+	<script>
+	$.ajax({
+        url: 'http://localhost:8080/hangoutchill/shop/get/shoppingCartItemNum',
+        type: 'GET',
+        contentType: "application/json;charset=UTF-8",
+        datatype: 'json',
+        success: function (result) {
+            console.log(result);
+         	if(result == 0){
+         		$('.count').hide();
+         	}else{
+            $('.count').text(result);
+         	}
+         	
+        },
+        error: function (err) {
+            console.log(err);
+            $('.count').hide();
+        }
+    })
+	
+	</script>
+	
 </body>
 </html>
