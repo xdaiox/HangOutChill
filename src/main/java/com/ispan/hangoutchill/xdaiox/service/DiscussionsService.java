@@ -13,10 +13,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ispan.hangoutchill.xdaiox.dao.DiscussionsRepository;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @Service
 public class DiscussionsService {
 
+    @PersistenceContext
+    private EntityManager entityManager;
+	
 	@Autowired
 	private DiscussionsRepository dssRepository;
 	

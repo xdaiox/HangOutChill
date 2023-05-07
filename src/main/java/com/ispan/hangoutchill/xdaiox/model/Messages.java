@@ -45,8 +45,16 @@ public class Messages {
         }
     }
     
-    @ManyToOne
-    @JoinColumn(name="fk_member_id", nullable = true, insertable = false, updatable = false)
+    public NormalMember getNormalMmeber() {
+		return normalMmeber;
+	}
+
+	public void setNormalMmeber(NormalMember normalMmeber) {
+		this.normalMmeber = normalMmeber;
+	}
+
+	@ManyToOne
+    @JoinColumn(name="fk_member_id", nullable = true)
     private NormalMember normalMmeber;
 	
     @ManyToOne

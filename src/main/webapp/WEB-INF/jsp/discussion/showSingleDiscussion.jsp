@@ -252,23 +252,24 @@
 											<h5 class="card-title text-center">回覆</h5>
 										</div>
 
-										<!-- ========================顯示回覆訊息======================== -->
+										<!-- ========================顯示全部回覆======================== -->
 										<jstl:forEach var="message" items="${page.content}">
 											<div class="card">
 												<div class="card-body p-2 p-sm-3">
 													<div class="media forum-item">
+														<!-- ========================顯示使用者圖片======================== -->
 														<a href="#" data-toggle="collapse"
 															data-target=".forum-content"><img
-																src="https://bootdey.com/img/Content/avatar/avatar1.png"
+																src="${message.normalMmeber.photoB64}"
 																class="mr-3 rounded-circle" width="50" alt="User" /></a>
 														<div class="media-body">
 															<h3>${message.contents}</h3>
 															<p class="text-muted">
-															<h5>Author:
-																<a href="#">${discussion.normalMmeber.nickName}</a>
-																posted
+															<h5>作者:
+																<a>${message.normalMmeber.nickName}</a>
+																
 															</h5><span class="text-secondary font-weight-bold">
-																<fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss"
+																回覆於:<fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss"
 																	value="${message.postDate}" />
 															</span>
 															</p>
@@ -304,7 +305,8 @@
 												<form:input type="hidden" path="discussions"
 													value="${discussion.d_id}" />
 												<div class="form-group">
-
+													<!--  把member_id值設定至message的normalMmeber -->
+													<form:hidden path="normalMmeber" value="${result.id}"></form:hidden>
 													<!-- ================================== ck editor ================================== -->
 													<form:textarea path="contents" id="editor" placeholder="請在這裡填寫內容" />
 													<!-- ================================== ck editor ================================== -->

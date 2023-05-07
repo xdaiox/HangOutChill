@@ -18,8 +18,6 @@ public class Discussions {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="dscussion_id")
 	private Integer d_id;
-	@Column(name="fk_member_id")
-	private Integer m_id;
 	@Column(name="type")
 	private String type;
 	@Column(name="title")
@@ -60,32 +58,61 @@ public class Discussions {
 	
 	
 	@ManyToOne
-	@JoinColumn(name="fk_member_id", nullable = true, insertable = false, updatable = false)
-	private NormalMember normalMmeber;
+	@JoinColumn(name="fk_member_id", nullable = true)
+	private NormalMember normalMember;
 	
     @OneToMany(mappedBy = "discussions",fetch=FetchType.LAZY,
 	cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Messages> messages = new LinkedHashSet<>();
-	
-    @OneToMany(mappedBy = "fkImgDiscussions",fetch=FetchType.LAZY,
+
+	@OneToMany(mappedBy = "fkImgDiscussions",fetch=FetchType.LAZY,
 	cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Images> images = new LinkedHashSet<>();
 	
+	
+	
+	
+    public NormalMember getNormalMember() {
+		return normalMember;
+	}
+
+
+
+	public void setNormalMember(NormalMember normalMember) {
+		this.normalMember = normalMember;
+	}
+
+
+
+	public Set<Messages> getMessages() {
+		return messages;
+	}
+
+
+
+	public void setMessages(Set<Messages> messages) {
+		this.messages = messages;
+	}
+
+
+
+	public Set<Images> getImages() {
+		return images;
+	}
+
+
+
+	public void setImages(Set<Images> images) {
+		this.images = images;
+	}
+
+
     
 	public Discussions() {
 	}
 	
 	
-	
-	public NormalMember getNormalMmeber() {
-		return normalMmeber;
-	}
 
-
-
-	public void setNormalMmeber(NormalMember normalMmeber) {
-		this.normalMmeber = normalMmeber;
-	}
 
 
 
@@ -98,19 +125,6 @@ public class Discussions {
 	public void setD_id(Integer d_id) {
 		this.d_id = d_id;
 	}
-
-
-
-	public Integer getM_id() {
-		return m_id;
-	}
-
-
-
-	public void setM_id(Integer m_id) {
-		this.m_id = m_id;
-	}
-
 
 
 	public String getType() {

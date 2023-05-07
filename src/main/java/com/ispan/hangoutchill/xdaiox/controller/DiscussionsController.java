@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,8 @@ import com.ispan.hangoutchill.member.service.NormalMemberService;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
 import com.ispan.hangoutchill.xdaiox.model.Images;
 import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
-
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 @Controller
 public class DiscussionsController {
 	
@@ -83,15 +85,14 @@ public class DiscussionsController {
     	return "redirect:/message/allMessages/{id}";
     }
     
+    @Transactional
     @DeleteMapping("/discussion/deleteDiscussion/{id}")
     public String toDeleteButItsNotActuallyDeleteItsHiddenDiscussion(@PathVariable("id") Integer id) {
     	dService.deleteDiscussionById(id);
+    	System.out.println("========================after delete========================"+id+"========================after delete========================");
     	return "redirect:/discussion/allDiscussion";
     }
-    
-   
-    
-   
+
 //    
 //    
 //    
