@@ -4,15 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
-<<<<<<< HEAD
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
 import com.ispan.hangoutchill.xdaiox.service.MessagesService;
 
 import java.lang.reflect.Member;
 
 
-=======
->>>>>>> e73a2aa1b0b16c1a8d8cc2850ccba275ec854ce0
 @Controller
 public class HomepageController {
     @GetMapping("/")
