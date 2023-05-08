@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,8 +47,9 @@
             <div class="col-lg-4 col-md-3 col-sm-6 search-trigger">
                 <div class="right-button">
                     <ul>
-                        <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
                         <li><a href="#"><i class="ti-btnshopcart"></i></a></li>
+<%--                         <li><a href="#" data-toggle="dropdown"><i class="ti-user"><jstl:choose><jstl:when test="${result.nickName != null}">${result.nickName}您好</jstl:when></jstl:choose></i></a></li> --%>
+                        <li><a href="#" data-toggle="dropdown"><i class="ti-user"><sec:authentication property="name" />您好</i></a></li>
                         <li><a class="btn-login" href="${contextRoot}/member/loginHome">登入</a></li>
                     </ul>
                 </div>

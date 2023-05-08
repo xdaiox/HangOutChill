@@ -26,7 +26,7 @@ public class AALcontroller {
 	@Autowired
 	private AALservice aalService;
 	 @Autowired
-	 NormalMemberService nMemberService;
+	 private NormalMemberService nMemberService;
 
 	
 	@GetMapping("/actandles/shop/add")
