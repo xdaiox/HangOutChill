@@ -130,6 +130,23 @@ public class ShoppingCartController {
 	}
 	
 	
+	@GetMapping("/shop/orderdetail")
+	public String goOrderConfirmPage(@CurrentSecurityContext(expression = "authentication") Authentication authentication, Model model) {
+		// 商品細項資訊
+		String name = authentication.getName();
+		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
+		Set<ShoppingCart> cartItems = currentmember.getShoppingCart();
+		List<ShoppingCart> carItemsList = new ArrayList<>(cartItems);
+		model.addAttribute("shoppingCartItems", carItemsList);
+		
+		// 帶入會員資訊
+		model.addAttribute("user",currentmember);
+		
+		// 總價計算
+		Integer totalPrice = shoppingCartService.totalPriceCount(carItemsList);
+		model.addAttribute("totalprice", totalPrice);
+		return "shop/orderDetail";
+	}
 	
 	
 	

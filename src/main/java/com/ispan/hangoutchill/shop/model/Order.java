@@ -20,6 +20,7 @@ public class Order {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="order_id", columnDefinition="int")
 	private Integer orderId;
 	
 	@Column(name="orderdate", columnDefinition="date")
@@ -39,6 +40,26 @@ public class Order {
 	
 	@Column(name="shippeddate", columnDefinition="date")
 	private String shippedDate;
+	
+	// 新增欄位
+	
+	@Column(name="order_no", columnDefinition="nvarchar(30)")
+	private String orderNo;
+	
+	@Column(name="memberphone", columnDefinition="nvarchar(30)")
+	private String memberPhone;
+	
+	
+	@Column(name="recipientname", columnDefinition="nvarchar(30)")
+	private String recipientName;
+	
+	@Column(name="recipientphone", columnDefinition="nvarchar(30)")
+	private String recipientPhone;
+	
+	@Column(name="recipientmail", columnDefinition="nvarchar(50)")
+	private String recipientMail;
+	
+	
 	
 	// 等Member資料表中加入以下程式碼後執行此項
 	// @OneToMany(mappedBy="member",

@@ -1,14 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: iztuc
-  Date: 2023/4/20
-  Time: 下午 03:12
-  To change this template use File | Settings | File Templates.
---%>
+<%-- Created by IntelliJ IDEA. User: iztuc Date: 2023/4/20 Time: 下午 03:12 To change this template use File | Settings |
+	File Templates. --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <html>
+
 <head>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!-- Required meta tags -->
@@ -18,12 +14,13 @@
 <link rel="icon" href="" type="image/png">
 <link rel="stylesheet" href="${contextRoot}/css/shop/shoppingcart.css">
 <%-- <link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css"> --%>
-<title>購物車</title>
+<title>訂單明細</title>
 
 <jsp:include page="layout/navbar.jsp" />
 
 
 </head>
+
 <body>
 	<main>
 		<section class="category-page area-padding">
@@ -31,9 +28,10 @@
 				href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
 				rel="stylesheet">
 			<div class="container padding-bottom-3x mb-1" style="max-width: 70%">
-				<div class="table-responsive shopping-cart">
-					<div style="text-align: center;">
-						<h2>我的購物車</h2>
+				<div class="table-responsive shopping-cart"
+					style="margin-bottom: 0px;">
+					<div style="text-align: left; background-color: #D9D9D9;">
+						<h2 style="padding: 10px; margin-bottom: 0">訂單明細</h2>
 					</div>
 					<table class="table" style="background-color: white">
 						<thead>
@@ -43,8 +41,6 @@
 								<th class="text-center">單價</th>
 								<th class="text-center">折扣</th>
 								<th class="text-center">小計</th>
-								<th class="text-center"><a
-									class="btn btn-sm btn-outline-danger" href="#">刪除產品</a></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -52,10 +48,6 @@
 								<tr id="productItem${shoppingCartItems.indexOf(cartItem)}">
 									<td>
 										<div class="product-item">
-											<a class="product-thumb" href="#"><img width='100'
-												height='100'
-												src='<c:url value="/shop/getPicture/${cartItem.product.productId}" />'
-												alt="Product"></a>
 											<div class="product-info">
 												<h4 class="product-title">
 													<a href="#">${cartItem.product.productName}</a>
@@ -65,23 +57,10 @@
 										</div>
 									</td>
 									<td class="text-center">
-										<div class="input-group mb-3"
-											style="max-width: 120px; margin: auto;">
-											<div class="input-group-prepend">
-												<button class="btn btn-outline-primary js-btn-minus"
-													type="button">&minus;</button>
-											</div>
-											<input type="text" class="form-control text-center"
-												value="${cartItem.amount}" placeholder=""
-												aria-label="Example text with button addon"
-												aria-describedby="button-addon1"
-												id="amount${shoppingCartItems.indexOf(cartItem)}"
-												data-id="${cartItem.sId}">
-											<div class="input-group-append">
-												<button class="btn btn-outline-primary js-btn-plus"
-													type="button">&plus;</button>
-											</div>
-										</div>
+										<div class="count-input"
+											id="amount${shoppingCartItems.indexOf(cartItem)}">
+											${cartItem.amount}</div>
+
 									</td>
 									<td class="text-center text-lg text-medium"
 										id="price${shoppingCartItems.indexOf(cartItem)}">$${cartItem.product.unitPrice}</td>
@@ -89,10 +68,6 @@
 										id="discount${shoppingCartItems.indexOf(cartItem)}">${cartItem.product.discount}</td>
 									<td class="text-center text-lg text-medium"
 										id="subtotal${shoppingCartItems.indexOf(cartItem)}"></td>
-									<td class="text-center"><a class="remove-from-cart"
-										href="#" data-toggle="tooltip" title=""
-										data-original-title="Remove item"><i class="fa fa-trash"
-											id="deleteBtn${shoppingCartItems.indexOf(cartItem)}" data-id="${cartItem.sId}"></i></a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -110,23 +85,87 @@
 					<div class="column text-lg">
 						運費: <span class="text-medium" style="font-size: larger;">$588</span><br>
 						總計: <span class="text-medium" id="totalPrice"
-							style="font-size: 1.5em; color: red;"></span>
+							style="font-size: 1.5em; color: red;">${totalprice}</span>
 					</div>
 				</div>
-				<div class="shopping-cart-footer">
-					<div class="column">
-						<!-- 						<a class="btn btn-outline-secondary" href="#"><i -->
-						<!-- 							class="icon-arrow-left"></i>&nbsp;繼續購物</a> -->
-					</div>
-					<div class="column">
-						<a class="btn btn-primary" href="#" data-toast=""
-							data-toast-type="success" data-toast-position="topRight"
-							data-toast-icon="icon-circle-check" data-toast-title="Your cart"
-							data-toast-message="is updated successfully!">繼續逛逛</a><a
-							class="btn btn-success" href="#">確認結帳</a>
-					</div>
-				</div>
+				<div class="container" style="background-color: white">
+					<form>
+					<div class="row">
+						<div class="col-md-5">
+							<h3 style="text-align: left; margin: 20px 0px;">付款方式</h3>
+							<div class="form-group">
+								<label for="payment-method">選擇付款方式</label> <select
+									class="form-control" id="payment-method">
+									<option>線上刷卡</option>
+									<option>超商取貨付款</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="credit-card">信用卡號碼</label> <input type="text"
+									class="form-control" id="credit-card" placeholder="請輸入信用卡號碼">
+							</div>
+							<div class="form-group">
+								<label for="expiry-date">到期日</label> <input type="text"
+									class="form-control" id="expiry-date" placeholder="MM / YY">
+							</div>
+							<div class="form-group">
+								<label for="cvv">CVV</label> <input type="text"
+									class="form-control" id="cvv" placeholder="CVV">
+							</div>
+						</div>
+						<div class="col-md-7">
+							<h3 style="text-align: left; margin: 20px 0px;">購買人資訊</h3>
+							<div class="form-row">
+								<div class="col">
+									<label for="buyer-name">購買人姓名</label> <input type="text"
+										class="form-control" id="buyer-name" value="${user.reallName}"
+										readonly="readonly">
+								</div>
+								<div class="col">
+									<label for="buyer-phone">購買人手機</label> <input type="text"
+										class="form-control" id="buyer-phone">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="buyer-address">購買人email</label> <input type="text"
+									class="form-control" id="buyer-address" placeholder=""
+									value="${user.account}">
+							</div>
+							<h3
+								style="text-align: left; margin: 20px 0px; display: inline-block;">收件人資訊</h3>
+							<input type="button" value="複製購買人資訊"
+								class="btn btn-outline-warning" style="font-size: 0.8em;">
+							<div class="form-row">
+								<div class="col">
+									<label for="buyer-name">收件人姓名</label> <input type="text"
+										class="form-control" id="buyer-name" placeholder="">
+								</div>
+								<div class="col">
+									<label for="buyer-phone">收件人手機</label> <input type="text"
+										class="form-control" id="buyer-phone" placeholder="">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="buyer-address">收件人email</label> <input type="text"
+									class="form-control" id="buyer-address" placeholder="">
+							</div>
 
+							<div class="form-group">
+								<label for="recipient-address">收件人地址</label> <input type="text"
+									class="form-control" id="recipient-address" placeholder="">
+							</div>
+
+						</div>
+					</div>
+					<div class="shopping-cart-footer">
+						<!-- <div class="column"><a class="btn btn-outline-secondary" href="#"><i class="icon-arrow-left"></i>&nbsp;Back to Shopping</a></div> -->
+						<div class="column" style="text-align: center;">
+							<!-- <a class="btn btn-primary" href="#" data-toast="" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Your cart" data-toast-message="is updated successfully!">繼續逛逛</a> -->
+							<a class="btn btn-success" href="#">提交訂單</a>
+						</div>
+					</div>
+					</form>
+				</div>
 
 			</div>
 		</section>
@@ -152,210 +191,53 @@
 	<script src="${contextRoot}/js/jquery.validate.min.js"></script>
 	<script src="${contextRoot}/js/jquery.validate.min.js"></script>
 	<script src="${contextRoot}/js/mail-script.js"></script>
-<script src="${contextRoot}/js/jquery-3.6.4.min.js"></script>
+	<script src="${contextRoot}/js/jquery-3.6.4.min.js"></script>
 	<script src="${contextRoot}/js/shop/templatemo.js"></script>
 	<script src="${contextRoot}/js/theme.js"></script>
 	<script>
-		
-	// 購物車上的小圖示同步購物車內品項數量
-	$.ajax({
-        url: 'http://localhost:8080/hangoutchill/shop/get/shoppingCartItemNum',
-        type: 'GET',
-        contentType: "application/json;charset=UTF-8",
-        datatype: 'json',
-        success: function (result) {
-            console.log(result);
-         	if(result == 0){
-         		$('.count').hide();
-         	}else{
-            $('.count').text(result);
-         	}
-         	
-        },
-        error: function (err) {
-            console.log(err);
-            $('.count').hide();
-        }
-    })
-	
-	
-		// 計算各項產品價格與總價
+		// 購物車上的小圖示同步購物車內品項數量
+		$
+				.ajax({
+					url : 'http://localhost:8080/hangoutchill/shop/get/shoppingCartItemNum',
+					type : 'GET',
+					contentType : "application/json;charset=UTF-8",
+					datatype : 'json',
+					success : function(result) {
+						console.log(result);
+						if (result == 0) {
+							$('.count').hide();
+						} else {
+							$('.count').text(result);
+						}
+
+					},
+					error : function(err) {
+						console.log(err);
+						$('.count').hide();
+					}
+				})
+
 		let cartItems = document.getElementsByClassName('product-title');
 		let cartNum = cartItems.length;
 		console.log(cartNum);
-		let totalPrice = document.getElementById('totalPrice');
-		let totalPriceCount = 0;
 		for (let i = 0; i < cartNum; i++) {
 			let price = document.getElementById('price' + i).innerHTML;
-			//             console.log(price)
+			console.log(price.slice(2, -1));
 			let discount = document.getElementById('discount' + i).innerHTML;
 			if (discount == "—") {
 				discount = 1;
 			}
-			let amount = document.getElementById('amount' + i).value;
-			// console.log(amount);
+			let amount = document.getElementById('amount' + i).innerHTML;
+			console.log(amount);
 			let subtotal = document.getElementById('subtotal' + i);
 			let actprice = parseInt(price.slice(1));
-
-			//             console.log(price.slice(1));
 			subtotal.innerHTML = Math.round(actprice * discount * amount);
-
-			totalPriceCount += Math.round(actprice * discount * amount);
 
 			if (discount === "1.0") {
 				document.getElementById('discount' + i).innerHTML = "—";
 			}
-
 		}
-		totalPrice.innerHTML = totalPriceCount;
-
-		// 數量更改
-		// 但這邊要不要使用AJAX，讓數量隨之更改時更改資料庫的紀錄?
-		for (let i = 0; i < cartNum; i++) {
-			let amount = document.getElementById('amount' + i);
-			console.log(amount.value);
-			amount.addEventListener('change', updatePrice);
-		}
-
-		function updatePrice() {
-			totalPriceCount = 0;
-			for (let i = 0; i < cartNum; i++) {
-				let price = document.getElementById('price' + i);
-				if (price != null) {
-					let discount = document.getElementById('discount' + i).innerHTML;
-					if (discount == "—") {
-						discount = 1;
-					}
-					let amount = document.getElementById('amount' + i).value;
-					// console.log(amount);
-					let subtotal = document.getElementById('subtotal' + i);
-					let actprice = parseInt(price.innerHTML.slice(1));
-					// console.log(actprice);
-					subtotal.innerHTML = Math.round(actprice * discount
-							* amount);
-					totalPriceCount += Math.round(actprice * discount * amount);
-					if (discount === "1.0") {
-						document.getElementById('discount' + i).innerHTML = "—";
-					}
-				}
-			}
-			totalPrice.innerHTML = totalPriceCount
-		}
-
-		// 刪除品項
-		for (let i = 0; i < cartNum; i++) {
-			let deleteBtn = document.getElementById('deleteBtn' + i);
-			let theItem = document.getElementById('productItem' + i);
-			deleteBtn.addEventListener('click',function() {
-						let sId = deleteBtn.dataset.id;
-						console.log(sId);
-						let check = confirm('是否從購物車中刪除這個商品?');
-						if (check) {
-							theItem.remove();
-									// 以AJAX同步更新資料表
-								$.ajax({
-									url : 'http://localhost:8080/hangoutchill/shop/delete/cartItem',    
-									method : 'delete',
-									contentType : "application/json;charset=UTF-8",
-									dataType : 'json',
-									data : JSON.stringify({
-											'cartid':sId
-											}),
-									success : function(result) {
-											console.log(result);
-											alert("本項商品已成功刪除！");
-										},
-									error : function(err) {
-											console.log(err);
-											alert("購物車中無此項商品2222");
-										}
-									});
-									
-									$.ajax({
-        								url: 'http://localhost:8080/hangoutchill/shop/get/shoppingCartItemNum',
-										type: 'GET',
-										contentType: "application/json;charset=UTF-8",
-										datatype: 'json',
-										success: function (result) {
-											console.log(result);
-											if(result == 0){
-												$('.count').hide();
-											}else{
-											$('.count').text(result);
-											}
-         	
-											},
-											error: function (err) {
-												console.log(err);
-												$('.count').hide();
-											}
-										})
-									
-// 									 以AJAX同步更新資料表
-									updatePrice();
-							}
-
-
-						});
-
-		}
-
-		// 點擊數量按鈕增減
-		let plus = document
-				.getElementsByClassName('btn btn-outline-primary js-btn-plus');
-		let minus = document
-				.getElementsByClassName('btn btn-outline-primary js-btn-minus');
-
-		for (let i = 0; i < plus.length; i++) {
-			plus[i].addEventListener('click', function() {
-				let theAmount = this.parentElement.previousElementSibling;
-				let actValue = parseInt(theAmount.value);
-				let sId = theAmount.dataset.id;
-				actValue++;
-				theAmount.value = actValue;
-				updateAmount(sId,actValue);
-				theAmount.dispatchEvent(new Event('change'));
-			})
-		}
-
-		for (let i = 0; i < minus.length; i++) {
-			minus[i].addEventListener('click', function() {
-				let theAmount = this.parentElement.nextElementSibling;
-				let actValue = parseInt(theAmount.value);
-				let sId = theAmount.dataset.id;
-				if (actValue > 1) {
-					actValue--;
-					theAmount.value = actValue;
-					updateAmount(sId,actValue);
-					theAmount.dispatchEvent(new Event('change'));
-				}
-			})
-		}
-
-		function updateAmount(sId,updatedAmount){
-			$.ajax({
-				url : 'http://localhost:8080/hangoutchill/shop/put/amountupdate',    
-				method : 'PUT',
-				contentType : "application/json;charset=UTF-8",
-				dataType : 'json',
-				data : JSON.stringify({
-						'cartid':sId,
-						'amount': updatedAmount
-					}),
-				success : function(result) {
-							console.log(result);
-							alert(result);
-										},
-							error : function(err) {
-								console.log(err);
-								alert(err);
-						}
-			});
-		}
-
-		
-
-
 	</script>
 </body>
+
 </html>

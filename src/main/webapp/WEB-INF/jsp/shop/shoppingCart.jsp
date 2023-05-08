@@ -123,7 +123,7 @@
 							data-toast-type="success" data-toast-position="topRight"
 							data-toast-icon="icon-circle-check" data-toast-title="Your cart"
 							data-toast-message="is updated successfully!">繼續逛逛</a><a
-							class="btn btn-success" href="#">確認結帳</a>
+							class="btn btn-success" href='<c:url value="/shop/orderdetail" />'>確認結帳</a>
 					</div>
 				</div>
 
