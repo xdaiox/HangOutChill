@@ -155,113 +155,13 @@ public class LocationInfoController {
 
     //搜尋功能 By name
 //    @GetMapping("/location/locationManager/search")
-
-
-
-
-//    @GetMapping("/location/locationManager")
-//    public Map<String, Object> showAllLocationInfo(
-//            @RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
-//            @RequestParam(name = "name", required = false) String name,
-//            @RequestParam(name = "category", required = false) String category,
-//            @RequestParam(name = "price", required = false) Integer price,
-//            @RequestParam(name = "city", required = false) String city,
-//            @RequestParam(name = "dist", required = false) String dist) {
-//
-//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(
-//                pageNumber, name, category, price, city, dist);
-//
-//        // 將 Page 轉換為 JSON 格式
-//        Map<String, Object> response = new HashMap<>();
-//        response.put("content", page.getContent());
-//        response.put("totalPages", page.getTotalPages());
-//        response.put("pageNumber", pageNumber);
-//
-//        return response;
-//    }
-
-
-//    @GetMapping("/location/locationManager")
-//    public String showAllLocationInfo(@RequestParam(name = "p" ,defaultValue = "1") Integer pageNumber,
-//                                      @RequestParam(name = "name", required = false) String name,
-//                                      @RequestParam(name = "category", required = false) String category,
-//                                      @RequestParam(name = "price", required = false) Integer price,
-//                                      @RequestParam(name = "city", required = false) String city,
-//                                      @RequestParam(name = "dist", required = false) String dist,
-//                                      Model model){
-//   Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(
-//                                    pageNumber, name, category, price, city, dist);
-//   model.addAttribute("page", page);
-//   return "/location/locationManager";
-//    }
-
-
-
-
-
-
-//    @GetMapping("/location/locationManager")
-//    public String showAllLocationInfo(@RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber,Model model){
-//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber);
-//        model.addAttribute("page", page);
-//        return "/location/locationManager";
-//    }
-//
-//    @ResponseBody
-//    @GetMapping("/location/locationManager/search")
-//    public Page<LocationInfo>searchLocationInfo(@RequestParam(name = "name", required = false) String name,
-//                                                @RequestParam(name = "category", required = false) String category,
-//                                                @RequestParam(name = "price", required = false) Integer price,
-//                                                @RequestParam(name = "city", required = false) String city,
-//                                                @RequestParam(name = "dist", required = false) String dist,
-//                                                @RequestParam(name = "p" ,defaultValue = "1") Integer pageNumber){
-//        Page<LocationInfo> page = locationInfoService.searchLocationInfo(name,category,price,city,dist,pageNumber);
-//
-//        return page;
-//    }
+    
+//    ==========================AJAX測試==============================
 
     @GetMapping("/location/locationManager")
     public String toLocationManager(){
         return "/location/locationManagerAjax";
     }
-
-//    @ResponseBody
-//    @PostMapping("/api/location/locationManager/search")
-//    public Page<LocationInfo>searchLocationInfo(@RequestBody ){
-//
-//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber, name, category, price, city, dist);
-//        return page;
-//    }
-
-//    @ResponseBody
-//    @PostMapping("/api/location/locationManager/search")
-//    public  Page<LocationInfo> showAllLocationInfo(@RequestBody Map<String,Object> searchResult,
-//                                                   @RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber){
-//        String name = (String) searchResult.get("name");
-//        String category =(String) searchResult.get("category");
-//        Integer price = Integer.valueOf((String) searchResult.get("price"));
-//        String city = (String)  searchResult.get("city");
-//        String dist = (String)  searchResult.get("dist");
-//
-//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber, name, category, price, city, dist);
-//
-//        return page;
-//    }
-
-
-//    @ResponseBody
-//    @GetMapping("/api/location/locationManager/search")
-//    public  Page<LocationInfo> showAllLocationInfo(@RequestParam(name = "name", required = false) String name,
-//                                                   @RequestParam(name = "category", required = false) String category,
-//                                                   @RequestParam(name = "price", required = false) Integer price,
-//                                                   @RequestParam(name = "city", required = false) String city,
-//                                                   @RequestParam(name = "dist", required = false) String dist,
-//                                                   @RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber){
-//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber, name, category, price, city, dist);
-//        return page;
-//    }
-
-
 
 
     @ResponseBody
@@ -271,11 +171,9 @@ public class LocationInfoController {
 
 
 
-        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber,locationInfoRequest.getName(), null, null, null, null);
+        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber,locationInfoRequest.getName(), locationInfoRequest.getCategory(), null, null, null);
 
         return page;
     }
-//
-//
-//
+
 }
