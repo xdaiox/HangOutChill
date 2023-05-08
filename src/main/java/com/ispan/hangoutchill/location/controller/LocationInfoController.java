@@ -225,10 +225,38 @@ public class LocationInfoController {
         return "/location/locationManagerAjax";
     }
 
-    @ResponseBody
-    @PostMapping("/api/location/locationManager/search")
-    public Page<LocationInfo>searchLocationInfo(@RequestBody ){
+//    @ResponseBody
+//    @PostMapping("/api/location/locationManager/search")
+//    public Page<LocationInfo>searchLocationInfo(@RequestBody ){
+//
+//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber, name, category, price, city, dist);
+//        return page;
+//    }
 
+//    @ResponseBody
+//    @PostMapping("/api/location/locationManager/search")
+//    public  Page<LocationInfo> showAllLocationInfo(@RequestBody Map<String,Object> searchResult,
+//                                                   @RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber){
+//        String name = (String) searchResult.get("name");
+//        String category =(String) searchResult.get("category");
+//        Integer price = Integer.valueOf((String) searchResult.get("price"));
+//        String city = (String)  searchResult.get("city");
+//        String dist = (String)  searchResult.get("dist");
+//
+//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber, name, category, price, city, dist);
+//
+//        return page;
+//    }
+
+
+    @ResponseBody
+    @GetMapping("/api/location/locationManager/search")
+    public  Page<LocationInfo> showAllLocationInfo(@RequestParam(name = "name", required = false) String name,
+                                                   @RequestParam(name = "category", required = false) String category,
+                                                   @RequestParam(name = "price", required = false) Integer price,
+                                                   @RequestParam(name = "city", required = false) String city,
+                                                   @RequestParam(name = "dist", required = false) String dist,
+                                                   @RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber){
         Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber, name, category, price, city, dist);
         return page;
     }
@@ -236,4 +264,21 @@ public class LocationInfoController {
 
 
 
+//    @ResponseBody
+//    @PostMapping("/api/location/locationManager/search")
+//    public  Page<LocationInfo> showAllLocationInfo(@RequestBody Map<String,Object> searchResult,
+//                                                   @RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber){
+//        String name = locationInfoService.getStringParameter(searchResult,"name");
+//        String category = locationInfoService.getStringParameter(searchResult,"category");
+//        Integer price = locationInfoService.getIntegerParameter(searchResult,"price");
+//        String city = locationInfoService.getStringParameter(searchResult,"city");
+//        String dist = locationInfoService.getStringParameter(searchResult,"dist");
+//
+//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber, name, category, price, city, dist);
+//
+//        return page;
+//    }
+//
+//
+//
 }

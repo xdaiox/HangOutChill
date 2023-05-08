@@ -55,12 +55,16 @@
         <table>
           <thead>
             <tr>
-              <th></th>
-              <th></th>
+              <th>地點編號</th>
+              <th>地點名稱</th>
+              <th>地點分類</th>
+              <th>消費水準</th>
+              <th>地點城市</th>
+              <th>最後更新時間</th>
+              <th>操作</th>
             </tr>
           </thead>
-          <tbody>
-
+          <tbody id="searchResult-list">
           </tbody>
         </table>
       </div>
@@ -86,20 +90,36 @@
             "price" : inputPrice,
             "city" : inputCity,
             "dist" : inputDist,
+
           };
           let dtoJsonString = JSON.stringify(dtoObject);
 
         $.ajax({
-            url: '${pageContext.request.contextPath}/api/location/locationManager/search',
+            url: '${pageContext.request.contextPath}/api/location/locationManager/search?category=分類1',
             contentType: 'application/json;charset=UTF-8',
             dataType: 'json',
-            method: 'POST',
+            method: 'GET',
             data: dtoJsonString,
-              success: function(queryResult) {
-              console.log(queryResult);
-                },
-              error: function(queryError) {
-              console.log(queryError);
+              success: function(searchResult) {
+              console.log(searchResult);
+               let locationInfo = '';
+              $.each(searchResult.content,function (index,value) {
+                console.log(value)
+                locationInfo += '<tr>'
+                locationInfo += '<td>' + value.locId + '</td>'
+                locationInfo += '<td>' + value.locName + '</td>'
+                locationInfo += '<td>' + value.locCat + '</td>'
+                locationInfo += '<td>' + value.locPriceLevel + '</td>'
+                locationInfo += '<td>' + value.locCity + '</td>'
+                locationInfo += '<td>' + value.locDist + '</td>'
+              })
+                // locationInfo = '</tbody>';
+
+              let  table = document.getElementById('searchResult-list');
+              table.innerHTML = locationInfo
+              },
+              error: function(searchError) {
+              console.log(searchError);
                 }
             });
       })

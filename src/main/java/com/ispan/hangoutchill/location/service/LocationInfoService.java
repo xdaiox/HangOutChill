@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -239,6 +240,8 @@ public class LocationInfoService {
 
     //=============================測試=================================
 
+
+    //搜尋條件查詢
     public Page<LocationInfo> findAllLocationInfoByPage(Integer pageNumber, String name, String category, Integer price, String city, String dist) {
         if (name != null || category != null || price != null || city != null || dist != null) {
             return searchLocationInfo(pageNumber, name, category, price, city, dist);
@@ -253,6 +256,28 @@ public class LocationInfoService {
         Page<LocationInfo> page = locRepo.searchLocationInfo(name, category, price, city, dist, pageable);
         return page;
     }
+
+
+
+    //搜尋空字串轉null
+    public String getStringParameter(Map<String, Object> map, String parameterName) {
+        Object value = map.get(parameterName);
+        return value != null ? value.toString() : null;
+    }
+
+    public Integer getIntegerParameter(Map<String, Object> map, String parameterName) {
+        Object value = map.get(parameterName);
+        if (value instanceof Integer) {
+            return (Integer) value;
+        } else if (value instanceof String && !((String) value).isEmpty()) {
+            return Integer.parseInt((String) value);
+        } else {
+            return null;
+        }
+    }
+
+
+
 
 
 
