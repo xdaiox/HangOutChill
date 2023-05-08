@@ -225,13 +225,13 @@ public class LocationInfoController {
         return "/location/locationManagerAjax";
     }
 
-//    @ResponseBody
-//    @PostMapping("/api/location/locationManager/search")
-//    public Page<LocationInfo>searchLocationInfo(@RequestBody ){
-//
-//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber, name, category, price, city, dist);
-//        return page;
-//    }
+    @ResponseBody
+    @PostMapping("/api/location/locationManager/search")
+    public Page<LocationInfo>searchLocationInfo(@RequestBody ){
+
+        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber, name, category, price, city, dist);
+        return page;
+    }
 
 
 
