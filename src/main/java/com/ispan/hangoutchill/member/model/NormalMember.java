@@ -90,14 +90,14 @@ public class NormalMember {
     }
     
     @OneToMany(mappedBy = "normalMember",fetch=FetchType.LAZY,
-    					cascade = {CascadeType.PERSIST},orphanRemoval = true)
+    		cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Discussions> discussions = new LinkedHashSet<>();
     
     @OneToMany(mappedBy = "normalMmeber",fetch=FetchType.LAZY,
 			cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Messages> messages = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "fnormalMmeber",fetch=FetchType.LAZY,
+    @OneToMany(mappedBy = "normalMember",fetch=FetchType.LAZY,
 			cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Favourite> favourite = new LinkedHashSet<>();
 

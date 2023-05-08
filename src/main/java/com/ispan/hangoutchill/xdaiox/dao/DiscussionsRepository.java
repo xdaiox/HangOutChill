@@ -8,7 +8,7 @@ import com.ispan.hangoutchill.xdaiox.model.Discussions;
 
 public interface DiscussionsRepository extends JpaRepository<Discussions, Integer> {
 //	public Discussions findDIdByPostDateDesc();
-	
+    
 	public Page<Discussions> findByVisibleTrue(Pageable pageable);
 
 	

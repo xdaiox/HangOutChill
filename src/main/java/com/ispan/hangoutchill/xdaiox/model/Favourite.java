@@ -4,6 +4,9 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
@@ -16,16 +19,22 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.ispan.hangoutchill.member.model.NormalMember;
 
 @Entity
-@Table(name="favourite")
+@Table(name="discussionFavourite")
 public class Favourite {
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="favourite_id")
+	private Integer id;
+	
 	@ManyToOne
     @JoinColumn(name="fk_member_id", nullable = true)
-    private NormalMember fnormalMmeber;
+    private NormalMember normalMember;
+	
 	
     @ManyToOne
-    @JoinColumn(name="fk_dscussion_id", nullable = true)
-    private Discussions fdiscussions;
+    @JoinColumn(name="fk_discussion_id", nullable = true)
+    private Discussions discussions;
     
 	@Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
@@ -39,20 +48,29 @@ public class Favourite {
         }
     }
 
-	public NormalMember getFnormalMmeber() {
-		return fnormalMmeber;
+
+	public Integer getId() {
+		return id;
 	}
 
-	public void setFnormalMmeber(NormalMember fnormalMmeber) {
-		this.fnormalMmeber = fnormalMmeber;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public Discussions getFdiscussions() {
-		return fdiscussions;
+	public NormalMember getNormalMember() {
+		return normalMember;
 	}
 
-	public void setFdiscussions(Discussions fdiscussions) {
-		this.fdiscussions = fdiscussions;
+	public void setNormalMember(NormalMember normalMember) {
+		this.normalMember = normalMember;
+	}
+
+	public Discussions getDiscussions() {
+		return discussions;
+	}
+
+	public void setDiscussions(Discussions discussions) {
+		this.discussions = discussions;
 	}
 
 	public Date getPostDate() {

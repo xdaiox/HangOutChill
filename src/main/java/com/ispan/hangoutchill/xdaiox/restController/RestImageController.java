@@ -19,7 +19,7 @@ import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
 
 @RestController
 @RequestMapping("/upload")
-public class restImageController {
+public class RestImageController {
 
     @Autowired
     private ImagesRepository imageRepository;
