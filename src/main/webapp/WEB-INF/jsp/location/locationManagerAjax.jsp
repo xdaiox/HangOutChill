@@ -95,10 +95,13 @@
           let dtoJsonString = JSON.stringify(dtoObject);
 
         $.ajax({
-            url: '${pageContext.request.contextPath}/api/location/locationManager/search?category=分類1',
+            url: '${pageContext.request.contextPath}/api/location/locationManager/search',
+
+
+
             contentType: 'application/json;charset=UTF-8',
             dataType: 'json',
-            method: 'GET',
+            method: 'POST',
             data: dtoJsonString,
               success: function(searchResult) {
               console.log(searchResult);
@@ -112,6 +115,7 @@
                 locationInfo += '<td>' + value.locPriceLevel + '</td>'
                 locationInfo += '<td>' + value.locCity + '</td>'
                 locationInfo += '<td>' + value.locDist + '</td>'
+                locationInfo += '</tr>';
               })
                 // locationInfo = '</tbody>';
 

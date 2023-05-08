@@ -259,22 +259,22 @@ public class LocationInfoService {
 
 
 
-    //搜尋空字串轉null
-    public String getStringParameter(Map<String, Object> map, String parameterName) {
-        Object value = map.get(parameterName);
-        return value != null ? value.toString() : null;
-    }
-
-    public Integer getIntegerParameter(Map<String, Object> map, String parameterName) {
-        Object value = map.get(parameterName);
-        if (value instanceof Integer) {
-            return (Integer) value;
-        } else if (value instanceof String && !((String) value).isEmpty()) {
-            return Integer.parseInt((String) value);
-        } else {
-            return null;
-        }
-    }
+//    //搜尋空字串轉null
+//    public String getStringParameter(Map<String, Object> map, String parameterName) {
+//        Object value = map.get(parameterName);
+//        return value != null ? value.toString() : null;
+//    }
+//
+//    public Integer getIntegerParameter(Map<String, Object> map, String parameterName) {
+//        Object value = map.get(parameterName);
+//        if (value instanceof Integer) {
+//            return (Integer) value;
+//        } else if (value instanceof String && !((String) value).isEmpty()) {
+//            return Integer.parseInt((String) value);
+//        } else {
+//            return null;
+//        }
+//    }
 
 
 
