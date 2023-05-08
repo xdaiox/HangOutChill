@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
+import com.ispan.hangoutchill.member.model.NormalMember;
 
 public interface AALRepository extends JpaRepository<ActivitiesandLesson, Integer> {
 
@@ -14,5 +15,6 @@ public interface AALRepository extends JpaRepository<ActivitiesandLesson, Intege
 	public Page<ActivitiesandLesson> findPageByMemberId(@Param(value="memberId") Integer id,Pageable pageable);
 	
 	public Page<ActivitiesandLesson> findByaccountsId(Integer id,Pageable pageable);
+
 	 
 }
