@@ -276,12 +276,12 @@
 														</div>
 														<div>
 															<a
-																href="${contextRoot}/message/editMessage/${message.dm_id}"><button
+																href="${contextRoot}/back/editMessage/${message.dm_id}"><button
 																	class="btn btn-primary"
 																	type="submit">編輯</button></a>
 
 															<form
-																action="${contextRoot}/message/deleteMessage/${discussion.d_id}/${message.dm_id}"
+																action="${contextRoot}/back/deleteMessage/${discussion.d_id}/${message.dm_id}"
 																method="post">
 																<input type="hidden" name="_method" value="delete">
 																<button class="btn btn-primary danger"

@@ -5,7 +5,7 @@
 <html>
 <head>
     <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
-    <title>所有會員</title>
+    <title>所有討論</title>
 </head>
 <body>
 <div class="container-scroller">
@@ -22,9 +22,10 @@
                     <th scope="col">標題</th>
                     <th scope="col">內容</th>
                     <th scope="col">分類</th>
-                    <th scope="col">收藏數</th>
+                    <!-- <th scope="col">收藏數</th>
                     <th scope="col">點閱數</th>
-                    <th scope="col">分享次數</th>
+                    <th scope="col">分享次數</th> -->
+                    <th scope="col">被檢舉次數</th>
                     <th scope="col">最後更新</th>
                     <th scope="col">功能</th>
                 </tr>
@@ -39,18 +40,28 @@
                         <td class="align-middle">${allDiscussion.title}</td>
                         <td class="align-middle">${allDiscussion.contents}</td>
                         <td class="align-middle">${allDiscussion.type}</td>
-                        <td class="align-middle">${allDiscussion.favorite}</td>
+                        <!-- <td class="align-middle">${allDiscussion.favorite}</td>
                         <td class="align-middle">${allDiscussion.readCount}</td>
-                        <td class="align-middle">${allDiscussion.shareCount}</td>
-                        <td class="align-middle">${allDiscussion.updateDate}</td>
+                        <td class="align-middle">${allDiscussion.shareCount}</td> -->
+                        <td class="align-middle">${allDiscussion.rportCount}</td>
+                        <td class="align-middle">${allDiscussion.postDate}</td>
+                        
                         <td class="align-middle">
                             <div style="display: flex">
                                 <form method="get" action="${contextRoot}/back/backCheckDiscussion/${allDiscussion.d_id}" >
-                                    <input type="submit" class="btn btn-outline-primary btn-sm" value="編輯">
+                                    <input type="submit" class="btn btn-outline-primary btn-sm" value="查看">
                                 </form>
-                                <form method="get" action="#">
-                                    <input type="hidden" name="id" value="${allMember.id}">
-                                    <input type="submit" class="btn btn-outline-secondary btn-sm" value="刪除">
+                                <form method="post" action="${contextRoot}/back/visiable">
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <input type="hidden" name="id" value="${allDiscussion.d_id}">
+                                    <jstl:choose>
+                                        <jstl:when test="${allDiscussion.visible == false}">
+                                            <input type="submit" class="btn btn-outline-success" value="顯示討論" >
+                                        </jstl:when>
+                                        <jstl:otherwise >
+                                            <input type="submit" class="btn btn-outline-danger" value="隱藏討論" onclick="return confirm('確定隱藏討論')">
+                                        </jstl:otherwise>
+                                    </jstl:choose>
                                 </form>
                             </div>
                         </td>

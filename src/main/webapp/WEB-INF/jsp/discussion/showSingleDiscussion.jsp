@@ -237,14 +237,21 @@
 											</form:form>
 										</div>
 										<div class="inner-main-header">
-											<a href="${contextRoot}/discussion/editDiscussion/${discussion.d_id}"><button
-													class="btn btn-primary" type="submit">編輯</button></a>
+											<button	class="btn btn-primary" type="submit" onclick="showEditConfirmation()">編輯</button>
 
-											<form action="${contextRoot}/discussion/deleteDiscussion/${discussion.d_id}"
-												method="post">
+											<!-- <form action="${contextRoot}/discussion/deleteDiscussion/${discussion.d_id}"
+												method="post" >
+												<input type="hidden" name="_method" value="delete" >
+												<button class="btn btn-primary danger" type="submit" onclick="confirmDelete()">刪除</button>
+											</form> -->
+
+
+											<button class="btn btn-primary danger" type="button" onclick="showDeleteConfirmation()">刪除</button>
+											<!--==========刪除討論url==========-->
+											<form id="delete-form" action="${contextRoot}/discussion/deleteDiscussion/${discussion.d_id}" method="post" style="display:none">
 												<input type="hidden" name="_method" value="delete">
-												<button class="btn btn-primary danger" type="submit">刪除</button>
 											</form>
+
 										</div>
 									</div>
 									<div class="card">
@@ -336,6 +343,18 @@
 							plugins: [Essentials, Paragraph, Bold, Italic],
 							toolbar: ['bold', 'italic']
 						})
+
+						function showEditConfirmation() {
+							if (confirm("您確定要編輯此討論？")) {
+								window.location.href = "${contextRoot}/discussion/editDiscussion/${discussion.d_id}";
+							}
+						}
+
+						function showDeleteConfirmation() {
+							if (confirm("您確定要刪除此討論？")) {
+								document.getElementById("delete-form").submit();
+							}
+						}
 					</script>
 					<!-- ================================== ck editor ================================== -->
 

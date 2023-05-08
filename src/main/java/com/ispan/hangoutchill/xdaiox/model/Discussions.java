@@ -44,18 +44,25 @@ public class Discussions {
     private Date updateDate;
 	
 	@Column(name="visible")
-	private String visible;
+	private boolean visible;
 	@Column(name="rportCount")
 	private String rportCount;
 	
     @PrePersist
     public void onCreate() {
-        if(postDate == null) {
+        if(updateDate == null && postDate == null) {
         	postDate = new Date();
         }
+        updateDate = postDate;
+    }
+    @PreUpdate
+    	public void onUpdate() {
+    	updateDate = new Date();
     }
 	
-	
+    public void setVisibleTrue() {
+        this.visible = true;
+    }
 	
 	@ManyToOne
 	@JoinColumn(name="fk_member_id", nullable = true)
@@ -64,6 +71,10 @@ public class Discussions {
     @OneToMany(mappedBy = "discussions",fetch=FetchType.LAZY,
 	cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Messages> messages = new LinkedHashSet<>();
+    
+    @OneToMany(mappedBy = "fdiscussions",fetch=FetchType.LAZY,
+	cascade = {CascadeType.PERSIST},orphanRemoval = true)
+    private Set<Favourite> favourite = new LinkedHashSet<>();
 
 	@OneToMany(mappedBy = "fkImgDiscussions",fetch=FetchType.LAZY,
 	cascade = {CascadeType.PERSIST},orphanRemoval = true)
@@ -235,13 +246,15 @@ public class Discussions {
 
 
 
-	public String getVisible() {
+
+
+	public boolean isVisible() {
 		return visible;
 	}
 
 
 
-	public void setVisible(String visible) {
+	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
 

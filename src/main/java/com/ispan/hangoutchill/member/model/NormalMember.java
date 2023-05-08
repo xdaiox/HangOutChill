@@ -25,6 +25,7 @@ import javax.persistence.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
+import com.ispan.hangoutchill.xdaiox.model.Favourite;
 import com.ispan.hangoutchill.xdaiox.model.Images;
 import com.ispan.hangoutchill.xdaiox.model.Messages;
 import javax.persistence.*;
@@ -96,6 +97,11 @@ public class NormalMember {
 			cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Messages> messages = new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "fnormalMmeber",fetch=FetchType.LAZY,
+			cascade = {CascadeType.PERSIST},orphanRemoval = true)
+    private Set<Favourite> favourite = new LinkedHashSet<>();
+
+    
     @OneToMany(mappedBy = "fkImgNormalMmeber",fetch=FetchType.LAZY,
 			cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Images> images = new LinkedHashSet<>();

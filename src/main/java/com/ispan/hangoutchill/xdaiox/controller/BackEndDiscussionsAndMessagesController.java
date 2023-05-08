@@ -42,7 +42,7 @@ public class BackEndDiscussionsAndMessagesController {
 		NormalMember result = nMemberService.findNormalUserByAccount(name);
 		model.addAttribute("result", result);
 		
-		Page<Discussions> page = dService.findByPage(pageNumber);
+		Page<Discussions> page = dService.findAllByPage(pageNumber);
 		model.addAttribute("page", page);
 		return"/discussion/backEndAllDiscussion";
 	}
@@ -88,7 +88,7 @@ public class BackEndDiscussionsAndMessagesController {
     	return "redirect:/back/allDiscussions";
     }
 
-	//==============後台post新增回覆==============
+    //==============後台post新增回覆==============
     @PostMapping("/back/post/{id}")
     public String postMessage(@ModelAttribute("replyDiscussion") Messages mss, Model model,@PathVariable(name="id")Integer d_id) {
     	
@@ -99,7 +99,33 @@ public class BackEndDiscussionsAndMessagesController {
     }
     
     
+	//==============後台刪除回覆==============
+    @DeleteMapping("/back/deleteMessage/{id}/{m_id}")
+    public String toDeleteButItsActuallyHiddenMessage(@PathVariable("id") Integer id,@PathVariable("m_id")Integer m_id) {
+    	mService.deleteMessageById(m_id);
+      	return "redirect:/back/backCheckDiscussion/{id}";
+    }
     
+    
+	//==============後台編輯回覆==============
+    @GetMapping("/back/editMessage/{id}")
+    public String editMessage(@PathVariable("id") Integer id, Model model) {
+        Discussions dss = dService.findDiscussionById(id);
+        model.addAttribute("discussion", dss);
+        return "discussion/editDiscussionPage";
+    }
+    
+    @PutMapping("/back/editMessage/{id}")
+    public String toEditMessage(@ModelAttribute("discussion") Discussions dss,@PathVariable("id") Integer id) {
+    	dService.updateById(dss.getD_id(),dss.getTitle(),dss.getType(),dss.getContents());
+    	return "redirect:/message/allMessages/{id}";
+    }
+    
+    @PutMapping("/back/visiable")
+    public String toHiddenDiscussion(@ModelAttribute("id") Integer id) {
+    	dService.visibleDiscussion(id);
+    	return "redirect:/back/allDiscussions";
+    }
     
     
 //    

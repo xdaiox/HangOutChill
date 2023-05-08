@@ -13,19 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ispan.hangoutchill.xdaiox.dao.DiscussionsRepository;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 @Service
 public class DiscussionsService {
-
-    @PersistenceContext
-    private EntityManager entityManager;
 	
 	@Autowired
 	private DiscussionsRepository dssRepository;
 	
 	public void addDiscussions(Discussions dss) {
+		dss.setVisibleTrue();
 		dssRepository.save(dss);
 	}
 	
@@ -42,12 +37,22 @@ public class DiscussionsService {
 		dssRepository.deleteById(id);
 	}
 	
-	public Page<Discussions> findByPage(Integer pageNumber){
+	//找所有討論 where
+	public Page<Discussions> findAllByPage(Integer pageNumber){
 		Pageable pgb =PageRequest.of(pageNumber-1, 20, Sort.Direction.DESC, "postDate");
 		Page<Discussions> page = dssRepository.findAll(pgb);
 		return page;
 	}
 	
+	//找所有討論 where visible=true
+	public Page<Discussions> findByPage(Integer pageNumber){
+		Pageable pgb =PageRequest.of(pageNumber-1, 20, Sort.Direction.DESC, "postDate");
+		Page<Discussions> page = dssRepository.findByVisibleTrue(pgb);
+		return page;
+	}
+	
+	
+	//更新討論
 	@Transactional
 	public Discussions updateById(Integer id,String title,String type,String newDiscussions) {
 		Optional<Discussions> option = dssRepository.findById(id);
@@ -62,11 +67,37 @@ public class DiscussionsService {
 		return null;
 	}
 	
-
+	//管理者隱藏討論
 	@Transactional
-	public void hiddenDiscussion(Integer id) {
-		dssRepository.deleteById(id);
+	public Discussions visibleDiscussion(Integer id) {
+		Optional<Discussions> option = dssRepository.findById(id);
+		Discussions discussion = option.get();
+		System.out.println("=============================="+id+"==============================");
+		if (discussion.isVisible()) {
+			discussion.setVisible(false);
+		}else {
+			discussion.setVisible(true);
+		}
+		dssRepository.save(discussion);
+		return discussion;
 	}
+	
+//    @Override
+//    @Transactional
+//    public NormalMember updateEnable(Integer id){
+//        Optional<NormalMember> byId = nMemberRepository.findById(id);
+//        NormalMember normalMember = byId.get();
+//        System.out.println(id);
+//        if (normalMember.isEnabled()){
+//            normalMember.setEnabled(false);
+//        }else {
+//            normalMember.setEnabled(true);
+//        }
+//
+//        nMemberRepository.save(normalMember);
+//        return  normalMember;
+//    }
+	
 	
 //	public Discussions getLatest() {
 //		return dssRepository.findDIdByPostDateDesc();
