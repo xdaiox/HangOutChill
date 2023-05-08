@@ -170,5 +170,15 @@ public class NormalMemberService implements INormalMemberService {
         nMemberRepository.save(normalMember);
         return  normalMember;
     }
+
+    //確認信箱是否已存在
+    public Boolean existAccount(String account){
+        NormalMember member = nMemberRepository.findNormalMembersByAccount(account);
+        if(member == null){
+            return  true;
+        }else {
+            return  false;
+        }
+    }
 }
 

@@ -33,18 +33,14 @@
         </button>
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item userName">
-            <span>username</span>
+            <span>管理者您好!</span>
           </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
               <img src="${contextRoot}/img/OSLO-12.png" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
-                <i class="ti-settings text-primary"></i>
-                Settings
-              </a>
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="${contextRoot}/logout">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>

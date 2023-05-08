@@ -18,6 +18,7 @@ public class UserDetail implements UserDetails {
     }
 
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Role role = normalMember.getRole();

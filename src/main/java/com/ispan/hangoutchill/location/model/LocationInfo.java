@@ -59,10 +59,6 @@ public class LocationInfo {
     @JoinColumn(name = "location_image_id")
     private LocationImage locationImage;
 
-    //關聯 與LocationComment
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "locationInfo",fetch=FetchType.LAZY)
-    private Set<LocationComment> locationComments = new HashSet<LocationComment>();
-
 
 
 
@@ -181,12 +177,6 @@ public class LocationInfo {
         this.locationImage = locationImage;
     }
 
-    public Set<LocationComment> getLocationComments() {
-        return locationComments;
-    }
 
-    public void setLocationComments(Set<LocationComment> locationComments) {
-        this.locationComments = locationComments;
-    }
 }
 

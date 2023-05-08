@@ -31,6 +31,5 @@ public class HomepageController {
         return "/dashboard";
     }
 
-    
 }
 

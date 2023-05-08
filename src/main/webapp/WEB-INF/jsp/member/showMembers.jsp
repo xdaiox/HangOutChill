@@ -21,7 +21,6 @@
 
     <div class="container-fluid page-body-wrapper">
         <jsp:include page="../dbLayout/left_navbar.jsp" />
-        <div class="container">
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -36,9 +35,7 @@
                 </tr>
                 </thead>
                 <tbody>
-
                 <jstl:forEach var="allMember" items="${members}">
-
                     <tr>
                         <th scope="row" class="align-middle">${members.indexOf(allMember)+1}</th>
                         <td class="align-middle">${allMember.identity}</td>
@@ -92,12 +89,10 @@
                     </jstl:choose>
                 </jstl:forEach>
             </div>
-
     </div>
 </div>
 
 
-</div>
 
 
 
