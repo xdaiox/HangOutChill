@@ -121,30 +121,32 @@
             function checkMail() {
                 let mail = document.getElementById('account').value
                 let reg = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
-                // if (!(reg.test(mail))) {
-                //     document.getElementById('wrongMail').innerText = '錯誤的信箱格式'
-                //     return false
-                // } else {
-                //     document.getElementById('wrongMail').innerText = ''
-                //
-                //     return true
-                // }
+                let flagMail = true;
+                if (!(reg.test(mail))) {
+                    document.getElementById('wrongMail').innerText = '錯誤的信箱格式'
+                    return false
+                } else  {
+                    axios.get("${contextRoot}/member/existed?account="+mail)
+                        .then( (res) => {
+                            if(res.data){
+                                alert(
+                                    "此信箱可使用")
+                                 flagMail = true;
+                            }else {
+                                alert("此帳號已使用")
+                                 flagMail = false;
+                            }
+                        })
+                        .catch( (err) => {
+                            alert(err)
 
-                axios.get("${contextRoot}/member/existed?account="+mail)
-                    .then( (res) => {
-                        if(res.data){
-                       alert(
-                          "此信箱可使用")
-                        }else {
-                            alert("此帳號已使用")
-                        }
-                    })
-                    .catch( (err) => {
-                        alert(err)
+                        });
+                    document.getElementById('wrongMail').innerText = ''
 
-                    });
-
-
+                    if(flagMail){
+                        return  true;
+                    }return false;
+                }
 
 
             }

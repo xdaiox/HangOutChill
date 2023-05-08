@@ -86,7 +86,7 @@ public class NormalMemberService implements INormalMemberService {
     //後臺所有會員
     @Override
     public List<NormalMember> findallmember(Integer pageNum) {
-        Pageable pgb = PageRequest.of(pageNum - 1, 10, Sort.Direction.DESC, "registTime");
+        Pageable pgb = PageRequest.of(pageNum - 1, 5, Sort.Direction.DESC, "registTime");
         Page<NormalMember> page = nMemberRepository.findAll(pgb);
         List<NormalMember> result = page.getContent();
         return result;
@@ -95,9 +95,8 @@ public class NormalMemberService implements INormalMemberService {
 
     @Override
     public Page<NormalMember> findPages(Integer pageNum) {
-        Pageable pgb = PageRequest.of(pageNum - 1, 10, Sort.Direction.DESC, "registTime");
+        Pageable pgb = PageRequest.of(pageNum - 1, 5, Sort.Direction.DESC, "registTime");
         Page<NormalMember> page = nMemberRepository.findAll(pgb);
-
         return page;
     }
 
