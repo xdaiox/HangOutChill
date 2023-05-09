@@ -76,22 +76,18 @@ public class ProductController {
 		// 其餘商商品圖片存放
 		Set<ProductPhoto> photosets = new LinkedHashSet<>();
 		ProductPhoto pp;
-		ProductPhotoPK pPK;
 		
 		for(MultipartFile photo : extraphotos) {
 			if(photo != null && !photo.isEmpty()) {
 				pp = new ProductPhoto();
 				pp.setProduct(product);
 				
-				// 這行應該是不用存
-//			pPK.setProductId(product.getProductId());
 				
 				try {
 					byte[] b = photo.getBytes();
 					pp.setPhoto(b);
 					pp.setPhotoName(photo.getOriginalFilename());
 					System.out.println(photo.getOriginalFilename());
-//				pPK.setPhotoName("TEST"); 
 					photosets.add(pp);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -99,7 +95,7 @@ public class ProductController {
 				}
 			}
 		}
-		
+
 		product.setPhotos(photosets);
 		productService.addProduct(product);
 		redirectAttributes.addFlashAttribute("sucessMessage", "新增產品成功 !");

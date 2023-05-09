@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ispan.hangoutchill.shop.dao.OrderRepository;
+import com.ispan.hangoutchill.shop.model.Order;
 
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
@@ -43,7 +44,7 @@ public class OrderService {
 		aioCheck.setTradeDesc("hangoutchilltrade");
 		
 		// 商品名稱
-		aioCheck.setItemName("測試用用用");
+		aioCheck.setItemName("測試用用用x1#testX2");
 		
 		// 特店交易編號
 		String testNo = UUID.randomUUID().toString().replaceAll("-", "").substring(0,20);
@@ -60,5 +61,11 @@ public class OrderService {
 		
 		return form;
 	}
+	
+	
+	public void addOrder(Order order) {
+		orderRepository.save(order);
+	}
+	
 	
 }

@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.service.NormalMemberService;
+import com.ispan.hangoutchill.shop.model.Order;
 import com.ispan.hangoutchill.shop.model.Product;
 import com.ispan.hangoutchill.shop.model.ShoppingCart;
 import com.ispan.hangoutchill.shop.service.ProductService;
@@ -145,6 +145,7 @@ public class ShoppingCartController {
 		// 總價計算
 		Integer totalPrice = shoppingCartService.totalPriceCount(carItemsList);
 		model.addAttribute("totalprice", totalPrice);
+		model.addAttribute("order", new Order());
 		return "shop/orderDetail";
 	}
 	
