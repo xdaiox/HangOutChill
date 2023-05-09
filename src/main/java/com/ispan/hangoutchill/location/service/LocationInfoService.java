@@ -2,6 +2,7 @@ package com.ispan.hangoutchill.location.service;
 
 
 import com.ispan.hangoutchill.location.dao.LocationInfoRepository;
+import com.ispan.hangoutchill.location.dto.locationInfo.LocationInfoRequest;
 import com.ispan.hangoutchill.location.model.LocationImage;
 import com.ispan.hangoutchill.location.model.LocationInfo;
 import com.ispan.hangoutchill.location.model.LocationOperationTime;
@@ -10,12 +11,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -295,5 +301,25 @@ public class LocationInfoService {
 //        Page<LocationInfo> page = locRepo.searchLocationInfo(name, category, price, city, dist, pageable);
 //        return page;
 //    }
+
+
+
+    //    ======================多條件測試=============================================
+    Specification<LocationInfo> Specification = new Specification<LocationInfo>() {
+        private static final long serialVersionUID = 1L;
+        @Override
+        public Predicate toPredicate(Root<LocationInfo> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+            String name =
+
+
+
+            return null;
+        }
+    }
+
+
+
+
+
 
 }
