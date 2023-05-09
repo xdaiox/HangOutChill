@@ -305,17 +305,17 @@ public class LocationInfoService {
 
 
     //    ======================多條件測試=============================================
-    Specification<LocationInfo> Specification = new Specification<LocationInfo>() {
-        private static final long serialVersionUID = 1L;
-        @Override
-        public Predicate toPredicate(Root<LocationInfo> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-            String name =
-
-
-
-            return null;
-        }
-    }
+//    Specification<LocationInfo> Specification = new Specification<LocationInfo>() {
+//        private static final long serialVersionUID = 1L;
+//        @Override
+//        public Predicate toPredicate(Root<LocationInfo> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+//            String name =
+//
+//
+//
+//            return null;
+//        }
+//    }
 
 
 
