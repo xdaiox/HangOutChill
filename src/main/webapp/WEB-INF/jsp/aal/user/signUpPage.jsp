@@ -61,10 +61,10 @@
 									<tr>
 										<td class="align-middle">${result.account}
 										<td class="align-middle">${result.reallName}
-										<td class="align-middle"><form:input path="tel" value="${result.tel}" type="text" />
-										<td class="align-middle">
-												<jstl:if test="${aal.topic=='act'}"><form:input path="numbersOfPeople"  type="text" /></jstl:if>
-												<jstl:if test="${aal.topic=='les'}"><form:input path="numbersOfPeople" value="1" type="hidden" /></jstl:if>
+										<td class="align-middle"><input name="tel" value="${result.tel}" type="text" />
+										
+												<jstl:if test="${aal.topic=='act'}"><td class="align-middle"><input name="numbersOfPeople"  type="text" /></jstl:if>
+												<jstl:if test="${aal.topic=='les'}"><input name="numbersOfPeople" value="1" type="hidden" /></jstl:if>
 										
 								</tbody>
 							</table>

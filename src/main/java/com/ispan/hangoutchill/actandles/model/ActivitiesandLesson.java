@@ -16,13 +16,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -38,10 +38,6 @@ public class ActivitiesandLesson {
 	@Column(name="id",columnDefinition = "int")
 	private Integer id;
 
-	
-	
-//	@Column(name="shop_Id",columnDefinition = "int",nullable = false)
-//	private Integer shop_Id;
 	@OneToOne
 	@JoinColumn(name = "shop_Id",foreignKey =@ForeignKey(name="member_id"))
 	private NormalMember normalMember;
@@ -106,7 +102,16 @@ public class ActivitiesandLesson {
 	    )
 	    private List<NormalMember> accounts;
 	
-	
+	 @OneToMany(mappedBy = "activitiesandLesson")
+	 private List<LessonSignUpDetail> lessonSignUpDetails;
+
+	public List<LessonSignUpDetail> getLessonSignUpDetails() {
+		return lessonSignUpDetails;
+	}
+
+	public void setLessonSignUpDetails(List<LessonSignUpDetail> lessonSignUpDetails) {
+		this.lessonSignUpDetails = lessonSignUpDetails;
+	}
 
 	public List<NormalMember> getAccounts() {
 		return accounts;

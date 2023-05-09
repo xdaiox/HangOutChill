@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+    <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
+<%-- <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> --%>
+<jstl:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
-    <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
-    <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 <meta charset="UTF-8">
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -48,8 +48,8 @@
                 <div class="right-button">
                     <ul>
                         <li><a href="#"><i class="ti-btnshopcart"></i></a></li>
-<%--                         <li><a href="#" data-toggle="dropdown"><i class="ti-user"><jstl:choose><jstl:when test="${result.nickName != null}">${result.nickName}您好</jstl:when></jstl:choose></i></a></li> --%>
-                        <li><a href="#" data-toggle="dropdown"><i class="ti-user"><sec:authentication property="name" />您好</i></a></li>
+                        <li><a href="#" data-toggle="dropdown"><i class="ti-user"><jstl:choose><jstl:when test="${result.nickName != null}">${result.nickName}您好</jstl:when></jstl:choose></i></a></li>
+<%--                         <li><a href="#" data-toggle="dropdown"><i class="ti-user"><sec:authentication property="name" />您好</i></a></li> --%>
                         <li><a class="btn-login" href="${contextRoot}/member/loginHome">登入</a></li>
                     </ul>
                 </div>

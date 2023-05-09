@@ -61,8 +61,8 @@
 									<td class="align-middle"><img width="200px" height="200px"
 										src="data:image/png;base64,${aal.base64image}"> <br />
 									<td class="align-middle">
-									<form:form method="GET" action="${contextRoot}/actandles/detail/lessignup">
-												<input value="${aal.id}" type="hidden" name="id" />
+										<form:form method="get" action="${contextRoot}/actandles/detail/lessignup">
+											<input value="${aal.id}" type="hidden" name="id" />
 												<jstl:choose>
 												<jstl:when test="${empty aal.accounts}"><button type="submit" class="btn btn-primary" >報名</button></jstl:when>
 												<jstl:when test="${not empty aal.accounts}"><button type="submit" disabled class="btn btn-primary" >您已報名</button></jstl:when>									

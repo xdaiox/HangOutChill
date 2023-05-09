@@ -1,6 +1,6 @@
 package com.ispan.hangoutchill.actandles.service;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,14 +21,35 @@ public class LessonSignUpDetailService {
 	@Autowired
 	private AALRepository aalRepository;
 
-	public void saveles(ActivitiesandLesson aal, Integer accountsId,Integer numbersOfPeople,Integer tel) {
-		List<NormalMember> members = new ArrayList<>(aal.getAccounts());
-		Optional<NormalMember> accounts = normalMemberRepository.findById(accountsId);
+	public void saveles(ActivitiesandLesson aal, Integer accountsId, String numbersOfPeople, String tel) {
 
-		members.add(accounts.get());
+		 Optional<NormalMember> accounts = normalMemberRepository.findById(accountsId);
+		    NormalMember member = accounts.get();
+		    aal.getAccounts().add(member);
 
-		aal.setAccounts(members);
-		aalRepository.save(aal);
+		    LessonSignUpDetail lessonSignUpDetail = new LessonSignUpDetail();
+		    lessonSignUpDetail.setNumbersOfPeople(numbersOfPeople);
+		    lessonSignUpDetail.setTel(tel);
+		    lessonSignUpDetail.setActivitiesandLesson(aal);
+		    lessonSignUpDetail.setNormalMember(member);
+
+		    aal.getLessonSignUpDetails().add(lessonSignUpDetail);
+
+		    aalRepository.save(aal);
+
+//		List<NormalMember> members = new ArrayList<>(aal.getAccounts());
+//		Optional<NormalMember> accounts = normalMemberRepository.findById(accountsId);
+//		members.add(accounts.get());
+//		aal.setAccounts(members);
+//		List<LessonSignUpDetail> lessonSignUpDetails = new ArrayList<>();
+//		LessonSignUpDetail lessonSignUpDetail = new LessonSignUpDetail();
+//		lessonSignUpDetail.setDate(LocalDateTime.now());
+//		lessonSignUpDetail.setNumbersOfPeople(numbersOfPeople);
+//		lessonSignUpDetail.setTel(tel);
+//		lessonSignUpDetail.setActivitiesandLesson(aal);
+//		lessonSignUpDetails.add(lessonSignUpDetail);
+//		aal.setLessonSignUpDetails(lessonSignUpDetails);
+//		aalRepository.save(aal);
 	}
 
 	public void cancalById(ActivitiesandLesson aal, Integer accountsId) {
