@@ -102,12 +102,6 @@ public class NormalMember {
     private Set<Favourite> favourite = new LinkedHashSet<>();
 
     
-    @OneToMany(mappedBy = "fkImgNormalMmeber",fetch=FetchType.LAZY,
-			cascade = {CascadeType.PERSIST},orphanRemoval = true)
-    private Set<Images> images = new LinkedHashSet<>();
-
-    
-    
     
     public Set<Favourite> getFavourite() {
 		return favourite;
@@ -133,14 +127,6 @@ public class NormalMember {
  		this.messages = messages;
  	}
 
- 	public Set<Images> getImages() {
- 		return images;
- 	}
-
- 	public void setImages(Set<Images> images) {
- 		this.images = images;
- 	}
-    
     public Integer getId() {
         return id;
     }

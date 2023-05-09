@@ -85,7 +85,9 @@
     </div>
     </section>
 
+
  	<script src="${contextRoot}/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+    <script src="${contextRoot}/js/jquery-3.6.4.min.js" type="text/javascript"></script>
     <script src="${contextRoot}/js/popper.js" type="text/javascript" ></script>
     <script src="${contextRoot}/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="${contextRoot}/js/stellar.js" type="text/javascript"></script>
@@ -98,5 +100,6 @@
     <script src="${contextRoot}/js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="${contextRoot}/js/mail-script.js" type="text/javascript"></script>
     <script src="${contextRoot}/js/theme.js" type="text/javascript"></script>
+    
 </body>
 </html>

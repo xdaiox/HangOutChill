@@ -75,11 +75,6 @@ public class Discussions {
     @OneToMany(mappedBy = "discussions",fetch=FetchType.LAZY,
 	cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Favourite> favourite = new LinkedHashSet<>();
-
-	@OneToMany(mappedBy = "fkImgDiscussions",fetch=FetchType.LAZY,
-	cascade = {CascadeType.PERSIST},orphanRemoval = true)
-    private Set<Images> images = new LinkedHashSet<>();
-	
 	
 	
 	
@@ -104,19 +99,6 @@ public class Discussions {
 	public void setMessages(Set<Messages> messages) {
 		this.messages = messages;
 	}
-
-
-
-	public Set<Images> getImages() {
-		return images;
-	}
-
-
-
-	public void setImages(Set<Images> images) {
-		this.images = images;
-	}
-
 
     
 	public Discussions() {
