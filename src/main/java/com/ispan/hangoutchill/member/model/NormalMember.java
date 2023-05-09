@@ -107,7 +107,17 @@ public class NormalMember {
     private Set<Images> images = new LinkedHashSet<>();
 
     
-    public Set<Discussions> getDiscussions() {
+    
+    
+    public Set<Favourite> getFavourite() {
+		return favourite;
+	}
+
+	public void setFavourite(Set<Favourite> favourite) {
+		this.favourite = favourite;
+	}
+
+	public Set<Discussions> getDiscussions() {
  		return discussions;
  	}
 
