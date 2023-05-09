@@ -20,6 +20,7 @@ public class Order {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="order_id", columnDefinition="int")
 	private Integer orderId;
 	
 	@Column(name="orderdate", columnDefinition="date")

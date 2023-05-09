@@ -2,6 +2,7 @@ package com.ispan.hangoutchill.member.controller;
 
 import com.ispan.hangoutchill.member.UserDetailServiceImpl;
 import com.ispan.hangoutchill.member.event.OnForgotPassWord;
+import com.ispan.hangoutchill.member.event.OnResendAuthenticationMail;
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.model.Role;
 import com.ispan.hangoutchill.member.model.SecuredToken;
@@ -141,6 +142,14 @@ public class NormalMemberController {
         return "redirect:/member/forgetPwdResult";
     }
 
+    @ResponseBody
+    @GetMapping("/member/resendMail")
+    public String  memberResendAuthenticationMail(@RequestParam(name = "id")Integer id){
+        NormalMember member = nMemberService.findNormalMemberById(id);
+        eventPublisher.publishEvent( new OnResendAuthenticationMail(member));
+        return "驗證信已重新寄送";
+    }
+
     @GetMapping("/member/NormalMemberDetail")
     //目前登入的人到會員中心
     public String toMemberCenterPage(@CurrentSecurityContext(expression = "authentication")
@@ -212,6 +221,9 @@ public class NormalMemberController {
         nMemberService.updateEnable(id);
         return "redirect:/back/members";
     }
+
+
+
 
 
 }

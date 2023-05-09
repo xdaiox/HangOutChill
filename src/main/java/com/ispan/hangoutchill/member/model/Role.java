@@ -15,6 +15,7 @@ public class Role {
     private String roleName;
 
     @OneToMany(mappedBy = "role")
+
     private Collection<NormalMember> normalMember;
 
 //    @OneToMany(mappedBy = "role")

@@ -1,5 +1,6 @@
 package com.ispan.hangoutchill.member.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,6 +35,7 @@ public class NormalMember {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="FK_role_id", foreignKey=@ForeignKey(name = "role_id"))
+    @JsonIgnoreProperties("normalMember")
     private Role role;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -42,6 +44,7 @@ public class NormalMember {
     private Date registTime;
 
     @OneToOne(mappedBy = "normalMember")
+    @JsonIgnoreProperties("normalMember")
     private SecuredToken securedToken;
 
     @Column(name="enabled")

@@ -179,5 +179,17 @@ public class NormalMemberService implements INormalMemberService {
             return  false;
         }
     }
+
+    //後臺模糊搜尋會員帳號
+    public  List<NormalMember> findBlurMember(String account){
+        return nMemberRepository.findBlurMemberByAcoount(account);
+    }
+
+//    後臺模糊搜尋分頁
+//    public Page<NormalMember> findBlurMemberPage(String account, Integer pageNum){
+//        Pageable page = PageRequest.of(pageNum - 1, 5, Sort.Direction.DESC, "registTime");
+//        Page<NormalMember> normalMembersByAccountPage = nMemberRepository.findNormalMembersByAccountPage(account, page);
+//        return  normalMembersByAccountPage;
+//    }
 }
 
