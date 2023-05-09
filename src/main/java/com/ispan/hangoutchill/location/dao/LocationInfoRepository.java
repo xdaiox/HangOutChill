@@ -40,6 +40,7 @@ public interface LocationInfoRepository extends JpaRepository<LocationInfo, Inte
 
 
 
+    
 
 //    ======================多條件測試=============================================
 //    Specification<LocationInfo> Specification = new Specification<LocationInfo>() {
