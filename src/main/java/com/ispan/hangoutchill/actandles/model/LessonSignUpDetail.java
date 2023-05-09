@@ -27,11 +27,11 @@ public class LessonSignUpDetail {
 	    @JoinColumn(name = "account_id")
 	    private NormalMember normalMember;
 	    
-	   @Column(name = "tel")
-	   private String tel;
-	   
-	   @Column(name = "numbers_of_people")
-	   private String numbersOfPeople;
+//	   @Column(name = "tel")
+//	   private String tel;
+//	   
+//	   @Column(name = "numbers_of_people")
+//	   private String numbersOfPeople;
 	   
 
 	   public ActivitiesandLesson getActivitiesandLesson() {
@@ -61,22 +61,22 @@ public class LessonSignUpDetail {
 	public void setId(LessonSignUpDetailId id) {
 		this.id = id;
 	}
-
-	public String getTel() {
-		return tel;
-	}
-
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-
-	public String getNumbersOfPeople() {
-		return numbersOfPeople;
-	}
-
-	public void setNumbersOfPeople(String numbersOfPeople) {
-		this.numbersOfPeople = numbersOfPeople;
-	}
+//
+//	public String getTel() {
+//		return tel;
+//	}
+//
+//	public void setTel(String tel) {
+//		this.tel = tel;
+//	}
+//
+//	public String getNumbersOfPeople() {
+//		return numbersOfPeople;
+//	}
+//
+//	public void setNumbersOfPeople(String numbersOfPeople) {
+//		this.numbersOfPeople = numbersOfPeople;
+//	}
 
 
 }

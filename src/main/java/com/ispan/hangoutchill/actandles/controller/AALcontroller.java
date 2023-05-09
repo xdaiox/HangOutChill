@@ -91,4 +91,32 @@ public class AALcontroller {
 		
 		return "aal/showTheDetail";
 	}
+	
+	
+//====================================管理員部分=========================================	
+
+	@GetMapping("/actandles/admin/chackaal")
+	public String goShowAALForAdmin(@RequestParam(name="p",defaultValue = "1") Integer pagenumber, Model model) {
+		Page<ActivitiesandLesson> page = aalService.findByPage(pagenumber);
+		model.addAttribute("page",page);
+				
+		return "aal/admin/checkAaL";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//================================================================================	
 }

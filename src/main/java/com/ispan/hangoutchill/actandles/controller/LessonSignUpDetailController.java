@@ -47,7 +47,7 @@ public class LessonSignUpDetailController {
 		 String name = authentication.getName();
 	        NormalMember result = nMemberService.findNormalUserByAccount(name);
 	        
-	     lessonSignUpDetailService.saveles(aal, result.getId(),numbersOfPeople,tel); 
+	     lessonSignUpDetailService.saveles(aal, result.getId()); 
 		return "redirect:/actandles/detail/showmysignup";
 	}
 	

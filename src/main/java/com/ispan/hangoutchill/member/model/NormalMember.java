@@ -37,6 +37,7 @@ import java.util.Set;
 import com.ispan.hangoutchill.shop.model.ShoppingCart;
 
 import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
+import com.ispan.hangoutchill.actandles.model.LessonSignUpDetail;
 
 @Entity
 @Table(name="normalAccount")
@@ -143,7 +144,18 @@ public class NormalMember {
 		this.actandles = actandles;
 	}
 
-//===================================================    	
+// 	@OneToMany(mappedBy = "normalMember",cascade = CascadeType.ALL)
+//	 private List<LessonSignUpDetail> lessonSignUpDetails;
+// 	
+// 	public List<LessonSignUpDetail> getLessonSignUpDetails() {
+//		return lessonSignUpDetails;
+//	}
+//
+//	public void setLessonSignUpDetails(List<LessonSignUpDetail> lessonSignUpDetails) {
+//		this.lessonSignUpDetails = lessonSignUpDetails;
+//	}
+
+//======================================================    	
     public Integer getId() {
         return id;
     }
