@@ -1,20 +1,13 @@
 package com.ispan.hangoutchill.actandles.model;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.ispan.hangoutchill.member.model.NormalMember;
 
@@ -24,12 +17,12 @@ public class LessonSignUpDetail {
 	 @EmbeddedId
 	    private LessonSignUpDetailId id;
 	    
-	    @ManyToOne
+	    @ManyToOne(fetch = FetchType.LAZY)
 	    @MapsId("lesId")
 	    @JoinColumn(name = "les_id")
 	    private ActivitiesandLesson activitiesandLesson;
 	    
-	    @ManyToOne
+	    @ManyToOne(fetch = FetchType.LAZY)
 	    @MapsId("accountId")
 	    @JoinColumn(name = "account_id")
 	    private NormalMember normalMember;
@@ -40,11 +33,7 @@ public class LessonSignUpDetail {
 	   @Column(name = "numbers_of_people")
 	   private String numbersOfPeople;
 	   
-	   @Temporal(TemporalType.TIMESTAMP)
-		@DateTimeFormat(iso = ISO.DATE)
-	   @Column(name = "date_of_signup")
-	   private Date date;
-	   
+
 	   public ActivitiesandLesson getActivitiesandLesson() {
 		return activitiesandLesson;
 	}
@@ -62,7 +51,16 @@ public class LessonSignUpDetail {
 	}
 
 
+	
 
+
+	public LessonSignUpDetailId getId() {
+		return id;
+	}
+
+	public void setId(LessonSignUpDetailId id) {
+		this.id = id;
+	}
 
 	public String getTel() {
 		return tel;
@@ -80,15 +78,6 @@ public class LessonSignUpDetail {
 		this.numbersOfPeople = numbersOfPeople;
 	}
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	
 
 }
 
