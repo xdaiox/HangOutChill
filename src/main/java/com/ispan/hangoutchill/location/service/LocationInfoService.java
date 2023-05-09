@@ -15,6 +15,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,9 +24,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class LocationInfoService {
@@ -94,20 +93,7 @@ public class LocationInfoService {
 
 
 
-    //    ========================Show Location List===============================
-    //??????動態查詢??????
-    //查詢地點 By City 城市
-    //查詢地點 By District 區域
-    //查詢地點 by Address 地址
-    //查詢地點 by Category 分類
-    //查詢地點 by Tag 標籤
-
-
-
-    //    =======================Show Location Single===============================
-
-
-    //    ========================自訂方法===============================
+    //    ========================處理圖片方法===============================
 
     //處理圖片Cover
     public void handleLocationImagCover(LocationInfo locationInfo){
@@ -248,59 +234,23 @@ public class LocationInfoService {
 
 
     //搜尋條件查詢
-    public Page<LocationInfo> findAllLocationInfoByPage(Integer pageNumber, String name, String category, Integer price, String city, String dist) {
-        if (name != null || category != null || price != null || city != null || dist != null) {
-            return searchLocationInfo(pageNumber, name, category, price, city, dist);
-        }
-        Pageable pageable = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "locId");  //此處透過jpa搜尋 所以排序properties要用實體類屬性
-        Page<LocationInfo> page = locRepo.findAll(pageable);
-        return page;
-    }
-
-    private Page<LocationInfo> searchLocationInfo(Integer pageNumber, String name, String category, Integer price, String city, String dist) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "location_id"); //此處透過SQL原生語法搜尋 所以排序properties要用資料庫資料表欄位名
-        Page<LocationInfo> page = locRepo.searchLocationInfo(name, category, price, city, dist, pageable);
-        return page;
-    }
-
-
-
-//    //搜尋空字串轉null
-//    public String getStringParameter(Map<String, Object> map, String parameterName) {
-//        Object value = map.get(parameterName);
-//        return value != null ? value.toString() : null;
-//    }
-//
-//    public Integer getIntegerParameter(Map<String, Object> map, String parameterName) {
-//        Object value = map.get(parameterName);
-//        if (value instanceof Integer) {
-//            return (Integer) value;
-//        } else if (value instanceof String && !((String) value).isEmpty()) {
-//            return Integer.parseInt((String) value);
-//        } else {
-//            return null;
+//    public Page<LocationInfo> findAllLocationInfoByPage(Integer pageNumber, String name, String category, Integer price, String city, String dist) {
+//        if (name != null || category != null || price != null || city != null || dist != null) {
+//            return searchLocationInfo(pageNumber, name, category, price, city, dist);
 //        }
+//        Pageable pageable = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "locId");  //此處透過jpa搜尋 所以排序properties要用實體類屬性
+//        Page<LocationInfo> page = locRepo.findAll(pageable);
+//        return page;
 //    }
-
-
-
-
-
-
-////    public Page<LocationInfo> findAllLocationInfoByPage(Integer pageNumber, String name, String category, Integer price, String city, String dist) {
-////        if (name != null || category != null || price != null || city != null || dist != null) {
-////            return searchLocationInfo(name, category, price, city, dist, pageNumber);
-////        }
-////        Pageable pageable = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "locId");  //此處透過jpa搜尋 所以排序properties要用實體類屬性
-////        Page<LocationInfo> page = locRepo.findAll(pageable);
-////        return page;
-////    }
 //
-//    public Page<LocationInfo> searchLocationInfo(String name, String category, Integer price, String city, String dist, Integer pageNumber) {
+//    private Page<LocationInfo> searchLocationInfo(Integer pageNumber, String name, String category, Integer price, String city, String dist) {
 //        Pageable pageable = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "location_id"); //此處透過SQL原生語法搜尋 所以排序properties要用資料庫資料表欄位名
 //        Page<LocationInfo> page = locRepo.searchLocationInfo(name, category, price, city, dist, pageable);
 //        return page;
 //    }
+
+
+
 
 
 
@@ -316,6 +266,52 @@ public class LocationInfoService {
 //            return null;
 //        }
 //    }
+
+
+    public Page<LocationInfo> findAllLocationInfoByPage(String name, String category, Integer price,
+                                              String city, String dist ,Integer pageNumber){
+
+        Specification<LocationInfo> specification = new Specification<LocationInfo>(){
+            @Override
+            public Predicate toPredicate(Root<LocationInfo> root, CriteriaQuery<?> query,
+                                         CriteriaBuilder criteriaBuilder) {
+                List<Predicate> predicateList = new ArrayList<>();
+
+                if (org.apache.commons.lang3.StringUtils.isNotBlank(name)){
+                    Predicate predicate = criteriaBuilder.like(root.get("locName"),"%" + name + "%");
+                    predicateList.add(predicate);
+                }
+                if (org.apache.commons.lang3.StringUtils.isNotBlank(category)){
+                    Predicate predicate = criteriaBuilder.equal(root.get("locCat"),category);
+                    predicateList.add(predicate);
+                }
+                if (price != null){
+                    Predicate predicate = criteriaBuilder.equal(root.get("locPriceLevel"),price);
+                    predicateList.add(predicate);
+                }
+                if (org.apache.commons.lang3.StringUtils.isNotBlank(city)){
+                    Predicate predicate = criteriaBuilder.equal(root.get("locCity"),city);
+                    predicateList.add(predicate);
+                }
+                if (org.apache.commons.lang3.StringUtils.isNotBlank(dist)){
+                    Predicate predicate = criteriaBuilder.equal(root.get("locDist"),dist);
+                    predicateList.add(predicate);
+                }
+                Predicate[] predicate = new Predicate[predicateList.size()];
+                return criteriaBuilder.and(predicateList.toArray(predicate));
+            }
+        };
+        Pageable pageable = PageRequest.of(pageNumber-1,6,Sort.Direction.DESC,"locId");
+        if (org.apache.commons.lang3.StringUtils.isNotBlank(name) &&
+                org.apache.commons.lang3.StringUtils.isNotBlank(category) &&
+                price == null &&
+                org.apache.commons.lang3.StringUtils.isNotBlank(city) &&
+                org.apache.commons.lang3.StringUtils.isNotBlank(dist)) {
+            return locRepo.findAll(pageable);
+        } else {
+            return locRepo.findAll(specification, pageable);
+        }
+    }
 
 
 

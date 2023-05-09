@@ -125,36 +125,10 @@ public class LocationInfoController {
         return "redirect:/location/locationManager";
     }
 
-    //    ========================Admin LocationInfoManager 地點資ㄙ料管理(後台)===============================
-    //搜索BY locName
-//    @ResponseBody
-//    @GetMapping("/location/locationManager/findByNameLike")
-//    public List<LocationInfo> findLocationInfoByLocName(@RequestParam("locName") String locName){
-//        return locationInfoRepository.findLocationInfoByLocNameLike(locName);
-//    }
-
-
-
-//    @GetMapping("/location/locationManager")
-//    public String showAllLocationInfo(@RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber,Model model){
-//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber);
-//        model.addAttribute("page", page);
-//        return "/location/locationManager";
-//    }
 
 //============================================================================
 
 
-
-
-
-    //查看該地點所有評論 find all comment by locationInfo Id
-
-    //刪除該地點評論By comment id
-
-
-    //搜尋功能 By name
-//    @GetMapping("/location/locationManager/search")
     
 //    ==========================AJAX測試==============================
 
@@ -164,14 +138,27 @@ public class LocationInfoController {
     }
 
 
+//    @ResponseBody
+//    @PostMapping("/api/location/locationManager/search")
+//    public  Page<LocationInfo> showAllLocationInfo(@RequestBody LocationInfoRequest locationInfoRequest){
+//
+//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(locationInfoRequest.getName(),
+//                locationInfoRequest.getCategory(), locationInfoRequest.getPrice(),locationInfoRequest.getCity(),
+//                locationInfoRequest.getDist(),locationInfoRequest.getPageNumber());
+//
+//        return page;
+//    }
+
     @ResponseBody
-    @PostMapping("/api/location/locationManager/search")
-    public  Page<LocationInfo> showAllLocationInfo(@RequestBody LocationInfoRequest locationInfoRequest,
-                                                   @RequestParam(name ="p" ,defaultValue = "1") Integer pageNumber){
+    @GetMapping ("/api/location/locationManager/search")
+    public  Page<LocationInfo> showAllLocationInfo(@RequestParam(name = "p" ,defaultValue = "1") Integer pageNumber,
+                                                   @RequestParam(name = "name", required = false) String name,
+                                                   @RequestParam(name = "category", required = false) String category,
+                                                   @RequestParam(name = "price", required = false) Integer price,
+                                                   @RequestParam(name = "city", required = false) String city,
+                                                   @RequestParam(name = "dist", required = false) String dist){
 
-
-
-        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(pageNumber,locationInfoRequest.getName(), locationInfoRequest.getCategory(), null, null, null);
+        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(name,category,price,city,dist,pageNumber);
 
         return page;
     }
