@@ -68,5 +68,9 @@ public class ShoppingCartService {
 		return totalPrice;
 	}
 	
+	public List<ShoppingCart> findShoppingCartItemsByMemberId(Integer memberId){
+		
+		return shoppingCartRepository.findShoppingCartItemsByMemberId(memberId);
+	}
 	
 }

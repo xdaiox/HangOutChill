@@ -17,4 +17,7 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Inte
 	@Query("select COUNT(product) from ShoppingCart where member_id = :memberId")
 	public Integer findProductNumInCart(@Param(value="memberId") Integer memberId);
 	
+	@Query("from ShoppingCart where member_id = :memberId")
+	public List<ShoppingCart> findShoppingCartItemsByMemberId(@Param(value="memberId") Integer memberId);
+	
 }

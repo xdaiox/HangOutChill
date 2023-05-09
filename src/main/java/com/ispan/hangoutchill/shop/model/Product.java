@@ -59,12 +59,12 @@ public class Product {
 	
 	
 	@OneToMany(mappedBy="product",
-		       cascade = CascadeType.PERSIST, orphanRemoval = true)
+		       cascade = CascadeType.PERSIST)
 	private Set<OrderDetail> orderDetails = new LinkedHashSet<>();
 	
 	
 	@OneToMany(mappedBy="product",
-		       cascade = CascadeType.PERSIST, orphanRemoval = true)
+		       cascade = CascadeType.PERSIST)
 	private Set<ShoppingCart> shoppingCarts = new LinkedHashSet<>();
 	
 	

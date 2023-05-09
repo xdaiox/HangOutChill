@@ -8,9 +8,12 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -18,6 +21,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.ispan.hangoutchill.member.model.NormalMember;
 
 @Entity
 @Table(name="orders")
@@ -75,12 +80,12 @@ public class Order {
     //            cascade = CascadeType.PERSIST, orphanRemoval = true)
 	//private Set<Order> orders = new LinkedHashSet<>();
 	
-//	@ManyToOne(fetch = FetchTyle.Lazy)
-//	@JoinColumn(name="member_id")
-//	private Member member;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="member_id")
+	private NormalMember member;
 	
 	@OneToMany(mappedBy="order",
-		       cascade = CascadeType.PERSIST, orphanRemoval = true)
+		       cascade = CascadeType.ALL)
 	private Set<OrderDetail> orderDetails = new LinkedHashSet<>();
 	
 	
@@ -104,7 +109,6 @@ public class Order {
 	
 	public Order() {
 	}
-
 
 
 	public Integer getOrderId() {
@@ -243,6 +247,16 @@ public class Order {
 
 	public void setOrderDetails(Set<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
+	}
+
+
+	public NormalMember getMember() {
+		return member;
+	}
+
+
+	public void setMember(NormalMember member) {
+		this.member = member;
 	}
 	
 	

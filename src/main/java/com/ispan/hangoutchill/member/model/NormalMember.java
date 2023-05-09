@@ -25,6 +25,7 @@ import javax.persistence.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ispan.hangoutchill.shop.model.Order;
 import com.ispan.hangoutchill.shop.model.ShoppingCart;
 
 @Entity
@@ -101,13 +102,23 @@ public class NormalMember {
     public void setShoppingCart(Set<ShoppingCart> shoppingCart) {
     	this.shoppingCart = shoppingCart;
     }
-    // shop 自行加入
     
     
+	@OneToMany(mappedBy="member",
+                cascade = CascadeType.PERSIST, orphanRemoval = true)
+	private Set<Order> orders = new LinkedHashSet<>();
     
-    public String getAccount() {
+    
+    public Set<Order> getOrders() {
+		return orders;
+	}
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
+	public String getAccount() {
         return account;
     }
+	// shop 自行加入
 
 	public void setAccount(String account) {
         this.account = account;
