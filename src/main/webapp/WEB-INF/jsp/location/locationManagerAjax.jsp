@@ -77,6 +77,8 @@
 <script>
   $(document).ready(function (){
 
+      $('#pageNumber').val(1);
+
       $('#submitBtnSearch').click(function (event){
           event.preventDefault();
           let inputName = document.getElementById('name').value;
@@ -97,8 +99,10 @@
           let dtoJsonString = JSON.stringify(dtoObject);
 
         $.ajax({
-            url: '${pageContext.request.contextPath}/api/location/locationManager/search?',
-
+            <%--url: '${pageContext.request.contextPath}/api/location/locationManager/search?',--%>
+          url: '${pageContext.request.contextPath}/api/location/locationManager/search?name='
+                  + inputName + '&category=' + inputCategory + '&price=' + inputPrice
+                  + '&city=' + inputCity + '&dist=' + inputDist + '&pageNumber=' + pageNumber,
 
 
             contentType: 'application/json;charset=UTF-8',

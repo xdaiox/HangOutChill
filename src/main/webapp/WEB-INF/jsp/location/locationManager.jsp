@@ -38,7 +38,7 @@
                             <option value="分類3" label="分類3"></option>
                         </select>
                     <select id="price" name="price">
-                        <option value="0" label="請選擇消費費水準..."></option>
+                        <option value="" label="請選擇消費費水準..."></option>
                         <option value="1" label="$"></option>
                         <option value="2" label="$ $"></option>
                         <option value="3" label="$ $ $"></option>
@@ -107,15 +107,9 @@
 
 <script>
 
-    // $(document).ready(function (){
-    //     $('#submitBtnSearch').click()(function (event){
-    //         event.preventDefault();
-    //         let inputName = document.getElementById('name').value;
-    //         let inputCategory = document.getElementById('category').value;
-    //         let inputPrice = document.getElementById('price').value;
-    //
-    //     })
-    // })
+    window.onload = function() {
+        document.getElementById("searchForm").submit();
+    };
 
 
 

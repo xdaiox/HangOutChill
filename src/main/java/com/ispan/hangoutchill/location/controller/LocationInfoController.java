@@ -132,10 +132,10 @@ public class LocationInfoController {
     
 //    ==========================AJAX測試==============================
 
-    @GetMapping("/location/locationManager")
-    public String toLocationManager(){
-        return "/location/locationManagerAjax";
-    }
+//    @GetMapping("/location/locationManager")
+//    public String toLocationManager(){
+//        return "/location/locationManagerAjax";
+//    }
 
 
 //    @ResponseBody
@@ -149,18 +149,34 @@ public class LocationInfoController {
 //        return page;
 //    }
 
-    @ResponseBody
-    @GetMapping ("/api/location/locationManager/search")
-    public  Page<LocationInfo> showAllLocationInfo(@RequestParam(name = "p" ,defaultValue = "1") Integer pageNumber,
-                                                   @RequestParam(name = "name", required = false) String name,
-                                                   @RequestParam(name = "category", required = false) String category,
-                                                   @RequestParam(name = "price", required = false) Integer price,
-                                                   @RequestParam(name = "city", required = false) String city,
-                                                   @RequestParam(name = "dist", required = false) String dist){
+//    @ResponseBody
+//    @GetMapping ("/api/location/locationManager/search")
+//    public  Page<LocationInfo> showAllLocationInfo(@RequestParam(name = "p" ,defaultValue = "1") Integer pageNumber,
+//                                                   @RequestParam(name = "name", required = false) String name,
+//                                                   @RequestParam(name = "category", required = false) String category,
+//                                                   @RequestParam(name = "price", required = false) Integer price,
+//                                                   @RequestParam(name = "city", required = false) String city,
+//                                                   @RequestParam(name = "dist", required = false) String dist){
+//
+//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(name,category,price,city,dist,pageNumber);
+//
+//        return page;
+//    }
 
-        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(name,category,price,city,dist,pageNumber);
 
-        return page;
+
+//        顯示所有LocationInfo 透過page 即LocationInfo Manager畫面
+    @GetMapping("/location/locationManager")
+    public String showAllLocationInfo(@RequestParam(name = "p" ,defaultValue = "1") Integer pageNumber,
+                                      @RequestParam(name = "name", required = false) String name,
+                                      @RequestParam(name = "category", required = false) String category,
+                                      @RequestParam(name = "price", required = false) Integer price,
+                                      @RequestParam(name = "city", required = false) String city,
+                                      @RequestParam(name = "dist", required = false) String dist,
+                                      Model model){
+        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(name, category, price, city, dist, pageNumber);
+        model.addAttribute("page", page);
+        return "/location/locationManager";
     }
 
 }
