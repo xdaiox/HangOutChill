@@ -3,11 +3,18 @@ package com.ispan.hangoutchill.xdaiox.restController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.JSONObject;
 
 import com.fasterxml.jackson.annotation.JsonRawValue;
@@ -17,9 +24,8 @@ import com.ispan.hangoutchill.xdaiox.model.Discussions;
 import com.ispan.hangoutchill.xdaiox.model.Images;
 import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
 
-@RestController
-@RequestMapping("/upload")
-public class restImageController {
+@Controller
+public class RestImageController {
 
     @Autowired
     private ImagesRepository imageRepository;
@@ -29,39 +35,33 @@ public class restImageController {
     
 //    @Autowired
 //    private DiscussionsService dService;
-
-    @PostMapping("/image")
-    public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("data") String data) {
-        try {
-            // 解析前端傳送過來的 JSON 字串
-            JSONObject jsonObject = new JSONObject(data);
-            
-//            String d_id = jsonObject.getString("discussionId");
-            
-            String title = jsonObject.getString("title");
-            String content = jsonObject.getString("content");
-            
-            System.out.println("========================================================"+"========================================================");
+    
+    @ResponseBody
+    @PostMapping("/discussion/upload/image")
+    public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file) {
+        
+    	System.out.println("========================上傳controller========================");
+    	
+    	try {
 
             // 將圖片資料轉換成 byte 陣列
             byte[] bytes = file.getBytes();
 
-            // 將資料存入資料庫中
-            Discussions discussion = new Discussions();
-            discussion.setTitle(title);
-            discussion.setContents(content);
-            dssRepository.save(discussion);
-            
+            // 將圖片存入資料庫中
             Images image = new Images();
-//            Discussions dss = dService.findDiscussionById(d_id);
-//            image.setFkImgDiscussions(dss);
             image.setImg_data(bytes);
-            imageRepository.save(image);
-            System.out.println("========================================================saveImagesaveImagesaveImagesaveImagesaveImage========================================================");
-            return ResponseEntity.ok().build();
+            Images Map = imageRepository.save(image);
+            
+            String imageUrl = "http://localhost:8080/hangoutchill/discussion/upload/image/" + Map.getI_id();
+            System.out.println(imageUrl);
+            Map<String,String> response = new HashMap<>();
+            response.put("url", imageUrl);
+            return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+    
+
 }
 

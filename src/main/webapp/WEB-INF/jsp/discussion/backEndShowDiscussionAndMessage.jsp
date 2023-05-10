@@ -9,7 +9,7 @@
 					<jsp:include page="../layout/navbar.jsp" />
 					<jstl:set var="contextRoot" value="${pageContext.request.contextPath}" />
 					<meta charset="UTF-8">
-					<title>討論</title>
+					<title>文章</title>
 
 					<style>
 						body {
@@ -237,21 +237,14 @@
 											</form:form>
 										</div>
 										<div class="inner-main-header">
-											<button	class="btn btn-primary" type="submit" onclick="showEditConfirmation()">編輯</button>
+											<a href="${contextRoot}/back/backEndEditDiscussion/${discussion.d_id}"><button
+													class="btn btn-primary" type="submit">編輯</button></a>
 
-											<!-- <form action="${contextRoot}/discussion/deleteDiscussion/${discussion.d_id}"
-												method="post" >
-												<input type="hidden" name="_method" value="delete" >
-												<button class="btn btn-primary danger" type="submit" onclick="confirmDelete()">刪除</button>
-											</form> -->
-
-
-											<button class="btn btn-primary danger" type="button" onclick="showDeleteConfirmation()">刪除</button>
-											<!--==========刪除討論url==========-->
-											<form id="delete-form" action="${contextRoot}/discussion/deleteDiscussion/${discussion.d_id}" method="post" style="display:none">
+											<form action="${contextRoot}/back/deleteDiscussion/${discussion.d_id}"
+												method="post">
 												<input type="hidden" name="_method" value="delete">
+												<button class="btn btn-primary danger" type="submit">刪除</button>
 											</form>
-
 										</div>
 									</div>
 									<div class="card">
@@ -283,12 +276,12 @@
 														</div>
 														<div>
 															<a
-																href="${contextRoot}/message/editMessage/${message.dm_id}"><button
+																href="${contextRoot}/back/editMessage/${message.dm_id}"><button
 																	class="btn btn-primary"
 																	type="submit">編輯</button></a>
 
 															<form
-																action="${contextRoot}/message/deleteMessage/${discussion.d_id}/${message.dm_id}"
+																action="${contextRoot}/back/deleteMessage/${discussion.d_id}/${message.dm_id}"
 																method="post">
 																<input type="hidden" name="_method" value="delete">
 																<button class="btn btn-primary danger"
@@ -307,7 +300,7 @@
 
 										<div class="card">
 											<form:form modelAttribute="replyDiscussion" method="post"
-												action="${contextRoot}/message/post/${discussion.d_id}">
+												action="${contextRoot}/back/post/${discussion.d_id}">
 
 												<form:input type="hidden" path="discussions"
 													value="${discussion.d_id}" />
@@ -324,8 +317,8 @@
 												<button type="submit" class="btn btn-primary">發表回覆</button>
 											</form:form>
 
-											<a href="${contextRoot}/discussion/allDiscussion"
-												class="btn btn-primary">返回文章列</a>
+											<a href="${contextRoot}/back/allDiscussions"
+												class="btn btn-primary">返回後台文章列</a>
 										</div>
 
 
@@ -343,18 +336,6 @@
 							plugins: [Essentials, Paragraph, Bold, Italic],
 							toolbar: ['bold', 'italic']
 						})
-
-						function showEditConfirmation() {
-							if (confirm("您確定要編輯此討論？")) {
-								window.location.href = "${contextRoot}/discussion/editDiscussion/${discussion.d_id}";
-							}
-						}
-
-						function showDeleteConfirmation() {
-							if (confirm("您確定要刪除此討論？")) {
-								document.getElementById("delete-form").submit();
-							}
-						}
 					</script>
 					<!-- ================================== ck editor ================================== -->
 

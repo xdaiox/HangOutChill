@@ -28,6 +28,7 @@ import javax.persistence.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
+import com.ispan.hangoutchill.xdaiox.model.Favourite;
 import com.ispan.hangoutchill.xdaiox.model.Images;
 import com.ispan.hangoutchill.xdaiox.model.Messages;
 import javax.persistence.*;
@@ -94,19 +95,28 @@ public class NormalMember {
     }
     
     @OneToMany(mappedBy = "normalMember",fetch=FetchType.LAZY,
-    					cascade = {CascadeType.PERSIST},orphanRemoval = true)
+    		cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Discussions> discussions = new LinkedHashSet<>();
     
     @OneToMany(mappedBy = "normalMmeber",fetch=FetchType.LAZY,
 			cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Messages> messages = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "fkImgNormalMmeber",fetch=FetchType.LAZY,
+    @OneToMany(mappedBy = "normalMember",fetch=FetchType.LAZY,
 			cascade = {CascadeType.PERSIST},orphanRemoval = true)
-    private Set<Images> images = new LinkedHashSet<>();
+    private Set<Favourite> favourite = new LinkedHashSet<>();
 
     
-    public Set<Discussions> getDiscussions() {
+    
+    public Set<Favourite> getFavourite() {
+		return favourite;
+	}
+
+	public void setFavourite(Set<Favourite> favourite) {
+		this.favourite = favourite;
+	}
+
+	public Set<Discussions> getDiscussions() {
  		return discussions;
  	}
 

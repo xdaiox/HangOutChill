@@ -40,9 +40,14 @@ public class Messages {
 	
     @PrePersist
     public void onCreate() {
-        if(postDate == null) {
+        if(updateDate == null && postDate == null) {
         	postDate = new Date();
         }
+        updateDate = postDate;
+    }
+    @PreUpdate
+    	public void onUpdate() {
+    	updateDate = new Date();
     }
     
     public NormalMember getNormalMmeber() {

@@ -18,12 +18,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.service.NormalMemberService;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
+
+import com.ispan.hangoutchill.xdaiox.model.Messages;
 import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
+import com.ispan.hangoutchill.xdaiox.service.MessagesService;
 @Controller
 public class DiscussionsController {
 	
 	@Autowired
 	private DiscussionsService dService;
+
+	@Autowired
+	private MessagesService mService;
 	
     @Autowired
     NormalMemberService nMemberService;
@@ -94,10 +100,8 @@ public class DiscussionsController {
     	System.out.println("========================after delete========================"+id+"========================after delete========================");
     	return "redirect:/discussion/allDiscussion";
     }
-
-//    
-//    
-//    
+    
+    
 //    @GetMapping("/discussion/replyDiscussion")
 //    public  String toreplyDiscussion (){
 //      return"discussion/replyDiscussion";

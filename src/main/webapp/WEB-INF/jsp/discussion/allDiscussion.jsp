@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 <jsp:include page="../layout/navbar.jsp" />
 <jstl:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
@@ -207,7 +208,7 @@ body {
 										<jstl:when test="${page.number+1 != pageNumber }">
 											<li class="page-item"><a class="page-link"
 										href="${contextRoot}/discussion/allDiscussion?p=${pageNumber}">${pageNumber}</a></li>
-										<!-- 反正上面這個p 就是DiscussionsController,toShowAllDiscussion內的p -->
+										<!-- p 是DiscussionsController,toShowAllDiscussion內的p -->
 										</jstl:when>
 										<jstl:otherwise>
 											<li class="page-item"><a class="page-link">${pageNumber}</a></li>
@@ -257,21 +258,25 @@ body {
 							<div class="card-body p-2 p-sm-3">
 								<div class="media forum-item">
 									<!-- 先從自己的discussion model 外鍵entity名稱 normalMember 再去找到normalMmeber對應的table裡photoB64欄位 -->
-									<a href="#" data-toggle="collapse" data-target=".forum-content"><img src="${discussion.normalMember.photoB64}" class="mr-3 rounded-circle" width="50" alt="User" /></a>
+									<a data-toggle="collapse" data-target=".forum-content"><img src="${discussion.normalMember.photoB64}" class="mr-3 rounded-circle" width="50" alt="User" /></a>
+									<a href="" class="star" data-discussion-id="${discussion.d_id}" data-normalmember-id="${discussion.normalMember.id}">
+										<!-- ********************星星******************** -->
+										<i class="far fa-star fa-2x"></i>
+									</a>
+									
 									<div class="media-body">
-										
 										<div class="text-body" onclick="window.location.href='${contextRoot}/message/allMessages/${discussion.d_id}'">	
-										
 											<a href="#" data-toggle="collapse" ata-target=".forum-content" class="text-body">
 												<h3>${discussion.title}</h3>
 												<p class="text-secondary">${discussion.contents}</p>
+												<p class="text-muted">
+													<h5>作者: ${discussion.normalMember.nickName}</h5>
+												</p>
 											</a>
 										</div>
-										<p class="text-muted">
-											<h5>作者:
-											<a>${discussion.normalMember.nickName}</a> </h5>
-											<span class="text-secondary font-weight-bold">發布於 <fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss" value="${discussion.postDate}"/></span>
-										</p>
+										<span class="text-secondary font-weight-bold">發布於 
+											<fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss" value="${discussion.postDate}"/>
+										</span>
 									</div>
 									<!-- <a href="${contextRoot}/discussion/replyDiscussion"><button class="btn btn-primary" type="submit">回覆
 									</button></a>
@@ -371,6 +376,83 @@ body {
 		</div>
 	</div>
 
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+		<div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+		  <div class="toast-header">
+			<strong class="me-auto">提示</strong>
+			<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="关闭"></button>
+		  </div>
+		  <div class="toast-body">
+			已把討論加入收藏。
+		  </div>
+		</div>
+	  </div>
 
+	  
+	<script>
+		$(document).ready(function() {
+		  $(".star").hover(
+			function() {
+			  // hover實心星星
+			  $(this).find("i").removeClass("far fa-star");
+			  $(this).find("i").addClass("fas fa-star");
+			},
+			function() {
+			  // 移開變空心星星
+			  $(this).find("i").removeClass("fas fa-star");
+			  $(this).find("i").addClass("far fa-star");
+			}
+		  );
+		  $(".star").click(function() {
+			event.preventDefault();
+
+			// 獲取星星的 data-discussion-id 值
+			let discussionId = $(this).data("discussion-id");
+			let normalMemberId = $(this).data("normalmember-id");
+
+			// 控制台顯示 discussionId
+			console.log("discussion ID:", discussionId);
+			console.log("normalMember ID:", normalMemberId);
+            
+			let dtoObject = {
+                                "discussions": {
+                                    "d_id": discussionId
+                                },
+                                "normalMember": {
+                                    "id" : normalMemberId
+                                }
+                            }
+            let dtoJsonString = JSON.stringify(dtoObject);
+			
+			$.ajax({
+                url:'http://localhost:8080/hangoutchill/api/addFavourite/post',
+                contentType:"application/json;charset=UTF-8",
+                dataType: 'json',
+                method:'post',
+                data:dtoJsonString,
+                success:function(result){
+                    // console.log(result)
+                    
+                    // msg_data = '<tbody>';
+                    // $.each(result,function(index,value){
+                    //     msg_data += '<tr>'
+                    //     msg_data += '<td>' + value.discussions + '</td>'
+                    //     msg_data += '<td>' + value.normalMember + '</td>'
+                    //     msg_data += '<td >' + '<i class="far fa-star"></i>'+ '</td>'
+                    //     msg_data += '</tr>'
+                    // })
+                    // msg_data += '</tbody>';
+
+                    // let myTable = document.getElementById('list_table_json');
+                    // myTable.getElementsByTagName('tbody')[0].innerHTML = msg_data
+
+                    },
+                error:function(err){
+                    console.log(err)
+                }
+            })
+		  });
+		});
+	  </script>
 </body>
 </html>

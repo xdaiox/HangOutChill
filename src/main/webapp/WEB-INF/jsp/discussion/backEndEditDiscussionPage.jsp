@@ -163,8 +163,7 @@ body {
 }
 </style>
 <!-- ================================== ck editor ================================== -->
-<!-- <script src="${contextRoot}/js/ckeditor/ckeditor.js"></script> -->
-<script src="${contextRoot}/js/ckeditor5-build-classic/ckeditor.js"></script>
+<script src="${contextRoot}/js/ckeditor/ckeditor.js"></script>
 <!-- ================================== ck editor ================================== -->
 </head>
 <div class="container">
@@ -177,7 +176,7 @@ body {
 							<h5 class="card-title text-center">修改文章</h5>
 						</div>
 						<div class="card-body">
-							<form:form modelAttribute="discussion" method="put" action="${contextRoot}/discussion/editDiscussion/${discussion.d_id}">
+							<form:form modelAttribute="discussion" method="put" action="${contextRoot}/back/backEndEditDiscussion/${discussion.d_id}">
 								<div class="form-group">
 								<form:input path="d_id" type="hidden"></form:input>
 								</div>
@@ -198,14 +197,16 @@ body {
 								<div class="form-group">
 									<label for="content">内容</label>
 									<!-- ================================== ck editor ================================== -->
-									<form:textarea path="contents" id="editor" name="content"
-										placeholder="請在這裡填寫內容"></form:textarea>
+									<form:textarea path="contents" id="editor" name="content" placeholder="請在這裡填寫內容"></form:textarea>
 									<!-- ================================== ck editor ================================== -->
+									
+									<!-- <form:textarea path="contents" class="form-control" id="content" rows="5"
+										placeholder="輸入内容" ></form:textarea> -->
 								</div>
 								<button type="submit" class="btn btn-primary">發表</button>
 							</form:form>
-							<a href="${contextRoot}/discussion/allDiscussion"
-								class="btn btn-primary">返回文章列</a>
+							<a href="${contextRoot}/back/allDiscussions"
+								class="btn btn-primary">返回後台文章列</a>
 						</div>
 					</div>
 					
@@ -218,67 +219,23 @@ body {
 
 <!-- ================================== ck editor ================================== -->
 <script>
-	ClassicEditor
-	.create(document.querySelector('#editor'), {
-		extraPlugins: [CustomUploadAdapterPlugin],
-	
-	
-		customUploadAdapter: {
-			uploadUrl: '${contextRoot}/discussion/upload/image'
-		}
-	})
-	.then(editor => {
-		console.log(editor);
-	})
-	.catch(error => {
-		console.error(error);
-	});
-	
-	function CustomUploadAdapterPlugin(editor) {
-	editor.plugins.get('FileRepository').createUploadAdapter = loader => {
-		return new CustomUploadAdapter(loader, editor.config.get('customUploadAdapter.uploadUrl'));
-	};
-	}
-	
-	
-	
-	
-	
-	class CustomUploadAdapter {
-		constructor(loader, uploadUrl) {
-			this.loader = loader;
-			this.uploadUrl = uploadUrl;
-		}
-	
-		upload() {
-			return this.loader.file
-				.then(file => new Promise((resolve, reject) => {
-					this._uploadFile(file).then(response => {
-						if (response.url) {
-							resolve({ default: response.url });
-						} else {
-							reject(`Upload failed: ${response.message}`);
-						}
-					});
-				}));
-		}
-	
-		_uploadFile(file) {
-			const data = new FormData();
-			data.append('file', file);
-	
-			return fetch(this.uploadUrl, {
-				method: 'POST',
-				body: data
-			})
-				.then(response => response.json())
-				.catch(error => {
-					console.error('Upload error:', error);
-					throw error;
-				});
-		}
-	}
-	</script>
+CKEDITOR.replace("editor");
+	// ClassicEditor
+    // .create( document.querySelector( '#editor' ), {
+    //     plugins: [ Essentials, Paragraph, Bold, Italic ],
+    //     toolbar: [ 'bold', 'italic' ]
+    // } )
+    // .then( editor => {
+    //     console.log( 'Editor was initialized', editor );
+    // } )
+    // .catch( error => {
+    //     console.error( error.stack );
+    // } );
+	ClassicEditor.create( document.querySelector( '#editor' ), {
+    plugins: [ Essentials, Paragraph, Bold, Italic ],
+    toolbar: [ 'bold', 'italic' ]
+} )
+</script>
 <!-- ================================== ck editor ================================== -->
 
 </html>
