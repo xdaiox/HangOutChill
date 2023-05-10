@@ -116,8 +116,8 @@ public class OrderController {
 		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
 		Order latestOrder = orderService.findLatestOrderByMemberId(currentmember.getId());
 		model.addAttribute("order", latestOrder);
-//		return "shop/orderFinishCheck";
-		return "redirect:/";
+		return "shop/orderFinishCheck";
+//		return "redirect:/";
 	}
 	
 	
