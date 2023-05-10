@@ -2,28 +2,18 @@ package com.ispan.hangoutchill.location.controller;
 
 import com.ispan.hangoutchill.location.dao.LocationInfoRepository;
 
-import com.ispan.hangoutchill.location.dto.locationInfo.LocationInfoRequest;
-import com.ispan.hangoutchill.location.model.LocationImage;
 import com.ispan.hangoutchill.location.model.LocationInfo;
-
-
-import com.ispan.hangoutchill.location.model.LocationImage;
-import com.ispan.hangoutchill.location.model.LocationInfo;
-import com.ispan.hangoutchill.location.model.LocationOperationTime;
 
 
 import com.ispan.hangoutchill.location.service.LocationInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class LocationInfoController {
@@ -132,10 +122,10 @@ public class LocationInfoController {
     
 //    ==========================AJAX測試==============================
 
-//    @GetMapping("/location/locationManager")
-//    public String toLocationManager(){
-//        return "/location/locationManagerAjax";
-//    }
+    @GetMapping("/location/locationManager")
+    public String toLocationManager(){
+        return "/location/locationManagerAjax";
+    }
 
 
 //    @ResponseBody
@@ -150,33 +140,63 @@ public class LocationInfoController {
 //    }
 
 //    @ResponseBody
-//    @GetMapping ("/api/location/locationManager/search")
-//    public  Page<LocationInfo> showAllLocationInfo(@RequestParam(name = "p" ,defaultValue = "1") Integer pageNumber,
-//                                                   @RequestParam(name = "name", required = false) String name,
-//                                                   @RequestParam(name = "category", required = false) String category,
-//                                                   @RequestParam(name = "price", required = false) Integer price,
-//                                                   @RequestParam(name = "city", required = false) String city,
-//                                                   @RequestParam(name = "dist", required = false) String dist){
+//        @GetMapping ("/api/location/locationManager/search")
+//        public  Page<LocationInfo> showAllLocationInfo(@RequestParam(name = "p" ,defaultValue = "1") Integer pageNumber,
+//                @RequestParam(name = "name", required = false) String name,
+//                @RequestParam(name = "category", required = false) String category,
+//                @RequestParam(name = "price", required = false) Integer price,
+//                @RequestParam(name = "city", required = false) String city,
+//                @RequestParam(name = "dist", required = false) String dist){
 //
-//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(name,category,price,city,dist,pageNumber);
+//            Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(name,category,price,city,dist,pageNumber);
 //
-//        return page;
+//            return page;
 //    }
 
 
 
 //        顯示所有LocationInfo 透過page 即LocationInfo Manager畫面
-    @GetMapping("/location/locationManager")
-    public String showAllLocationInfo(@RequestParam(name = "p" ,defaultValue = "1") Integer pageNumber,
-                                      @RequestParam(name = "name", required = false) String name,
-                                      @RequestParam(name = "category", required = false) String category,
-                                      @RequestParam(name = "price", required = false) Integer price,
-                                      @RequestParam(name = "city", required = false) String city,
-                                      @RequestParam(name = "dist", required = false) String dist,
-                                      Model model){
-        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(name, category, price, city, dist, pageNumber);
-        model.addAttribute("page", page);
-        return "/location/locationManager";
+//    @GetMapping("/location/locationManager")
+//    public String showAllLocationInfo(@RequestParam(name = "p" ,defaultValue = "1") Integer pageNumber,
+//                                      @RequestParam(name = "name", required = false) String name,
+//                                      @RequestParam(name = "category", required = false) String category,
+//                                      @RequestParam(name = "price", required = false) Integer price,
+//                                      @RequestParam(name = "city", required = false) String city,
+//                                      @RequestParam(name = "dist", required = false) String dist,
+//                                      Model model){
+//        Page<LocationInfo> page = locationInfoService.findAllLocationInfoByPage(name, category, price, city, dist, pageNumber);
+//        model.addAttribute("page", page);
+//        return "/location/locationManager";
+//    }
+
+
+    @ResponseBody
+    @GetMapping("/location/locationManager/search")
+    public Map<String,Object> showAllLocationInfo(@RequestParam(name = "pageNumber" ,defaultValue = "1") Integer pageNumber,
+                                                  @RequestParam(name = "name", required = false) String name,
+                                                  @RequestParam(name = "category", required = false) String category,
+                                                  @RequestParam(name = "price", required = false) Integer price,
+                                                  @RequestParam(name = "city", required = false) String city,
+                                                  @RequestParam(name = "dist", required = false) String dist){
+
+        System.out.println("in controller");
+
+        Page<LocationInfo> page;
+        Map<String,Object> response = new HashMap<>();
+        page = locationInfoService.findAllLocationInfoByPage(name, category, price, city, dist, pageNumber);
+        response.put("name", name);
+        response.put("category", category);
+        response.put("price", price);
+        response.put("city", city);
+        response.put("dist",dist);
+        response.put("pageNumber",pageNumber);
+        response.put("page",page);
+        return response;
     }
+
+
+
+
+
 
 }

@@ -42,18 +42,6 @@ public interface LocationInfoRepository extends JpaRepository<LocationInfo, Inte
 
 
 
-//    ======================多條件測試=============================================
-//    Specification<LocationInfo> Specification = new Specification<LocationInfo>() {
-//        private static final long serialVersionUID = 1L;
-//        @Override
-//        public Predicate toPredicate(Root<LocationInfo> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-//            String name = LocationInfoRequest.get
-//
-//
-//
-//            return null;
-//        }
-//    }
 
 
 

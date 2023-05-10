@@ -14,9 +14,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>地點清單管理</title>
 </head>
 <body>
+
 <div class="container-scroller">
 
 </div>
@@ -52,7 +54,7 @@
       </form>
       <br>
       <div class="table-responsive">
-        <table>
+        <table id="locationInfo-table">
           <thead>
             <tr>
               <th>地點編號</th>
@@ -72,68 +74,143 @@
   </div>
 </div>
 
+</div>
 
 
 <script>
-  $(document).ready(function (){
-
-      $('#pageNumber').val(1);
-
-      $('#submitBtnSearch').click(function (event){
-          event.preventDefault();
-          let inputName = document.getElementById('name').value;
-          let inputCategory = document.getElementById('category').value;
-          let inputPrice = document.getElementById('price').value;
-          let inputCity = document.getElementById('city').value;
-          let inputDist = document.getElementById('dist').value;
-          let pageNumber = document.getElementById('pageNumber').value;
-          let dtoObject = {
-            "name" : inputName,
-            "category" : inputCategory,
-            "price" : inputPrice,
-            "city" : inputCity,
-            "dist" : inputDist,
-            "pageNumber" : pageNumber,
-
-          };
-          let dtoJsonString = JSON.stringify(dtoObject);
-
-        $.ajax({
-            <%--url: '${pageContext.request.contextPath}/api/location/locationManager/search?',--%>
-          url: '${pageContext.request.contextPath}/api/location/locationManager/search?name='
-                  + inputName + '&category=' + inputCategory + '&price=' + inputPrice
-                  + '&city=' + inputCity + '&dist=' + inputDist + '&pageNumber=' + pageNumber,
-
-
-            contentType: 'application/json;charset=UTF-8',
-            dataType: 'json',
-            method: 'GET',
-            data: dtoJsonString,
-              success: function(searchResult) {
-              console.log(searchResult);
-               let locationInfo = '';
-              $.each(searchResult.content,function (index,value) {
-                console.log(value)
-                locationInfo += '<tr>'
-                locationInfo += '<td>' + value.locId + '</td>'
-                locationInfo += '<td>' + value.locName + '</td>'
-                locationInfo += '<td>' + value.locCat + '</td>'
-                locationInfo += '<td>' + value.locPriceLevel + '</td>'
-                locationInfo += '<td>' + value.locCity + '</td>'
-                locationInfo += '<td>' + value.locDist + '</td>'
-                locationInfo += '</tr>';
-              })
-                // locationInfo = '</tbody>';
-
-              let  table = document.getElementById('searchResult-list');
-              table.innerHTML = locationInfo
-              },
-              error: function(searchError) {
-              console.log(searchError);
-                }
-            });
-      })
+  window.addEventListener("load", () => {
+    return  loadLocationInfo(1,'', '', '','','')
   })
+
+  async function loadLocationInfo(pageNumber, name, category, price, city, dist) {
+    try {
+      const response = await axios.get('${pageContext.request.contextPath}/location/locationManager/search', {
+        params: {pageNumber, name, category, price, city, dist}
+      });
+      console.log(response)
+      displayLocationInfo(response.data.page.content);
+      // setupPagination(response.data);
+    } catch (error) {
+      console.error('Error loading LocationInfo:', error);
+    }
+  }
+
+  //先載入避免跑版
+  // window.onload = () => {
+  //   Promise.all(Array.from(document.getElementsByTagName('jsp:include')).map((include) => {
+  //     return new Promise((resolve, reject) => {
+  //       include.addEventListener('load', resolve);
+  //     });
+  //   })).then(() => {
+  //     // 預設值
+  //     loadLocationInfo(1, '', '', '','','');
+  //   });
+  // };
+
+
+  //獲取查詢值name
+  function getNameValue(){
+    const inputName = document.getElementById('name').value;
+    return inputName
+  }
+  //獲取查詢值category
+  function getCategoryValue(){
+    const inputCategory = document.getElementById('category').value;
+    return inputCategory
+  }
+
+  //獲取查詢值price
+  function getPriceValue(){
+    const inputPrice = document.getElementById('price').value;
+    return inputPrice
+  }
+  //獲取查詢值city
+  function getCityValue(){
+    const inputCity = document.getElementById('city').value;
+    return inputCity
+  }
+  //獲取查詢值dist
+  function getDistValue(){
+    const inputDist = document.getElementById('dist').value;
+    return inputDist
+  }
+
+  function getPageNumberValue(){
+    const pageNumber = document.getElementById('pageNumber').value;
+    return pageNumber
+  }
+
+
+  function displayLocationInfo(location){
+    const
+  }
+
+
+
+
+
+
+
+
+  <%--$(document).ready(function (){--%>
+
+  <%--    $('#pageNumber').val(1);--%>
+
+  <%--    $('#submitBtnSearch').click(function (event){--%>
+  <%--        event.preventDefault();--%>
+  <%--        let inputName = document.getElementById('name').value;--%>
+  <%--        let inputCategory = document.getElementById('category').value;--%>
+  <%--        let inputPrice = document.getElementById('price').value;--%>
+  <%--        let inputCity = document.getElementById('city').value;--%>
+  <%--        let inputDist = document.getElementById('dist').value;--%>
+  <%--        let pageNumber = document.getElementById('pageNumber').value;--%>
+  <%--        let dtoObject = {--%>
+  <%--          "name" : inputName,--%>
+  <%--          "category" : inputCategory,--%>
+  <%--          "price" : inputPrice,--%>
+  <%--          "city" : inputCity,--%>
+  <%--          "dist" : inputDist,--%>
+  <%--          "pageNumber" : pageNumber,--%>
+
+  <%--        };--%>
+  <%--        let dtoJsonString = JSON.stringify(dtoObject);--%>
+
+  <%--      $.ajax({--%>
+  <%--          &lt;%&ndash;url: '${pageContext.request.contextPath}/api/location/locationManager/search?',&ndash;%&gt;--%>
+  <%--        url: '${pageContext.request.contextPath}/api/location/locationManager/search?name='--%>
+  <%--                + inputName + '&category=' + inputCategory + '&price=' + inputPrice--%>
+  <%--                + '&city=' + inputCity + '&dist=' + inputDist + '&pageNumber=' + pageNumber,--%>
+
+
+  <%--          contentType: 'application/json;charset=UTF-8',--%>
+  <%--          dataType: 'json',--%>
+  <%--          method: 'GET',--%>
+  <%--          data: dtoJsonString,--%>
+  <%--            success: function(searchResult) {--%>
+  <%--            console.log(searchResult);--%>
+  <%--             let locationInfo = '';--%>
+  <%--            $.each(searchResult.content,function (index,value) {--%>
+  <%--              console.log(value)--%>
+  <%--              locationInfo += '<tr>'--%>
+  <%--              locationInfo += '<td>' + value.locId + '</td>'--%>
+  <%--              locationInfo += '<td>' + value.locName + '</td>'--%>
+  <%--              locationInfo += '<td>' + value.locCat + '</td>'--%>
+  <%--              locationInfo += '<td>' + value.locPriceLevel + '</td>'--%>
+  <%--              locationInfo += '<td>' + value.locCity + '</td>'--%>
+  <%--              locationInfo += '<td>' + value.locDist + '</td>'--%>
+  <%--              locationInfo += '</tr>';--%>
+  <%--            })--%>
+  <%--              // locationInfo = '</tbody>';--%>
+
+  <%--            let  table = document.getElementById('searchResult-list');--%>
+  <%--            table.innerHTML = locationInfo--%>
+  <%--            },--%>
+  <%--            error: function(searchError) {--%>
+  <%--            console.log(searchError);--%>
+  <%--              }--%>
+  <%--          });--%>
+  <%--    })--%>
+  <%--})--%>
 
 
 </script>

@@ -267,52 +267,97 @@ public class LocationInfoService {
 //        }
 //    }
 
+//    =====================================多條件搜尋-確認可動-但切換分頁沒辦法帶條件參數===========================================
+//    public Page<LocationInfo> findAllLocationInfoByPage(String name, String category, Integer price,
+//                                                        String city, String dist ,Integer pageNumber){
+//
+//        Specification<LocationInfo> specification = new Specification<LocationInfo>(){
+//            @Override
+//            public Predicate toPredicate(Root<LocationInfo> root, CriteriaQuery<?> query,
+//                                         CriteriaBuilder criteriaBuilder) {
+//                List<Predicate> predicateList = new ArrayList<>();
+//
+//                if (org.apache.commons.lang3.StringUtils.isNotBlank(name)){
+//                    Predicate predicate = criteriaBuilder.like(root.get("locName"),"%" + name + "%");
+//                    predicateList.add(predicate);
+//                }
+//                if (org.apache.commons.lang3.StringUtils.isNotBlank(category)){
+//                    Predicate predicate = criteriaBuilder.equal(root.get("locCat"),category);
+//                    predicateList.add(predicate);
+//                }
+//                if (price != null){
+//                    Predicate predicate = criteriaBuilder.equal(root.get("locPriceLevel"),price);
+//                    predicateList.add(predicate);
+//                }
+//                if (org.apache.commons.lang3.StringUtils.isNotBlank(city)){
+//                    Predicate predicate = criteriaBuilder.equal(root.get("locCity"),city);
+//                    predicateList.add(predicate);
+//                }
+//                if (org.apache.commons.lang3.StringUtils.isNotBlank(dist)){
+//                    Predicate predicate = criteriaBuilder.equal(root.get("locDist"),dist);
+//                    predicateList.add(predicate);
+//                }
+//                Predicate[] predicate = new Predicate[predicateList.size()];
+//                return criteriaBuilder.and(predicateList.toArray(predicate));
+//            }
+//        };
+//        Pageable pageable = PageRequest.of(pageNumber-1,6,Sort.Direction.DESC,"locId");
+//        if (org.apache.commons.lang3.StringUtils.isNotBlank(name) &&
+//                org.apache.commons.lang3.StringUtils.isNotBlank(category) &&
+//                price == null &&
+//                org.apache.commons.lang3.StringUtils.isNotBlank(city) &&
+//                org.apache.commons.lang3.StringUtils.isNotBlank(dist)) {
+//            return locRepo.findAll(pageable);
+//        } else {
+//            return locRepo.findAll(specification, pageable);
+//        }
+//    }
 
-    public Page<LocationInfo> findAllLocationInfoByPage(String name, String category, Integer price,
-                                              String city, String dist ,Integer pageNumber){
+//    ====================================改寫成list 到controller================================================
+public Page<LocationInfo> findAllLocationInfoByPage(String name, String category, Integer price,
+                                                    String city, String dist ,Integer pageNumber){
 
-        Specification<LocationInfo> specification = new Specification<LocationInfo>(){
-            @Override
-            public Predicate toPredicate(Root<LocationInfo> root, CriteriaQuery<?> query,
-                                         CriteriaBuilder criteriaBuilder) {
-                List<Predicate> predicateList = new ArrayList<>();
+    Specification<LocationInfo> specification = new Specification<LocationInfo>(){
+        @Override
+        public Predicate toPredicate(Root<LocationInfo> root, CriteriaQuery<?> query,
+                                     CriteriaBuilder criteriaBuilder) {
+            List<Predicate> predicateList = new ArrayList<>();
 
-                if (org.apache.commons.lang3.StringUtils.isNotBlank(name)){
-                    Predicate predicate = criteriaBuilder.like(root.get("locName"),"%" + name + "%");
-                    predicateList.add(predicate);
-                }
-                if (org.apache.commons.lang3.StringUtils.isNotBlank(category)){
-                    Predicate predicate = criteriaBuilder.equal(root.get("locCat"),category);
-                    predicateList.add(predicate);
-                }
-                if (price != null){
-                    Predicate predicate = criteriaBuilder.equal(root.get("locPriceLevel"),price);
-                    predicateList.add(predicate);
-                }
-                if (org.apache.commons.lang3.StringUtils.isNotBlank(city)){
-                    Predicate predicate = criteriaBuilder.equal(root.get("locCity"),city);
-                    predicateList.add(predicate);
-                }
-                if (org.apache.commons.lang3.StringUtils.isNotBlank(dist)){
-                    Predicate predicate = criteriaBuilder.equal(root.get("locDist"),dist);
-                    predicateList.add(predicate);
-                }
-                Predicate[] predicate = new Predicate[predicateList.size()];
-                return criteriaBuilder.and(predicateList.toArray(predicate));
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(name)){
+                Predicate predicate = criteriaBuilder.like(root.get("locName"),"%" + name + "%");
+                predicateList.add(predicate);
             }
-        };
-        Pageable pageable = PageRequest.of(pageNumber-1,6,Sort.Direction.DESC,"locId");
-        if (org.apache.commons.lang3.StringUtils.isNotBlank(name) &&
-                org.apache.commons.lang3.StringUtils.isNotBlank(category) &&
-                price == null &&
-                org.apache.commons.lang3.StringUtils.isNotBlank(city) &&
-                org.apache.commons.lang3.StringUtils.isNotBlank(dist)) {
-            return locRepo.findAll(pageable);
-        } else {
-            return locRepo.findAll(specification, pageable);
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(category)){
+                Predicate predicate = criteriaBuilder.equal(root.get("locCat"),category);
+                predicateList.add(predicate);
+            }
+            if (price != null){
+                Predicate predicate = criteriaBuilder.equal(root.get("locPriceLevel"),price);
+                predicateList.add(predicate);
+            }
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(city)){
+                Predicate predicate = criteriaBuilder.equal(root.get("locCity"),city);
+                predicateList.add(predicate);
+            }
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(dist)){
+                Predicate predicate = criteriaBuilder.equal(root.get("locDist"),dist);
+                predicateList.add(predicate);
+            }
+            Predicate[] predicate = new Predicate[predicateList.size()];
+            return criteriaBuilder.and(predicateList.toArray(predicate));
         }
+    };
+    Pageable pageable = PageRequest.of(pageNumber-1,6,Sort.Direction.DESC,"locId");
+    if (org.apache.commons.lang3.StringUtils.isNotBlank(name) &&
+            org.apache.commons.lang3.StringUtils.isNotBlank(category) &&
+            price == null &&
+            org.apache.commons.lang3.StringUtils.isNotBlank(city) &&
+            org.apache.commons.lang3.StringUtils.isNotBlank(dist)) {
+        return locRepo.findAll(pageable);
+    } else {
+        return locRepo.findAll(specification, pageable);
     }
-
+}
 
 
 

@@ -107,9 +107,9 @@
 
 <script>
 
-    window.onload = function() {
-        document.getElementById("searchForm").submit();
-    };
+    // window.onload = function() {
+    //     document.getElementById("searchForm").submit();
+    // };
 
 
 
