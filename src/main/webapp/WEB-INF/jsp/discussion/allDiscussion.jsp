@@ -402,7 +402,7 @@ body {
 			  $(this).find("i").addClass("fas fa-star");
 			},
 			function() {
-			  // 移開變空心星星
+			  // 移開，變空心星星
 			  $(this).find("i").removeClass("fas fa-star");
 			  $(this).find("i").addClass("far fa-star");
 			}
