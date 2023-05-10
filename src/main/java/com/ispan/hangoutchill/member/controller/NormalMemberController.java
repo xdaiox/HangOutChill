@@ -2,6 +2,7 @@ package com.ispan.hangoutchill.member.controller;
 
 import com.ispan.hangoutchill.member.UserDetailServiceImpl;
 import com.ispan.hangoutchill.member.event.OnForgotPassWord;
+import com.ispan.hangoutchill.member.event.OnResendAuthenticationMail;
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.model.Role;
 import com.ispan.hangoutchill.member.model.SecuredToken;
@@ -9,8 +10,10 @@ import com.ispan.hangoutchill.member.event.OnRegistrationCompleteEvent;
 import com.ispan.hangoutchill.member.service.NormalMemberService;
 import com.ispan.hangoutchill.member.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,6 +35,7 @@ public class NormalMemberController {
     @Autowired
     RoleService roleService;
 
+    @Qualifier("encoder")
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -57,6 +61,12 @@ public class NormalMemberController {
         return "member/normalMemberLogin";
     }
 
+    @GetMapping ("/admin/login")
+    public String toAdminLogin(){
+        return  "member/adminLogin";
+    }
+
+
     @GetMapping("/member/LocationRegister")
     public String toLocationMemberRegister() {
         return "member/registerLocation";
@@ -67,12 +77,28 @@ public class NormalMemberController {
         return"member/forgetPwdAlter";
     }
 
+    @GetMapping("/member/resetPwd")
+    public String toResetPassWord(@RequestParam(name="id")Integer id,Model model){
+        model.addAttribute("memberId", id);
+        return "member/resetPwd";
+    }
+
     @GetMapping("/member/registration")
     public String addMessage(Model model) {
         model.addAttribute("newNormalMember", new NormalMember());
         return "member/registerNormalMember";
     }
 
+    @GetMapping("/member/forgetPwdResult")
+    public String toPasswordAlterDone(){
+        return  "member/passwordAlterDone";
+    }
+
+    @ResponseBody
+    @GetMapping("/member/existed")
+    public Boolean existEmail(@RequestParam(name="account")String account){
+        return  nMemberService.existAccount(account);
+    }
     @PostMapping("/NormalMember/registed")
     public String registedNormalMember(@ModelAttribute("newNormalMember") NormalMember nMember, Model model) {
         try {
@@ -124,7 +150,26 @@ public class NormalMemberController {
     public  String memberForgetPwdAct(@RequestParam(name = "password") String password, @RequestParam(name="id")Integer id){
         String passwordEncoded = passwordEncoder.encode(password);
         nMemberService.updatePassword(id, passwordEncoded);
-        return "redirect:/back/members";
+        return "redirect:/member/forgetPwdResult";
+    }
+
+    @ResponseBody
+    @GetMapping("/member/resendMail")
+    public String  memberResendAuthenticationMail(@RequestParam(name = "id")Integer id){
+        NormalMember member = nMemberService.findNormalMemberById(id);
+        eventPublisher.publishEvent( new OnResendAuthenticationMail(member));
+        return "驗證信已重新寄送";
+    }
+
+
+    @GetMapping("/resendAuthenticationMail")
+    public String resendMailConfirm(@RequestParam String token){
+        SecuredToken securedToken = nMemberService.findSecuredToken(token);
+        NormalMember normalMember = securedToken.getNormalMember();
+        if(normalMember != null){
+            return  "redirect:/member/login";
+        }
+        return  " ";
     }
 
     @GetMapping("/member/NormalMemberDetail")
@@ -137,6 +182,36 @@ public class NormalMemberController {
         return "/member/normalMemberCenter";
     }
 
+
+
+    @PutMapping("/member/updateInfo")
+    public String putUpdateForMember(@ModelAttribute("result")NormalMember member) throws IOException {
+        Integer id = member.getId();
+        MultipartFile file = member.getFile();
+        byte[] fileBytes =  file.getBytes();
+        String base64 = Base64.getEncoder().encodeToString(fileBytes);
+        String base64File = "data:image/png;base64," + base64;
+        if(base64File.equals("data:image/png;base64,")){
+            NormalMember normalMemberById = nMemberService.findNormalMemberById(id);
+            nMemberService.updateActByIdForMemberP(id,member,normalMemberById.getPhotoB64());
+        }else{
+           nMemberService.updateActByIdForMemberP(id,member,base64File);
+        }
+
+      return"redirect:/member/NormalMemberDetail";
+    }
+
+    @PostMapping("/member/checkPassWord")
+    public String matchPassword(@RequestParam("pwd")String password,@RequestParam("memberId")Integer id, Model model){
+        NormalMember member = nMemberService.findNormalMemberById(id);
+        boolean checked = nMemberService.findPwd(password, id);
+        if(checked){
+            model.addAttribute("forgotM",member);
+            return "/member/forgetPwdUpdate";
+        }else {
+            return "";
+        }
+    }
 
 
     @GetMapping("/back/members")
@@ -175,22 +250,6 @@ public class NormalMemberController {
     }
 
 
-    @PutMapping("/member/updateInfo")
-    public String putUpdateForMember(@ModelAttribute("result")NormalMember member) throws IOException {
-        Integer id = member.getId();
-        MultipartFile file = member.getFile();
-        byte[] fileBytes =  file.getBytes();
-        String base64 = Base64.getEncoder().encodeToString(fileBytes);
-        String base64File = "data:image/png;base64," + base64;
-        if(base64File.equals("data:image/png;base64,")){
-            NormalMember normalMemberById = nMemberService.findNormalMemberById(id);
-            nMemberService.updateActByIdForMemberP(id,member,normalMemberById.getPhotoB64());
-        }else{
-           nMemberService.updateActByIdForMemberP(id,member,base64File);
-        }
-
-      return"redirect:/member/NormalMemberDetail";
-    }
 
 
 

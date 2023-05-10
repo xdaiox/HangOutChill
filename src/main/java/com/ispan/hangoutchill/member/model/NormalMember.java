@@ -1,30 +1,6 @@
 package com.ispan.hangoutchill.member.model;
 
-import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
@@ -67,6 +43,7 @@ public class NormalMember {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="FK_role_id", foreignKey=@ForeignKey(name = "role_id"))
+    @JsonIgnoreProperties("normalMember")
     private Role role;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -75,6 +52,7 @@ public class NormalMember {
     private Date registTime;
 
     @OneToOne(mappedBy = "normalMember")
+    @JsonIgnoreProperties("normalMember")
     private SecuredToken securedToken;
 
     @Column(name="enabled")

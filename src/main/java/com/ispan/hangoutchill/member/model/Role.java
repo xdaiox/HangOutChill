@@ -15,7 +15,11 @@ public class Role {
     private String roleName;
 
     @OneToMany(mappedBy = "role")
+
     private Collection<NormalMember> normalMember;
+
+//    @OneToMany(mappedBy = "role")
+//    private Collection<Admin> admin;
 
     @OneToMany(mappedBy = "role")
     private Collection<LocationMember> locationMembers;
@@ -34,6 +38,7 @@ public class Role {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
+
 
 
 }

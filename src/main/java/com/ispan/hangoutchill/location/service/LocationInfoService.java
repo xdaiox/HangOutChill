@@ -26,7 +26,6 @@ public class LocationInfoService {
     @Autowired
     private LocationInfoRepository locRepo;
 
-
     //    ========================LocationStoreInfoManager 地點資料管理===============================
 
     //查詢所有地點 透過page

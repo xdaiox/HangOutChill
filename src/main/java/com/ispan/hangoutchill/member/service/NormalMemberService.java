@@ -5,10 +5,12 @@ import com.ispan.hangoutchill.member.dao.SecuredTokenRepository;
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.model.SecuredToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,6 +24,10 @@ public class NormalMemberService implements INormalMemberService {
 
     @Autowired
     SecuredTokenRepository securedTokenRepository;
+
+    @Qualifier("encoder")
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     //創造token
     @Override
@@ -86,7 +92,7 @@ public class NormalMemberService implements INormalMemberService {
     //後臺所有會員
     @Override
     public List<NormalMember> findallmember(Integer pageNum) {
-        Pageable pgb = PageRequest.of(pageNum - 1, 10, Sort.Direction.DESC, "registTime");
+        Pageable pgb = PageRequest.of(pageNum - 1, 5, Sort.Direction.DESC, "registTime");
         Page<NormalMember> page = nMemberRepository.findAll(pgb);
         List<NormalMember> result = page.getContent();
         return result;
@@ -95,9 +101,8 @@ public class NormalMemberService implements INormalMemberService {
 
     @Override
     public Page<NormalMember> findPages(Integer pageNum) {
-        Pageable pgb = PageRequest.of(pageNum - 1, 10, Sort.Direction.DESC, "registTime");
+        Pageable pgb = PageRequest.of(pageNum - 1, 5, Sort.Direction.DESC, "registTime");
         Page<NormalMember> page = nMemberRepository.findAll(pgb);
-
         return page;
     }
 
@@ -169,6 +174,30 @@ public class NormalMemberService implements INormalMemberService {
         normalMember.setPassword(password);
         nMemberRepository.save(normalMember);
         return  normalMember;
+    }
+
+    //確認信箱是否已存在
+    public Boolean existAccount(String account){
+        NormalMember member = nMemberRepository.findNormalMembersByAccount(account);
+        if(member == null){
+            return  true;
+        }else {
+            return  false;
+        }
+    }
+
+    //後臺模糊搜尋會員帳號
+    public  List<NormalMember> findBlurMember(String account){
+        return nMemberRepository.findBlurMemberByAcoount(account);
+    }
+
+    //更改密碼判斷是否相同
+    public boolean findPwd (String password , Integer id){
+        Optional<NormalMember> byId = nMemberRepository.findById(id);
+        NormalMember normalMember = byId.get();
+        String passwordInDB = normalMember.getPassword();
+        boolean matches = passwordEncoder.matches(password, passwordInDB);
+        return  matches;
     }
 }
 

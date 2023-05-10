@@ -20,8 +20,8 @@
     <div class="box box-border">
         <div class="box-body">
             <h4>請輸入新密碼</h4>
-            <form method="post" action="${contextRoot}/member/updatePwdForget" >
-                <input type="hidden" name="_method" value="PUT">
+            <form method="post" action="${contextRoot}/member/updatePwdForget ">
+                <input type="hidden" name="_method" value="put">
                 <input type="hidden" value="${forgotM.id}" name="id">
                 <div class="form-group">
                     <label>密碼</label>
