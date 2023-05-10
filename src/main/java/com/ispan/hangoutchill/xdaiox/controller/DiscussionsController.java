@@ -1,5 +1,7 @@
 package com.ispan.hangoutchill.xdaiox.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
@@ -18,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.service.NormalMemberService;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
-
+import com.ispan.hangoutchill.xdaiox.model.Favourite;
+import com.ispan.hangoutchill.xdaiox.model.FavouriteDTO;
 import com.ispan.hangoutchill.xdaiox.model.Messages;
 import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
+import com.ispan.hangoutchill.xdaiox.service.FavouriteService;
 import com.ispan.hangoutchill.xdaiox.service.MessagesService;
 @Controller
 public class DiscussionsController {
@@ -33,7 +37,12 @@ public class DiscussionsController {
 	
     @Autowired
     NormalMemberService nMemberService;
+    
+    @Autowired
+    FavouriteService fService;
 	
+    
+//  顯示查找所有討論  
 	@GetMapping("/discussion/allDiscussion")
 	public String toShowAllDiscussion(@RequestParam(name="p",defaultValue = "1")Integer pageNumber,Model model,
 										@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
@@ -44,7 +53,12 @@ public class DiscussionsController {
         String name = authentication.getName();
         NormalMember result = nMemberService.findNormalUserByAccount(name);
         model.addAttribute("result", result);
-		
+        
+//      透過會員id，找收藏的資料
+        if(result != null) {
+	        	List<FavouriteDTO> favouriteDTO = fService.findAllFavouriteById(result.getId());
+	        	model.addAttribute("favouriteDTO", favouriteDTO);
+        }
 		return"discussion/allDiscussion";
 	}
 	

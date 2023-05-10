@@ -253,6 +253,8 @@ body {
 						</div>
 						</jstl:forEach> -->
 						
+
+						<!-- ******************** 討論區 ******************** 討論區 ******************** -->
 						<jstl:forEach var="discussion" items="${page.content}">
 						<div class="card">
 							<div class="card-body p-2 p-sm-3">
@@ -297,6 +299,8 @@ body {
 							</div>
 						</div>
 						</jstl:forEach>
+						<!-- ******************** 討論區 ******************** 討論區 ******************** -->
+
 						
 						<!-- 範例card -->
 						<!-- <div class="card">
