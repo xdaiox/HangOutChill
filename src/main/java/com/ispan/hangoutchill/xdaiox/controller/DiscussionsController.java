@@ -35,14 +35,12 @@ public class DiscussionsController {
 	@Autowired
 	private MessagesService mService;
 	
+	@Autowired
+	private FavouriteService fService;
+	
     @Autowired
     NormalMemberService nMemberService;
-    
-    @Autowired
-    FavouriteService fService;
 	
-    
-//  顯示查找所有討論  
 	@GetMapping("/discussion/allDiscussion")
 	public String toShowAllDiscussion(@RequestParam(name="p",defaultValue = "1")Integer pageNumber,Model model,
 										@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
@@ -53,12 +51,7 @@ public class DiscussionsController {
         String name = authentication.getName();
         NormalMember result = nMemberService.findNormalUserByAccount(name);
         model.addAttribute("result", result);
-        
-//      透過會員id，找收藏的資料
-        if(result != null) {
-	        	List<FavouriteDTO> favouriteDTO = fService.findAllFavouriteById(result.getId());
-	        	model.addAttribute("favouriteDTO", favouriteDTO);
-        }
+		
 		return"discussion/allDiscussion";
 	}
 	
@@ -114,6 +107,19 @@ public class DiscussionsController {
     	System.out.println("========================after delete========================"+id+"========================after delete========================");
     	return "redirect:/discussion/allDiscussion";
     }
+    
+    //找使用者所有的討論收藏
+    @GetMapping("/discussion/allFavourite")
+    public String toShowAllFavourite(@CurrentSecurityContext(expression = "authentication")
+										Authentication authentication,Model model) {
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        List<FavouriteDTO> favDTO = fService.findAllFavouriteById(result.getId());
+        
+        model.addAttribute("favourite",favDTO);
+        return "discussion/allFavourite";
+    }
+    
     
     
 //    @GetMapping("/discussion/replyDiscussion")

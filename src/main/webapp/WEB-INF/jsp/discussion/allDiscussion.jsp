@@ -184,6 +184,7 @@ body {
 						<button class="btn btn-primary" type="submit">最新</button>
 						<button class="btn btn-primary" type="submit">精選</button>
 						<button class="btn btn-primary" type="submit">熱門</button>
+						<a href="${contextRoot}/discussion/allFavourite"><button class="btn btn-primary" type="submit">珍藏文章</button></a>
 						<button type="button" class="btn btn-link ml-auto">分類1</button>
 						<button type="button" class="btn btn-link ml-auto">分類2</button>
 						<button type="button" class="btn btn-link ml-auto">分類3</button>
@@ -253,8 +254,6 @@ body {
 						</div>
 						</jstl:forEach> -->
 						
-
-						<!-- ******************** 討論區 ******************** 討論區 ******************** -->
 						<jstl:forEach var="discussion" items="${page.content}">
 						<div class="card">
 							<div class="card-body p-2 p-sm-3">
@@ -299,8 +298,6 @@ body {
 							</div>
 						</div>
 						</jstl:forEach>
-						<!-- ******************** 討論區 ******************** 討論區 ******************** -->
-
 						
 						<!-- 範例card -->
 						<!-- <div class="card">
@@ -402,7 +399,7 @@ body {
 			  $(this).find("i").addClass("fas fa-star");
 			},
 			function() {
-			  // 移開，變空心星星
+			  // 移開變空心星星
 			  $(this).find("i").removeClass("fas fa-star");
 			  $(this).find("i").addClass("far fa-star");
 			}
