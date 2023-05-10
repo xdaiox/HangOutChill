@@ -6,6 +6,7 @@ public class LocationInfoRequest {
     Integer price;
     String city;
     String dist;
+    Integer pageNumber;
 
 
     public String getName() {
@@ -48,4 +49,11 @@ public class LocationInfoRequest {
         this.dist = dist;
     }
 
+    public Integer getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(Integer pageNumber) {
+        this.pageNumber = pageNumber;
+    }
 }

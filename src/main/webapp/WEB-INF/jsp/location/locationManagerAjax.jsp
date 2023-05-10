@@ -77,6 +77,8 @@
 <script>
   $(document).ready(function (){
 
+      $('#pageNumber').val(1);
+
       $('#submitBtnSearch').click(function (event){
           event.preventDefault();
           let inputName = document.getElementById('name').value;
@@ -84,24 +86,28 @@
           let inputPrice = document.getElementById('price').value;
           let inputCity = document.getElementById('city').value;
           let inputDist = document.getElementById('dist').value;
+          let pageNumber = document.getElementById('pageNumber').value;
           let dtoObject = {
             "name" : inputName,
             "category" : inputCategory,
             "price" : inputPrice,
             "city" : inputCity,
             "dist" : inputDist,
+            "pageNumber" : pageNumber,
 
           };
           let dtoJsonString = JSON.stringify(dtoObject);
 
         $.ajax({
-            url: '${pageContext.request.contextPath}/api/location/locationManager/search',
-
+            <%--url: '${pageContext.request.contextPath}/api/location/locationManager/search?',--%>
+          url: '${pageContext.request.contextPath}/api/location/locationManager/search?name='
+                  + inputName + '&category=' + inputCategory + '&price=' + inputPrice
+                  + '&city=' + inputCity + '&dist=' + inputDist + '&pageNumber=' + pageNumber,
 
 
             contentType: 'application/json;charset=UTF-8',
             dataType: 'json',
-            method: 'POST',
+            method: 'GET',
             data: dtoJsonString,
               success: function(searchResult) {
               console.log(searchResult);
