@@ -42,7 +42,6 @@ public class OrderService {
 		aioCheck.setMerchantTradeDate(sdf.format(new Date()));
 		
 		// 交易金額
-		
 		aioCheck.setTotalAmount(Integer.toString(totalPrice));
 		
 		// 交易描述
@@ -67,7 +66,7 @@ public class OrderService {
 		aioCheck.setReturnURL("http://localhost:8080/hangoutchill/shop/ecpayReturn");
 		
 		// Client端回傳付款成功網址
-//		aioCheck.setOrderResultURL("null");
+		aioCheck.setOrderResultURL("http://localhost:8080/hangoutchill/shop/orderdetailcheck");
 		
 		// 輸出畫面的String
 		String form = aio.aioCheckOut(aioCheck, null);
@@ -84,5 +83,8 @@ public class OrderService {
 		return orderRepository.findOrderByOrderNo(orderNo);
 	}
 	
+	public Order findLatestOrderByMemberId(Integer memberId) {
+		return orderRepository.findLatestOrderByMemberId(memberId);
+	}
 	
 }
