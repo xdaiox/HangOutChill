@@ -27,6 +27,7 @@
         document.getElementById("resend").addEventListener('click',resendResult)
         function resendResult(){
             let theId = parseInt(document.getElementById("memberId").value)
+            console.log(theId)
             axios.get("${contextRoot}/member/resendMail?id="+ theId)
                 .then((res) =>{
                     // console.log(res.data)

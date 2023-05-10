@@ -77,6 +77,12 @@ public class NormalMemberController {
         return"member/forgetPwdAlter";
     }
 
+    @GetMapping("/member/resetPwd")
+    public String toResetPassWord(@RequestParam(name="id")Integer id,Model model){
+        model.addAttribute("memberId", id);
+        return "member/resetPwd";
+    }
+
     @GetMapping("/member/registration")
     public String addMessage(Model model) {
         model.addAttribute("newNormalMember", new NormalMember());
@@ -88,6 +94,11 @@ public class NormalMemberController {
         return  "member/passwordAlterDone";
     }
 
+    @ResponseBody
+    @GetMapping("/member/existed")
+    public Boolean existEmail(@RequestParam(name="account")String account){
+        return  nMemberService.existAccount(account);
+    }
     @PostMapping("/NormalMember/registed")
     public String registedNormalMember(@ModelAttribute("newNormalMember") NormalMember nMember, Model model) {
         try {
@@ -150,6 +161,17 @@ public class NormalMemberController {
         return "驗證信已重新寄送";
     }
 
+
+    @GetMapping("/resendAuthenticationMail")
+    public String resendMailConfirm(@RequestParam String token){
+        SecuredToken securedToken = nMemberService.findSecuredToken(token);
+        NormalMember normalMember = securedToken.getNormalMember();
+        if(normalMember != null){
+            return  "redirect:/member/login";
+        }
+        return  " ";
+    }
+
     @GetMapping("/member/NormalMemberDetail")
     //目前登入的人到會員中心
     public String toMemberCenterPage(@CurrentSecurityContext(expression = "authentication")
@@ -179,12 +201,17 @@ public class NormalMemberController {
       return"redirect:/member/NormalMemberDetail";
     }
 
-    @ResponseBody
-    @GetMapping("/member/existed")
-    public Boolean existEmail(@RequestParam(name="account")String account){
-        return  nMemberService.existAccount(account);
+    @PostMapping("/member/checkPassWord")
+    public String matchPassword(@RequestParam("pwd")String password,@RequestParam("memberId")Integer id, Model model){
+        NormalMember member = nMemberService.findNormalMemberById(id);
+        boolean checked = nMemberService.findPwd(password, id);
+        if(checked){
+            model.addAttribute("forgotM",member);
+            return "/member/forgetPwdUpdate";
+        }else {
+            return "";
+        }
     }
-
 
 
     @GetMapping("/back/members")

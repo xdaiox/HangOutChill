@@ -96,7 +96,7 @@
                                             <tr>
                                                 <th scope="row" style="width: 160px"></th>
                                                 <td style=" text-align: left; "><button type="submit" class="btn btn-primary">送出修改</button></td>
-                                                <td><a href="#" class="link">修改密碼</a></td>
+                                                <td><a href="${contextRoot}/member/resetPwd?id=${result.id}" class="link">修改密碼</a></td>
                                             </tr>
                                             </tbody>
                                             </form:form>

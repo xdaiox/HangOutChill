@@ -57,7 +57,7 @@
                                             <input type="submit" class="btn btn-outline-success" value="開啟">
                                         </jstl:when>
                                         <jstl:otherwise>
-                                            <input type="submit" class="btn btn-outline-danger" value="關閉"
+                                            <input type="button" class="btn btn-outline-danger" value="關閉"
                                                    onclick="return confirm('確定關閉權限')">
                                         </jstl:otherwise>
                                     </jstl:choose>
@@ -70,8 +70,10 @@
                                     <input type="hidden" name="id" value="${allMember.id}">
                                     <input type="submit" class="btn btn-outline-primary btn-sm" value="編輯資料">
                                 </form>
+                                <form>
                                     <input type="hidden" name="id" value="${allMember.id}" id="memberId">
-                                    <input type="button" class="btn btn-outline-secondary btn-sm" value="重寄驗證信" id="resend" onclick="resendResult()">
+                                    <input type="button" class="btn btn-outline-secondary btn-sm" value="重寄驗證信" id="resend" onclick="resendResult(event)">
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -116,10 +118,11 @@
 
     //重寄驗證信
     <%--document.getElementById("resend").addEventListener('click',resendResult)--%>
-    function resendResult(){
-        let theId= parseInt(document.getElementById("memberId").value)
+
+    function resendResult(event){
+        let memberId = event.target.previousElementSibling.value;
+        let theId= parseInt(memberId)
         console.log(theId)
-        console.log(typeof (theId))
         axios.get("${contextRoot}/member/resendMail?id="+theId)
             .then((res) =>{
                 alert(res.data)
@@ -158,24 +161,14 @@
                     resultData +='</form>'
                     resultData +='<form method="get" action="#">'
                     resultData +='<input type="hidden" name="id" value="'+res.data[i].id+'">'
-                    resultData +='<input type="submit" class="btn btn-outline-secondary btn-sm" value="重寄驗證信" id="ajaxResend">'
-                    <%--document.getElementById("ajaxResend").addEventListener('click',resendResultAjax)--%>
-                    <%--function resendResultAjax(){--%>
-                    <%--    axios.get("${contextRoot}/member/resendMail?id="+res.data[i].id)--%>
-                    <%--        .then((res) =>{--%>
-                    <%--            alert(res.data)--%>
-                    <%--        }).catch((err)=>{--%>
-                    <%--        alert(err)--%>
-                    <%--    })--%>
-                    <%--}--%>
+                    resultData +='<input type="button" class="btn btn-outline-secondary btn-sm" value="重寄驗證信" id="ajaxResend" onclick="resendResult(event)"">'
                     resultData +='</form></div></td>'
                     resultData +='</tr>'
                 }
                 members.innerHTML=resultData
                 let elementById = document.getElementById("pageNum");
                 let page='';
-                elementById.innerHTML = page
-
+                elementById.innerHTML = page;
         }).catch((err)=>{
             alert(err)
         })

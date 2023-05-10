@@ -5,10 +5,12 @@ import com.ispan.hangoutchill.member.dao.SecuredTokenRepository;
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.model.SecuredToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,6 +24,10 @@ public class NormalMemberService implements INormalMemberService {
 
     @Autowired
     SecuredTokenRepository securedTokenRepository;
+
+    @Qualifier("encoder")
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     //創造token
     @Override
@@ -185,11 +191,13 @@ public class NormalMemberService implements INormalMemberService {
         return nMemberRepository.findBlurMemberByAcoount(account);
     }
 
-//    後臺模糊搜尋分頁
-//    public Page<NormalMember> findBlurMemberPage(String account, Integer pageNum){
-//        Pageable page = PageRequest.of(pageNum - 1, 5, Sort.Direction.DESC, "registTime");
-//        Page<NormalMember> normalMembersByAccountPage = nMemberRepository.findNormalMembersByAccountPage(account, page);
-//        return  normalMembersByAccountPage;
-//    }
+    //更改密碼判斷是否相同
+    public boolean findPwd (String password , Integer id){
+        Optional<NormalMember> byId = nMemberRepository.findById(id);
+        NormalMember normalMember = byId.get();
+        String passwordInDB = normalMember.getPassword();
+        boolean matches = passwordEncoder.matches(password, passwordInDB);
+        return  matches;
+    }
 }
 
