@@ -59,7 +59,7 @@ public class RestController {
 	
 	
     @ResponseBody
-    @GetMapping("/upload/image/{id}")
+    @GetMapping("/discussion/upload/image/{id}")
     public ResponseEntity<byte[]> downloadImage(@PathVariable Integer id){
     	Images image = imageRepository.findById(id).orElse(null);
     	if (image == null) {

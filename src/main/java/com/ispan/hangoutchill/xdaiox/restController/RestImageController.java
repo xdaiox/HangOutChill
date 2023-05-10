@@ -3,6 +3,7 @@ package com.ispan.hangoutchill.xdaiox.restController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +24,7 @@ import com.ispan.hangoutchill.xdaiox.model.Discussions;
 import com.ispan.hangoutchill.xdaiox.model.Images;
 import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
 
-@RestController
-@RequestMapping("/upload/image")
+@Controller
 public class RestImageController {
 
     @Autowired
@@ -35,8 +35,14 @@ public class RestImageController {
     
 //    @Autowired
 //    private DiscussionsService dService;
+    
+    @ResponseBody
+    @PostMapping("/discussion/upload/image")
     public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file) {
-        try {
+        
+    	System.out.println("========================上傳controller========================");
+    	
+    	try {
 
             // 將圖片資料轉換成 byte 陣列
             byte[] bytes = file.getBytes();
@@ -47,7 +53,7 @@ public class RestImageController {
             Images Map = imageRepository.save(image);
             
             String imageUrl = "http://localhost:8080/hangoutchill/discussion/upload/image/" + Map.getI_id();
-            
+            System.out.println(imageUrl);
             Map<String,String> response = new HashMap<>();
             response.put("url", imageUrl);
             return ResponseEntity.ok().body(response);
