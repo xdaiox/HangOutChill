@@ -6,6 +6,7 @@ import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.model.SecuredToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -96,7 +97,6 @@ public class NormalMemberService implements INormalMemberService {
         Page<NormalMember> page = nMemberRepository.findAll(pgb);
         List<NormalMember> result = page.getContent();
         return result;
-
     }
 
     @Override
@@ -190,6 +190,13 @@ public class NormalMemberService implements INormalMemberService {
     public  List<NormalMember> findBlurMember(String account){
         return nMemberRepository.findBlurMemberByAcoount(account);
     }
+
+
+    //後台搜群全部的一般會員
+//    public  Page<NormalMember> findAllNormalMember(Integer pageNumber){
+//        Pageable pageable = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "registTime");
+//        return nMemberRepository.findAllNormalMember(pageable);
+//    }
 
     //更改密碼判斷是否相同
     public boolean findPwd (String password , Integer id){

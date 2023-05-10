@@ -10,6 +10,7 @@ import com.ispan.hangoutchill.xdaiox.model.Messages;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import com.ispan.hangoutchill.shop.model.ShoppingCart;
 
@@ -123,7 +124,6 @@ public class NormalMember {
 		this.actandles = actandles;
 	}
 
-//===================================================    	
     public Integer getId() {
         return id;
     }
@@ -136,6 +136,7 @@ public class NormalMember {
     // shop 自行加入
     @OneToMany(mappedBy="member",
                 cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties("normalMember")
 	private Set<ShoppingCart> shoppingCart = new LinkedHashSet<>();
     
     public Set<ShoppingCart> getShoppingCart() {

@@ -51,11 +51,6 @@ public class NormalMemberController {
         return nMemberService.findNormalMemberById(id);
     }
 
-//    @GetMapping("/member/NormalRegister")
-//    public String toNormalMemberRegister() {
-//        return "member/registerNormalMember";
-//    }
-
     @GetMapping("/member/login")
     public String toNormalMemberLogin() {
         return "member/normalMemberLogin";
@@ -68,7 +63,8 @@ public class NormalMemberController {
 
 
     @GetMapping("/member/LocationRegister")
-    public String toLocationMemberRegister() {
+    public String toLocationMemberRegister(Model model) {
+        model.addAttribute("newLocationMember",new NormalMember());
         return "member/registerLocation";
     }
 
@@ -107,6 +103,27 @@ public class NormalMemberController {
             nMember.setPhotoB64(base64File);
             nMember.setPassword(passwordEncoder.encode(nMember.getPassword()));
             Role roleByid = roleService.findRoleByid(1);
+            nMember.setRole(roleByid);
+            nMemberService.registNormalMember(nMember);
+            eventPublisher.publishEvent(new OnRegistrationCompleteEvent(nMember));
+            NormalMember latestRegister = nMemberService.getLatestRegister();
+            if (latestRegister != null) {
+                model.addAttribute("latest", latestRegister);
+            }
+            return "member/registResult";
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @PostMapping("/LocationMember/registed")
+    public String registedLocationMember(@ModelAttribute("newLocationMember") NormalMember nMember, Model model) {
+        try {
+            byte[] fileBytes = nMember.getFile().getBytes();
+            String base64File = "data:image/png;base64," + Base64.getEncoder().encodeToString(fileBytes);
+            nMember.setPhotoB64(base64File);
+            nMember.setPassword(passwordEncoder.encode(nMember.getPassword()));
+            Role roleByid = roleService.findRoleByid(2);
             nMember.setRole(roleByid);
             nMemberService.registNormalMember(nMember);
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent(nMember));
@@ -249,8 +266,11 @@ public class NormalMemberController {
         return "redirect:/back/members";
     }
 
-
-
+//    @ResponseBody
+//    @GetMapping("/back/showNormalMember")
+//    public Page<NormalMember> findAllNormalMember(@RequestParam(name="pageNum" , defaultValue = "1")Integer pageNum){
+//        return nMemberService.findAllNormalMember(pageNum);
+//    }
 
 
 }

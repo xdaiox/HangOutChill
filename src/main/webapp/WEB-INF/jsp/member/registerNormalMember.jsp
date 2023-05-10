@@ -17,7 +17,6 @@
     <title>一般會員註冊</title>
 </head>
 <body>
-
         <div class="box-wrapper">
             <div class="box box-border">
                 <div class="box-body">
@@ -245,7 +244,6 @@
                     event.preventDefault()
                 }
             }
-
 
         </script>
 </body>

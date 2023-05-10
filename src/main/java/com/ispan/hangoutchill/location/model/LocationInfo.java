@@ -178,9 +178,6 @@ public class LocationInfo {
         this.locationImage = locationImage;
     }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> esther
 }
 
