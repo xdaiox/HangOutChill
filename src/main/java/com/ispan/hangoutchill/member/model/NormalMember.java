@@ -131,14 +131,6 @@ public class NormalMember {
  	public void setMessages(Set<Messages> messages) {
  		this.messages = messages;
  	}
-
- 	public Set<Images> getImages() {
- 		return images;
- 	}
-
- 	public void setImages(Set<Images> images) {
- 		this.images = images;
- 	}
     
 //==================設定課程報名的中介表===================    
     
