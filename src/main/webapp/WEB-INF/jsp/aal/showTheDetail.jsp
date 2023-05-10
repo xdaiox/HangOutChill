@@ -63,10 +63,8 @@
 									<td class="align-middle">
 										<form:form method="get" action="${contextRoot}/actandles/detail/lessignup">
 											<input value="${aal.id}" type="hidden" name="id" />
-												<jstl:choose>
-												<jstl:when test="${empty aal.accounts}"><button type="submit" class="btn btn-primary" >報名</button></jstl:when>
-												<jstl:when test="${not empty aal.accounts && not empty aal.normalMember.id}"><button type="submit" disabled class="btn btn-primary" >您已報名</button></jstl:when>									
-												</jstl:choose>
+												<button type="submit" class="btn btn-primary" >報名</button>
+									
 										</form:form>
 						</tbody>
 					</table>

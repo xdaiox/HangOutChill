@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
@@ -31,7 +33,6 @@ import com.ispan.hangoutchill.member.service.NormalMemberService;
 
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
-import ecpay.payment.integration.domain.AioCheckOutDevide;
 
 @Controller
 public class AALcontroller {
@@ -96,10 +97,13 @@ public class AALcontroller {
 	}
 
 	@GetMapping("/actandles/{id}")
-	public String showTheDetail(@PathVariable Integer id, Model model) {
+	public String showTheDetail(@PathVariable Integer id, Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
 		ActivitiesandLesson aal = aalService.findAALById(id);
+		model.addAttribute("aal", new ActivitiesandLesson());
+		String name = authentication.getName();
+		NormalMember result = nMemberService.findNormalUserByAccount(name);
 		model.addAttribute("aal", aal);
-
+		model.addAttribute("result",result);
 		return "aal/showTheDetail";
 	}
 
@@ -116,15 +120,17 @@ public class AALcontroller {
 //===================================結帳測試=========================================	
 
 	/* 準備前往綠界 */
-	@GetMapping("/goECPay")
-	public void goECPay(Model model, HttpServletRequest request, HttpServletResponse response)
+	@ResponseBody
+	@PostMapping("/actandles/detail/checkout")
+	public String goECPay(@RequestParam(name = "id") Integer id,@CurrentSecurityContext(expression = "authentication") Authentication authentication)
 			throws IOException {
-//		OrderBean ob = (OrderBean) request.getAttribute("orderBean");
+
 		// 設定金流
+		String testNo = UUID.randomUUID().toString().replaceAll("-", "").substring(0,2);
 		AllInOne aio = new AllInOne("");
 		AioCheckOutALL aioCheck = new AioCheckOutALL();
 		/* 特店編號 */
-		aioCheck.setMerchantID("2000214");
+		aioCheck.setMerchantID("2000132");
 		/* 特店交易時間 */
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		sdf.setLenient(false);
@@ -136,22 +142,24 @@ public class AALcontroller {
 		/* 商品名稱 */
 		aioCheck.setItemName("500");
 		/* 特店交易編號 */
-		aioCheck.setMerchantTradeNo("testSpeakitup" +131);
+		aioCheck.setMerchantTradeNo("testSpeakitup"+testNo);
 		/* 付款完成通知回傳網址 */
 		aioCheck.setReturnURL("http://localhost:8080/hangoutchill/returnURL");
 		/* Client端回傳付款結果網址 */
-		String sessionId = request.getSession().getId();
-		aioCheck.setOrderResultURL("http://localhost:8080/hangoutchill/showHistoryOrder?sessionId=" + sessionId);
+
+		aioCheck.setOrderResultURL("http://localhost:8080/hangoutchill/showHistoryOrder");
 		// 輸出畫面
-		PrintWriter out = response.getWriter();
-		response.setContentType("text/html");
-		out.print(aio.aioCheckOut(aioCheck, null));
+
+		String form = aio.aioCheckOut(aioCheck, null);
+		
+		return form;
 	}
 
 	// 綠界回傳資料
+	@Transactional
 	@PostMapping("/returnURL")
-	public void returnURL(@RequestParam("Merchant TradeNo") String MerchantTradeNo,
-			@RequestParam("RtnCode") int RtnCode, @RequestParam("TradeAmt") int TradeAmt, HttpServletRequest request) {
+	public void returnURL(@RequestParam("MerchantTradeNo") String MerchantTradeNo,
+			@RequestParam("RtnCode") int RtnCode, @RequestParam("TradeAmt") int TradeAmt,@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
 		// 交易成功
 		if (RtnCode == 1) {
 //			String orderIdStr = MerchantTradeNo.substring(13);
@@ -165,8 +173,9 @@ public class AALcontroller {
 	}
 
 	/* 查詢歷史訂單 */
+	@Transactional
 	@PostMapping("/showHistoryOrder")
-	public String showECPAYHistoryurder (Model model) {
+	public String showECPAYHistoryurder (Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
 		
 	return "aal/user/historyOrder";
 	}

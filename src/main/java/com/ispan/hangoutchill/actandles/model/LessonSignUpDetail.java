@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Formula;
+
 import com.ispan.hangoutchill.member.model.NormalMember;
 
 @Entity
@@ -27,12 +29,7 @@ public class LessonSignUpDetail {
 	    @JoinColumn(name = "account_id")
 	    private NormalMember normalMember;
 	    
-//	   @Column(name = "tel")
-//	   private String tel;
-//	   
-//	   @Column(name = "numbers_of_people")
-//	   private String numbersOfPeople;
-	   
+	    
 
 	   public ActivitiesandLesson getActivitiesandLesson() {
 		return activitiesandLesson;
@@ -51,9 +48,6 @@ public class LessonSignUpDetail {
 	}
 
 
-	
-
-
 	public LessonSignUpDetailId getId() {
 		return id;
 	}
@@ -61,22 +55,6 @@ public class LessonSignUpDetail {
 	public void setId(LessonSignUpDetailId id) {
 		this.id = id;
 	}
-//
-//	public String getTel() {
-//		return tel;
-//	}
-//
-//	public void setTel(String tel) {
-//		this.tel = tel;
-//	}
-//
-//	public String getNumbersOfPeople() {
-//		return numbersOfPeople;
-//	}
-//
-//	public void setNumbersOfPeople(String numbersOfPeople) {
-//		this.numbersOfPeople = numbersOfPeople;
-//	}
 
 
 }

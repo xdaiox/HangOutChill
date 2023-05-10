@@ -36,7 +36,7 @@ public class LessonSignUpDetailController {
         NormalMember result = nMemberService.findNormalUserByAccount(name);
 		model.addAttribute("result",result);
 		model.addAttribute("aal",aal);
-		
+		model.addAttribute("checksignup",aalservice.findSignUpDetail(aal.getId(), result.getId()));
 		return "aal/user/signUpPage";
 	}
 	

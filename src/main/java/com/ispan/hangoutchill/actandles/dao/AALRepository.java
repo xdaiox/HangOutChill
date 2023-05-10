@@ -15,6 +15,9 @@ public interface AALRepository extends JpaRepository<ActivitiesandLesson, Intege
 	public Page<ActivitiesandLesson> findPageByMemberId(@Param(value="memberId") Integer id,Pageable pageable);
 	
 	public Page<ActivitiesandLesson> findByaccountsId(Integer id,Pageable pageable);
+	
+	@Query("SELECT COUNT(*) FROM LessonSignUpDetail  WHERE activitiesandLesson.id = :lesid AND normalMember.id = :memberid")
+	public Integer findSignUpDetail(@Param(value ="lesid") Integer lesid , @Param(value = "memberid") Integer memberid);
 
 	 
 }

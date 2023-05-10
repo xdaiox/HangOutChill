@@ -24,6 +24,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Formula;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.web.multipart.MultipartFile;
@@ -104,7 +105,9 @@ public class ActivitiesandLesson {
 	
 	 @OneToMany(mappedBy = "activitiesandLesson")
 	 private List<LessonSignUpDetail> lessonSignUpDetails;
+	 
 
+	 
 	public List<LessonSignUpDetail> getLessonSignUpDetails() {
 		return lessonSignUpDetails;
 	}

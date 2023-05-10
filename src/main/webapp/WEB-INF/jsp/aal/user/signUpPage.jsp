@@ -47,30 +47,55 @@
 							</table>
 							<form:form method="post"
 								action="${contextRoot}/actandles/detail/lessignup">
-							<table class="table table-hover table-bordered table-light">
-								<ins>報名會員資訊:</ins>
-								<thead>
-									<tr>
-										<th>聯絡信箱:
-										<th>姓名:
-										<th>電話:
-										<jstl:if test="${aal.topic=='act'}"><th>人數:</jstl:if>
-										
-								</thead>
-								<tbody>
-									<tr>
-										<td class="align-middle">${result.account}
-										<td class="align-middle">${result.reallName}
-										<td class="align-middle"><input name="tel" value="${result.tel}" type="text" />
-										
-												<jstl:if test="${aal.topic=='act'}"><td class="align-middle"><input name="numbersOfPeople"  type="text" /></jstl:if>
-												<jstl:if test="${aal.topic=='les'}"><input name="numbersOfPeople" value="1" type="hidden" /></jstl:if>
-										
-								</tbody>
-							</table>
-								<input value="${aal.id}" type="hidden" name="id" />
-								<button type="submit" class="btn btn-primary">確定送出</button>
+								<table class="table table-hover table-bordered table-light">
+									<ins>報名會員資訊:</ins>
+									<thead>
+										<tr>
+											<th>聯絡信箱:
+											<th>姓名:
+											<th>電話: <jstl:if test="${aal.topic=='act'}">
+													<th>人數:
+												</jstl:if>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="align-middle">${result.account}
+											<td class="align-middle">${result.reallName}
+											<td class="align-middle"><input name="tel"
+												value="${result.tel}" type="text" /> <jstl:if
+													test="${aal.topic=='act'}">
+													<td class="align-middle"><input name="numbersOfPeople"
+														type="text" />
+												</jstl:if> <jstl:if test="${aal.topic=='les'}">
+													<input name="numbersOfPeople" value="1" type="hidden" />
+												</jstl:if>
+									</tbody>
+								</table>
+								
+								<jstl:choose>
+									<jstl:when test="${checksignup==0}">
+										<input value="${aal.id}" type="hidden" name="id" />
+										<button type="submit" class="btn btn-primary">確定送出</button>
+									</jstl:when>
+									<jstl:when test="${checksignup==1}">
+										<button type="submit" class="btn btn-primary" disabled>您已報名</button>
+									</jstl:when>
+								</jstl:choose>
+							
 							</form:form>
+								<form:form method="post"
+									action="${contextRoot}/actandles/detail/checkout">
+
+									<jstl:choose>
+										<jstl:when test="${checksignup==0}">
+											<button type="submit" class="btn btn-primary" disabled>尚未報名</button>
+										</jstl:when>
+										<jstl:when test="${checksignup==1}">
+											<input value="${aal.id}" type="hidden" name="id" />
+											<button type="submit" class="btn btn-primary">準備結帳</button>
+										</jstl:when>
+									</jstl:choose>
+								</form:form>
 
 						</div>
 
