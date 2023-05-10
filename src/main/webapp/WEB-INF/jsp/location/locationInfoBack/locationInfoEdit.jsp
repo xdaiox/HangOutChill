@@ -12,7 +12,7 @@
 
 <html>
 <head>
-    <jsp:include page="../layout/navbar.jsp"/>
+    <jsp:include page="../../layout/navbar.jsp"/>
     <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
     <meta charset="UTF-8">
     <title>修改地點</title>
@@ -121,7 +121,7 @@
         </div>
     </div>
 </div>
-<jsp:include page="../layout/footer.jsp" />
+<jsp:include page="../../layout/footer.jsp" />
 
 
 </body>

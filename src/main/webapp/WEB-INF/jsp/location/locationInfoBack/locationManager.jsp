@@ -19,9 +19,9 @@
 </head>
 <body>
 <div class="container-scroller">
-    <jsp:include page="../dbLayout/top_navbar.jsp"/>
+    <jsp:include page="../../dbLayout/top_navbar.jsp"/>
     <div class="container-fluid page-body-wrapper">
-        <jsp:include page="../dbLayout/left_navbar.jsp"/>
+        <jsp:include page="../../dbLayout/left_navbar.jsp"/>
         <div class="container">
             <div class="content_box" style="width: 100%">
                 <h3 style="text-align: center;">地點管理</h3>

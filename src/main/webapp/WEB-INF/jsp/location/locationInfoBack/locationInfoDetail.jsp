@@ -11,11 +11,12 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
-    <jsp:include page="../layout/navbar.jsp"/>
+    <jsp:include page="../../layout/navbar.jsp"/>
     <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
     <meta charset="UTF-8">
-    <title>地點名稱</title>
+    <title>該地點名稱</title>
 </head>
+
 <body>
 
 </body>

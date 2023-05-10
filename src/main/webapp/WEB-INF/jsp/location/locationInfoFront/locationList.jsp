@@ -9,7 +9,7 @@
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
 <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 <%--<link rel="stylesheet" href="${contextRoot}/css/location/locationList.css">--%>
-<jsp:include page="../layout/navbar.jsp"/>
+<jsp:include page="../../layout/navbar.jsp"/>
 <html>
 <head>
     <title>精選地點</title>
@@ -26,6 +26,6 @@
 
 
 
-<jsp:include page="../layout/footer.jsp" />
+<jsp:include page="../../layout/footer.jsp" />
 </body>
 </html>

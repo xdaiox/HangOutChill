@@ -34,6 +34,9 @@ public class LocationInfo {
     private String locTel;
     @Column(name = "location_link")
     private String locLink;
+
+
+
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     @Column(name = "location_info_updateTime",columnDefinition = "datetime")
