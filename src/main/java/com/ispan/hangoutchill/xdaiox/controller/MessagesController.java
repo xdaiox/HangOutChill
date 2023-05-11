@@ -49,7 +49,8 @@ public class MessagesController {
 	}
 	
     @PostMapping("/message/post/{id}")
-    public String postMessage(@ModelAttribute("replyDiscussion") Messages mss, Model model,@PathVariable(name="id")Integer d_id) {
+    public String postMessage(@ModelAttribute("replyDiscussion") Messages mss, Model model,
+    							@PathVariable(name="id")Integer d_id) {
     	
     	mService.addMessage(mss);
     	model.addAttribute("message", new Messages());

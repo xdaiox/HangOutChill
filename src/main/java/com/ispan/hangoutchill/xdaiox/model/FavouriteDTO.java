@@ -10,15 +10,15 @@ public class FavouriteDTO {
 	private Integer discussions;
 	private Date postDate;
 	
-//	  測試用顯示內容
-//    public String toString() {
-//        return "FavouriteDTO{" +
-//                "id=" + id +
-//                ", normalMember='" + normalMember.getId() + '\'' +
-//                ", discussions='" + discussions.getD_id() + '\'' +
-//                ", postDate='" + postDate + '\'' +
-//                '}'+"\n";
-//    }
+	 // 測試用顯示內容
+    public String toString() {
+        return "FavouriteDTO{" +
+                "id=" + id +
+                ", normalMember='" + normalMember + '\'' +
+                ", discussions='" + discussions + '\'' +
+                ", postDate='" + postDate + '\'' +
+                '}'+"\n";
+    }
 	
     public FavouriteDTO() {
     }

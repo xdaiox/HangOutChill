@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
@@ -104,19 +105,39 @@ public class DiscussionsController {
     @DeleteMapping("/discussion/deleteDiscussion/{id}")
     public String toDeleteButItsNotActuallyDeleteItsHiddenDiscussion(@PathVariable("id") Integer id) {
     	dService.deleteDiscussionById(id);
-    	System.out.println("========================after delete========================"+id+"========================after delete========================");
     	return "redirect:/discussion/allDiscussion";
     }
     
-    //找使用者所有的討論收藏
+    //==============找使用者所有的討論收藏==============
     @GetMapping("/discussion/allFavourite")
     public String toShowAllFavourite(@CurrentSecurityContext(expression = "authentication")
 										Authentication authentication,Model model) {
     	String name = authentication.getName();
-        NormalMember result = nMemberService.findNormalUserByAccount(name);
-        List<FavouriteDTO> favDTO = fService.findAllFavouriteById(result.getId());
+    	NormalMember result = nMemberService.findNormalUserByAccount(name);
+//    	System.out.println("============/discussion/allFavourite=================name: "+name+"===============================");
+//    	System.out.println("============/discussion/allFavourite=================result: "+result+"===============================");
+
+        if(result != null) {
+        	List<Favourite> fav = fService.findAllFavouriteById(result.getId());
+        	// Print each object in the list
+//        	for(FavouriteDTO fav : favDTO) {
+//        		System.out.println(fav.toString());
+//        	}
+        	model.addAttribute("favouriteDTO",fav);
+        }	
         
-        model.addAttribute("favourite",favDTO);
+            
+            
+//            if (favDTO.isEmpty()) {
+//                System.out.println("FavouriteDTO list is empty");
+//            } else {
+//                System.out.println("FavouriteDTO list is not empty");
+//            }
+            
+            System.out.println("==============================result NOT NULL=============================="+"==============================result NOT NULL==============================");
+
+
+
         return "discussion/allFavourite";
     }
     

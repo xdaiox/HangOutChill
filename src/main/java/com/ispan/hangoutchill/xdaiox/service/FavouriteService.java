@@ -32,15 +32,16 @@ public class FavouriteService {
 //		return fav;
 //	}
 //	
-	public List<FavouriteDTO> findAllFavouriteById(Integer normalMemberId) {
+	public List<Favourite> findAllFavouriteById(Integer normalMemberId) {
 	    List<Favourite> favourites = favRepository.findAllByNormalMemberId(normalMemberId);
-	    List<FavouriteDTO> favouriteDTOs = new ArrayList<>();
 	    
-	    for (Favourite favourite : favourites) {
-	        favouriteDTOs.add(convertToFavouriteDTO(favourite));
-	    }
+//	    List<FavouriteDTO> favouriteDTOs = new ArrayList<>();
+//	    
+//	    for (Favourite favourite : favourites) {
+//	        favouriteDTOs.add(convertToFavouriteDTO(favourite));
+//	    }
 	    
-	    return favouriteDTOs;
+	    return favourites;
 	}
 	
 	
