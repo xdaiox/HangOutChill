@@ -95,8 +95,8 @@
         <div class="collapse" id="auth">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="${contextRoot}/back/members">顯示所有會員</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">顯示所有一般會員</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">顯示所有商家會員</a></li>
+            <li class="nav-item"> <a class="nav-link" href="${contextRoot}/back/showNormalMember">顯示所有一般會員</a></li>
+            <li class="nav-item"> <a class="nav-link" href="${contextRoot}/back/showLocationMember">顯示所有商家會員</a></li>
           </ul>
         </div>
       </li>

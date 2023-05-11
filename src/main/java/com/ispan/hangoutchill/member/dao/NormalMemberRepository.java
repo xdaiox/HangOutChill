@@ -4,6 +4,7 @@ import com.ispan.hangoutchill.member.model.NormalMember;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface NormalMemberRepository extends JpaRepository<NormalMember,Integer> {
+public interface NormalMemberRepository extends JpaRepository<NormalMember,Integer>, JpaSpecificationExecutor<NormalMember> {
 
     public NormalMember findFirstByOrderByRegistTimeDesc();
 
@@ -23,8 +24,11 @@ public interface NormalMemberRepository extends JpaRepository<NormalMember,Integ
     @Query(value = "from NormalMember where account like '%'+:account+'%'")
     public List<NormalMember> findBlurMemberByAcoount(@Param(value = "account")String account);
 
-//    @Query(value = "from NormalMember where role.roleId = 1")
-//    public  Page<NormalMember> findAllNormalMember(Pageable pageable);
+    @Query(value = "SELECT  * FROM [dbo].[normalAccount] WHERE FK_role_id = 1 ", nativeQuery = true)
+    public  Page<NormalMember> findAllNormalMember(Pageable pageable);
+
+    @Query(value = "SELECT  * FROM [dbo].[normalAccount] WHERE FK_role_id = 2 ", nativeQuery = true)
+    public  Page<NormalMember> findAllLocationMember(Pageable pageable);
 
 
 //    @Query(value = "from NormalMember where account like '%'+:account+'%'")
