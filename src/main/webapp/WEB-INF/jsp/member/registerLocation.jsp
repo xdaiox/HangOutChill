@@ -13,6 +13,7 @@
     <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
     <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
     <jsp:include page="../layout/navbar.jsp"/>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="${contextRoot}/css/member/register.css">
     <title>商家會員註冊</title>
 </head>

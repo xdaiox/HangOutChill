@@ -23,8 +23,9 @@ import com.ispan.hangoutchill.member.service.NormalMemberService;
 
 @Controller
 public class AALcontroller {
+
 	@Autowired
-	private AALservice aalService;
+	 AALservice aalService;
 	 @Autowired
 	 NormalMemberService nMemberService;
 
