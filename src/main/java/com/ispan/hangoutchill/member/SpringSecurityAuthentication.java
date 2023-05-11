@@ -39,7 +39,13 @@ public class SpringSecurityAuthentication {
                 .and()
                 .formLogin().loginPage("/member/login")
                 .defaultSuccessUrl("/member/NormalMemberDetail").and()
-                .logout().deleteCookies("JSESSSIONID");
+                .logout().deleteCookies("JSESSSIONID")
+//==============================================================================             
+                .and()
+                .headers().addHeaderWriter((request, response) -> {
+                    response.setHeader("Set-Cookie", "HttpOnly;SameSite=lax;Secure");
+                });
+//==============================================================================        
         return http.build();
     }
 

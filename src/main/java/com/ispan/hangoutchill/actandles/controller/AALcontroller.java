@@ -147,9 +147,11 @@ public class AALcontroller {
 		aioCheck.setMerchantTradeNo("AaL"+testNo);
 		/* 付款完成通知回傳網址 */
 		aioCheck.setReturnURL("http://localhost:8080/hangoutchill/returnURL");
+//		aioCheck.setReturnURL("https://0ebf-203-204-109-146.ngrok-free.app/hangoutchill/returnURL");
 		/* Client端回傳付款結果網址 */
 
 		aioCheck.setOrderResultURL("http://localhost:8080/hangoutchill/showHistoryOrder?id="+aal.getId());
+//		aioCheck.setOrderResultURL("https://0ebf-203-204-109-146.ngrok-free.app/hangoutchill/showHistoryOrder?id="+aal.getId());
 		// 輸出畫面
 
 		String form = aio.aioCheckOut(aioCheck, null);
