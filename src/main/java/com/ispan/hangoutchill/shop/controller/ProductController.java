@@ -353,7 +353,16 @@ public class ProductController {
 	// 商品分類 仍須加上分頁功能與分頁按鈕
 	@GetMapping("/shop/products")
 	public String showProductbyCategory(@RequestParam(name="category") String category, Model model) {
-		List<Product> cps = productService.findProductByCategory(category);
+		
+		List<Product> cps;
+		if(category.equals("全部商品")) {
+			cps = productService.findAllProducts();
+			
+		}else {
+			cps = productService.findProductByCategory(category);
+		}
+		
+		
 		model.addAttribute("category", category);
 		model.addAttribute("cateProducts", cps);
 		return "shop/shopCategory";

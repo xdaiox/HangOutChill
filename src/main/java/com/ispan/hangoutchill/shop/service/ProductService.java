@@ -74,5 +74,9 @@ public class ProductService {
 		return productRepository.findProductsByCategory(category);
 	}
 	
+	public List<Product> findAllProducts(){
+		
+		return productRepository.findAll();
+	}
 	
 }

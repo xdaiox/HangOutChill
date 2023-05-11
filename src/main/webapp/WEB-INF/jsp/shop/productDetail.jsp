@@ -128,8 +128,7 @@
 
 								</ul>
 
-								<form action="" method="GET">
-									<input type="hidden" name="product-title" value="Activewear">
+									<input type="hidden" name="product-title" value="${product.productId}" id="productid">
 									<div class="row">
 										<div class="col-auto">
 											<!-- 產品size -->
@@ -146,7 +145,7 @@
 										<div class="col-auto">
 											<ul class="list-inline pb-3">
 												<li class="list-inline-item text-right">購買數量： <input
-													type="hidden" name="product-quanity" id="product-quanity"
+													type="hidden" name="product-quanity"
 													value="1">
 												</li>
 												<li class="list-inline-item"><span
@@ -160,15 +159,13 @@
 									</div>
 									<div class="row pb-3">
 										<div class="col d-grid">
-											<button type="submit" class="btn btn-success btn-lg"
-												name="submit" value="buy">立即購買</button>
+											<a class="btn btn-success btn-lg" href='<c:url value="/shop/shoppingCart" />'>立即購買</a>
 										</div>
 										<div class="col d-grid">
 											<button type="submit" class="btn btn-success btn-lg"
-												name="submit" value="addtocard">加入購物車</button>
+												name="submit" value="addtocard" id="submitBtn">加入購物車</button>
 										</div>
 									</div>
-								</form>
 								<h6>運送及付款方式:</h6>
 								<ul class="list-unstyled pb-3">
 									<li>運送方式：到府、超商取貨</li>
@@ -193,6 +190,67 @@
 
 	<!-- 	<footer class="footer-area"> </footer> -->
 	<jsp:include page="../layout/footer.jsp" />
+	<script src="${contextRoot}/js/jquery-3.6.4.min.js"></script>
+	<script>
+	// 更新購物車小圖示標示
+	updateCartItems();
+	
+    // 加入購物車
+	$('#submitBtn').click(function(){
+		let productId = document.getElementById('productid');
+		let amount = document.getElementById('var-value');
+		$.ajax({
+			url: 'http://localhost:8080/hangoutchill/shop/addcart',
+			type: 'POST',
+			contentType: "application/json;charset=UTF-8",
+			datatype: 'text',
+			data: JSON.stringify({
+                'productid': productId.value,
+                'amount': amount.innerHTML
+            }),
+            success: function (result) {
+            	console.log(result);
+            	alert(result);
+            	updateCartItems();
+            },
+            error: function (err) {
+            	console.log(err);
+            	alert(err);
+            }
+            
+		})		
+	})
+	
+	
+	
+	
+	
+	
+	function updateCartItems(){
+	$.ajax({
+        url: 'http://localhost:8080/hangoutchill/shop/get/shoppingCartItemNum',
+        type: 'GET',
+        contentType: "application/json;charset=UTF-8",
+        datatype: 'json',
+        success: function (result) {
+            console.log(result);
+         	if(result == 0){
+         		$('.count').hide();
+         	}else{
+            $('.count').text(result);
+         	}
+         	
+        },
+        error: function (err) {
+            console.log(err);
+            $('.count').hide();
+        }
+    })
+	}
+    
+    
+    
+	</script>
 	<script src="${contextRoot}/js/jquery-2.2.4.min.js"></script>
 	<script src="${contextRoot}/js/popper.js"></script>
 	<script src="${contextRoot}/js/bootstrap.min.js"></script>
@@ -204,7 +262,6 @@
 	<script src="${contextRoot}/js/jquery.form.js"></script>
 	<script src="${contextRoot}/js/jquery.validate.min.js"></script>
 	<script src="${contextRoot}/js/mail-script.js"></script>
-
 	<script src="${contextRoot}/js/shop/templatemo.js"></script>
 	<script src="${contextRoot}/js/theme.js"></script>
 </body>

@@ -49,7 +49,13 @@ public class UserConfig {
                 .and()
                 .formLogin().loginPage("/member/login")
                 .defaultSuccessUrl("/member/NormalMemberDetail").and()
-                .logout().logoutSuccessUrl("/").deleteCookies("JSESSIONID");
+                .logout().logoutSuccessUrl("/").deleteCookies("JSESSIONID")
+      //==============================================================================
+        .and()
+        .headers().addHeaderWriter((request, response) -> {
+            response.setHeader("Set-Cookie", "HttpOnly;SameSite=lax;Secure");
+        });
+//==============================================================================
         return http.build();
     }
 
@@ -67,7 +73,6 @@ public class UserConfig {
         authProvider.setPasswordEncoder(encoder());
         return authProvider;
     }
-
 
     @Bean
     public RoleHierarchy roleHierarchy() {

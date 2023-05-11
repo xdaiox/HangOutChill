@@ -81,9 +81,6 @@ public class OrderController {
 	public void ecpayReturnURL(HttpServletRequest request,
 								@RequestParam("RtnCode") int rtnCode,
 								@RequestParam("MerchantTradeNo") String merchantTradeNo) {
-			
-		
-		
 			if(rtnCode == 1) {
 			String oriOrderNo = merchantTradeNo.substring(0,18);
 			System.out.println(oriOrderNo);
