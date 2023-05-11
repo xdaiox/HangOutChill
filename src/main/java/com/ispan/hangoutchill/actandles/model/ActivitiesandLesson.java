@@ -43,7 +43,7 @@ public class ActivitiesandLesson {
 //	@Column(name="shop_Id",columnDefinition = "int",nullable = false)
 //	private Integer shop_Id;
 	@OneToOne
-	@JoinColumn(name = "shop_Id",foreignKey =@ForeignKey(name="member_id"))
+	@JoinColumn(name = "shop_Id")
 	private NormalMember normalMember;
 	
 	@Column(name="name",columnDefinition = "nvarchar(50)",nullable = false )
