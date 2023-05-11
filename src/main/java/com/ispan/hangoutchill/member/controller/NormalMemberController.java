@@ -266,11 +266,21 @@ public class NormalMemberController {
         return "redirect:/back/members";
     }
 
-//    @ResponseBody
-//    @GetMapping("/back/showNormalMember")
-//    public Page<NormalMember> findAllNormalMember(@RequestParam(name="pageNum" , defaultValue = "1")Integer pageNum){
-//        return nMemberService.findAllNormalMember(pageNum);
-//    }
+
+    @GetMapping("/back/showNormalMember")
+    public String findAllNormalMember(@RequestParam(name="pageNum" , defaultValue = "1")Integer pageNum,Model model){
+        Page<NormalMember> allNormalMember = nMemberService.findAllNormalMember(pageNum);
+        model.addAttribute("page",allNormalMember);
+        return "member/showAllNormalMembers";
+
+    }
+
+    @GetMapping("/back/showLocationMember")
+    public String findAllLocationMember(@RequestParam(name="pageNum" , defaultValue = "1")Integer pageNum,Model model){
+        Page<NormalMember> allNormalMember = nMemberService.findAllLocationMember(pageNum);
+        model.addAttribute("page",allNormalMember);
+        return "member/showAllLocationMembers";
+    }
 
 
 }

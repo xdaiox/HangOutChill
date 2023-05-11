@@ -193,10 +193,16 @@ public class NormalMemberService implements INormalMemberService {
 
 
     //後台搜群全部的一般會員
-//    public  Page<NormalMember> findAllNormalMember(Integer pageNumber){
-//        Pageable pageable = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "registTime");
-//        return nMemberRepository.findAllNormalMember(pageable);
-//    }
+    public  Page<NormalMember> findAllNormalMember(Integer pageNumber){
+        Pageable pageable = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "registeration_time");
+        return nMemberRepository.findAllNormalMember(pageable);
+    }
+
+    //後臺搜尋全部的商家會員
+    public  Page<NormalMember> findAllLocationMember(Integer pageNumber){
+        Pageable pageable = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "registeration_time");
+        return nMemberRepository.findAllLocationMember(pageable);
+    }
 
     //更改密碼判斷是否相同
     public boolean findPwd (String password , Integer id){
