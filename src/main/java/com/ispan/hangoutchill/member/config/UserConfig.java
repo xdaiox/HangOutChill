@@ -1,7 +1,8 @@
-package com.ispan.hangoutchill.member;
+package com.ispan.hangoutchill.member.config;
 
 
 
+import com.ispan.hangoutchill.member.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,7 +41,7 @@ public class UserConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
+        http.cors();
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/discussion/newDiscussion").hasAuthority("USER")
