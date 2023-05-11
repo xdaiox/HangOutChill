@@ -345,7 +345,6 @@ public class ProductController {
 		MediaType mediaType = MediaType.valueOf("image/png");
 		headers.setContentType(mediaType);
 		ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
-		
 		return responseEntity;
 	}
 	
