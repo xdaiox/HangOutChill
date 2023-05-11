@@ -29,10 +29,12 @@
                 <div class="card">
                     <div class="card-header">修改地點</div>
                     <div class="card-body">
-                        <form:form class="" modelAttribute="locationInfo" enctype="multipart/form-data" method="put" action="${contextRoot}/location/locationManager/editPage">
+                        <form:form class="" modelAttribute="locationInfo" enctype="multipart/form-data" method="put"
+                                   action="${contextRoot}/location/locationManager/editPage">
                             <form:input type="hidden" value="${locationInfo.locId}" path="locId"/>
                             <p>地點名稱:</p>
-                            <form:input path="locName" value="${locationInfo.locName}" class="form-control" type="text"></form:input>
+                            <form:input path="locName" value="${locationInfo.locName}" class="form-control"
+                                        type="text"></form:input>
                             <p>地點分類:</p>
                             <form:select path="locCat" value="${locationInfo.locCat}" Class="form-control">
                                 <form:option value="未分類" label="請選擇分類..."/>
@@ -43,10 +45,11 @@
                                 <form:option value="宵夜" label="宵夜"/>
                             </form:select>
                             <p>地點標籤:</p>
-<%--                            <form:checkbox path="locTag" label="標籤1" value="${locationInfo.locTag}"/>--%>
-<%--                            <form:checkbox path="locTag" label="標籤2" value="${locationInfo.locTag}"/>--%>
+                            <%--                            <form:checkbox path="locTag" label="標籤1" value="${locationInfo.locTag}"/>--%>
+                            <%--                            <form:checkbox path="locTag" label="標籤2" value="${locationInfo.locTag}"/>--%>
                             <p>消費水準:</p>
-                            <form:select path="locPriceLevel" value="${locationInfo.locPriceLevel}" Class="form-control">
+                            <form:select path="locPriceLevel" value="${locationInfo.locPriceLevel}"
+                                         Class="form-control">
                                 <form:option value="未分類" label="請選擇分類..."/>
                                 <form:option value="$" label="$"/>
                                 <form:option value="$ $" label="$ $"/>
@@ -55,67 +58,125 @@
                                 <form:option value="$ $ $ $ $" label="$ $ $ $ $"/>
                             </form:select>
                             <p>地點簡介:</p>
-                            <form:textarea path="locDesc" value="${locationInfo.locDesc}" class="form-control" style="height:200px;" ></form:textarea>
+                            <form:textarea path="locDesc" value="${locationInfo.locDesc}" class="form-control"
+                                           style="height:200px;"></form:textarea>
                             <p>城市:</p>
-                            <form:input path="locCity" value="${locationInfo.locCity}" class="form-control" type="text"></form:input>
+                            <form:input path="locCity" value="${locationInfo.locCity}" class="form-control"
+                                        type="text"></form:input>
                             <p>區域:</p>
-                            <form:input path="locDist" value="${locationInfo.locDist}" class="form-control" type="text"></form:input>
+                            <form:input path="locDist" value="${locationInfo.locDist}" class="form-control"
+                                        type="text"></form:input>
                             <p>地址:</p>
-                            <form:input path="locAdd" value="${locationInfo.locAdd}" class="form-control" type="text"></form:input>
+                            <form:input path="locAdd" value="${locationInfo.locAdd}" class="form-control"
+                                        type="text"></form:input>
                             <p>電話:</p>
-                            <form:input path="locTel" value="${locationInfo.locTel}" class="form-control" type="text"></form:input>
+                            <form:input path="locTel" value="${locationInfo.locTel}" class="form-control"
+                                        type="text"></form:input>
                             <p>網址連結:</p>
-                            <form:input path="locLink" value="${locationInfo.locLink}" class="form-control" type="text"></form:input>
+                            <form:input path="locLink" value="${locationInfo.locLink}" class="form-control"
+                                        type="text"></form:input>
 
                             <p>營業時間:</p>
-                            <sapn>星期一 : </sapn>
+                            <sapn>星期一 :</sapn>
                             <span>開始</span>
-<%--                            <p><fmt:formatDate pattern="HH-mm" value="${locationInfo.locationOperationTime.mondayOpen}" /></p>--%>
-                            <form:input path="locationOperationTime.mondayOpen" value="${locationOperationTime.mondayOpen}" type="time"></form:input>
+                            <%--                            <p><fmt:formatDate pattern="HH-mm" value="${locationInfo.locationOperationTime.mondayOpen}" /></p>--%>
+                            <form:input path="locationOperationTime.mondayOpen"
+                                        value="${locationOperationTime.mondayOpen}" type="time"></form:input>
                             <span>結束</span>
-                            <form:input path="locationOperationTime.mondayClose" value="${locationOperationTime.mondayClose}" type="time" ></form:input>
+                            <form:input path="locationOperationTime.mondayClose"
+                                        value="${locationOperationTime.mondayClose}" type="time"></form:input>
                             <br>
-                            <sapn>星期二 : </sapn>
+                            <sapn>星期二 :</sapn>
                             <span>開始</span>
-                            <form:input path="locationOperationTime.tuesdayOpen" value="${locationOperationTime.tuesdayOpen}" type="time" ></form:input>
+                            <form:input path="locationOperationTime.tuesdayOpen"
+                                        value="${locationOperationTime.tuesdayOpen}" type="time"></form:input>
                             <span>結束</span>
-                            <form:input path="locationOperationTime.tuesdayClose" value="${locationOperationTime.tuesdayClose}" type="time" ></form:input>
+                            <form:input path="locationOperationTime.tuesdayClose"
+                                        value="${locationOperationTime.tuesdayClose}" type="time"></form:input>
                             <br>
-                            <sapn>星期三 : </sapn>
+                            <sapn>星期三 :</sapn>
                             <span>開始</span>
-                            <form:input path="locationOperationTime.wednesdayOpen" value="${locationOperationTime.wednesdayOpen}" type="time" ></form:input>
+                            <form:input path="locationOperationTime.wednesdayOpen"
+                                        value="${locationOperationTime.wednesdayOpen}" type="time"></form:input>
                             <span>結束</span>
-                            <form:input path="locationOperationTime.wednesdayClose" value="${locationOperationTime.wednesdayClose}" type="time" ></form:input>
+                            <form:input path="locationOperationTime.wednesdayClose"
+                                        value="${locationOperationTime.wednesdayClose}" type="time"></form:input>
                             <br>
-                            <sapn>星期四 : </sapn>
+                            <sapn>星期四 :</sapn>
                             <span>開始</span>
-                            <form:input path="locationOperationTime.thursdayOpen" value="${locationOperationTime.thursdayOpen}" type="time" ></form:input>
+                            <form:input path="locationOperationTime.thursdayOpen"
+                                        value="${locationOperationTime.thursdayOpen}" type="time"></form:input>
                             <span>結束</span>
-                            <form:input path="locationOperationTime.thursdayClose" value="${locationOperationTime.thursdayClose}" type="time" ></form:input>
+                            <form:input path="locationOperationTime.thursdayClose"
+                                        value="${locationOperationTime.thursdayClose}" type="time"></form:input>
                             <br>
-                            <sapn>星期五 : </sapn>
+                            <sapn>星期五 :</sapn>
                             <span>開始</span>
-                            <form:input path="locationOperationTime.fridayOpen" value="${locationOperationTime.fridayOpen}" type="time" ></form:input>
+                            <form:input path="locationOperationTime.fridayOpen"
+                                        value="${locationOperationTime.fridayOpen}" type="time"></form:input>
                             <span>結束</span>
-                            <form:input path="locationOperationTime.fridayClose" value="${locationOperationTime.fridayClose}" type="time" ></form:input>
+                            <form:input path="locationOperationTime.fridayClose"
+                                        value="${locationOperationTime.fridayClose}" type="time"></form:input>
                             <br>
-                            <sapn>星期六 : </sapn>
+                            <sapn>星期六 :</sapn>
                             <span>開始</span>
-                            <form:input path="locationOperationTime.saturdayOpen" value="${locationOperationTime.saturdayOpen}" type="time" ></form:input>
+                            <form:input path="locationOperationTime.saturdayOpen"
+                                        value="${locationOperationTime.saturdayOpen}" type="time"></form:input>
                             <span>結束</span>
-                            <form:input path="locationOperationTime.saturdayClose" value="${locationOperationTime.saturdayClose}" type="time" ></form:input>
+                            <form:input path="locationOperationTime.saturdayClose"
+                                        value="${locationOperationTime.saturdayClose}" type="time"></form:input>
                             <br>
-                            <sapn>星期日 : </sapn>
+                            <sapn>星期日 :</sapn>
                             <span>開始</span>
-                            <form:input path="locationOperationTime.sundayOpen" value="${locationOperationTime.sundayOpen}" type="time" ></form:input>
+                            <form:input path="locationOperationTime.sundayOpen"
+                                        value="${locationOperationTime.sundayOpen}" type="time"></form:input>
                             <span>結束</span>
-                            <form:input path="locationOperationTime.sundayClose" value="${locationOperationTime.sundayClose}" type="time" ></form:input>
+                            <form:input path="locationOperationTime.sundayClose"
+                                        value="${locationOperationTime.sundayClose}" type="time"></form:input>
+                            <br>
+                            <br>
+                            <p>上傳圖片 : </p>
+                            <span>封面照片 :</span>
+                            <span>${locationInfo.locationImage.locImgCover}</span>
+                            <form:input path="locationImage.imagCover"
+                                        class="form-control" type="file" accept="image/png, image/jpeg"/>
+                            <span>相簿照片1 :</span>
+                            <span>${locationInfo.locationImage.locImgGallery_1}</span>
+                            <form:input path="locationImage.imagG1"
+                                         class="form-control"
+                                        type="file" accept="image/png, image/jpeg"/>
+                            <span>相簿照片2 :</span>
+                            <form:input path="locationImage.imagG2"
+                                         class="form-control"
+                                        type="file" accept="image/png, image/jpeg"/>
+                            <span>相簿照片3 :</span>
+                            <form:input path="locationImage.imagG3"
+                                         class="form-control"
+                                        type="file" accept="image/png, image/jpeg"/>
+                            <span>相簿照片4 :</span>
+                            <form:input path="locationImage.imagG4"
+                                        class="form-control"
+                                        type="file" accept="image/png, image/jpeg"/>
+                            <span>相簿照片5 :</span>
+                            <form:input path="locationImage.imagG5"
+                                         class="form-control"
+                                        type="file" accept="image/png, image/jpeg"/>
+                            <span>相簿照片6 :</span>
+                            <form:input path="locationImage.imagG6"
+                                         class="form-control"
+                                        type="file" accept="image/png, image/jpeg"/>
+                            <span>相簿照片7 :</span>
+                            <form:input path="locationImage.imagG7"
+                                        class="form-control"
+                                        type="file" accept="image/png, image/jpeg"/>
+                            <span>相簿照片8 :</span>
+                            <form:input path="locationImage.imagG8"
+                                        class="form-control"
+                                        type="file" accept="image/png, image/jpeg"/>
 
 
-
-
-
-                            <br><button type="submit" class="btn btn-primary">送出</button>
+                            <br>
+                            <button type="submit" class="btn btn-primary">送出</button>
                         </form:form>
                     </div>
                 </div>
@@ -123,7 +184,7 @@
         </div>
     </div>
 </div>
-<jsp:include page="../../layout/footer.jsp" />
+<jsp:include page="../../layout/footer.jsp"/>
 
 
 </body>

@@ -13,6 +13,7 @@
 <jsp:include page="../../layout/navbar.jsp"/>
 <html>
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>精選地點</title>
     <style>
         figure {
@@ -25,7 +26,8 @@
             margin-bottom: 30px;
             margin-right: 30px;
         }
-        figure img{
+
+        figure img {
             width: 100%;
         }
 
@@ -33,13 +35,6 @@
 </head>
 <body>
 <div class="container">
-    <%--        <div class="row" style="margin: auto">--%>
-    <%--            <div class="col-1"></div>--%>
-    <%--            <div class="col-lg-3 col-md-12 col-sm-12">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem maxime nemo saepe vero debitis corrupti quos laborum facere aperiam voluptatibus. Explicabo cumque commodi ea a aliquam! Suscipit placeat facilis qui.</div>--%>
-    <%--            <div class="col-lg-7 col-md-6 col-sm-12">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, id. Omnis nobis praesentium eveniet, atque, esse quos qui unde neque laboriosam libero mollitia ducimus exercitationem asperiores excepturi temporibus aliquid nihil.</div>--%>
-    <%--            <div class="col-1"></div>--%>
-    <%--        </div>--%>
-
 
     <!--================Blog Area =================-->
     <section class="blog_area area-padding">
@@ -89,11 +84,9 @@
                                     </div>
                                     <%--<input type="button" id="submitBtnSearch" class="button rounded-0 primary-bg text-white w-100" value="查詢" onclick="search()"/>--%>
                                     <div>
-                                        <button id="submitBtnSearch"
-                                                class="button rounded-0 primary-bg text-white w-100" type="submit"
-                                                onclick="search()">
-                                            Search
-                                        </button>
+                                        <input type="button" id="submitBtnSearch"
+                                               class="button rounded-0 primary-bg text-white w-100"
+                                               onclick="search()" value="Search"/>
                                     </div>
                                 </div>
                             </form>
@@ -101,60 +94,61 @@
                     </div>
                 </div>
 
-                                <div class="col-lg-8 mb-5 mb-lg-0">
-                                    <div class="blog_left_sidebar">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="blog_left_sidebar">
 
 
-                                        <article class="blog_item">
-<%--                                            <div class="blog_item_img">--%>
-<%--                                                <img class="card-img rounded-0" src="img/blog/main-blog/m-blog-5.jpg" alt="">--%>
+                        <article class="blog_item">
+                            <%--                                            <div class="blog_item_img">--%>
+                            <%--                                                <img class="card-img rounded-0" src="img/blog/main-blog/m-blog-5.jpg" alt="">--%>
 
-<%--                                            </div>--%>
-
-
-
-                                            <div class="blog_details" style="background-color: white">
-                                               <figure>
-                                                   <img src="${contextRoot}/img/HangOutChill.png"/>
-                                               </figure>
-                                                <div>
-                                                <a class="d-inline-block" href="single-blog.html">
-                                                    <h2>這裡放地點名稱</h2>
-                                                </a>
-                                                </div>
-                                                <div>
-                                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that he earth it first without heaven in place seed it second morning saying.</p>
-                                                <ul class="blog-info-link">
-                                                    <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>
-                                                    <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
-                                                </ul>
-                                                </div>
-                                            </div>
-                                        </article>
+                            <%--                                            </div>--%>
 
 
-                                        <nav class="blog-pagination justify-content-center d-flex">
-                                            <ul class="pagination">
-                                                <li class="page-item">
-                                                    <a href="#" class="page-link" aria-label="Previous">
-                                                        <i class="ti-angle-left"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a href="#" class="page-link">1</a>
-                                                </li>
-                                                <li class="page-item active">
-                                                    <a href="#" class="page-link">2</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a href="#" class="page-link" aria-label="Next">
-                                                        <i class="ti-angle-right"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
+                            <div class="blog_details" style="background-color: white" id="searchResult-list">
+                                <figure>
+                                    <img src="${contextRoot}/img/HangOutChill.png"/>
+                                </figure>
+                                <div>
+                                    <a class="d-inline-block" href="single-blog.html">
+                                        <h2>這裡放地點名稱</h2>
+                                    </a>
                                 </div>
+                                <div>
+                                    <p>That dominion stars lights dominion divide years for fourth have don't stars is
+                                        that he earth it first without heaven in place seed it second morning
+                                        saying.</p>
+                                    <ul class="blog-info-link">
+                                        <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>
+                                        <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+
+
+                        <nav class="blog-pagination justify-content-center d-flex">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a href="#" class="page-link" aria-label="Previous">
+                                        <i class="ti-angle-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a href="#" class="page-link">1</a>
+                                </li>
+                                <li class="page-item active">
+                                    <a href="#" class="page-link">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a href="#" class="page-link" aria-label="Next">
+                                        <i class="ti-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
 
 
             </div>
@@ -164,5 +158,97 @@
 
 
     <jsp:include page="../../layout/footer.jsp"/>
+    <script>
+        window.addEventListener("load", () => {
+            return loadLocationInfo(1, '', '', '', '', '')
+        })
+
+
+        async function loadLocationInfo(pageNumber, name, category, price, city, dist) {
+            try {
+                const response = await axios.get('${pageContext.request.contextPath}/location/locationList/search', {
+                    params: {pageNumber, name, category, price, city, dist}
+                });
+                console.log(response.data)
+                // displayLocationInfo(response.data.page.content);
+                // setupPagination(response.data);
+            } catch (error) {
+                console.error('Error loading LocationInfo:', error);
+            }
+        }
+
+
+        <%--function displayLocationInfo(e) {--%>
+        <%--    let resultList = document.getElementById("searchResult-list")--%>
+        <%--    let result = '';--%>
+        <%--    for (let i = 0; i < e.length; i++) {--%>
+        <%--        result += '<figure>'--%>
+        <%--        if (e[i].locationImage !== null) {--%>
+        <%--            if (e[i].locationImage.locImgCover !== null) {--%>
+        <%--                var byteArray = e[i].locationImage.locImgCover--%>
+        <%--                var blob = new Blob([byteArray], {type: 'image/png'});--%>
+        <%--                var imageUrl = URL.createObjectURL(blob);--%>
+        <%--                console.log(imageUrl)--%>
+        <%--                URL.revokeObjectURL(imageUrl);--%>
+        <%--            } else {--%>
+        <%--                imageUrl = "${contextRoot}/img/HangOutChill.png"--%>
+        <%--            }--%>
+        <%--        } else {--%>
+        <%--            imageUrl = "${contextRoot}/img/HangOutChill.png"--%>
+        <%--        }--%>
+
+        <%--        result += ' <img src="' + imageUrl + '"/>'--%>
+        <%--        result += '</figure>'--%>
+
+        <%--    }--%>
+        <%--    resultList.innerHTML = result--%>
+        <%--}--%>
+
+        // function search(){
+        //     getNameValue()
+        //     getCategoryValue()
+        //     getCityValue()
+        //     getPriceValue()
+        //     getDistValue()
+        // }
+
+
+        //獲取查詢值name
+        function getNameValue() {
+            const inputName = document.getElementById('name').value;
+            console.log(inputName)
+            return inputName
+        }
+
+        //獲取查詢值category
+        function getCategoryValue() {
+            const inputCategory = document.getElementById('category').value;
+            console.log(inputCategory)
+            return inputCategory
+        }
+
+        //獲取查詢值price(INTEGER)
+        function getPriceValue() {
+            const inputPrice = document.getElementById('price').value;
+            console.log(inputPrice)
+            return inputPrice
+        }
+
+        //獲取查詢值city
+        function getCityValue() {
+            const inputCity = document.getElementById('city').value;
+            console.log(inputCity)
+            return inputCity
+        }
+
+        //獲取查詢值dist
+        function getDistValue() {
+            const inputDist = document.getElementById('dist').value;
+            console.log(inputDist)
+            return inputDist
+        }
+
+
+    </script>
 </body>
 </html>

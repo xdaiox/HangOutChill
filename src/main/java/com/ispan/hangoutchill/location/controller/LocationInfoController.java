@@ -89,15 +89,15 @@ public class LocationInfoController {
     public String postAddLocationInfo(@ModelAttribute("locationInfo") LocationInfo locationInfo, Model model) {
 
         //處理圖片
-        locationInfoService.handleLocationImagCover(locationInfo);
-        locationInfoService.handleLocationImagG1(locationInfo);
-        locationInfoService.handleLocationImagG2(locationInfo);
-        locationInfoService.handleLocationImagG3(locationInfo);
-        locationInfoService.handleLocationImagG4(locationInfo);
-        locationInfoService.handleLocationImagG5(locationInfo);
-        locationInfoService.handleLocationImagG6(locationInfo);
-        locationInfoService.handleLocationImagG7(locationInfo);
-        locationInfoService.handleLocationImagG8(locationInfo);
+        locationInfoService.addLocationImagCover(locationInfo);
+        locationInfoService.addLocationImagG1(locationInfo);
+        locationInfoService.addLocationImagG2(locationInfo);
+        locationInfoService.addLocationImagG3(locationInfo);
+        locationInfoService.addLocationImagG4(locationInfo);
+        locationInfoService.addLocationImagG5(locationInfo);
+        locationInfoService.addLocationImagG6(locationInfo);
+        locationInfoService.addLocationImagG7(locationInfo);
+        locationInfoService.addLocationImagG8(locationInfo);
 
         locationInfoService.addLocationInfo(locationInfo);
         model.addAttribute("locationInfo", new LocationInfo());
@@ -134,6 +134,16 @@ public class LocationInfoController {
     //編輯LocationInfo動作
     @PutMapping("/location/locationManager/editPage")
     public String putEditLocationInfo(@ModelAttribute("locationInfo") LocationInfo locationInfo) {
+        //處理圖片
+//        locationInfoService.handleLocationImagCover(locationInfo);
+//        locationInfoService.handleLocationImagG1(locationInfo);
+//        locationInfoService.handleLocationImagG2(locationInfo);
+//        locationInfoService.handleLocationImagG3(locationInfo);
+//        locationInfoService.handleLocationImagG4(locationInfo);
+//        locationInfoService.handleLocationImagG5(locationInfo);
+//        locationInfoService.handleLocationImagG6(locationInfo);
+//        locationInfoService.handleLocationImagG7(locationInfo);
+//        locationInfoService.handleLocationImagG8(locationInfo);
         locationInfoService.updateLocationInfoById(locationInfo.getLocId(), locationInfo);
         return "redirect:/location/locationManager";
     }

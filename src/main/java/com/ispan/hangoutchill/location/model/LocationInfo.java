@@ -48,13 +48,13 @@ public class LocationInfo {
     }
 
 
-    //關聯 與LocationOperationTime
+//    //關聯 與LocationOperationTime
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "location_operationTime_id")
     private LocationOperationTime locationOperationTime;
 
 
-    //關聯 與LocationImage
+//    //關聯 與LocationImage
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "location_image_id")
     private LocationImage locationImage;
@@ -180,6 +180,5 @@ public class LocationInfo {
     public void setLocationImage(LocationImage locationImage) {
         this.locationImage = locationImage;
     }
-
 }
 

@@ -40,9 +40,9 @@ public class LocationImage {
     @Column(name = "location_image_gallery_8",columnDefinition = "varbinary(max)")
     private byte[] locImgGallery_8;
 
-    //對應locationInfo
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn (name = "location_id")
+    //關聯 與LocationInfo
+//    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+//    @JoinColumn(name = "location_id")
 //    private LocationInfo locationInfo;
 
 
@@ -69,6 +69,7 @@ public class LocationImage {
 
     //參數建構子
     public LocationImage(){}
+
 
     public Integer getLocImgId() {
         return locImgId;
@@ -150,6 +151,14 @@ public class LocationImage {
         this.locImgGallery_8 = locImgGallery_8;
     }
 
+//    public LocationInfo getLocationInfo() {
+//        return locationInfo;
+//    }
+//
+//    public void setLocationInfo(LocationInfo locationInfo) {
+//        this.locationInfo = locationInfo;
+//    }
+
     public MultipartFile getImagCover() {
         return imagCover;
     }
@@ -221,5 +230,4 @@ public class LocationImage {
     public void setImagG8(MultipartFile imagG8) {
         this.imagG8 = imagG8;
     }
-
 }

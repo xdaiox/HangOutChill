@@ -78,6 +78,11 @@ public class LocationOperationTime {
     @Column(name="sundayClose")
     private Date sundayClose;
 
+    //關聯 與LocationInfo
+//    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+//    @JoinColumn(name = "location_id")
+//    private LocationInfo locationInfo;
+
 
     //參數建構子
     public LocationOperationTime(){}
@@ -201,4 +206,12 @@ public class LocationOperationTime {
     public void setSundayClose(Date sundayClose) {
         this.sundayClose = sundayClose;
     }
+
+//    public LocationInfo getLocationInfo() {
+//        return locationInfo;
+//    }
+//
+//    public void setLocationInfo(LocationInfo locationInfo) {
+//        this.locationInfo = locationInfo;
+//    }
 }
