@@ -1,12 +1,12 @@
 package com.ispan.hangoutchill.shop.controller;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
@@ -98,13 +98,13 @@ public class OrderController {
 	@Transactional
 	@PostMapping("/shop/orderdetailcheck")
 	public String showOrderDetailPage(@CurrentSecurityContext(expression = "authentication") Authentication authentication, Model model) {
-		
 		String name = authentication.getName();
 		System.out.println(name);
 		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
 		Order latestOrder = orderService.findLatestOrderByMemberId(currentmember.getId());
 		latestOrder.setPaymentState(true);
 		model.addAttribute("order", latestOrder);
+		
 		
 		return "shop/orderFinishCheck";
 	}
@@ -115,7 +115,9 @@ public class OrderController {
 		String name = authentication.getName();
 		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
 		Order latestOrder = orderService.findLatestOrderByMemberId(currentmember.getId());
+		List<OrderDetail> ods = new ArrayList<>(latestOrder.getOrderDetails());
 		model.addAttribute("order", latestOrder);
+		model.addAttribute("orderDetails", ods);
 		return "shop/orderFinishCheck";
 //		return "redirect:/";
 	}

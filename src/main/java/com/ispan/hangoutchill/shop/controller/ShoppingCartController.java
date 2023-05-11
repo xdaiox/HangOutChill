@@ -64,6 +64,7 @@ public class ShoppingCartController {
 		return shoppingCartService.findCartItemsNum(currentmember.getId());
 	}
 	
+	
 	@ResponseBody
 	@DeleteMapping("shop/delete/cartItem")
 	public String deleteCartItemById(
