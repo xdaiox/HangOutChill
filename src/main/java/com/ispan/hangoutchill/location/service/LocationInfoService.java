@@ -314,7 +314,7 @@ public class LocationInfoService {
 //    }
 
 //    ====================================改寫成list 到controller================================================
-public Page<LocationInfo> findAllLocationInfoByPage(String name, String category, Integer price,
+public Page<LocationInfo> findAllLocationInfoByPage(String name, String category, String price,
                                                     String city, String dist ,Integer pageNumber){
 
     Specification<LocationInfo> specification = new Specification<LocationInfo>(){
@@ -331,7 +331,7 @@ public Page<LocationInfo> findAllLocationInfoByPage(String name, String category
                 Predicate predicate = criteriaBuilder.equal(root.get("locCat"),category);
                 predicateList.add(predicate);
             }
-            if (price != null){
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(price)){
                 Predicate predicate = criteriaBuilder.equal(root.get("locPriceLevel"),price);
                 predicateList.add(predicate);
             }

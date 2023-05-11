@@ -80,9 +80,8 @@
         </a>
         <div class="collapse" id="icons">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="#">Buttons</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">Dropdowns</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">Typography</a></li>
+            <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/location/locationManager ">地點清單</a></li>
+            <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/location/locationManager/addPage ">新增地點</a></li>
           </ul>
         </div>
       </li>

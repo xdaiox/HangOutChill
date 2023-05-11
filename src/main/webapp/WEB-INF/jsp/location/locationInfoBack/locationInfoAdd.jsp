@@ -37,9 +37,11 @@
                                     <p>地點分類 : </p>
                                     <form:select path="locCat" Class="form-control">
                                         <form:option value="未分類" label="請選擇分類..."/>
-                                        <form:option value="分類1" label="分類1"/>
-                                        <form:option value="分類2" label="分類2"/>
-                                        <form:option value="分類3" label="分類3"/>
+                                        <form:option value="酒吧" label="酒吧"/>
+                                        <form:option value="燒烤" label="燒烤"/>
+                                        <form:option value="咖啡廳" label="咖啡廳"/>
+                                        <form:option value="餐館" label="餐館"/>
+                                        <form:option value="宵夜" label="宵夜"/>
                                     </form:select>
 
                                     <p>地點標籤:</p>
@@ -48,12 +50,12 @@
                                     <br>
                                     <p>消費水準 : </p>
                                     <form:select path="locPriceLevel" Class="form-control">
-                                        <form:option value="0" label="請選擇分類..."/>
-                                        <form:option value="1" label="$"/>
-                                        <form:option value="2" label="$ $"/>
-                                        <form:option value="3" label="$ $ $"/>
-                                        <form:option value="4" label="$ $ $ $"/>
-                                        <form:option value="5" label="$ $ $ $ $"/>
+                                        <form:option value="未分類" label="請選擇分類..."/>
+                                        <form:option value="$" label="$"/>
+                                        <form:option value="$ $" label="$ $"/>
+                                        <form:option value="$ $ $" label="$ $ $"/>
+                                        <form:option value="$ $ $ $" label="$ $ $ $"/>
+                                        <form:option value="$ $ $ $ $" label="$ $ $ $ $"/>
                                     </form:select>
                                     <br>
                                     <p>地點簡介 : </p>

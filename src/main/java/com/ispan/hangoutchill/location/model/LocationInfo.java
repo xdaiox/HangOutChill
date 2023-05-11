@@ -21,7 +21,7 @@ public class LocationInfo {
     @Column(name = "location_tag")
     private String locTag;
     @Column(name = "location_priceLevel")
-    private Integer locPriceLevel;
+    private String locPriceLevel;
     @Column(name = "location_description")
     private String locDesc;
     @Column(name = "location_city")
@@ -101,11 +101,11 @@ public class LocationInfo {
         this.locTag = locTag;
     }
 
-    public Integer getLocPriceLevel() {
+    public String getLocPriceLevel() {
         return locPriceLevel;
     }
 
-    public void setLocPriceLevel(Integer locPriceLevel) {
+    public void setLocPriceLevel(String locPriceLevel) {
         this.locPriceLevel = locPriceLevel;
     }
 

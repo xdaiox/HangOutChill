@@ -34,17 +34,20 @@
                     <input type="text" id="name" name="name" placeholder="輸入地點名稱"/>
                     <select id="category" name="category">
                         <option value="" label="請選擇分類..."></option>
-                        <option value="分類1" label="分類1"></option>
-                        <option value="分類2" label="分類2"></option>
-                        <option value="分類3" label="分類3"></option>
+                        <option value="酒吧" label="酒吧"></option>
+                        <option value="燒烤" label="燒烤"></option>
+                        <option value="咖啡廳" label="咖啡廳"></option>
+                        <option value="餐館" label="餐館"></option>
+                        <option value="宵夜" label="宵夜"></option>
+                        <option value="未分類" label="未分類"></option>
                     </select>
                     <select id="price" name="price">
                         <option value="" label="請選擇消費費水準..."></option>
-                        <option value="1" label="$"></option>
-                        <option value="2" label="$ $"></option>
-                        <option value="3" label="$ $ $"></option>
-                        <option value="4" label="$ $ $ $"></option>
-                        <option value="5" label="$ $ $ $ $"></option>
+                        <option value="$" label="$"></option>
+                        <option value="$ $" label="$ $"></option>
+                        <option value="$ $ $" label="$ $ $"></option>
+                        <option value="$ $ $ $" label="$ $ $ $"></option>
+                        <option value="$ $ $ $ $" label="$ $ $ $ $"></option>
                     </select>
                     <input type="text" id="city" name="city" placeholder="輸入地點城市"/>
                     <input type="text" id="dist" name="dist" placeholder="輸入地點區域"/>
@@ -152,13 +155,13 @@
     //獲取查詢值category
     function getCategoryValue() {
         const inputCategory = document.getElementById('category').value;
-        // console.log(inputCategory)
+        console.log(inputCategory)
         return inputCategory
     }
 
     //獲取查詢值price(INTEGER)
     function getPriceValue() {
-        const inputPrice = parseInt(document.getElementById('price').value);
+        const inputPrice = document.getElementById('price').value;
         // console.log(inputPrice)
         return inputPrice
     }

@@ -38,7 +38,7 @@ public class LocationInfoController {
     public Map<String, Object> showAllLocationInfo(@RequestParam(name = "pageNumber", defaultValue = "1") Integer pageNumber,
                                                    @RequestParam(name = "name", required = false) String name,
                                                    @RequestParam(name = "category", required = false) String category,
-                                                   @RequestParam(name = "price", required = false) Integer price,
+                                                   @RequestParam(name = "price", required = false) String price,
                                                    @RequestParam(name = "city", required = false) String city,
                                                    @RequestParam(name = "dist", required = false) String dist) {
 
@@ -153,10 +153,51 @@ public class LocationInfoController {
 
 //    ==========================測試==============================
 
-    @GetMapping("/location/locationManager/detail")
+    //查詢地點詳細資訊
+    @GetMapping("/location/locationList/single")
     public String toLocationDetail() {
+
         return "location/locationInfoBack/locationInfoDetail";
     }
+
+
+
+
+
+    //地點清單首頁
+    @GetMapping ("/location/locationList")
+    public String toLocationList(){
+        return "location/locationInfoFront/locationList";
+    }
+
+    //地點清單查詢包含多條件
+    @ResponseBody
+    @GetMapping("/location/locationList/search")
+    public Map<String, Object> showAllLocationList(@RequestParam(name = "pageNumber", defaultValue = "1") Integer pageNumber,
+                                                   @RequestParam(name = "name", required = false) String name,
+                                                   @RequestParam(name = "category", required = false) String category,
+                                                   @RequestParam(name = "price", required = false) String price,
+                                                   @RequestParam(name = "city", required = false) String city,
+                                                   @RequestParam(name = "dist", required = false) String dist) {
+
+        Page<LocationInfo> page;
+        Map<String, Object> response = new HashMap<>();
+        page = locationInfoService.findAllLocationInfoByPage(name, category, price, city, dist, pageNumber);
+        response.put("name", name);
+        response.put("category", category);
+        response.put("price", price);
+        response.put("city", city);
+        response.put("dist", dist);
+        response.put("pageNumber", pageNumber);
+        response.put("page", page);
+        return response;
+    }
+
+
+
+
+
+
 
 
 
