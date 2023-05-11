@@ -12,10 +12,12 @@ import com.ispan.hangoutchill.shop.model.ShoppingCart;
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Integer> {
 
 	@Query("select product from ShoppingCart where member_id = :memberId")
-	public List<Product> findProductidsByMemberid(@Param(value="memberId") Integer memberId);
+	public List<Product> findProductsByMemberid(@Param(value="memberId") Integer memberId);
 	
 	@Query("select COUNT(product) from ShoppingCart where member_id = :memberId")
 	public Integer findProductNumInCart(@Param(value="memberId") Integer memberId);
 	
+	@Query("from ShoppingCart where member_id = :memberId")
+	public List<ShoppingCart> findShoppingCartItemsByMemberId(@Param(value="memberId") Integer memberId);
 	
 }

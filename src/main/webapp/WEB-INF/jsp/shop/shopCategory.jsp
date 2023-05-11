@@ -144,7 +144,7 @@
                                         url: 'http://localhost:8080/hangoutchill/shop/addcart',
                                         type: 'POST',
                                         contentType: "application/json;charset=UTF-8",
-                                        datatype: 'json',
+                                        datatype: 'text',
                                         data: JSON.stringify({
                                             'productid': productId,
                                             'amount': amount

@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.service.NormalMemberService;
+import com.ispan.hangoutchill.shop.model.Order;
 import com.ispan.hangoutchill.shop.model.Product;
 import com.ispan.hangoutchill.shop.model.ShoppingCart;
 import com.ispan.hangoutchill.shop.service.ProductService;
@@ -63,6 +63,7 @@ public class ShoppingCartController {
 		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
 		return shoppingCartService.findCartItemsNum(currentmember.getId());
 	}
+	
 	
 	@ResponseBody
 	@DeleteMapping("shop/delete/cartItem")
@@ -130,6 +131,24 @@ public class ShoppingCartController {
 	}
 	
 	
+	@GetMapping("/shop/orderdetail")
+	public String goOrderConfirmPage(@CurrentSecurityContext(expression = "authentication") Authentication authentication, Model model) {
+		// 商品細項資訊
+		String name = authentication.getName();
+		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
+		Set<ShoppingCart> cartItems = currentmember.getShoppingCart();
+		List<ShoppingCart> carItemsList = new ArrayList<>(cartItems);
+		model.addAttribute("shoppingCartItems", carItemsList);
+		
+		// 帶入會員資訊
+		model.addAttribute("user",currentmember);
+		
+		// 總價計算
+		Integer totalPrice = shoppingCartService.totalPriceCount(carItemsList);
+		model.addAttribute("totalprice", totalPrice);
+		model.addAttribute("order", new Order());
+		return "shop/orderDetail";
+	}
 	
 	
 	

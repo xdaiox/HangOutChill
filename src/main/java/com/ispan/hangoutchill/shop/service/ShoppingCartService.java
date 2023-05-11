@@ -22,7 +22,7 @@ public class ShoppingCartService {
 
 	public List<Integer> findMemberCartProductIds(Integer memberId){
 		
-		List<Product> productList = shoppingCartRepository.findProductidsByMemberid(memberId);
+		List<Product> productList = shoppingCartRepository.findProductsByMemberid(memberId);
 		List<Integer> productIds = new ArrayList<>();
 		for(Product p : productList) {
 			productIds.add(p.getProductId());
@@ -53,6 +53,24 @@ public class ShoppingCartService {
 		}
 		
 		return null;
+	}
+	
+	
+	public Integer totalPriceCount(List<ShoppingCart> cartItems) {
+		Integer totalPrice = 0;
+		for(ShoppingCart item : cartItems) {
+			Integer amount = item.getAmount();
+			Integer unitPrice = item.getProduct().getUnitPrice();
+			Double discount = item.getProduct().getDiscount();
+			Integer subtotal = (int) Math.round(amount * unitPrice * discount) ;
+			totalPrice += subtotal;
+		}
+		return totalPrice;
+	}
+	
+	public List<ShoppingCart> findShoppingCartItemsByMemberId(Integer memberId){
+		
+		return shoppingCartRepository.findShoppingCartItemsByMemberId(memberId);
 	}
 	
 }

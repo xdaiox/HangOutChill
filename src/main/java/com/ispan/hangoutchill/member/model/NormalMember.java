@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.ispan.hangoutchill.shop.model.Order;
 import com.ispan.hangoutchill.shop.model.ShoppingCart;
 
 import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
@@ -145,13 +147,23 @@ public class NormalMember {
     public void setShoppingCart(Set<ShoppingCart> shoppingCart) {
     	this.shoppingCart = shoppingCart;
     }
-    // shop 自行加入
     
     
+	@OneToMany(mappedBy="member",
+                cascade = CascadeType.PERSIST, orphanRemoval = true)
+	private Set<Order> orders = new LinkedHashSet<>();
     
-    public String getAccount() {
+    
+    public Set<Order> getOrders() {
+		return orders;
+	}
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
+	public String getAccount() {
         return account;
     }
+	// shop 自行加入
 
 	public void setAccount(String account) {
         this.account = account;

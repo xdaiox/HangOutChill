@@ -119,11 +119,13 @@
 						<!-- 							class="icon-arrow-left"></i>&nbsp;繼續購物</a> -->
 					</div>
 					<div class="column">
-						<a class="btn btn-primary" href="#" data-toast=""
+						<a
+							class="btn btn-success" href='<c:url value="/shop/orderdetailpagetest" />'>訂單頁面測試</a>
+						<a class="btn btn-primary" href='<c:url value="/shop/products?category=全部商品" />' data-toast=""
 							data-toast-type="success" data-toast-position="topRight"
 							data-toast-icon="icon-circle-check" data-toast-title="Your cart"
 							data-toast-message="is updated successfully!">繼續逛逛</a><a
-							class="btn btn-success" href="#">確認結帳</a>
+							class="btn btn-success" href='<c:url value="/shop/orderdetail" />'>確認結帳</a>
 					</div>
 				</div>
 
@@ -257,39 +259,21 @@
 									url : 'http://localhost:8080/hangoutchill/shop/delete/cartItem',    
 									method : 'delete',
 									contentType : "application/json;charset=UTF-8",
-									dataType : 'json',
+									dataType : 'text',
 									data : JSON.stringify({
 											'cartid':sId
 											}),
 									success : function(result) {
 											console.log(result);
 											alert("本項商品已成功刪除！");
+											updateCartItem();
 										},
 									error : function(err) {
 											console.log(err);
 											alert("購物車中無此項商品2222");
+											updateCartItem();
 										}
 									});
-									
-									$.ajax({
-        								url: 'http://localhost:8080/hangoutchill/shop/get/shoppingCartItemNum',
-										type: 'GET',
-										contentType: "application/json;charset=UTF-8",
-										datatype: 'json',
-										success: function (result) {
-											console.log(result);
-											if(result == 0){
-												$('.count').hide();
-											}else{
-											$('.count').text(result);
-											}
-         	
-											},
-											error: function (err) {
-												console.log(err);
-												$('.count').hide();
-											}
-										})
 									
 // 									 以AJAX同步更新資料表
 									updatePrice();
@@ -298,6 +282,30 @@
 
 						});
 
+		}
+		
+		// 以Ajax更新購物車小圖示
+		function updateCartItem(){
+		$.ajax({
+        	url: 'http://localhost:8080/hangoutchill/shop/get/shoppingCartItemNum',
+			type: 'GET',
+			contentType: "application/json;charset=UTF-8",
+			datatype: 'json',
+			success: function (result) {
+					console.log(result);
+					if(result == 0){
+						$('.count').hide();
+					}else{
+						$('.count').text(result);
+					}
+         	
+				},
+					error: function (err) {
+						console.log(err);
+						$('.count').hide();
+				}
+			})
+		
 		}
 
 		// 點擊數量按鈕增減

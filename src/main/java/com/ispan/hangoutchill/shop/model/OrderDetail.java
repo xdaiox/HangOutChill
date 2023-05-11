@@ -4,6 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -13,16 +16,22 @@ import javax.persistence.Table;
 @Table(name="orderDetails")
 public class OrderDetail {
 
-	@EmbeddedId
-	private OrderDetailPK orderDetailPK;
+//	@EmbeddedId
+//	private OrderDetailPK orderDetailPK;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="orderDetail_id")
+	private Integer orderDetailId;
+	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("orderId")
+//	@MapsId("orderId")
 	@JoinColumn(name="order_id")
 	private Order order;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("productId")
+//	@MapsId("productId")
 	@JoinColumn(name="product_id")
 	private Product product;
 	
@@ -39,18 +48,30 @@ public class OrderDetail {
 	}
 
 
-	public OrderDetailPK getOrderDetailPK() {
-		return orderDetailPK;
-	}
+//	public OrderDetailPK getOrderDetailPK() {
+//		return orderDetailPK;
+//	}
+//
+//
+//	public void setOrderDetailPK(OrderDetailPK orderDetailPK) {
+//		this.orderDetailPK = orderDetailPK;
+//	}
 
-
-	public void setOrderDetailPK(OrderDetailPK orderDetailPK) {
-		this.orderDetailPK = orderDetailPK;
-	}
-
+	
+	
 
 	public Order getOrder() {
 		return order;
+	}
+
+
+	public Integer getOrderDetailId() {
+		return orderDetailId;
+	}
+
+
+	public void setOrderDetailId(Integer orderDetailId) {
+		this.orderDetailId = orderDetailId;
 	}
 
 
