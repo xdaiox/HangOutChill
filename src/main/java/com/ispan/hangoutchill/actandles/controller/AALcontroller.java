@@ -122,11 +122,13 @@ public class AALcontroller {
 	/* 準備前往綠界 */
 	@ResponseBody
 	@PostMapping("/actandles/detail/checkout")
-	public String goECPay(@RequestParam(name = "id") Integer id,@CurrentSecurityContext(expression = "authentication") Authentication authentication)
+	public String goECPay(@RequestParam(name = "id") Integer id,@CurrentSecurityContext(expression = "authentication") Authentication authentication,Model model)
 			throws IOException {
+		ActivitiesandLesson aal = aalService.findAALById(id);
 
+		
 		// 設定金流
-		String testNo = UUID.randomUUID().toString().replaceAll("-", "").substring(0,2);
+		String testNo = UUID.randomUUID().toString().replaceAll("-", "").substring(0,8);
 		AllInOne aio = new AllInOne("");
 		AioCheckOutALL aioCheck = new AioCheckOutALL();
 		/* 特店編號 */
@@ -136,18 +138,18 @@ public class AALcontroller {
 		sdf.setLenient(false);
 		aioCheck.setMerchantTradeDate(sdf.format(new Date()));
 		/* 交易金額 */
-		aioCheck.setTotalAmount("500");
+		aioCheck.setTotalAmount(String.valueOf(aal.getFee()));
 		/* 交易描述 */
-		aioCheck.setTradeDesc("speakitup");
+		aioCheck.setTradeDesc(aal.getTopic());
 		/* 商品名稱 */
-		aioCheck.setItemName("500");
+		aioCheck.setItemName(aal.getName());
 		/* 特店交易編號 */
-		aioCheck.setMerchantTradeNo("testSpeakitup"+testNo);
+		aioCheck.setMerchantTradeNo("AaL"+testNo);
 		/* 付款完成通知回傳網址 */
 		aioCheck.setReturnURL("http://localhost:8080/hangoutchill/returnURL");
 		/* Client端回傳付款結果網址 */
 
-		aioCheck.setOrderResultURL("http://localhost:8080/hangoutchill/showHistoryOrder");
+		aioCheck.setOrderResultURL("http://localhost:8080/hangoutchill/showHistoryOrder?id="+aal.getId());
 		// 輸出畫面
 
 		String form = aio.aioCheckOut(aioCheck, null);
@@ -161,6 +163,7 @@ public class AALcontroller {
 	public void returnURL(@RequestParam("MerchantTradeNo") String MerchantTradeNo,
 			@RequestParam("RtnCode") int RtnCode, @RequestParam("TradeAmt") int TradeAmt,@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
 		// 交易成功
+		System.out.println("RtnCode"+RtnCode);
 		if (RtnCode == 1) {
 //			String orderIdStr = MerchantTradeNo.substring(13);
 //			int orderId = Integer.parseInt(orderIdStr);
@@ -175,7 +178,7 @@ public class AALcontroller {
 	/* 查詢歷史訂單 */
 	@Transactional
 	@PostMapping("/showHistoryOrder")
-	public String showECPAYHistoryurder (Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
+	public String showECPAYHistoryurder (Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication,@RequestParam(name = "id") Integer id) {
 		
 	return "aal/user/historyOrder";
 	}

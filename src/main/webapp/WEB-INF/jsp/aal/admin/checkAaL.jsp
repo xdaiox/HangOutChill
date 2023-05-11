@@ -10,6 +10,54 @@
 <head>
 <meta charset="UTF-8">
 <title>個人活動管理</title>
+<style>
+.popup {
+display: none;
+position: fixed;
+z-index: 999;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0, 0, 0, 0.4);
+}
+
+.popup-content {
+background-color: #ffffff;
+margin:5% auto;
+padding: 20px;
+border: 1px solid #bcbcbc;
+width: 60%;
+height: 100%;
+max-width: 80%;
+position: relative;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+text-align: center;
+overflow:auto
+}
+pop-content p img{
+width: auto;
+height: auto;
+white-space: normal;
+border-radius: unset;
+}
+.close {
+position: absolute;
+top: 10px;
+right: 10px;
+font-size: 28px;
+font-weight: bold;
+color: #999999;
+cursor: pointer;
+transition: color 0.3s ease;
+}
+
+.close:hover {
+color: #3e3e3e;
+}
+</style>
 
 
 </head>
@@ -46,7 +94,7 @@
 									<td class="align-middle">${aal.id}
 									<td class="align-middle">${aal.normalMember.id}
 									<td class="align-middle">${aal.name}
-									<td class="align-middle">${aal.aalContent}
+									<td class="align-middle"><button class="123 btn btn-primary">預覽</button>
 									<td class="align-middle"><jstl:if
 											test="${aal.topic=='act'}">活動</jstl:if> <jstl:if
 											test="${aal.topic=='les'}">課程</jstl:if>
@@ -78,8 +126,11 @@
 													type="submit" class="btn btn-outline-danger btn-sm"
 													value="駁回" onclick="return confirm('確定刪除?')" />
 											</form>
-										
+										</td>
 										</div>
+										<div id="popup-date" class="popup">
+											<div class="popup-content" >
+										<span class="close">&times;</span> <div>${aal.aalContent}</div></div></div>
 							</jstl:forEach>
 						</tbody>
 					</table>
@@ -104,7 +155,35 @@
 
 		</div>
 	</div>
+<script>
+	const buttons = document.querySelectorAll('button');
 
+	// 監聽每個按鈕的點擊事件
+	buttons.forEach(function(button) {
+	  button.addEventListener('click', function() {
+	    // 判斷按鈕是否擁有 "123" 這個 class
+	    if (button.classList.contains('123')) {
+	      // 取得彈出視窗元素
+	      const popup = document.getElementById('popup-date');
+	      // 顯示彈出視窗
+	      popup.style.display = 'block';
+	    }
+	  });
+	});
+
+	// 取得所有的關閉按鈕元素
+	const closeButtons = document.querySelectorAll('.close');
+
+	// 監聽每個關閉按鈕的點擊事件
+	closeButtons.forEach(function(closeButton) {
+	  closeButton.addEventListener('click', function() {
+	    // 取得彈出視窗元素
+	    const popup = document.getElementById('popup-date');
+	    // 隱藏彈出視窗
+	    popup.style.display = 'none';
+	  });
+	});
+ </script>
 
 </body>
 </html>

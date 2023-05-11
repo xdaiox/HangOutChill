@@ -9,17 +9,23 @@
 <head>
 <meta charset="UTF-8">
 <title>活動與課程</title>
+
+
+
 </head>
 <body>
 	<jsp:include page="../layout/navbar.jsp" />
-	<div class="container content_view" style="background-color: #ffffff00;height: 100%;">
-		<div class="content_box" style="height: 100%;" >
+	<div class="container content_view"
+		style="background-color: #ffffff00; height: 100%;">
+		<div class="content_box" style="height: 100%;">
 
-			<div class="content" style="background-color: #ffffff00;height: 100%;">
+			<div class="content"
+				style="background-color: #ffffff00; height: 100%;">
 				<h1>輪播圖</h1>
-				<img style="height: 600px;width: 600px " src="">
+				<img style="height: 600px; width: 600px" src="">
 			</div>
-			<div class="content" style="background-color: #ffffff00;height: 100%;">
+			<div class="content"
+				style="background-color: #ffffff00; height: 100%;">
 				<p>活動總攬
 				<form action="${contextRoot}/actandles/shop/postall">
 					<input type="submit" class="btn btn-outline-info btn-sm"
@@ -52,11 +58,14 @@
 								<tr>
 									<td class="align-middle">${aal.id}
 									<td class="align-middle">${aal.normalMember.id}
-									<td class="align-middle"><a href="${contextRoot}/actandles/${aal.id}"><img width="200px" height="200px"
-										src="data:image/png;base64,${aal.base64image}"></a>
+									<td class="align-middle"><a
+										href="${contextRoot}/actandles/${aal.id}"><img
+											width="200px" height="200px"
+											src="data:image/png;base64,${aal.base64image}"></a>
 									<td class="align-middle"><a
 										href="${contextRoot}/actandles/${aal.id}">${aal.name}</a>
-									<td class="align-middle">${aal.aalContent}
+									<td class="align-middle"><button class="123 btn btn-primary">預覽</button>
+										
 									<td class="align-middle"><jstl:if
 											test="${aal.topic=='act'}">活動</jstl:if> <jstl:if
 											test="${aal.topic=='les'}">課程</jstl:if>
@@ -71,6 +80,10 @@
 									<td class="align-middle"><span><fmt:formatDate
 												pattern="yyyy-MM-dd" value="${aal.deadLine}" /></span>
 									<td class="align-middle">${aal.currentStatus}
+									
+									<div id="popup-date" class="popup">
+											<div class="popup-content" style="border-radius: 0%;height: auto;width: auto;" >
+										<span class="close">&times;</span> ${aal.aalContent}</div></div>
 							</jstl:forEach>
 						</tbody>
 					</table>
@@ -82,5 +95,8 @@
 	</div>
 
 	<jsp:include page="../layout/footer.jsp" />
+	
+	
+	
 </body>
 </html>
