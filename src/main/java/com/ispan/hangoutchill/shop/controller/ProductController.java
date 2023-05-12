@@ -303,7 +303,8 @@ public class ProductController {
 //		}
 //		out.close();
 //	}
-	
+
+
 	@GetMapping("/shop/getPicture/{productId}")
 	public ResponseEntity<byte[]> getPicture(HttpServletResponse resp, @PathVariable Integer productId){
 		

@@ -80,8 +80,13 @@ public class LocationInfoService {
             locOriginal.setLocTel(locationInfo.getLocTel());
             locOriginal.setLocLink(locationInfo.getLocLink());
             locOriginal.setLocationOperationTime(locationInfo.getLocationOperationTime());
-            locOriginal.setLocationImage(locationInfo.getLocationImage());
-            locRepo.save(locOriginal);
+
+
+            locOriginal.getLocationImage().setLocImgCover(locationInfo.getLocationImage().getLocImgCover());
+            locOriginal.getLocationImage().setLocImgGallery_1(locationInfo.getLocationImage().getLocImgGallery_1());
+//            locOriginal.getLocationImage().set
+
+
             return locOriginal;
         }
         return null;
@@ -140,7 +145,7 @@ public class LocationInfoService {
 
 
 
-    //    ========================處理圖片方法===============================
+    //    ========================新增圖片轉碼===============================
 
     //處理新增圖片Cover
     public void addLocationImagCover(LocationInfo locationInfo){
@@ -280,9 +285,7 @@ public class LocationInfoService {
 
 
 
-
-
-    //=============================測試=================================
+    //=============================編輯圖片轉碼=================================
 
     //處理修改圖片Cover
 //    public void editLocationImagCover(LocationInfo locationInfo) {
@@ -290,34 +293,42 @@ public class LocationInfoService {
 //        if (imagCover !=null && !imagCover.isEmpty()){
 //            try{
 //                byte[] bytes = imagCover.getBytes();
-//                product.setCoverImage(b);
+//                locationInfo.getLocationImage().setLocImgCover(bytes);
 //            } catch (IOException e) {
 //                e.printStackTrace();
 //                throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 //            }
 //        } else {
-//            Product originalProduct = productService.getProductById(product.getProductId());
-//            product.setCoverImage(originalProduct.getCoverImage());
-//        }
+//            LocationInfo originalLocationInfo = findLocationInfoById(locationInfo.getLocId());
+//            locationInfo.getLocationImage().setImagCover(originalLocationInfo.getLocationImage().getImagCover());
 //
+//
+//        }
 //    }
 
 
 
-    //處理新增圖片Cover
-//    public void addLocationImagCover(LocationInfo locationInfo){
-//        MultipartFile imagCover = locationInfo.getLocationImage().getImagCover();
-//        if (imagCover !=null && !imagCover.isEmpty()){
+    //處理修改圖片G1
+//    public void editLocationImagG1(LocationInfo locationInfo) {
+//        MultipartFile imagG1 = locationInfo.getLocationImage().getImagG1();
+//        if (imagG1 !=null && !imagG1.isEmpty()){
 //            try{
-//                byte[] bytes = imagCover.getBytes();
-//                locationInfo.getLocationImage().setLocImgCover(bytes);
-//
-//            }catch (IOException e){
+//                byte[] bytes = imagG1.getBytes();
+//                locationInfo.getLocationImage().setLocImgGallery_1(bytes);
+//            } catch (IOException e) {
 //                e.printStackTrace();
-//                throw new RuntimeException("錯誤:"+ e.getMessage());
+//                throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 //            }
+//        } else {
+//            LocationInfo originalLocationInfo = findLocationInfoById(locationInfo.getLocId());
+//            locationInfo.getLocationImage().setImagG1(originalLocationInfo.getLocationImage().getImagG1());
+//
+//
 //        }
 //    }
+
+
+
 
 
 

@@ -95,36 +95,57 @@
                 </div>
 
                 <div class="col-lg-8 mb-5 mb-lg-0">
-                    <div class="blog_left_sidebar">
+                    <div class="blog_left_sidebar" id="searchResult-list">
+<%--                        <article class="blog_item" >--%>
+<%--                            <div class="blog_details" style="background-color: white" >--%>
+<%--                                <figure>--%>
+<%--                                    <img src="${contextRoot}/img/HangOutChill.png"/>--%>
+<%--                                </figure>--%>
+<%--                                <div>--%>
+<%--                                    <a class="d-inline-block" href="single-blog.html">--%>
+<%--                                        <h2>這裡放地點名稱</h2>--%>
+<%--                                    </a>--%>
+<%--                                </div>--%>
+<%--                                <div>--%>
+<%--                                    <p>That dominion stars lights dominion divide years for fourth have don't stars is--%>
+<%--                                        that he earth it first without heaven in place seed it second morning--%>
+<%--                                        saying.</p>--%>
+<%--                                    <ul class="blog-info-link">--%>
+<%--                                        <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>--%>
+<%--                                        <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>--%>
+<%--                                    </ul>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </article>--%>
 
 
-                        <article class="blog_item">
-                            <%--                                            <div class="blog_item_img">--%>
-                            <%--                                                <img class="card-img rounded-0" src="img/blog/main-blog/m-blog-5.jpg" alt="">--%>
 
-                            <%--                                            </div>--%>
+    <article class="blog_item" >
+        <div class="blog_details" style="background-color: white" >
+            <figure>
+                <img src="${contextRoot}/img/HangOutChill.png"/>
+            </figure>
+            <div>
+                <a class="d-inline-block" href="single-blog.html">
+                    <h2>這裡放地點名稱</h2>
+                </a>
+            </div>
+            <div>
+                <p>That dominion stars lights dominion divide years for fourth have don't stars is
+                    that he earth it first without heaven in place seed it second morning
+                    saying.</p>
+                <ul class="blog-info-link">
+                    <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>
+                    <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
+                </ul>
+            </div>
+        </div>
+    </article>
 
 
-                            <div class="blog_details" style="background-color: white" id="searchResult-list">
-                                <figure>
-                                    <img src="${contextRoot}/img/HangOutChill.png"/>
-                                </figure>
-                                <div>
-                                    <a class="d-inline-block" href="single-blog.html">
-                                        <h2>這裡放地點名稱</h2>
-                                    </a>
-                                </div>
-                                <div>
-                                    <p>That dominion stars lights dominion divide years for fourth have don't stars is
-                                        that he earth it first without heaven in place seed it second morning
-                                        saying.</p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>
-                                        <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </article>
+
+
+
 
 
                         <nav class="blog-pagination justify-content-center d-flex">
@@ -178,31 +199,41 @@
         }
 
 
-        <%--function displayLocationInfo(e) {--%>
-        <%--    let resultList = document.getElementById("searchResult-list")--%>
-        <%--    let result = '';--%>
-        <%--    for (let i = 0; i < e.length; i++) {--%>
-        <%--        result += '<figure>'--%>
-        <%--        if (e[i].locationImage !== null) {--%>
-        <%--            if (e[i].locationImage.locImgCover !== null) {--%>
-        <%--                var byteArray = e[i].locationImage.locImgCover--%>
-        <%--                var blob = new Blob([byteArray], {type: 'image/png'});--%>
-        <%--                var imageUrl = URL.createObjectURL(blob);--%>
-        <%--                console.log(imageUrl)--%>
-        <%--                URL.revokeObjectURL(imageUrl);--%>
-        <%--            } else {--%>
-        <%--                imageUrl = "${contextRoot}/img/HangOutChill.png"--%>
-        <%--            }--%>
-        <%--        } else {--%>
-        <%--            imageUrl = "${contextRoot}/img/HangOutChill.png"--%>
-        <%--        }--%>
+        function displayLocationInfo(e) {
+            let resultList = document.getElementById("searchResult-list")
+            let result = '';
+            let base64 = '';
 
-        <%--        result += ' <img src="' + imageUrl + '"/>'--%>
-        <%--        result += '</figure>'--%>
+            for (let i = 0; i < e.length; i++) {
+                result +='  <article class="blog_item" ><div class="blog_details" style="background-color: white" >'
+                result += '<figure>'
+                if (e[i].locationImage !== null) {
+                    if (e[i].locationImage.locImgCover !== null) {
+                        base64 = '${contextRoot}/locationInfo/getImgCover/' + e[i].locId;
+                        console.log(e[i].locId);
+                    } else {
+                        base64 = "${contextRoot}/img/HangOutChill.png"
+                    }
+                } else {
+                    base64 = "${contextRoot}/img/HangOutChill.png"
+                }
 
-        <%--    }--%>
-        <%--    resultList.innerHTML = result--%>
-        <%--}--%>
+                result += '<img src="' + base64 + '"/>'
+
+                result += '</figure>'
+                result +=' <div> <a class="d-inline-block" href="#詳細地點controller">'
+                result +=' <h2>'+e[i].locName+'</h2>'
+                result +='</a></div>'
+                result +='<div><p>'+e[i].locDesc+ '</p>' +'<ul class="blog-info-link">'
+                result +='<li><i class="far fa-user"></i>' + e[i].locCat+'</li>'
+                result +='<li><i class="far fa-comments"></i>'+e[i].locPriceLevel+'</li> '
+                result +='<li><i class="far fa-user"></i>' + e[i].locCity+'</li>'
+                result +='<li><i class="far fa-comments"></i>'+e[i].locDist+'</li> '
+                result +='</ul>'+'</div>'
+                result +='</div></article>'
+            }
+            resultList.innerHTML = result
+        }
 
         // function search(){
         //     getNameValue()
