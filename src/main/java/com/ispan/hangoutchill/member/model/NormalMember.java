@@ -18,6 +18,14 @@ import com.ispan.hangoutchill.shop.model.ShoppingCart;
 
 import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
 
+import com.ispan.hangoutchill.article.model.Article;
+import com.ispan.hangoutchill.article.model.ArticleFavorite;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 @Entity
 @Table(name="normalAccount")
 public class NormalMember {
@@ -127,6 +135,37 @@ public class NormalMember {
 	}
 
     public Integer getId() {
+    //-------------Article----------------
+    
+    @OneToMany(mappedBy="normalmember", cascade = CascadeType.PERSIST)
+	private Set<ArticleFavorite> favorite = new LinkedHashSet<>();
+    
+    @OneToMany(mappedBy="normalmember", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private Set<Article> article = new LinkedHashSet<>();
+    
+    
+    public Set<ArticleFavorite> getFavorite() {
+    	return favorite;
+    }
+    
+    public void setFavorite(Set<ArticleFavorite> favorite) {
+    	this.favorite = favorite;
+    }
+    
+
+    public Set<Article> getArticle() {
+		return article;
+	}
+
+	public void setArticle(Set<Article> article) {
+		this.article = article;
+	}
+
+
+    //-------------Article----------------
+    
+
+	public Integer getId() {
         return id;
     }
 

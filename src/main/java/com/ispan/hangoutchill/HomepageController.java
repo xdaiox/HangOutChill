@@ -36,5 +36,14 @@ public class HomepageController {
         return "/dashboard";
     }
 
+    @GetMapping("/article")
+    public String toArticleList() {
+    	return "/article/article";
+    }
+    
+    @GetMapping("/article/db")
+    public String toDashBoard() {
+    	return "dashboard";
+    }
 }
 
