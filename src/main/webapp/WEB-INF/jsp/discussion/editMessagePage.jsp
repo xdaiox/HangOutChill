@@ -161,6 +161,16 @@ body {
 	width: 150px; /*分頁選單option*/
 	margin-left: 15px;
 }
+.long-input {
+    width: 100%; /* 設置寬度為100% */
+}
+
+/* 使用媒體查詢，在特定寬度下改變輸入框的寬度 */
+@media (min-width: 768px) {
+    .long-input {
+        width: 400px; /* 在768px以上的寬度下設置寬度為400px */
+    }
+}
 </style>
 
 </head>
@@ -169,9 +179,12 @@ body {
 		<div class="inner-wrapper">
 			<div class="inner-main">
 				<div class="inner-main-body collapse forum-content show">
+
+					<!-- ===============顯示討論=============== -->
+
 					<div class="card">
 						<div class="card-header">
-							<h5 class="card-title text-center">修改文章</h5>
+							<h5 class="card-title text-center">討論</h5>
 						</div>
 						<div class="card-body">
 							<form:form modelAttribute="discussion" method="put" action="${contextRoot}/discussion/editDiscussion/${discussion.d_id}">
@@ -179,23 +192,42 @@ body {
 								<form:input path="d_id" type="hidden"></form:input>
 								</div>
 									<div class="form-group">
-									
-									<label for="titl e">標題</label>
 									<label for="titl e">標題</label> ${discussion.title}
 								</div>
 
 								<div class="form-group">
-									<label for="content">内容</label>
-									<label for="titl e">標題</label> ${discussion.contents}
+									<label for="titl e">内容</label> ${discussion.contents}
 
 								</div>
-								<button type="submit" class="btn btn-primary">發表</button>
+							</form:form>
+						</div>
+					</div>
+					
+					<!-- ===============put修改回覆=============== -->
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title text-center">修改回覆</h5>
+						</div>
+						<div class="card-body">
+							<form:form modelAttribute="message" method="put" action="${contextRoot}/message/editMessage/${discussion.d_id}/">
+								<div class="form-group">
+								<form:input path="dm_id" type="hidden"></form:input>
+								</div>
+								
+								<div class="form-group">
+									<label for="contents">内容</label>
+
+									<form:input path="contents" id="editor" name="content"
+										placeholder="請在這裡填寫內容" class="long-input"></form:input>
+									<button type="submit" class="btn btn-primary">發表</button>
+								</div>
+								
 							</form:form>
 							<a href="${contextRoot}/discussion/allDiscussion"
 								class="btn btn-primary">返回文章列</a>
 						</div>
 					</div>
-					
+
 					
 				</div>
 			</div>

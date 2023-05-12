@@ -75,6 +75,7 @@ public class MessagesController {
     
     
     //==============編輯留言==============
+    
     @GetMapping("/message/editMessage/{id}/{m_id}")
     public String editMessage(@PathVariable("id") Integer id,@PathVariable("m_id") Integer m_id, Model model) {
         Discussions dss = dService.findDiscussionById(id);
@@ -82,10 +83,11 @@ public class MessagesController {
         
         Messages mss = mService.findMessageById(m_id);
         model.addAttribute("message", mss);
+        
         return "discussion/editMessagePage";
     }
     
-    @PutMapping("/message/editMessage/{id}/{m_id}")
+    @PutMapping("/message/editMessage/{id}")
     public String toEditeMessage(@ModelAttribute("message") Messages mss,@PathVariable("id") Integer id) {
     	mService.updateMessageById(mss.getDm_id(),mss.getContents());
     	return "redirect:/message/allMessages/{id}";

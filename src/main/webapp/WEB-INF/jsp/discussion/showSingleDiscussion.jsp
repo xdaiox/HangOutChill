@@ -272,28 +272,27 @@
 														<div class="media-body">
 															<h3>${message.contents}</h3>
 															<p class="text-muted">
-															<h5>作者:
+															<span class="text-secondary font-weight-bold">
 																<a>${message.normalMmeber.nickName}</a>
-																
-															</h5><span class="text-secondary font-weight-bold">
-																回覆於:<fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss"
-																	value="${message.postDate}" />
+															</span>
+															<span class="text-secondary font-weight-bold">
+																回覆於:<fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss" value="${message.postDate}" />
 															</span>
 															</p>
 														</div>
 														<div>
-															<a
-																href="${contextRoot}/message/editMessage/${discussion.d_id}/${message.dm_id}"><button
-																	class="btn btn-primary"
-																	type="submit">編輯</button></a>
+															<button class="btn btn-primary" type="submit" onclick="showEditMessageConfirmation()">編輯</button>
+														<!--==========編輯討論url==========-->
+														<form id="edit-form-message" action="${contextRoot}/message/editMessage/${discussion.d_id}/${message.dm_id}" method="post">
+															<input type="hidden" name="_method" value="get">
+														</form>
 
-															<form
-																action="${contextRoot}/message/deleteMessage/${discussion.d_id}/${message.dm_id}"
-																method="post">
-																<input type="hidden" name="_method" value="delete">
-																<button class="btn btn-primary danger"
-																	type="submit">刪除</button>
-															</form>
+														<button class="btn btn-primary danger" type="submit" onclick="showDeleteMessageConfirmation()">刪除</button>
+														<!--==========刪除討論url==========-->
+														<form id="delete-form-message" action="${contextRoot}/message/deleteMessage/${discussion.d_id}/${message.dm_id}" method="post">
+															<input type="hidden" name="_method" value="delete">
+														</form>
+
 														</div>
 														<div class="text-muted small text-center align-self-center">
 															<span class="d-none d-sm-inline-block"><i
@@ -348,12 +347,25 @@
 								window.location.href = "${contextRoot}/discussion/editDiscussion/${discussion.d_id}";
 							}
 						}
-
 						function showDeleteConfirmation() {
 							if (confirm("您確定要刪除此討論？")) {
 								document.getElementById("delete-form").submit();
 							}
 						}
+
+
+						
+						function showEditMessageConfirmation() {
+							if (confirm("您確定要編輯此回覆？")) {
+								document.getElementById("edit-form-message").submit();
+							}
+						}
+						function showDeleteMessageConfirmation() {
+							if (confirm("您確定要刪除此回覆？")) {
+								document.getElementById("delete-form-message").submit();
+							}
+						}
+
 					</script>
 					<!-- ================================== ck editor ================================== -->
 
