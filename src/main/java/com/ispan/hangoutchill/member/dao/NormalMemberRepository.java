@@ -20,8 +20,6 @@ public interface NormalMemberRepository extends JpaRepository<NormalMember,Integ
     @Query(value = "from NormalMember where account= :account")
     public NormalMember findNormalMembersByAccount(@Param(value = "account")String account);
 
-    @Query(value = "from NormalMember where nickName= :nickName")
-    public NormalMember findNormalMembersByNickName(@Param(value = "nickName")String nickName);
 
     @Query(value = "from NormalMember where account like '%'+:account+'%'")
     public List<NormalMember> findBlurMemberByAcoount(@Param(value = "account")String account);
