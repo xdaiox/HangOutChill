@@ -21,7 +21,7 @@ public class LocationInfo {
     @Column(name = "location_tag")
     private String locTag;
     @Column(name = "location_priceLevel")
-    private Integer locPriceLevel;
+    private String locPriceLevel;
     @Column(name = "location_description")
     private String locDesc;
     @Column(name = "location_city")
@@ -34,6 +34,9 @@ public class LocationInfo {
     private String locTel;
     @Column(name = "location_link")
     private String locLink;
+
+
+
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     @Column(name = "location_info_updateTime",columnDefinition = "datetime")
@@ -45,13 +48,13 @@ public class LocationInfo {
     }
 
 
-    //關聯 與LocationOperationTime
+//    //關聯 與LocationOperationTime
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "location_operationTime_id")
     private LocationOperationTime locationOperationTime;
 
 
-    //關聯 與LocationImage
+//    //關聯 與LocationImage
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "location_image_id")
     private LocationImage locationImage;
@@ -98,11 +101,11 @@ public class LocationInfo {
         this.locTag = locTag;
     }
 
-    public Integer getLocPriceLevel() {
+    public String getLocPriceLevel() {
         return locPriceLevel;
     }
 
-    public void setLocPriceLevel(Integer locPriceLevel) {
+    public void setLocPriceLevel(String locPriceLevel) {
         this.locPriceLevel = locPriceLevel;
     }
 
@@ -177,7 +180,6 @@ public class LocationInfo {
     public void setLocationImage(LocationImage locationImage) {
         this.locationImage = locationImage;
     }
-
 
 }
 
