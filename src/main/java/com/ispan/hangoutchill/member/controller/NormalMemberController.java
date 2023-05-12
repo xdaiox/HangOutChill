@@ -188,15 +188,24 @@ public class NormalMemberController {
         }
         return  " ";
     }
-
     @GetMapping("/member/NormalMemberDetail")
-    //目前登入的人到會員中心
     public String toMemberCenterPage(@CurrentSecurityContext(expression = "authentication")
                                      Authentication authentication, Model model) {
         String name = authentication.getName();
-        NormalMember result = nMemberService.findNormalUserByAccount(name);
-        model.addAttribute("result", result);
-        return "/member/normalMemberCenter";
+        System.out.println(name);
+        if (name.contains("@") ){
+            System.out.println("原本的");
+            NormalMember result = nMemberService.findNormalUserByAccount(name);
+            model.addAttribute("result", result);
+            return "/member/normalMemberCenter";
+        }else {
+//            HangoutOauth2User hangoutOauth2User = (HangoutOauth2User) authentication.getPrincipal();
+//            String account = hangoutOauth2User.getEmail();
+//            NormalMember result = nMemberService.findNormalUserByAccount(account);
+//            model.addAttribute("result", result);
+//            return "/member/normalMemberCenter";
+            return null;
+        }
     }
 
 

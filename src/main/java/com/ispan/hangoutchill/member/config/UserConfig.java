@@ -3,6 +3,8 @@ package com.ispan.hangoutchill.member.config;
 
 
 import com.ispan.hangoutchill.member.UserDetailServiceImpl;
+import com.ispan.hangoutchill.member.handler.Oauth2LoginSuccessHandler;
+import com.ispan.hangoutchill.member.oauth2.HangoutOauth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +30,19 @@ public class UserConfig {
 
     @Autowired
     UserDetailServiceImpl userDetail;
+
+    private HangoutOauth2UserService oauth2UserService;
+    private Oauth2LoginSuccessHandler oauth2LoginSuccessHandler;
+
+    @Autowired
+    public UserConfig(UserDetailServiceImpl userDetail,  HangoutOauth2UserService oauth2UserService, Oauth2LoginSuccessHandler oauth2LoginSuccessHandler) {
+        this.userDetail = userDetail;
+        this.oauth2UserService = oauth2UserService;
+        this.oauth2LoginSuccessHandler = oauth2LoginSuccessHandler;
+    }
+
+
+
 
 
 
