@@ -1,7 +1,10 @@
 package com.ispan.hangoutchill.xdaiox.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
@@ -18,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.service.NormalMemberService;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
-
+import com.ispan.hangoutchill.xdaiox.model.Favourite;
+import com.ispan.hangoutchill.xdaiox.model.FavouriteDTO;
 import com.ispan.hangoutchill.xdaiox.model.Messages;
 import com.ispan.hangoutchill.xdaiox.service.DiscussionsService;
+import com.ispan.hangoutchill.xdaiox.service.FavouriteService;
 import com.ispan.hangoutchill.xdaiox.service.MessagesService;
 @Controller
 public class DiscussionsController {
@@ -30,6 +35,9 @@ public class DiscussionsController {
 
 	@Autowired
 	private MessagesService mService;
+	
+	@Autowired
+	private FavouriteService fService;
 	
     @Autowired
     NormalMemberService nMemberService;
@@ -97,9 +105,42 @@ public class DiscussionsController {
     @DeleteMapping("/discussion/deleteDiscussion/{id}")
     public String toDeleteButItsNotActuallyDeleteItsHiddenDiscussion(@PathVariable("id") Integer id) {
     	dService.deleteDiscussionById(id);
-    	System.out.println("========================after delete========================"+id+"========================after delete========================");
     	return "redirect:/discussion/allDiscussion";
     }
+    
+    //==============找使用者所有的討論收藏==============
+    @GetMapping("/discussion/allFavourite")
+    public String toShowAllFavourite(@CurrentSecurityContext(expression = "authentication")
+										Authentication authentication,Model model) {
+    	String name = authentication.getName();
+    	NormalMember result = nMemberService.findNormalUserByAccount(name);
+//    	System.out.println("============/discussion/allFavourite=================name: "+name+"===============================");
+//    	System.out.println("============/discussion/allFavourite=================result: "+result+"===============================");
+
+        if(result != null) {
+        	List<Favourite> fav = fService.findAllFavouriteById(result.getId());
+        	// Print each object in the list
+//        	for(FavouriteDTO fav : favDTO) {
+//        		System.out.println(fav.toString());
+//        	}
+        	model.addAttribute("favouriteDTO",fav);
+        }	
+        
+            
+            
+//            if (favDTO.isEmpty()) {
+//                System.out.println("FavouriteDTO list is empty");
+//            } else {
+//                System.out.println("FavouriteDTO list is not empty");
+//            }
+            
+            System.out.println("==============================result NOT NULL=============================="+"==============================result NOT NULL==============================");
+
+
+
+        return "discussion/allFavourite";
+    }
+    
     
     
 //    @GetMapping("/discussion/replyDiscussion")

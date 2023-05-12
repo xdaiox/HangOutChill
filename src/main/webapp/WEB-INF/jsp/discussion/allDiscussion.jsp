@@ -184,6 +184,7 @@ body {
 						<button class="btn btn-primary" type="submit">最新</button>
 						<button class="btn btn-primary" type="submit">精選</button>
 						<button class="btn btn-primary" type="submit">熱門</button>
+						<a href="${contextRoot}/discussion/allFavourite"><button class="btn btn-primary" type="submit">珍藏文章</button></a>
 						<button type="button" class="btn btn-link ml-auto">分類1</button>
 						<button type="button" class="btn btn-link ml-auto">分類2</button>
 						<button type="button" class="btn btn-link ml-auto">分類3</button>

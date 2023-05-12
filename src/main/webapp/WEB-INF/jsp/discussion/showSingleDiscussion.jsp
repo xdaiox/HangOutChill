@@ -309,8 +309,7 @@
 											<form:form modelAttribute="replyDiscussion" method="post"
 												action="${contextRoot}/message/post/${discussion.d_id}">
 
-												<form:input type="hidden" path="discussions"
-													value="${discussion.d_id}" />
+												<form:input type="hidden" path="discussions" value="${discussion.d_id}" />
 												<div class="form-group">
 													<!--  把member_id值設定至message的normalMmeber -->
 													<form:hidden path="normalMmeber" value="${result.id}"></form:hidden>
