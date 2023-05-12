@@ -7,6 +7,7 @@ import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.model.Role;
 import com.ispan.hangoutchill.member.model.SecuredToken;
 import com.ispan.hangoutchill.member.event.OnRegistrationCompleteEvent;
+import com.ispan.hangoutchill.member.oauth2.HangoutOauth2User;
 import com.ispan.hangoutchill.member.service.NormalMemberService;
 import com.ispan.hangoutchill.member.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -199,12 +200,12 @@ public class NormalMemberController {
             model.addAttribute("result", result);
             return "/member/normalMemberCenter";
         }else {
-//            HangoutOauth2User hangoutOauth2User = (HangoutOauth2User) authentication.getPrincipal();
-//            String account = hangoutOauth2User.getEmail();
-//            NormalMember result = nMemberService.findNormalUserByAccount(account);
-//            model.addAttribute("result", result);
-//            return "/member/normalMemberCenter";
-            return null;
+            HangoutOauth2User hangoutOauth2User = (HangoutOauth2User) authentication.getPrincipal();
+            String account = hangoutOauth2User.getEmail();
+            NormalMember result = nMemberService.findNormalUserByAccount(account);
+            model.addAttribute("result", result);
+            return "/member/normalMemberCenter";
+
         }
     }
 

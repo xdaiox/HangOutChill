@@ -2,6 +2,7 @@ package com.ispan.hangoutchill.member.config;
 
 
 
+import com.ispan.hangoutchill.member.Handler.Oauth2LoginSuccessHandler;
 import com.ispan.hangoutchill.member.UserDetailServiceImpl;
 
 //import com.ispan.hangoutchill.member.oauth2.HangoutOauth2UserService;
@@ -33,6 +34,9 @@ public class UserConfig {
     UserDetailServiceImpl userDetail;
 
     private HangoutOauth2UserService oauth2UserService;
+
+    @Autowired
+    private Oauth2LoginSuccessHandler oauth2LoginSuccessHandler;
     
 
     @Autowired
@@ -72,8 +76,7 @@ public class UserConfig {
         .oauth2Login()
             .loginPage("/member/login")
             .userInfoEndpoint()
-            .userService(oauth2UserService);
-
+            .userService(oauth2UserService).and().successHandler(oauth2LoginSuccessHandler);
     return http.build();
     }
 
@@ -91,7 +94,6 @@ public class UserConfig {
         authProvider.setPasswordEncoder(encoder());
         return authProvider;
     }
-
 
     @Bean
     public RoleHierarchy roleHierarchy() {
