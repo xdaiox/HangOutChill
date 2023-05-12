@@ -26,9 +26,10 @@ public class NormalMemberService implements INormalMemberService {
     @Autowired
     SecuredTokenRepository securedTokenRepository;
 
-    @Qualifier("encoder")
     @Autowired
     PasswordEncoder passwordEncoder;
+
+
 
     //創造token
     @Override
@@ -68,6 +69,7 @@ public class NormalMemberService implements INormalMemberService {
     //透過email找會員
     @Override
     public NormalMember findNormalUserByAccount(String account) {
+        System.out.println("我有來找會員");
         return nMemberRepository.findNormalMembersByAccount(account);
     }
 
@@ -211,6 +213,11 @@ public class NormalMemberService implements INormalMemberService {
         String passwordInDB = normalMember.getPassword();
         boolean matches = passwordEncoder.matches(password, passwordInDB);
         return  matches;
+    }
+
+    //機掰第三方登入透過暱稱找會員
+    public  NormalMember findMemberByNickName(String nickName){
+        return  nMemberRepository.findNormalMembersByNickName(nickName);
     }
 }
 

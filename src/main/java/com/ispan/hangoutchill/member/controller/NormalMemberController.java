@@ -1,5 +1,6 @@
 package com.ispan.hangoutchill.member.controller;
 
+import com.ispan.hangoutchill.member.HangoutOauth2User;
 import com.ispan.hangoutchill.member.UserDetailServiceImpl;
 import com.ispan.hangoutchill.member.event.OnForgotPassWord;
 import com.ispan.hangoutchill.member.event.OnResendAuthenticationMail;
@@ -193,12 +194,23 @@ public class NormalMemberController {
     //目前登入的人到會員中心
     public String toMemberCenterPage(@CurrentSecurityContext(expression = "authentication")
                                      Authentication authentication, Model model) {
+        System.out.println("我有進來controller");
         String name = authentication.getName();
-        NormalMember result = nMemberService.findNormalUserByAccount(name);
-        model.addAttribute("result", result);
-        return "/member/normalMemberCenter";
-    }
+        System.out.println(name);
+        if (name.contains("@") ){
+            System.out.println("原本的");
+            NormalMember result = nMemberService.findNormalUserByAccount(name);
+            model.addAttribute("result", result);
+            return "/member/normalMemberCenter";
+        }else {
+            HangoutOauth2User hangoutOauth2User = (HangoutOauth2User) authentication.getPrincipal();
+            String account = hangoutOauth2User.getEmail();
+            NormalMember result = nMemberService.findNormalUserByAccount(account);
+            model.addAttribute("result", result);
+            return "/member/normalMemberCenter";
+        }
 
+    }
 
 
     @PutMapping("/member/updateInfo")

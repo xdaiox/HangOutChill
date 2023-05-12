@@ -23,7 +23,6 @@
     <input type="hidden" value="${latest.id}" id="memberId">
     <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" id="resend">重寄驗證信</a>
     <script>
-
         document.getElementById("resend").addEventListener('click',resendResult)
         function resendResult(){
             let theId = parseInt(document.getElementById("memberId").value)
@@ -37,7 +36,6 @@
                     alert(err)
             })
         }
-
     </script>
 </div>
 </body>
