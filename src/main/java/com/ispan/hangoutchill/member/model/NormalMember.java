@@ -17,6 +17,7 @@ import com.ispan.hangoutchill.shop.model.Order;
 import com.ispan.hangoutchill.shop.model.ShoppingCart;
 
 import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
+import com.ispan.hangoutchill.actandles.model.LessonSignUpDetail;
 
 import com.ispan.hangoutchill.article.model.Article;
 import com.ispan.hangoutchill.article.model.ArticleFavorite;
@@ -134,7 +135,8 @@ public class NormalMember {
 		this.actandles = actandles;
 	}
 
-    public Integer getId() {
+//======================================================    	
+    
     //-------------Article----------------
     
     @OneToMany(mappedBy="normalmember", cascade = CascadeType.PERSIST)

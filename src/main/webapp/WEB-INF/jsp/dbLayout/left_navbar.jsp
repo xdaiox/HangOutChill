@@ -38,7 +38,7 @@
         </a>
         <div class="collapse" id="form-elements">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="#">Buttons</a></li>
+            <li class="nav-item"> <a class="nav-link" href="${contextRoot}/actandles/admin/chackaal">待審核項目</a></li>
             <li class="nav-item"> <a class="nav-link" href="#">Dropdowns</a></li>
             <li class="nav-item"> <a class="nav-link" href="#">Typography</a></li>
           </ul>
