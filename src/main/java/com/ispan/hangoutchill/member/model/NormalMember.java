@@ -3,8 +3,13 @@ package com.ispan.hangoutchill.member.model;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ispan.hangoutchill.article.model.Article;
+import com.ispan.hangoutchill.article.model.ArticleFavorite;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="normalAccount")
@@ -47,7 +52,38 @@ public class NormalMember {
             registTime = new Date();
         }
     }
-    public Integer getId() {
+    
+    //-------------Article----------------
+    
+    @OneToMany(mappedBy="normalmember", cascade = CascadeType.PERSIST)
+	private Set<ArticleFavorite> favorite = new LinkedHashSet<>();
+    
+    @OneToMany(mappedBy="normalmember", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private Set<Article> article = new LinkedHashSet<>();
+    
+    
+    public Set<ArticleFavorite> getFavorite() {
+    	return favorite;
+    }
+    
+    public void setFavorite(Set<ArticleFavorite> favorite) {
+    	this.favorite = favorite;
+    }
+    
+
+    public Set<Article> getArticle() {
+		return article;
+	}
+
+	public void setArticle(Set<Article> article) {
+		this.article = article;
+	}
+
+
+    //-------------Article----------------
+    
+
+	public Integer getId() {
         return id;
     }
 

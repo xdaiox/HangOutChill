@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jstl"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
-
 <head>
-<link rel="stylesheet" href="${contextRoot}/css/vendors/vertical-layout-light/define.css">
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-<meta charset="UTF-8">
-<title>新增專欄</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+  <title>HangOut趣</title>
 </head>
-
 <body>
   <div class="container-scroller">
   	<jsp:include page="../dbLayout/top_navbar.jsp" />
@@ -19,41 +19,39 @@
     <div class="container-fluid page-body-wrapper">
 		<jsp:include page="../dbLayout/left_navbar.jsp" />
 		<div class="main-panel">
-			<div class="titleSpace d-flex">
-			    <h3 class="createContent col-8">新增專欄</h3>
-			    <h3 class="defaultImg col-4">預覽圖</h3>
-			
-			</div>
+		    <h3>編輯專欄</h3>
 		    <div class="content-wrapper">
 		      <div class="row cw">
 		        <div class=" content articleform col-8">
 		          <div class="form-floating mb-3">
-		            <form:form class="row g-3" modelAttribute="articles" enctype="multipart/form-data" method="post" action="${contextRoot}/article/post">
+		            <form:form class="row g-3" modelAttribute="articles" enctype="multipart/form-data" method="put" action="${contextRoot}/article/edit">
+		              <form:input type="hidden" path="article_id"/>
 		              <div class="col-12">
 		                <div class="titleName">
 		                  <form:input path="article_name" class="title" type="text" name="" id="articleName" placeholder="專欄名稱"/>
 		                </div>
 		              </div>
-		              <div class="col-md-4">
+		              <div class="col-md-6">
 		                <label for="inputCity" class="form-label">主題</label>
 		                <form:select path="article_theme" class="form-select form-select-lg mb-3" id="inputCity" aria-label="Default select example">
-		                  <option selected disabled>------請選擇主題-------</option>
-		                  <option value="life">生活</option>
-		                  <option value="eats">宵夜</option>
-		                  <option value="fun">玩樂</option>
+		                  <form:option value="life">生活</form:option>
+		                  <form:option value="eats">宵夜</form:option>
+		                  <form:option value="fun">玩樂</form:option>
 		                </form:select>
-		              </div>
-   		              <div class="col-md-8">
 		              	<label for="inputGroupFile02" class="form-label">專欄封面圖</label>
-				  		<form:input path="mainImg" type="file" class="form-control" id="target" aria-placeholder="專欄封面圖"/>
+				  		<form:input path="mainImg" type="file" class="form-control" id="target"/>
+		              </div>
+		              <div class="col-md-4">
+		              	<label for="inputGroupFile03" class="form-label">封面原圖</label>
+		              	<img class="originalImg" width="300px" height="200px" src="${articles.article_mainImg}" alt="" name="inputGroupFile03">
 		              </div>
    	              	  <div class="formContent col-12">
 		                <label for="form-check-inline1" class="form-label">簡介</label>
-		                <form:textarea name="form-check-inline1" path="article_excerpt" id="articleExcerpt"  class="form-control"></form:textarea>
+		                <form:textarea name="form-check-inline1" path="article_excerpt" id="articleExcerpt" class="form-control"></form:textarea>
 		              </div>
 	              	  <div class="formContent col-12">
-		                <label for="form-check-inline" class="form-label">內容</label>
-		                <form:textarea path="article_content" name="picturefile" class="form-control" id="summernote"></form:textarea>
+		                <label for="form-check-inline2" class="form-label">內容</label>
+		                <form:textarea name="form-check-inline2" path="article_content" class="form-control" id="summernote"></form:textarea>
 		              </div>
 					  <div class="col-12">
 		                <label for="form-check-inline" class="form-label">狀態</label>
@@ -63,7 +61,7 @@
 		                    <label class="form-check-label" for="inlineRadio1">上架</label>
 		                  </div>
 		                  <div class="form-check form-check-inline">
-		                    <form:radiobutton path="status" class="form-check-input" name="inlineRadioOptions" id="inlineRadio2" value="2"/>
+		                    <form:radiobutton path="status" class="form-check-input" name="inlineRadioOptions" id="inlineRadio2" value="0"/>
 		                    <label class="form-check-label" for="inlineRadio2">下架</label>
 		                  </div>
 		                </div>
@@ -74,8 +72,7 @@
 		            </form:form>
 		          </div>
 		        </div>
-              	
-              	
+		        
               	<div class="content col-4 defaultBox"> 
 	          		<div class=" col-12 ">
 			            <div class="uploadbox">
@@ -92,13 +89,18 @@
 			            	<div id="showArticleExcerpt"></div>
 			            </div>
 	          		</div>
-	          		
+	          		<div class=" col-12 ">
+		       			<div class="uploadbox defaultSummerBox">
+	        				<button class="defaultSummerBtn btn btn-primary">預覽內文</button>
+	        			</div>
+        			</div>
       		  	</div>
 		      	</div>
 		    </div>
 		 </div>
-    </div>
+   	</div>
   </div>
+</body>
 <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-zh-TW.js"></script>
@@ -107,7 +109,7 @@ $(document).ready(function() {
  $('#summernote').summernote({
      placeholder: '請輸入內容',
      tabsize:2, 
-     height:450,
+     height:500,
      lang: 'zh-TW',
      toolbar: [
        ['style', ['style']],
@@ -123,7 +125,6 @@ $(document).ready(function() {
   });
 </script>
 
-<!-- 圖片預覽 -->
 <script>
 	const input = document.getElementById("target")
 	const preview = document.getElementById("preview")
@@ -132,7 +133,7 @@ $(document).ready(function() {
 	 const reader = new FileReader();
 	
 	 reader.addEventListener('load', () => {
-	  preview.src = reader.result;
+	 preview.src = reader.result;
 	 });
 	
 	 if (file) {
@@ -143,28 +144,37 @@ $(document).ready(function() {
 	});
 </script>
 
-<!-- 簡欄名稱預覽 -->
 <script>
-	const input2 = document.getElementById('articleName');
-	const displayDiv2 = document.getElementById('showArticleName');
+  document.addEventListener('DOMContentLoaded', function() {
+    const input2 = document.getElementById('articleName');
+    const displayDiv2 = document.getElementById('showArticleName');
 
-	input2.addEventListener('input', function(event) {
-  	const text = event.target.value;
-    displayDiv2.textContent = text;
+    const textContent = input2.value;
+
+    displayDiv2.textContent = textContent;
+    
+    input2.addEventListener('input', function(event) {
+        const inputValue = event.target.value;
+        displayDiv2.textContent = inputValue;
+      });
   });
 </script>
 
 <!-- 簡介預覽 -->
 <script>
-	const textarea = document.getElementById('articleExcerpt');
-	const displayDiv = document.getElementById('showArticleExcerpt');
-
-	textarea.addEventListener('input', function(event) {
-  	const text = event.target.value;
-    displayDiv.textContent = text;
+	document.addEventListener('DOMContentLoaded', function() {
+		const textarea = document.getElementById('articleExcerpt');
+		const displayDiv = document.getElementById('showArticleExcerpt');
+		
+		displayDiv.textContent = textarea.value;
+	
+		textarea.addEventListener('input', function(event) {
+		  	const text = event.target.value;
+	    	displayDiv.textContent = text;
+  	});
   });
 </script>
 
 
- </body>
- </html>
+
+</html>

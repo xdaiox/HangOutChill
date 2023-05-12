@@ -49,13 +49,11 @@ public class HomepageController {
 
     @GetMapping("/article")
     public String toArticleList() {
-    	return "/article/showAllArticle";
+    	return "/article/article";
     }
     
-    @GetMapping("/createArticle")
-    public String toCreateArticle() {
-    	return "/article/dbCreateArticle";
+    @GetMapping("/article/db")
+    public String toDashBoard() {
+    	return "dashboard";
     }
-    
-    
 }
