@@ -19,9 +19,9 @@
 
 <body>
 <div class="container-scroller">
-    <jsp:include page="../../dbLayout/top_navbar.jsp" />
+    <jsp:include page="../../dbLayout/top_navbar.jsp"/>
     <div class="container-fluid page-body-wrapper">
-        <jsp:include page="../../dbLayout/left_navbar.jsp" />
+        <jsp:include page="../../dbLayout/left_navbar.jsp"/>
         <div class="container">
             <div class="content_box" style="width: 100%">
                 <h3 style="text-align: center;">地點管理</h3>
@@ -30,7 +30,8 @@
                         <div class="card">
                             <div class="card-header">新增地點</div>
                             <div class="card-body">
-                                <form:form class="" modelAttribute="locationInfo" enctype="multipart/form-data" method="POST" action="${contextRoot}/location/locationManager/addPage/post">
+                                <form:form class="" modelAttribute="locationInfo" enctype="multipart/form-data"
+                                           method="POST" action="${contextRoot}/location/locationManager/addPage/post">
                                     <p>地點名稱 : </p>
                                     <form:input path="locName" class="form-control" type="text"></form:input>
                                     <br>
@@ -59,7 +60,8 @@
                                     </form:select>
                                     <br>
                                     <p>地點簡介 : </p>
-                                    <form:textarea path="locDesc" class="form-control" style="height:200px;" ></form:textarea>
+                                    <form:textarea path="locDesc" class="form-control"
+                                                   style="height:200px;"></form:textarea>
                                     <br>
                                     <p>城市 : </p>
                                     <form:input path="locCity" class="form-control" type="text"></form:input>
@@ -77,73 +79,81 @@
                                     <form:input path="locLink" class="form-control" type="text"></form:input>
                                     <br>
                                     <p>營業時間 : </p>
-                                    <sapn>星期一 : </sapn>
+                                    <sapn>星期一 :</sapn>
                                     <span>開始</span>
-                                    <form:input path="locationOperationTime.mondayOpen" type="time" ></form:input>
+                                    <form:input path="locationOperationTime.mondayOpen" type="time"></form:input>
                                     <span>結束</span>
-                                    <form:input path="locationOperationTime.mondayClose" type="time" ></form:input>
+                                    <form:input path="locationOperationTime.mondayClose" type="time"></form:input>
                                     <br>
-                                    <sapn>星期二 : </sapn>
+                                    <sapn>星期二 :</sapn>
                                     <span>開始</span>
-                                    <form:input path="locationOperationTime.tuesdayOpen" type="time" ></form:input>
+                                    <form:input path="locationOperationTime.tuesdayOpen" type="time"></form:input>
                                     <span>結束</span>
-                                    <form:input path="locationOperationTime.tuesdayClose" type="time" ></form:input>
+                                    <form:input path="locationOperationTime.tuesdayClose" type="time"></form:input>
                                     <br>
-                                    <sapn>星期三 : </sapn>
+                                    <sapn>星期三 :</sapn>
                                     <span>開始</span>
-                                    <form:input path="locationOperationTime.wednesdayOpen" type="time" ></form:input>
+                                    <form:input path="locationOperationTime.wednesdayOpen" type="time"></form:input>
                                     <span>結束</span>
-                                    <form:input path="locationOperationTime.wednesdayClose" type="time" ></form:input>
+                                    <form:input path="locationOperationTime.wednesdayClose" type="time"></form:input>
                                     <br>
-                                    <sapn>星期四 : </sapn>
+                                    <sapn>星期四 :</sapn>
                                     <span>開始</span>
-                                    <form:input path="locationOperationTime.thursdayOpen" type="time" ></form:input>
+                                    <form:input path="locationOperationTime.thursdayOpen" type="time"></form:input>
                                     <span>結束</span>
-                                    <form:input path="locationOperationTime.thursdayClose" type="time" ></form:input>
+                                    <form:input path="locationOperationTime.thursdayClose" type="time"></form:input>
                                     <br>
-                                    <sapn>星期五 : </sapn>
+                                    <sapn>星期五 :</sapn>
                                     <span>開始</span>
-                                    <form:input path="locationOperationTime.fridayOpen" type="time" ></form:input>
+                                    <form:input path="locationOperationTime.fridayOpen" type="time"></form:input>
                                     <span>結束</span>
-                                    <form:input path="locationOperationTime.fridayClose" type="time" ></form:input>
+                                    <form:input path="locationOperationTime.fridayClose" type="time"></form:input>
                                     <br>
-                                    <sapn>星期六 : </sapn>
+                                    <sapn>星期六 :</sapn>
                                     <span>開始</span>
-                                    <form:input path="locationOperationTime.saturdayOpen" type="time" ></form:input>
+                                    <form:input path="locationOperationTime.saturdayOpen" type="time"></form:input>
                                     <span>結束</span>
-                                    <form:input path="locationOperationTime.saturdayClose" type="time" ></form:input>
+                                    <form:input path="locationOperationTime.saturdayClose" type="time"></form:input>
                                     <br>
-                                    <sapn>星期日 : </sapn>
+                                    <sapn>星期日 :</sapn>
                                     <span>開始</span>
-                                    <form:input path="locationOperationTime.sundayOpen" type="time" ></form:input>
+                                    <form:input path="locationOperationTime.sundayOpen" type="time"></form:input>
                                     <span>結束</span>
-                                    <form:input path="locationOperationTime.sundayClose" type="time" ></form:input>
+                                    <form:input path="locationOperationTime.sundayClose" type="time"></form:input>
                                     <br>
                                     <br>
                                     <p>上傳圖片 : </p>
                                     <span>封面照片 :</span>
-                                    <form:input path="locationImage.imagCover" class="form-control" type="file" accept="image/png, image/jpeg" />
+                                    <form:input path="locationImage.imagCover" class="form-control" type="file"
+                                                accept="image/png, image/jpeg"/>
                                     <span>相簿照片1 :</span>
-                                    <form:input path="locationImage.imagG1" class="form-control" type="file" accept="image/png, image/jpeg" />
+                                    <form:input path="locationImage.imagG1" class="form-control" type="file"
+                                                accept="image/png, image/jpeg"/>
                                     <span>相簿照片2 :</span>
-                                    <form:input path="locationImage.imagG2" class="form-control" type="file" accept="image/png, image/jpeg" />
+                                    <form:input path="locationImage.imagG2" class="form-control" type="file"
+                                                accept="image/png, image/jpeg"/>
                                     <span>相簿照片3 :</span>
-                                    <form:input path="locationImage.imagG3" class="form-control" type="file" accept="image/png, image/jpeg" />
+                                    <form:input path="locationImage.imagG3" class="form-control" type="file"
+                                                accept="image/png, image/jpeg"/>
                                     <span>相簿照片4 :</span>
-                                    <form:input path="locationImage.imagG4" class="form-control" type="file" accept="image/png, image/jpeg" />
+                                    <form:input path="locationImage.imagG4" class="form-control" type="file"
+                                                accept="image/png, image/jpeg"/>
                                     <span>相簿照片5 :</span>
-                                    <form:input path="locationImage.imagG5" class="form-control" type="file" accept="image/png, image/jpeg" />
+                                    <form:input path="locationImage.imagG5" class="form-control" type="file"
+                                                accept="image/png, image/jpeg"/>
                                     <span>相簿照片6 :</span>
-                                    <form:input path="locationImage.imagG6" class="form-control" type="file" accept="image/png, image/jpeg" />
+                                    <form:input path="locationImage.imagG6" class="form-control" type="file"
+                                                accept="image/png, image/jpeg"/>
                                     <span>相簿照片7 :</span>
-                                    <form:input path="locationImage.imagG7" class="form-control" type="file" accept="image/png, image/jpeg" />
+                                    <form:input path="locationImage.imagG7" class="form-control" type="file"
+                                                accept="image/png, image/jpeg"/>
                                     <span>相簿照片8 :</span>
-                                    <form:input path="locationImage.imagG8" class="form-control" type="file" accept="image/png, image/jpeg" />
+                                    <form:input path="locationImage.imagG8" class="form-control" type="file"
+                                                accept="image/png, image/jpeg"/>
 
 
-
-
-                                    <br><button type="submit" class="btn btn-primary">送出</button>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">送出</button>
                                 </form:form>
                             </div>
                         </div>
@@ -151,13 +161,8 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-
-
-
-
 
 
 </body>

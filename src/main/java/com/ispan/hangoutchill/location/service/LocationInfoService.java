@@ -26,6 +26,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.io.IOException;
 import java.util.*;
+import java.util.function.Consumer;
 
 @Service
 public class LocationInfoService {
@@ -81,11 +82,16 @@ public class LocationInfoService {
             locOriginal.setLocLink(locationInfo.getLocLink());
             locOriginal.setLocationOperationTime(locationInfo.getLocationOperationTime());
 
-
             locOriginal.getLocationImage().setLocImgCover(locationInfo.getLocationImage().getLocImgCover());
             locOriginal.getLocationImage().setLocImgGallery_1(locationInfo.getLocationImage().getLocImgGallery_1());
+            locOriginal.getLocationImage().setLocImgGallery_2(locationInfo.getLocationImage().getLocImgGallery_2());
+            locOriginal.getLocationImage().setLocImgGallery_3(locationInfo.getLocationImage().getLocImgGallery_3());
+            locOriginal.getLocationImage().setLocImgGallery_4(locationInfo.getLocationImage().getLocImgGallery_4());
+            locOriginal.getLocationImage().setLocImgGallery_5(locationInfo.getLocationImage().getLocImgGallery_5());
+            locOriginal.getLocationImage().setLocImgGallery_6(locationInfo.getLocationImage().getLocImgGallery_6());
+            locOriginal.getLocationImage().setLocImgGallery_7(locationInfo.getLocationImage().getLocImgGallery_7());
+            locOriginal.getLocationImage().setLocImgGallery_8(locationInfo.getLocationImage().getLocImgGallery_8());
 //            locOriginal.getLocationImage().set
-
 
             return locOriginal;
         }
@@ -287,45 +293,11 @@ public class LocationInfoService {
 
     //=============================編輯圖片轉碼=================================
 
-    //處理修改圖片Cover
-//    public void editLocationImagCover(LocationInfo locationInfo) {
-//        MultipartFile imagCover = locationInfo.getLocationImage().getImagCover();
-//        if (imagCover !=null && !imagCover.isEmpty()){
-//            try{
-//                byte[] bytes = imagCover.getBytes();
-//                locationInfo.getLocationImage().setLocImgCover(bytes);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
-//            }
-//        } else {
-//            LocationInfo originalLocationInfo = findLocationInfoById(locationInfo.getLocId());
-//            locationInfo.getLocationImage().setImagCover(originalLocationInfo.getLocationImage().getImagCover());
-//
-//
-//        }
-//    }
 
 
 
-    //處理修改圖片G1
-//    public void editLocationImagG1(LocationInfo locationInfo) {
-//        MultipartFile imagG1 = locationInfo.getLocationImage().getImagG1();
-//        if (imagG1 !=null && !imagG1.isEmpty()){
-//            try{
-//                byte[] bytes = imagG1.getBytes();
-//                locationInfo.getLocationImage().setLocImgGallery_1(bytes);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
-//            }
-//        } else {
-//            LocationInfo originalLocationInfo = findLocationInfoById(locationInfo.getLocId());
-//            locationInfo.getLocationImage().setImagG1(originalLocationInfo.getLocationImage().getImagG1());
-//
-//
-//        }
-//    }
+
+
 
 
 

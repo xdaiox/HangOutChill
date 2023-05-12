@@ -26,10 +26,10 @@
 
             <div class="content_box" style="width: 100%">
                 <h3 style="text-align: center;">地點管理</h3>
-                <form action="${pageContext.request.contextPath}/location/locationManager/addPage">
-                    <input type="submit" id="" class="btn btn-outline-info btn-sm" value="新增"/></form>
+<%--                <form action="${pageContext.request.contextPath}/location/locationManager/addPage">--%>
+<%--                    <input type="submit" id="" class="btn btn-outline-info btn-sm" value="新增"/></form>--%>
                 <br>
-                <p>搜索功能</p>
+<%--                <p>搜索功能</p>--%>
                 <form id="searchForm" action="#">
                     <input type="text" id="name" name="name" placeholder="輸入地點名稱"/>
                     <select id="category" name="category">

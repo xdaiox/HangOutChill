@@ -108,7 +108,7 @@ public class LocationInfoController {
     @DeleteMapping("/location/locationManager/delete")
     public String deleteLocationInfo(@RequestParam(name = "locId") Integer locId) {
         locationInfoService.deleteLocationInfoById(locId);
-        return "redirect:/location/locationManager";
+        return "redirect:/location/locationManagerAjax";
     }
 
 
@@ -125,7 +125,7 @@ public class LocationInfoController {
     //編輯LocationInfo動作
     @PutMapping("/location/locationManager/editPage")
     public String putEditLocationInfo(@ModelAttribute("locationInfo") LocationInfo locationInfo) {
-        //處理圖片
+        //處理圖片cover
         MultipartFile imagCover = locationInfo.getLocationImage().getImagCover();
         if (imagCover !=null && !imagCover.isEmpty()){
             try{
@@ -140,11 +140,12 @@ public class LocationInfoController {
             locationInfo.getLocationImage().setLocImgCover(originalLocationInfo.getLocationImage().getLocImgCover());
         }
 
+        //處理圖片G1
         MultipartFile imagG1 = locationInfo.getLocationImage().getImagG1();
         if (imagG1 !=null && !imagG1.isEmpty()){
             try{
-                byte[] bytes2 = imagG1.getBytes();
-                locationInfo.getLocationImage().setLocImgGallery_1(bytes2);
+                byte[] bytes = imagG1.getBytes();
+                locationInfo.getLocationImage().setLocImgGallery_1(bytes);
             } catch (IOException e) {
                 e.printStackTrace();
                 throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
@@ -152,15 +153,112 @@ public class LocationInfoController {
         } else {
             LocationInfo originalLocationInfo = locationInfoService.findLocationInfoById(locationInfo.getLocId());
             locationInfo.getLocationImage().setLocImgGallery_1(originalLocationInfo.getLocationImage().getLocImgGallery_1());
-
-
         }
 
+        //處理圖片G2
+        MultipartFile imagG2 = locationInfo.getLocationImage().getImagG2();
+        if (imagG2 !=null && !imagG2.isEmpty()){
+            try{
+                byte[] bytes = imagG2.getBytes();
+                locationInfo.getLocationImage().setLocImgGallery_2(bytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+            }
+        } else {
+            LocationInfo originalLocationInfo = locationInfoService.findLocationInfoById(locationInfo.getLocId());
+            locationInfo.getLocationImage().setLocImgGallery_2(originalLocationInfo.getLocationImage().getLocImgGallery_2());
+        }
 
+        //處理圖片G3
+        MultipartFile imagG3 = locationInfo.getLocationImage().getImagG3();
+        if (imagG3 !=null && !imagG3.isEmpty()){
+            try{
+                byte[] bytes = imagG3.getBytes();
+                locationInfo.getLocationImage().setLocImgGallery_3(bytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+            }
+        } else {
+            LocationInfo originalLocationInfo = locationInfoService.findLocationInfoById(locationInfo.getLocId());
+            locationInfo.getLocationImage().setLocImgGallery_3(originalLocationInfo.getLocationImage().getLocImgGallery_3());
+        }
 
+        //處理圖片G4
+        MultipartFile imagG4 = locationInfo.getLocationImage().getImagG4();
+        if (imagG4 !=null && !imagG4.isEmpty()){
+            try{
+                byte[] bytes = imagG4.getBytes();
+                locationInfo.getLocationImage().setLocImgGallery_4(bytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+            }
+        } else {
+            LocationInfo originalLocationInfo = locationInfoService.findLocationInfoById(locationInfo.getLocId());
+            locationInfo.getLocationImage().setLocImgGallery_4(originalLocationInfo.getLocationImage().getLocImgGallery_4());
+        }
 
+        //處理圖片G5
+        MultipartFile imagG5 = locationInfo.getLocationImage().getImagG5();
+        if (imagG5 !=null && !imagG5.isEmpty()){
+            try{
+                byte[] bytes = imagG5.getBytes();
+                locationInfo.getLocationImage().setLocImgGallery_5(bytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+            }
+        } else {
+            LocationInfo originalLocationInfo = locationInfoService.findLocationInfoById(locationInfo.getLocId());
+            locationInfo.getLocationImage().setLocImgGallery_5(originalLocationInfo.getLocationImage().getLocImgGallery_5());
+        }
 
+        //處理圖片G6
+        MultipartFile imagG6 = locationInfo.getLocationImage().getImagG6();
+        if (imagG6 !=null && !imagG6.isEmpty()){
+            try{
+                byte[] bytes = imagG6.getBytes();
+                locationInfo.getLocationImage().setLocImgGallery_6(bytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+            }
+        } else {
+            LocationInfo originalLocationInfo = locationInfoService.findLocationInfoById(locationInfo.getLocId());
+            locationInfo.getLocationImage().setLocImgGallery_6(originalLocationInfo.getLocationImage().getLocImgGallery_6());
+        }
 
+        //處理圖片G7
+        MultipartFile imagG7 = locationInfo.getLocationImage().getImagG7();
+        if (imagG7 !=null && !imagG7.isEmpty()){
+            try{
+                byte[] bytes = imagG7.getBytes();
+                locationInfo.getLocationImage().setLocImgGallery_7(bytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+            }
+        } else {
+            LocationInfo originalLocationInfo = locationInfoService.findLocationInfoById(locationInfo.getLocId());
+            locationInfo.getLocationImage().setLocImgGallery_7(originalLocationInfo.getLocationImage().getLocImgGallery_7());
+        }
+
+        //處理圖片G8
+        MultipartFile imagG8 = locationInfo.getLocationImage().getImagG8();
+        if (imagG3 !=null && !imagG8.isEmpty()){
+            try{
+                byte[] bytes = imagG8.getBytes();
+                locationInfo.getLocationImage().setLocImgGallery_8(bytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+            }
+        } else {
+            LocationInfo originalLocationInfo = locationInfoService.findLocationInfoById(locationInfo.getLocId());
+            locationInfo.getLocationImage().setLocImgGallery_8(originalLocationInfo.getLocationImage().getLocImgGallery_8());
+        }
 
         locationInfoService.updateLocationInfoById(locationInfo.getLocId(), locationInfo);
         return "redirect:/location/locationManager";
@@ -213,7 +311,7 @@ public class LocationInfoController {
 
 
 
-//===============================圖片處理=============================================
+//===============================取得locationInfo圖片=============================================
     //取得imgcover
     @GetMapping("/locationInfo/getImgCover/{locationId}")
     public ResponseEntity<byte[]> getImgCover(HttpServletResponse resp, @PathVariable Integer locationId){
@@ -238,10 +336,7 @@ public class LocationInfoController {
         return responseEntity;
     }
 
-
-
-
-    //取得imgcover
+    //取得imgG1
     @GetMapping("/locationInfo/getImgG1/{locationId}")
     public ResponseEntity<byte[]> getImgG1(HttpServletResponse resp, @PathVariable Integer locationId){
 
@@ -266,13 +361,185 @@ public class LocationInfoController {
     }
 
 
+    //取得imgG2
+    @GetMapping("/locationInfo/getImgG2/{locationId}")
+    public ResponseEntity<byte[]> getImgG2(HttpServletResponse resp, @PathVariable Integer locationId){
+
+        HttpHeaders headers = new HttpHeaders();
+        byte[] media = null;
+
+        LocationInfo locationInfo = locationInfoService.findLocationInfoById(locationId);
+
+
+        if (locationInfo != null) {
+            byte[] imageBytes = locationInfo.getLocationImage().getLocImgGallery_2();
+            if(imageBytes != null) {
+                media = imageBytes;
+            }
+        }
+
+        headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+        MediaType mediaType = MediaType.valueOf("image/png");
+        headers.setContentType(mediaType);
+        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
+        return responseEntity;
+    }
+
+    //取得imgG3
+    @GetMapping("/locationInfo/getImgG3/{locationId}")
+    public ResponseEntity<byte[]> getImgG3(HttpServletResponse resp, @PathVariable Integer locationId){
+
+        HttpHeaders headers = new HttpHeaders();
+        byte[] media = null;
+
+        LocationInfo locationInfo = locationInfoService.findLocationInfoById(locationId);
+
+
+        if (locationInfo != null) {
+            byte[] imageBytes = locationInfo.getLocationImage().getLocImgGallery_3();
+            if(imageBytes != null) {
+                media = imageBytes;
+            }
+        }
+
+        headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+        MediaType mediaType = MediaType.valueOf("image/png");
+        headers.setContentType(mediaType);
+        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
+        return responseEntity;
+    }
+
+    //取得imgG4
+    @GetMapping("/locationInfo/getImgG4/{locationId}")
+    public ResponseEntity<byte[]> getImgG4(HttpServletResponse resp, @PathVariable Integer locationId){
+
+        HttpHeaders headers = new HttpHeaders();
+        byte[] media = null;
+
+        LocationInfo locationInfo = locationInfoService.findLocationInfoById(locationId);
+
+
+        if (locationInfo != null) {
+            byte[] imageBytes = locationInfo.getLocationImage().getLocImgGallery_4();
+            if(imageBytes != null) {
+                media = imageBytes;
+            }
+        }
+
+        headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+        MediaType mediaType = MediaType.valueOf("image/png");
+        headers.setContentType(mediaType);
+        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
+        return responseEntity;
+    }
+
+    //取得imgG5
+    @GetMapping("/locationInfo/getImgG5/{locationId}")
+    public ResponseEntity<byte[]> getImgG5(HttpServletResponse resp, @PathVariable Integer locationId){
+
+        HttpHeaders headers = new HttpHeaders();
+        byte[] media = null;
+
+        LocationInfo locationInfo = locationInfoService.findLocationInfoById(locationId);
+
+
+        if (locationInfo != null) {
+            byte[] imageBytes = locationInfo.getLocationImage().getLocImgGallery_5();
+            if(imageBytes != null) {
+                media = imageBytes;
+            }
+        }
+
+        headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+        MediaType mediaType = MediaType.valueOf("image/png");
+        headers.setContentType(mediaType);
+        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
+        return responseEntity;
+    }
+
+    //取得imgG6
+    @GetMapping("/locationInfo/getImgG6/{locationId}")
+    public ResponseEntity<byte[]> getImgG6(HttpServletResponse resp, @PathVariable Integer locationId){
+
+        HttpHeaders headers = new HttpHeaders();
+        byte[] media = null;
+
+        LocationInfo locationInfo = locationInfoService.findLocationInfoById(locationId);
+
+
+        if (locationInfo != null) {
+            byte[] imageBytes = locationInfo.getLocationImage().getLocImgGallery_6();
+            if(imageBytes != null) {
+                media = imageBytes;
+            }
+        }
+
+        headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+        MediaType mediaType = MediaType.valueOf("image/png");
+        headers.setContentType(mediaType);
+        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
+        return responseEntity;
+    }
+
+    //取得imgG7
+    @GetMapping("/locationInfo/getImgG7/{locationId}")
+    public ResponseEntity<byte[]> getImgG7(HttpServletResponse resp, @PathVariable Integer locationId){
+
+        HttpHeaders headers = new HttpHeaders();
+        byte[] media = null;
+
+        LocationInfo locationInfo = locationInfoService.findLocationInfoById(locationId);
+
+
+        if (locationInfo != null) {
+            byte[] imageBytes = locationInfo.getLocationImage().getLocImgGallery_7();
+            if(imageBytes != null) {
+                media = imageBytes;
+            }
+        }
+
+        headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+        MediaType mediaType = MediaType.valueOf("image/png");
+        headers.setContentType(mediaType);
+        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
+        return responseEntity;
+    }
+
+    //取得imgG8
+    @GetMapping("/locationInfo/getImgG8/{locationId}")
+    public ResponseEntity<byte[]> getImgG8(HttpServletResponse resp, @PathVariable Integer locationId){
+
+        HttpHeaders headers = new HttpHeaders();
+        byte[] media = null;
+
+        LocationInfo locationInfo = locationInfoService.findLocationInfoById(locationId);
+
+
+        if (locationInfo != null) {
+            byte[] imageBytes = locationInfo.getLocationImage().getLocImgGallery_8();
+            if(imageBytes != null) {
+                media = imageBytes;
+            }
+        }
+
+        headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+        MediaType mediaType = MediaType.valueOf("image/png");
+        headers.setContentType(mediaType);
+        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
+        return responseEntity;
+    }
+
+
 
 
 
 //    ==========================測試==============================
 
 
-
+    @GetMapping ("/location/locationListTest")
+    public String toLocationListTest(){
+        return "location/locationInfoTest/locationInfoDetailTest";
+    }
 
 
 
