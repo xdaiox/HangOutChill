@@ -9,7 +9,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <link rel="icon" href="" type="image/png">
-    <title>HangoutChill Holiday</title>
+    <title>HangoutChill Shop</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="${contextRoot}/css/bootstrap.css">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="col-6 col-lg-4 col-md-3 col-sm-6 logo-wrapper">
-                <a href="${contextRoot}/" class="logo">
+                <a href="${contextRoot}/shop/index" class="logo">
 <!--                     <img src="" alt="商城LOGO" style="height: 80px;"> -->
                     <h3>商城LOGO</h3>
                 </a>
@@ -50,14 +50,29 @@
             <div class="col-lg-4 col-md-3 col-sm-6 search-trigger">
                 <div class="right-button">
                     <ul>
-                        <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
+<!--                         <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li> -->
                         <li><a href="${contextRoot}/shop/shoppingCart" class="site-cart">
                         
                          <i class="ti-btnshopcart"></i>
                       		<span class="count"></span>
                         </a>
                         </li>
-                        <li><a class="btn-login" href="${contextRoot}/member/loginHome">登入</a></li>
+<%--                         <li><a class="btn-login" href="${contextRoot}/member/loginHome">登入</a></li> --%>
+                    	<li><a href="#"><i class="ti-user"></i>
+                            <jstl:choose>
+                            <jstl:when
+                                    test="${result.nickName != null}">
+                            <a href="${contextRoot}/member/NormalMemberDetail">${result.nickName}您好</a></jstl:when>
+                        </jstl:choose>
+                        </a></li>
+                        <jstl:choose>
+                            <jstl:when test="${result.nickName != null}">
+                                <li><a class="btn-login" href="${contextRoot}/logout">登出</a></li>
+                            </jstl:when>
+                            <jstl:otherwise>
+                                <li><a class="btn-login" href="${contextRoot}/member/loginHome">登入</a></li>
+                            </jstl:otherwise>
+                        </jstl:choose>
                     </ul>
                 </div>
             </div>
@@ -78,10 +93,11 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-                        <li class="nav-item active"><a class="nav-link" href="/hangoutchill/shop/products?category=全部商品">全部商品</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/hangoutchill/shop/products?category=全部商品">全部商品</a></li>
                         <li class="nav-item"><a class="nav-link" href="/hangoutchill/shop/products?category=美味嚐點">美味嚐點</a></li>
                         <li class="nav-item"><a class="nav-link" href="/hangoutchill/shop/products?category=文創商品">文創商品</a></li>
                         <li class="nav-item"><a class="nav-link" href="/hangoutchill/shop/products?category=實用嚴選">實用嚴選</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/hangoutchill/shop/productcategory?category=全部商品">測試用版</a></li>
 <!--                         <li class="nav-item submenu dropdown"> -->
 <%--                             <a href="${contextRoot}/discussion/showAllDiscussion" class="nav-link dropdown-toggle">實用嚴選</a> --%>
 <!--                         </li> -->
@@ -106,6 +122,27 @@
     <script src="${contextRoot}/js/jquery.validate.min.js"></script>
     <script src="${contextRoot}/js/mail-script.js"></script>
     <script src="${contextRoot}/js/theme.js"></script>
+    <script>
+    	let categories = document.getElementsByClassName('nav-link');
+        let categoriesAmount = categories.length;
+        let url = location.href;
+        if(url.indexOf('?') != -1){
+            let array1 = url.split('?');
+            console.log(array1[1]);
+            let categoryName = array1[1].split('=')[1];
+            console.log(categoryName);
+            let theName = decodeURIComponent(categoryName);
+            console.log(theName);
+            for(let i=0; i<categoriesAmount; i++){
+                if (categories[i].innerHTML === theName){
+                    categories[i].parentElement.setAttribute('class','nav-item active');
+                }
+            }
+
+        }
+
+
+    </script>
 <%--     <script src="${contextRoot}/js/jquery-3.6.4.min.js"></script> --%>
 </body>
 </html>

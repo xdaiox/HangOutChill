@@ -53,6 +53,7 @@ public class ShoppingCartController {
 		Set<ShoppingCart> cartItems = currentmember.getShoppingCart();
 		List<ShoppingCart> carItemsList = new ArrayList<>(cartItems);
 		model.addAttribute("shoppingCartItems", carItemsList);
+		model.addAttribute("result", currentmember);
 		return "shop/shoppingCart";
 	}
 	
@@ -147,6 +148,7 @@ public class ShoppingCartController {
 		Integer totalPrice = shoppingCartService.totalPriceCount(carItemsList);
 		model.addAttribute("totalprice", totalPrice);
 		model.addAttribute("order", new Order());
+		model.addAttribute("result", currentmember);
 		return "shop/orderDetail";
 	}
 	

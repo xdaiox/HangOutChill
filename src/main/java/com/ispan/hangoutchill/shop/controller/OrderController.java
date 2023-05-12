@@ -74,7 +74,6 @@ public class OrderController {
 		return checkOutForm;
 	}
 	
-	
 	// 綠界交易回傳值接收
 	@Transactional
 	@PostMapping("/shop/ecpayReturn")
@@ -101,7 +100,6 @@ public class OrderController {
 		Order latestOrder = orderService.findLatestOrderByMemberId(currentmember.getId());
 		latestOrder.setPaymentState(true);
 		model.addAttribute("order", latestOrder);
-		
 		
 		return "shop/orderFinishCheck";
 	}

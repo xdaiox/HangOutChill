@@ -14,6 +14,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +28,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ispan.hangoutchill.member.model.NormalMember;
+import com.ispan.hangoutchill.member.service.NormalMemberService;
 import com.ispan.hangoutchill.shop.model.Product;
 import com.ispan.hangoutchill.shop.model.ProductPhoto;
 import com.ispan.hangoutchill.shop.model.ProductPhotoPK;
@@ -39,13 +43,18 @@ public class ProductController {
 	private ProductService productService;
 	private ProductPhotoService productPhotoService;
 	private ShoppingCartService shoppingCartService;
+	private NormalMemberService nMemberService;
 	
 	
 	@Autowired
-	public ProductController(ProductService productService, ProductPhotoService productPhotoService, ShoppingCartService shoppingCartService) {
+	public ProductController(ProductService productService, 
+							 ProductPhotoService productPhotoService, 
+							 ShoppingCartService shoppingCartService,
+							 NormalMemberService nMemberService ) {
 		this.productService = productService;
 		this.productPhotoService = productPhotoService;
 		this.shoppingCartService = shoppingCartService;
+		this.nMemberService = nMemberService;
 	}
 
 	@GetMapping("/shop/add")
@@ -352,8 +361,11 @@ public class ProductController {
 	// 前台渲染
 	// 商品分類 仍須加上分頁功能與分頁按鈕
 	@GetMapping("/shop/products")
-	public String showProductbyCategory(@RequestParam(name="category") String category, Model model) {
-		
+	public String showProductbyCategory(@RequestParam(name="category") String category,
+										@CurrentSecurityContext(expression = "authentication") Authentication authentication,
+										Model model) {
+		String name = authentication.getName();
+		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);	
 		List<Product> cps;
 		if(category.equals("全部商品")) {
 			cps = productService.findAllProducts();
@@ -362,20 +374,46 @@ public class ProductController {
 			cps = productService.findProductByCategory(category);
 		}
 		
-		
 		model.addAttribute("category", category);
 		model.addAttribute("cateProducts", cps);
+		model.addAttribute("result", currentmember);
 		return "shop/shopCategory";
 	}
 	
 	// 商品單獨頁面
 	@GetMapping("/shop/productdetail")
-	public String showProductDetail(@RequestParam(name="productid") Integer productId, Model model) {
+	public String showProductDetail(@RequestParam(name="productid") Integer productId, 
+			@CurrentSecurityContext(expression = "authentication") Authentication authentication,
+									Model model) {
+		String name = authentication.getName();
+		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
 		Product product = productService.getProductById(productId);
 		model.addAttribute("product", product);
+		model.addAttribute("result", currentmember);
 		return "shop/productDetail";
 	}
 	
+	// 測試用版
+	
+	@GetMapping("/shop/productcategory")
+	public String showProductByCategoryTest(@RequestParam(name="category") String category, 
+											@CurrentSecurityContext(expression = "authentication") Authentication authentication,
+											Model model) {
+		String name = authentication.getName();
+		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
+		List<Product> cps;
+		if(category.equals("全部商品")) {
+			cps = productService.findAllProducts();
+			
+		}else {
+			cps = productService.findProductByCategory(category);
+		}
+		
+		model.addAttribute("category", category);
+		model.addAttribute("cateProducts", cps);
+		model.addAttribute("result", currentmember);
+		return "shop/productCategory";
+	}
 	
 	
 }
