@@ -31,7 +31,6 @@
 										<th>項目ID
 										<th>商家ID
 										<th>名稱
-										<th>內容
 										<th>分類
 										<th>新增時間
 										<th>舉辦日
@@ -49,7 +48,6 @@
 											<td class="align-middle">${aal.id}
 											<td class="align-middle">${aal.normalMember.id}
 											<td class="align-middle">${aal.name}
-											<td class="align-middle">${aal.aalContent}
 											<td class="align-middle"><jstl:if
 													test="${aal.topic=='act'}">活動</jstl:if> <jstl:if
 													test="${aal.topic=='les'}">課程</jstl:if>

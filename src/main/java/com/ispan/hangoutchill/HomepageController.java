@@ -1,16 +1,29 @@
 package com.ispan.hangoutchill;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import com.ispan.hangoutchill.xdaiox.model.Discussions;
-import com.ispan.hangoutchill.xdaiox.service.MessagesService;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.lang.reflect.Member;
+import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
+import com.ispan.hangoutchill.actandles.service.AALservice;
+import com.ispan.hangoutchill.member.model.NormalMember;
+import com.ispan.hangoutchill.member.service.NormalMemberService;
 
 
 
 @Controller
 public class HomepageController {
+	
+	@Autowired
+	private AALservice aalService;
+	 @Autowired
+	 private NormalMemberService nMemberService;
+	
     @GetMapping("/")
     public String home() {
         return "index";
@@ -22,7 +35,14 @@ public class HomepageController {
     }
 
     @GetMapping("/actandles")
-    public String showAllActAndLes() {
+    public String showAllActAndLes(@RequestParam(name="p",defaultValue = "1") Integer pagenumber, Model model,
+    		@CurrentSecurityContext(expression="authentication") Authentication authentication) {
+    	Page<ActivitiesandLesson> page = aalService.findByPage(pagenumber);
+		model.addAttribute("page",page);
+		String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result",result);
+    	
         return "aal/showAllAaL";
     }
 
@@ -36,5 +56,14 @@ public class HomepageController {
         return "/dashboard";
     }
 
+    @GetMapping("/article")
+    public String toArticleList() {
+    	return "/article/article";
+    }
+    
+    @GetMapping("/article/db")
+    public String toDashBoard() {
+    	return "dashboard";
+    }
 }
 
