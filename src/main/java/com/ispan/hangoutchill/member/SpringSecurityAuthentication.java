@@ -42,7 +42,7 @@ public class SpringSecurityAuthentication {
                 .logout().deleteCookies("JSESSSIONID")           
                 .and()
                 .headers().addHeaderWriter((request, response) -> {
-                    response.setHeader("Set-Cookie", "HttpOnly;SameSite=lax;Secure");
+                    response.setHeader("Set-Cookie", "HttpOnly;SameSite=strict;Secure");
                 });        
         return http.build();
     }

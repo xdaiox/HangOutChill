@@ -17,7 +17,11 @@ public class SignUpOrderDetailService {
 	public void createOrder(NormalMember result , ActivitiesandLesson aal,String ind,Integer number) {
 		SignUpOrderDetail suod = new SignUpOrderDetail();
 		String uuid = ind.substring(0, 2);
-		String time = ind.substring(2, 3);
+		String time = ind.substring(2, 5);
+		System.out.println("uuid："+uuid);
+		System.out.println("time："+time);
+		System.out.println("memberID："+result.getId());
+		
 		suod.setOrderNumber("AaL"+aal.getId()+aal.getNormalMember().getId()+result.getId()+uuid+time);
 		suod.setMemberName(result.getReallName());
 		suod.setShopName(aal.getNormalMember().getReallName());

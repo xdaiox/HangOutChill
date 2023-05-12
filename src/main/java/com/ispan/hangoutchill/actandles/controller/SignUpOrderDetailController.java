@@ -33,6 +33,7 @@ public class SignUpOrderDetailController {
 				@RequestParam(name = "ind") String ind,@RequestParam(name = "n") Integer number) {
 			String name = authentication.getName();
 			NormalMember result = nMemberService.findNormalUserByAccount(name);
+			System.out.println(authentication.getName());
 			Integer id   = Integer.parseInt(ind.substring(5));
 			ActivitiesandLesson aal = aalService.findAALById(id);
 			suoService.createOrder(result, aal, ind, number); 
