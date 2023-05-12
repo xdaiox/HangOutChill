@@ -144,17 +144,6 @@ public class NormalMember {
 		this.actandles = actandles;
 	}
 
-// 	@OneToMany(mappedBy = "normalMember",cascade = CascadeType.ALL)
-//	 private List<LessonSignUpDetail> lessonSignUpDetails;
-// 	
-// 	public List<LessonSignUpDetail> getLessonSignUpDetails() {
-//		return lessonSignUpDetails;
-//	}
-//
-//	public void setLessonSignUpDetails(List<LessonSignUpDetail> lessonSignUpDetails) {
-//		this.lessonSignUpDetails = lessonSignUpDetails;
-//	}
-
 //======================================================    	
     public Integer getId() {
         return id;

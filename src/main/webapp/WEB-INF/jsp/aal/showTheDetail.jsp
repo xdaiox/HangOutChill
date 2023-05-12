@@ -18,7 +18,7 @@
 			<div class="content-sm" style="background-color: #ffffff00;">
 				
 			</div>
-			<div class="content" style="background-color: #ffffff00;">
+			<div class="content" style="background-color: #ffffff00;height: 100%;">
 				
 				<div class="table-responsive">
 					<table class="table table-hover table-bordered table-light">
@@ -64,6 +64,7 @@
 										<form:form method="get" action="${contextRoot}/actandles/detail/lessignup">
 											<input value="${aal.id}" type="hidden" name="id" />
 												<button type="submit" class="btn btn-primary" >報名</button>
+												
 									
 										</form:form>
 						</tbody>

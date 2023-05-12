@@ -104,6 +104,7 @@ public class AALcontroller {
 		NormalMember result = nMemberService.findNormalUserByAccount(name);
 		model.addAttribute("aal", aal);
 		model.addAttribute("result",result);
+//		model.addAttribute("checksignup",aalService.findSignUpDetail(aal.getId(), result.getId()));
 		return "aal/showTheDetail";
 	}
 
@@ -122,13 +123,13 @@ public class AALcontroller {
 	/* 準備前往綠界 */
 	@ResponseBody
 	@PostMapping("/actandles/detail/checkout")
-	public String goECPay(@RequestParam(name = "id") Integer id,@CurrentSecurityContext(expression = "authentication") Authentication authentication,Model model)
+	public String goECPay(@RequestParam(name = "id") Integer id,@RequestParam(name = "numbersOfPeople") Integer numbersOfPeople,@CurrentSecurityContext(expression = "authentication") Authentication authentication,Model model)
 			throws IOException {
 		ActivitiesandLesson aal = aalService.findAALById(id);
-
+		String name = authentication.getName();
+		NormalMember result = nMemberService.findNormalUserByAccount(name);
 		
 		// 設定金流
-		String testNo = UUID.randomUUID().toString().replaceAll("-", "").substring(0,8);
 		AllInOne aio = new AllInOne("");
 		AioCheckOutALL aioCheck = new AioCheckOutALL();
 		/* 特店編號 */
@@ -138,19 +139,23 @@ public class AALcontroller {
 		sdf.setLenient(false);
 		aioCheck.setMerchantTradeDate(sdf.format(new Date()));
 		/* 交易金額 */
-		aioCheck.setTotalAmount(String.valueOf(aal.getFee()));
+		aioCheck.setTotalAmount(String.valueOf(aal.getFee()*numbersOfPeople));
 		/* 交易描述 */
 		aioCheck.setTradeDesc(aal.getTopic());
 		/* 商品名稱 */
 		aioCheck.setItemName(aal.getName());
 		/* 特店交易編號 */
-		aioCheck.setMerchantTradeNo("AaL"+testNo);
+		String uuNo = UUID.randomUUID().toString().replaceAll("-", "").substring(0,2);
+		String timestamp = Long.toString(System.currentTimeMillis());
+		timestamp=timestamp.substring(timestamp.length()-3);
+		
+		aioCheck.setMerchantTradeNo("AaL"+aal.getId()+aal.getNormalMember().getId()+result.getId()+uuNo+timestamp);
 		/* 付款完成通知回傳網址 */
 		aioCheck.setReturnURL("http://localhost:8080/hangoutchill/returnURL");
 //		aioCheck.setReturnURL("https://0ebf-203-204-109-146.ngrok-free.app/hangoutchill/returnURL");
 		/* Client端回傳付款結果網址 */
 
-		aioCheck.setOrderResultURL("http://localhost:8080/hangoutchill/showHistoryOrder?id="+aal.getId());
+		aioCheck.setOrderResultURL("http://localhost:8080/hangoutchill/showOrder?ind="+uuNo+timestamp+aal.getId()+"&n="+numbersOfPeople);
 //		aioCheck.setOrderResultURL("https://0ebf-203-204-109-146.ngrok-free.app/hangoutchill/showHistoryOrder?id="+aal.getId());
 		// 輸出畫面
 
@@ -177,15 +182,6 @@ public class AALcontroller {
 		}
 	}
 
-	/* 查詢歷史訂單 */
-	@Transactional
-	@PostMapping("/showHistoryOrder")
-	public String showECPAYHistoryurder (Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication,@RequestParam(name = "id") Integer id) {
-		
-	return "aal/user/historyOrder";
-	}
-	
-	
 	
 //================================================================================	
 }

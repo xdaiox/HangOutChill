@@ -81,9 +81,7 @@
 												pattern="yyyy-MM-dd" value="${aal.deadLine}" /></span>
 									<td class="align-middle">${aal.currentStatus}
 									
-									<div id="popup-date" class="popup">
-											<div class="popup-content" style="border-radius: 0%;height: auto;width: auto;" >
-										<span class="close">&times;</span> ${aal.aalContent}</div></div>
+									
 							</jstl:forEach>
 						</tbody>
 					</table>

@@ -53,7 +53,8 @@
 										<tr>
 											<th>聯絡信箱:
 											<th>姓名:
-											<th>電話: <jstl:if test="${aal.topic=='act'}">
+											<th>電話:
+											 <jstl:if test="${aal.topic=='act'}">
 													<th>人數:
 												</jstl:if>
 									</thead>
@@ -62,10 +63,10 @@
 											<td class="align-middle">${result.account}
 											<td class="align-middle">${result.reallName}
 											<td class="align-middle"><input name="tel"
-												value="${result.tel}" type="text" /> <jstl:if
-													test="${aal.topic=='act'}">
+												value="${result.tel}" type="text" readonly /> 
+												<jstl:if test="${aal.topic=='act'}">
 													<td class="align-middle"><input name="numbersOfPeople"
-														type="text" />
+														type="text" value="1" />
 												</jstl:if> <jstl:if test="${aal.topic=='les'}">
 													<input name="numbersOfPeople" value="1" type="hidden" />
 												</jstl:if>
@@ -88,9 +89,10 @@
 
 									<jstl:choose>
 										<jstl:when test="${checksignup==0}">
-											<button type="submit" class="btn btn-primary" disabled>尚未報名</button>
+											<button class="btn btn-primary" disabled>尚未報名</button>
 										</jstl:when>
 										<jstl:when test="${checksignup==1}">
+											<input name="numbersOfPeople" id="target" type="hidden" />
 											<input value="${aal.id}" type="hidden" name="id" />
 											<button type="submit" class="btn btn-primary">準備結帳</button>
 										</jstl:when>
@@ -107,5 +109,15 @@
 
 	<jsp:include page="../../layout/footer.jsp" />
 
+<script>
+
+	const number=document.querySelectorAll('[name="numbersOfPeople"]')[0].value
+	console.log(number)
+	document.getElementById("target").value=number;
+
+
+
+
+</script>
 </body>
 </html>
