@@ -283,7 +283,7 @@
 														</div>
 														<div>
 															<a
-																href="${contextRoot}/message/editMessage/${message.dm_id}"><button
+																href="${contextRoot}/message/editMessage/${discussion.d_id}/${message.dm_id}"><button
 																	class="btn btn-primary"
 																	type="submit">編輯</button></a>
 
