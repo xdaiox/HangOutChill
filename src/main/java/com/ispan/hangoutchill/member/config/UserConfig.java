@@ -3,7 +3,7 @@ package com.ispan.hangoutchill.member.config;
 
 
 import com.ispan.hangoutchill.member.UserDetailServiceImpl;
-import com.ispan.hangoutchill.member.handler.Oauth2LoginSuccessHandler;
+
 //import com.ispan.hangoutchill.member.oauth2.HangoutOauth2UserService;
 import com.ispan.hangoutchill.member.oauth2.HangoutOauth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +33,13 @@ public class UserConfig {
     UserDetailServiceImpl userDetail;
 
     private HangoutOauth2UserService oauth2UserService;
-    private Oauth2LoginSuccessHandler oauth2LoginSuccessHandler;
+    
 
     @Autowired
-    public UserConfig(UserDetailServiceImpl userDetail,  HangoutOauth2UserService oauth2UserService, Oauth2LoginSuccessHandler oauth2LoginSuccessHandler) {
+    public UserConfig(UserDetailServiceImpl userDetail,  HangoutOauth2UserService oauth2UserService) {
         this.userDetail = userDetail;
         this.oauth2UserService = oauth2UserService;
-        this.oauth2LoginSuccessHandler = oauth2LoginSuccessHandler;
+        
     }
 
 
@@ -57,17 +57,24 @@ public class UserConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors();
-        http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/discussion/newDiscussion").hasAuthority("USER")
-                .antMatchers("/dashboard").hasAuthority("ADMIN")
-                .antMatchers("/","/member/registration","/NormalMember/registed").permitAll()
-                .and()
-                .formLogin().loginPage("/member/login")
-                .defaultSuccessUrl("/member/NormalMemberDetail").and()
-                .logout().logoutSuccessUrl("/").deleteCookies("JSESSIONID");
-        return http.build();
+    	http.csrf().disable()
+        .authorizeRequests()
+            .antMatchers("/discussion/newDiscussion").hasAuthority("USER")
+            .antMatchers("/dashboard").hasAuthority("ADMIN")
+            .antMatchers("/", "/member/registration", "/NormalMember/registed").permitAll()
+        .and()
+        .logout().logoutSuccessUrl("/").deleteCookies("JSESSIONID")
+        .and()
+        .formLogin()
+            .loginPage("/member/login")
+            .defaultSuccessUrl("/member/NormalMemberDetail")
+        .and()
+        .oauth2Login()
+            .loginPage("/member/login")
+            .userInfoEndpoint()
+            .userService(oauth2UserService);
+
+    return http.build();
     }
 
 

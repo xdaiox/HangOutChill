@@ -1,4 +1,4 @@
-package com.ispan.hangoutchill.member.handler;
+package com.ispan.hangoutchill.member.Handler;
 
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.oauth2.HangoutOauth2User;
