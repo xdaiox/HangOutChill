@@ -1,4 +1,4 @@
-package com.ispan.hangoutchill.member;
+package com.ispan.hangoutchill.member.oauth2;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -7,13 +7,11 @@ import java.util.Collection;
 import java.util.Map;
 
 public class HangoutOauth2User implements OAuth2User {
-
     private OAuth2User oauth2User;
 
     public HangoutOauth2User(OAuth2User oauth2User) {
         this.oauth2User = oauth2User;
     }
-
 
     @Override
     public Map<String, Object> getAttributes() {

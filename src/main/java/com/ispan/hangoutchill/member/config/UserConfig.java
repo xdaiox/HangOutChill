@@ -2,14 +2,14 @@ package com.ispan.hangoutchill.member.config;
 
 
 
-import com.ispan.hangoutchill.member.Handler.Oauth2LoginSuccessHandler;
-import com.ispan.hangoutchill.member.HangoutOauth2UserService;
-import com.ispan.hangoutchill.member.OauthService;
 import com.ispan.hangoutchill.member.UserDetailServiceImpl;
+import com.ispan.hangoutchill.member.handler.Oauth2LoginSuccessHandler;
+import com.ispan.hangoutchill.member.oauth2.HangoutOauth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,10 +17,12 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 
 @Configuration
@@ -34,11 +36,12 @@ public class UserConfig {
 
 
     @Autowired
-    public UserConfig(UserDetailServiceImpl userDetail,  HangoutOauth2UserService oauth2UserService,  @Lazy  Oauth2LoginSuccessHandler oauth2LoginSuccessHandler) {
+    public UserConfig(UserDetailServiceImpl userDetail,  HangoutOauth2UserService oauth2UserService, Oauth2LoginSuccessHandler oauth2LoginSuccessHandler) {
         this.userDetail = userDetail;
         this.oauth2UserService = oauth2UserService;
         this.oauth2LoginSuccessHandler = oauth2LoginSuccessHandler;
     }
+
 
 
     @Bean
@@ -48,10 +51,9 @@ public class UserConfig {
                 .build();
     }
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
+        http.cors();
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/discussion/newDiscussion").hasAuthority("USER")
@@ -76,13 +78,16 @@ public class UserConfig {
 
 
 
-
+    @Bean
+    public PasswordEncoder encoder(){
+        return  new BCryptPasswordEncoder();
+    }
 
 
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetail);
-        authProvider.setPasswordEncoder(userDetail.encoder());
+        authProvider.setPasswordEncoder(encoder());
         return authProvider;
     }
 

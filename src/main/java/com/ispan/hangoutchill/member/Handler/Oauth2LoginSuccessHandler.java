@@ -1,19 +1,10 @@
-package com.ispan.hangoutchill.member.Handler;
+package com.ispan.hangoutchill.member.handler;
 
-import com.ispan.hangoutchill.member.HangoutOauth2User;
-import com.ispan.hangoutchill.member.OauthService;
 import com.ispan.hangoutchill.member.model.NormalMember;
-import com.ispan.hangoutchill.member.model.Role;
+import com.ispan.hangoutchill.member.oauth2.HangoutOauth2User;
 import com.ispan.hangoutchill.member.service.NormalMemberService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import com.ispan.hangoutchill.member.service.OauthService;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -21,9 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+
 
 @Component
 public class Oauth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
@@ -32,9 +21,9 @@ public class Oauth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 
     private OauthService oauthService;
 
-    @Lazy
-    @Autowired
-    private AuthenticationManager authenticationManager;
+//    @Lazy
+//    @Autowired
+//    private AuthenticationManager authenticationManager;
 
     public Oauth2LoginSuccessHandler(  OauthService oauthService) {
 
@@ -56,5 +45,4 @@ public class Oauth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 
         response.sendRedirect("/hangoutchill/member/NormalMemberDetail");
     }
-
 }

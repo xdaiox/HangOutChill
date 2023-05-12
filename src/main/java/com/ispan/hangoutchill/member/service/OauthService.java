@@ -1,5 +1,4 @@
-package com.ispan.hangoutchill.member;
-
+package com.ispan.hangoutchill.member.service;
 
 import com.ispan.hangoutchill.member.dao.NormalMemberRepository;
 import com.ispan.hangoutchill.member.dao.RoleRepository;
