@@ -5,10 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.ispan.hangoutchill.actandles.dao.AALRepository;
@@ -25,12 +21,12 @@ public class LessonSignUpDetailService {
 	private AALRepository aalRepository;
 
 	public void saveles(ActivitiesandLesson aal, Integer accountsId) {
-		List<NormalMember> members = new ArrayList<>(aal.getAccounts());
 
+		List<NormalMember> members = new ArrayList<>(aal.getAccounts());
 		Optional<NormalMember> accounts = normalMemberRepository.findById(accountsId);
 		members.add(accounts.get());
-
 		aal.setAccounts(members);
+
 		aalRepository.save(aal);
 	}
 

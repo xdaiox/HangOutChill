@@ -191,8 +191,8 @@ public class NormalMemberController {
     @GetMapping("/member/NormalMemberDetail")
     public String toMemberCenterPage(@CurrentSecurityContext(expression = "authentication")
                                      Authentication authentication, Model model) {
-        System.out.println("我有進來controller");
         String name = authentication.getName();
+<<<<<<< HEAD
         System.out.println(name);
         if (name.contains("@") ){
             System.out.println("原本的");
@@ -208,6 +208,11 @@ public class NormalMemberController {
             return null;
         }
 
+=======
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+        return "/member/normalMemberCenter";
+>>>>>>> bd4e937ee42100f7f7097e7723190f68ba630707
     }
 
 

@@ -10,7 +10,7 @@ public class GlobalCorsConfig {
 
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("https://payment-stage.ecpay.com.tw/");
+        config.addAllowedOrigin("https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5");
         config.addAllowedOrigin("*");
         config.setAllowCredentials(true);
         config.addAllowedMethod("OPTIONS");

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,10 +29,20 @@ public class LessonSignUpDetailController {
 	@Autowired
 	NormalMemberService nMemberService;
 	
+	@GetMapping("/actandles/detail/lessignup")
+	public String lessignuppage(@CurrentSecurityContext(expression="authentication") Authentication authentication,@RequestParam("id") Integer id,Model model) {
+		ActivitiesandLesson aal = aalservice.findAALById(id);
+		String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+		model.addAttribute("result",result);
+		model.addAttribute("aal",aal);
+		model.addAttribute("checksignup",aalservice.findSignUpDetail(aal.getId(), result.getId()));
+		return "aal/user/signUpPage";
+	}
 	
 	@PostMapping("/actandles/detail/lessignup")
-	public String lessignup(@RequestParam("id") Integer id ,@CurrentSecurityContext(expression="authentication")
-    Authentication authentication) {
+	public String lessignup(@RequestParam("id") Integer id ,@RequestParam(name = "numbersOfPeople") String numbersOfPeople ,@RequestParam(name = "tel") String tel,
+			@CurrentSecurityContext(expression="authentication") Authentication authentication) {
 		ActivitiesandLesson aal = aalservice.findAALById(id);
 		 String name = authentication.getName();
 	        NormalMember result = nMemberService.findNormalUserByAccount(name);

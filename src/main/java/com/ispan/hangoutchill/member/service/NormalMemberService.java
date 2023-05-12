@@ -212,10 +212,5 @@ public class NormalMemberService implements INormalMemberService {
         boolean matches = passwordEncoder.matches(password, passwordInDB);
         return  matches;
     }
-
-    //機掰第三方登入透過暱稱找會員
-    public  NormalMember findMemberByNickName(String nickName){
-        return  nMemberRepository.findNormalMembersByNickName(nickName);
-    }
 }
 

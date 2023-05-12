@@ -83,7 +83,7 @@
 															type="submit" class="btn btn-outline-danger btn-sm"
 															value="刪除" onclick="return confirm('確定刪除?')" />
 													</form>
-													<form:form method="post" action="${contextRoot}/actandles/detail/lessignup">
+													<form:form method="GET" action="${contextRoot}/actandles/detail/lessignup">
 												<input value="${aal.id}" type="hidden" name="id" />
 												<button type="submit" class="btn btn-primary" >報名</button>
 										</form:form>

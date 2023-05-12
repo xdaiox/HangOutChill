@@ -14,38 +14,40 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>所有地點</title>
 </head>
 <body>
 <div class="container-scroller">
-    <jsp:include page="../dbLayout/top_navbar.jsp"/>
+    <jsp:include page="../../dbLayout/top_navbar.jsp"/>
     <div class="container-fluid page-body-wrapper">
-        <jsp:include page="../dbLayout/left_navbar.jsp"/>
+        <jsp:include page="../../dbLayout/left_navbar.jsp"/>
         <div class="container">
             <div class="content_box" style="width: 100%">
-                <h1 style="text-align: center;">地點管理</h1>
-                <form action="${contextRoot}/location/locationManager/addPage">
-                    <input type="submit" class="btn btn-outline-info btn-sm" value="新增"/></form>
+                <h3 style="text-align: center;">地點管理</h3>
+                <form action="${pageContext.request.contextPath}/location/locationManager/addPage">
+                    <input type="submit" id="" class="btn btn-outline-info btn-sm" value="新增"/></form>
                 <br>
                 <p>搜索功能</p>
-                <form action="${contextRoot}/location/locationManager/search">
-                    <label>
-                        <input type="text" name="name" placeholder="輸入地點名稱"/>
-                    </label><br>
-                    <label>
-                        <select>
+                <form id="searchForm" action="#">
+                        <input type="text" id="name" name="name" placeholder="輸入地點名稱"/>
+                        <select id="category" name="category">
                             <option value="" label="請選擇分類..."></option>
                             <option value="分類1" label="分類1"></option>
                             <option value="分類2" label="分類2"></option>
                             <option value="分類3" label="分類3"></option>
                         </select>
-                    </label><br>
-                    <label>
-                        <input type="text" name="city" placeholder="輸入地點城市"/>
-                    </label><br>
-                    <label>
-                        <input type="text" name="dist" placeholder="輸入地點區域"/>
-                    </label><br>
+                    <select id="price" name="price">
+                        <option value="" label="請選擇消費費水準..."></option>
+                        <option value="1" label="$"></option>
+                        <option value="2" label="$ $"></option>
+                        <option value="3" label="$ $ $"></option>
+                        <option value="4" label="$ $ $ $"></option>
+                        <option value="5" label="$ $ $ $ $"></option>
+                    </select>
+                        <input type="text" id="city" name="city" placeholder="輸入地點城市"/>
+                        <input type="text" id="dist" name="dist" placeholder="輸入地點區域"/>
+                        <input type="submit" id="submitBtnSearch" class="btn btn-outline-info btn-sm" value="查詢"/>
                 </form>
                 <br>
                 <div class="table-responsive">
@@ -88,8 +90,6 @@
                 <br>
                 <div style="text-align:center;">
                     <jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}">
-                        <%-- 					<jstl:if test="${page.number == pageNumber-1}"><span>${pageNumber}</span></jstl:if> --%>
-                        <%-- 					<jstl:if test="${page.number != pageNumber-1}"><a href="${contextRoot}/messages?p=${pageNumber}">${pageNumber}</a></jstl:if> --%>
                         <jstl:choose>
                             <jstl:when test="${page.number == pageNumber-1}">
                                 <span>${pageNumber}</span>
@@ -103,6 +103,109 @@
             </div>
         </div>
     </div>
+
+
+<script>
+
+    // window.onload = function() {
+    //     document.getElementById("searchForm").submit();
+    // };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // $(document).ready(function() {
+    //     loadData(1, null, null, null, null, null); // 加載初始資料
+    //
+    //     $('#searchForm').submit(function(event) {
+    //         event.preventDefault();
+    //
+    //         // 獲取查詢參數
+    //         var pageNumber = 1;
+    //         var name = $('#name').val();
+    //         var category = $('#category').val();
+    //         var price = $('#price').val();
+    //         var city = $('#city').val();
+    //         var dist = $('#dist').val();
+    //
+    //         // 發送 AJAX 查詢請求
+    //         searchLocationInfo(pageNumber, name, category, price, city, dist);
+    //     });
+    // });
+    //
+    // function loadData() {
+    //     $.ajax({
+    //         url: '/location/locationManager',
+    //         method: 'GET',
+    //         success: function(defaultResult) {
+    //             // 處理回應資料並更新頁面顯示
+    //             console.log(defaultResult);
+    //
+    //             // TODO: 更新頁面顯示
+    //
+    //         },
+    //         error: function(error) {
+    //             console.log(error);
+    //         }
+    //     });
+    // }
+    //
+    // function searchLocationInfo(pageNumber,name, category, price, city, dist) {
+    //     var dtoObject = {
+    //         p: pageNumber,
+    //         name: name,
+    //         category: category,
+    //         price: price,
+    //         city: city,
+    //         dist: dist
+    //     };
+    //     var dtoJsonString = JSON.stringify(dtoObject);
+    //
+    //     $.ajax({
+    //         url: '/location/locationManager',
+    //         contentType: 'application/json;charset=UTF-8',
+    //         dataType: 'json',
+    //         method: 'POST',
+    //         data: dtoJsonString,
+    //         success: function(queryResult) {
+    //             console.log(queryResult);
+    //
+    //             // TODO: 更新頁面顯示
+    //
+    //         },
+    //         error: function(queryError) {
+    //             console.log(queryError);
+    //         }
+    //     });
+    // }
+
+
+
+
+
+</script>
 
 </body>
 </html>
