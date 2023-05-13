@@ -125,26 +125,26 @@
 							</div>
 							<div class="form-group">
 								<label for="buyer-address">購買人email</label> <form:input type="text"
-									class="form-control" id="buyer-address" placeholder=""
+									class="form-control" id="buyer-mail" placeholder=""
 									value="${user.account}" path="memberMail" />
 							</div>
 							<h3
 								style="text-align: left; margin: 20px 0px; display: inline-block;">收件人資訊</h3>
 							<input type="button" value="複製購買人資訊"
-								class="btn btn-outline-warning" style="font-size: 0.8em;">
+								class="btn btn-outline-warning" style="font-size: 0.8em;" id="copyinfo">
 							<div class="form-row">
 								<div class="col">
-									<label for="buyer-name">收件人姓名</label> <form:input type="text"
-										class="form-control" id="buyer-name" placeholder="" path="recipientName" />
+									<label for="taker-name">收件人姓名</label> <form:input type="text"
+										class="form-control" id="taker-name" placeholder="" path="recipientName" />
 								</div>
 								<div class="col">
 									<label for="buyer-phone">收件人手機</label> <form:input type="text"
-										class="form-control" id="buyer-phone" placeholder="" path="recipientPhone" />
+										class="form-control" id="taker-phone" placeholder="" path="recipientPhone" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="buyer-address">收件人email</label> <form:input type="text"
-									class="form-control" id="buyer-address" placeholder="" path="recipientMail" />
+									class="form-control" id="taker-mail" placeholder="" path="recipientMail" />
 							</div>
 
 							<div class="form-group">
@@ -234,6 +234,28 @@
 				document.getElementById('discount' + i).innerHTML = "—";
 			}
 		}
+
+		let copyBtn = document.getElementById('copyinfo');
+		copyBtn.addEventListener('click',function(){
+			// 姓名複製
+			let buyerName = document.getElementById('buyer-name').value;
+			let takerName = document.getElementById('taker-name')
+			// console.log(buyerName);
+			takerName.value = buyerName;
+
+			// 電話複製
+			let buyerPhone = document.getElementById('buyer-phone').value;
+			let takerPhone = document.getElementById('taker-phone')
+			takerPhone.value = buyerPhone;
+
+			// email複製
+			let buyerMail = document.getElementById('buyer-mail').value;
+			let takerMail = document.getElementById('taker-mail')
+			takerMail.value = buyerMail;
+
+		})
+
+
 	</script>
 </body>
 

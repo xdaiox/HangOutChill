@@ -42,6 +42,7 @@
 
 <!-- 	<footer class="footer-area"> </footer> -->
 	<jsp:include page="../layout/footer.jsp" />
+	 <script src="${contextRoot}/js/jquery-3.6.4.min.js"></script>
 	<script src="${contextRoot}/js/jquery-2.2.4.min.js"></script>
 	<script src="${contextRoot}/js/popper.js"></script>
 	<script src="${contextRoot}/js/bootstrap.min.js"></script>

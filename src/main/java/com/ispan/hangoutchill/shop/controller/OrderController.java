@@ -74,16 +74,12 @@ public class OrderController {
 		return checkOutForm;
 	}
 	
-	
 	// 綠界交易回傳值接收
 	@Transactional
 	@PostMapping("/shop/ecpayReturn")
 	public void ecpayReturnURL(HttpServletRequest request,
 								@RequestParam("RtnCode") int rtnCode,
 								@RequestParam("MerchantTradeNo") String merchantTradeNo) {
-			
-		
-		
 			if(rtnCode == 1) {
 			String oriOrderNo = merchantTradeNo.substring(0,18);
 			System.out.println(oriOrderNo);
@@ -104,7 +100,6 @@ public class OrderController {
 		Order latestOrder = orderService.findLatestOrderByMemberId(currentmember.getId());
 		latestOrder.setPaymentState(true);
 		model.addAttribute("order", latestOrder);
-		
 		
 		return "shop/orderFinishCheck";
 	}

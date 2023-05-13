@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="${contextRoot}/css/stylecopy.css" type="text/css">
     <link rel="stylesheet" href="${contextRoot}/css/responsivecopy.css" type="text/css">
     <link rel="stylesheet" href="${contextRoot}/css/contentcopy.css" type="text/css">
+    
+    <!-- cart item used css -->
+    <link rel="stylesheet" href="${contextRoot}/css/cartitem.css" type="text/css">
     <title>導覽列</title>
 </head>
 <body>
@@ -46,7 +49,13 @@
             <div class="col-lg-4 col-md-3 col-sm-6 search-trigger">
                 <div class="right-button">
                     <ul>
-                        <li><a href="#"><i class="ti-btnshopcart"></i></a></li>
+<!--                         <li><a href="#"><i class="ti-btnshopcart"></i></a></li> -->
+						<li><a href="${contextRoot}/shop/shoppingCart" class="site-cart">
+                        
+                         <i class="ti-btnshopcart"></i>
+                      		<span class="count"></span>
+                        </a>
+                        </li>
                         <li><a href="#"><i class="ti-user"></i>
                             <jstl:choose>
                             <jstl:when
@@ -90,7 +99,7 @@
                                class="nav-link dropdown-toggle">討論區</a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="${contextRoot}/actandles">活動與課程</a></li>
-                        <li class="nav-item"><a class="nav-link" href="${contextRoot}/shop/index">商城</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${contextRoot}/shop/productcategory?category=全部商品">商城</a></li>
                         <li class="nav-item"><a class="nav-link" href="${contextRoot}/dashboard">後臺管理</a></li>
                     </ul>
                 </div>
@@ -114,6 +123,31 @@
     <script src="${contextRoot}/js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="${contextRoot}/js/mail-script.js" type="text/javascript"></script>
     <script src="${contextRoot}/js/theme.js" type="text/javascript"></script>
+    <script>
+    $(document).ready(function () {
+    	
+    	// 購物車上的小圖示
+    	$.ajax({
+            url: 'http://localhost:8080/hangoutchill/shop/get/shoppingCartItemNum',
+            type: 'GET',
+            contentType: "application/json;charset=UTF-8",
+            datatype: 'json',
+            success: function (result) {
+                console.log(result);
+             	if(result == 0){
+             		$('.count').hide();
+             	}else{
+                $('.count').text(result);
+             	}
+             	
+            },
+            error: function (err) {
+                console.log(err);
+                $('.count').hide();
+            }
+        })
+    })
+    </script>
     
 </body>
 </html>
