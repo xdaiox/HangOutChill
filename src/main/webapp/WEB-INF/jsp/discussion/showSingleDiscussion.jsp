@@ -295,15 +295,53 @@
 
 														</div>
 														<div class="text-muted small text-center align-self-center">
-															<span class="d-none d-sm-inline-block"><i
-																	class="far fa-eye"></i> 19</span> <span><i
-																	class="far fa-comment ml-2"></i> 3</span>
+															<span>	
+																<!-- 計算總共有多少筆回覆 -->
+																<c:forEach var="message" items="${page.content}">
+																<c:set var="messageCount" value="${messageCount + 1}" /> 
+																</c:forEach>
+																<i class="far fa-comment ml-2"></i><c:out value="${messageCount}" />
+															</span>
 														</div>
 													</div>
 												</div>
 											</div>
 										</jstl:forEach>
+									</div>
 
+									<div class="card">
+										<!-- =============== 下面的頁數 =============== -->
+										<div class="inner-main-header">
+											<div class="pagination-wrapper d-flex justify-content-center">
+												<ul class="pagination pagination-sm pagination-circle">
+												<jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+													<jstl:choose>
+														<jstl:when test="${page.number+1 != pageNumber }">
+															<li class="page-item"><a class="page-link"
+																	href="${contextRoot}/message/allMessages/${discussion.d_id}?p=${pageNumber}">${pageNumber}</a>
+															</li>
+															<!-- p 是DiscussionsController,toShowAllDiscussion內的p -->
+														</jstl:when>
+														<jstl:otherwise>
+															<li class="page-item"><a class="page-link">${pageNumber}</a></li>
+		
+														</jstl:otherwise>
+													</jstl:choose>
+		
+												</jstl:forEach>
+												<!-- <li class="page-item active"><span class="page-link">G</span></li>
+													<li class="page-item"><a class="page-link"
+														href="javascript:void(0)">G</a></li>
+													<li class="page-item"><a class="page-link has-icon"
+														href="javascript:void(0)"><i class="material-icons">chevron_right</i></a>
+													</li> -->
+												</ul>
+											</div>
+										</div>
+									</div>
+
+									<div class="card">
+										<!-- =============== 回覆功能 =============== -->
 										<div class="card">
 											<form:form modelAttribute="replyDiscussion" method="post"
 												action="${contextRoot}/message/post/${discussion.d_id}">
@@ -325,11 +363,11 @@
 											<a href="${contextRoot}/discussion/allDiscussion"
 												class="btn btn-primary">返回文章列</a>
 										</div>
-
-
-
-
 									</div>
+
+
+
+									
 								</div>
 							</div>
 						</div>

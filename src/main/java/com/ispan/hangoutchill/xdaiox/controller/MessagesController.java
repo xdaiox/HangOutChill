@@ -61,7 +61,7 @@ public class MessagesController {
     	return"redirect:/message/allMessages/{id}";
     }
     
-
+    
     //==============刪除留言==============
     @DeleteMapping("/message/deleteMessage/{id}/{m_id}")
     public String toDeleteButItsNotActuallyDeleteItsHiddenMessage(@PathVariable("id") Integer id,@PathVariable("m_id")Integer m_id) {
@@ -76,7 +76,7 @@ public class MessagesController {
     
     //==============編輯留言==============
     
-    @GetMapping("/message/editMessage/{id}/{m_id}")
+    @PostMapping("/message/editMessage/{id}/{m_id}")
     public String editMessage(@PathVariable("id") Integer id,@PathVariable("m_id") Integer m_id, Model model) {
         Discussions dss = dService.findDiscussionById(id);
         model.addAttribute("discussion", dss);
@@ -86,7 +86,7 @@ public class MessagesController {
         
         return "discussion/editMessagePage";
     }
-    
+    								
     @PutMapping("/message/editMessage/{id}")
     public String toEditeMessage(@ModelAttribute("message") Messages mss,@PathVariable("id") Integer id) {
     	mService.updateMessageById(mss.getDm_id(),mss.getContents());

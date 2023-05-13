@@ -290,9 +290,15 @@ body {
 									</form> -->
 									
 									<div class="text-muted small text-center align-self-center">
-										<span class="d-none d-sm-inline-block"><i
-											class="far fa-eye"></i> 19</span> <span><i
-											class="far fa-comment ml-2"></i> 3</span>
+										<span class="d-none d-sm-inline-block">
+											<!-- ===============計算總共有多少筆回覆=============== -->
+												<i class="far fa-comment ml-2 fa-lg" style="font-size: 20px;"></i>
+												<jstl:if test="${empty replyCountMap[discussion.d_id]}"><i style="font-size: 20px;">0</i></jstl:if>
+												
+												<jstl:if test="${not empty replyCountMap[discussion.d_id]}">
+												<i style="font-size: 20px;"><jstl:out value="${replyCountMap[discussion.d_id]}" /></i>
+												</jstl:if>
+											</span>
 									</div>
 								</div>
 							</div>

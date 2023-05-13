@@ -1,6 +1,8 @@
 package com.ispan.hangoutchill.xdaiox.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.service.NormalMemberService;
+import com.ispan.hangoutchill.xdaiox.dao.MessagesRepository;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
 import com.ispan.hangoutchill.xdaiox.model.Favourite;
 import com.ispan.hangoutchill.xdaiox.model.FavouriteDTO;
@@ -41,20 +44,34 @@ public class DiscussionsController {
 	
     @Autowired
     NormalMemberService nMemberService;
+    
+    @Autowired
+	private MessagesRepository mssRepository;
 	
 	@GetMapping("/discussion/allDiscussion")
 	public String toShowAllDiscussion(@RequestParam(name="p",defaultValue = "1")Integer pageNumber,Model model,
 										@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
 //		上面的p是在allDiscussion.jsp的href="${contextRoot}/discussion/allDiscussion?p=${pageNumber}">${pageNumber}</a></li>
-		Page<Discussions> page = dService.findByPage(pageNumber);
+		Page<Discussions> page = dService.findByPageWhereVisible(pageNumber);
 		model.addAttribute("page", page);
 		
         String name = authentication.getName();
         NormalMember result = nMemberService.findNormalUserByAccount(name);
         model.addAttribute("result", result);
 		
-		return"discussion/allDiscussion";
-	}
+        Page<Messages> pageCount = dService.CountMessageByDiscussion(pageNumber);
+        
+        Map<Integer, Long> replyCountMap = new HashMap<>();
+        for (Messages message : pageCount) {
+            Discussions discussion = message.getDiscussions();
+            Long count = mssRepository.countByDiscussions(discussion);
+            replyCountMap.put(discussion.getD_id(), count);
+        }
+        
+        model.addAttribute("replyCountMap", replyCountMap);
+        
+        return "discussion/allDiscussion";
+    }
 	
 	
     @GetMapping("/discussion/newDiscussion")

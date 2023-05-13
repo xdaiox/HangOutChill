@@ -11,13 +11,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ispan.hangoutchill.xdaiox.dao.DiscussionsRepository;
+import com.ispan.hangoutchill.xdaiox.dao.MessagesRepository;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
+import com.ispan.hangoutchill.xdaiox.model.Messages;
 
 @Service
 public class DiscussionsService {
 	
 	@Autowired
 	private DiscussionsRepository dssRepository;
+	
+	@Autowired
+	private MessagesRepository mssRepository;
 	
 	public void addDiscussions(Discussions dss) {
 		dss.setVisibleTrue();
@@ -45,9 +50,16 @@ public class DiscussionsService {
 	}
 	
 	//找所有討論 where visible=true
-	public Page<Discussions> findByPage(Integer pageNumber){
-		Pageable pgb =PageRequest.of(pageNumber-1, 20, Sort.Direction.DESC, "postDate");
+	public Page<Discussions> findByPageWhereVisible(Integer pageNumber){
+		Pageable pgb =PageRequest.of(pageNumber-1, 10, Sort.Direction.DESC, "postDate");
 		Page<Discussions> page = dssRepository.findByVisibleTrue(pgb);
+		return page;
+	}
+	
+	//算所有討論的回覆數量
+	public Page<Messages> CountMessageByDiscussion(Integer pageNumber){
+		Pageable pgb =PageRequest.of(pageNumber-1, 10, Sort.Direction.DESC, "postDate");
+		Page<Messages> page = mssRepository.findAll(pgb);
 		return page;
 	}
 	
