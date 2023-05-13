@@ -13,8 +13,8 @@
 </head>
 <body>
 
-    <div class="container">
-        <div class=" article_content">
+    <div class="container" style="width: 70%; margin: auto">
+        <div class=" article_content" >
             <section class="titlebox">
                 <div class="title_en">
                     <h1>${category}</h1>
@@ -27,7 +27,7 @@
                             <a href="/hangoutchill/article/theme?article_theme=life">全部商品</a>
                         </li>
                         <li>
-                            <a href="/hangoutchill/article/theme?article_theme=fun">美味嘗點</a>
+                            <a href="/hangoutchill/article/theme?article_theme=fun">美味嚐點</a>
                         </li>
                         <li>
                             <a href="/hangoutchill/article/theme?article_theme=life">文創商品</a>    
@@ -58,7 +58,7 @@
                         <article class="article_textbox">
                             <h3 class="title">${product.productName}</h3>
                             <div class="text">
-                                <p>$ ${product.unitPrice}</p>
+                                <h4>NT $${product.unitPrice}</h4>
                             </div>
                             <a href="#" class="read_more">READ MORE</a>
                         </article>

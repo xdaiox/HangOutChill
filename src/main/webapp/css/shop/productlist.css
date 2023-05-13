@@ -107,6 +107,8 @@
 
 .article_img {
     width: 100%;
+/*     高度自行加入 */
+    height: 50%;
     margin-bottom: 15px;
     overflow: hidden;
 }
