@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <div class="container" style="width: 70%; margin: auto">
+    <div class="container" style="width: 80%; margin: auto">
         <div class=" article_content" >
             <section class="titlebox">
                 <div class="title_en">
