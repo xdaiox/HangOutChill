@@ -161,19 +161,30 @@ body {
 	width: 150px; /*分頁選單option*/
 	margin-left: 15px;
 }
+.long-input {
+    width: 100%; /* 設置寬度為100% */
+}
+
+/* 使用媒體查詢，在特定寬度下改變輸入框的寬度 */
+@media (min-width: 768px) {
+    .long-input {
+        width: 400px; /* 在768px以上的寬度下設置寬度為400px */
+    }
+}
 </style>
-<!-- ================================== ck editor ================================== -->
-<script src="${contextRoot}/js/ckeditor/ckeditor.js"></script>
-<!-- ================================== ck editor ================================== -->
+
 </head>
 <div class="container">
 	<div class="main-body p-0">
 		<div class="inner-wrapper">
 			<div class="inner-main">
 				<div class="inner-main-body collapse forum-content show">
+
+					<!-- ===============顯示討論=============== -->
+
 					<div class="card">
 						<div class="card-header">
-							<h5 class="card-title text-center">修改文章</h5>
+							<h5 class="card-title text-center">討論</h5>
 						</div>
 						<div class="card-body">
 							<form:form modelAttribute="discussion" method="put" action="${contextRoot}/discussion/editDiscussion/${discussion.d_id}">
@@ -181,61 +192,47 @@ body {
 								<form:input path="d_id" type="hidden"></form:input>
 								</div>
 									<div class="form-group">
-									
-									<label for="title">標題</label> <form:input path="title" type="text"
-										class="form-control" id="title" placeholder="輸入標題"></form:input>
+									<label for="titl e">標題</label> ${discussion.title}
 								</div>
+
 								<div class="form-group">
-									<label for="category">分類</label> <form:select path="type" class="form-control"
-										id="category">
-										<option>分類1</option>
-										<option>分類2</option>
-										<option>分類3</option>
-										<option>分類4</option>
-									</form:select>
+									<label for="titl e">内容</label> ${discussion.contents}
+
 								</div>
+							</form:form>
+						</div>
+					</div>
+					
+					<!-- ===============put修改回覆=============== -->
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title text-center">修改回覆</h5>
+						</div>
+						<div class="card-body">
+							<form:form modelAttribute="message" method="put" action="${contextRoot}/message/editMessage/${discussion.d_id}/">
 								<div class="form-group">
-									<label for="content">内容</label>
-									<!-- ================================== ck editor ================================== -->
-									<form:textarea path="contents" id="editor" name="content" placeholder="請在這裡填寫內容"></form:textarea>
-									<!-- ================================== ck editor ================================== -->
-									
-									<!-- <form:textarea path="contents" class="form-control" id="content" rows="5"
-										placeholder="輸入内容" ></form:textarea> -->
+								<form:input path="dm_id" type="hidden"></form:input>
 								</div>
-								<button type="submit" class="btn btn-primary">發表</button>
+								
+								<div class="form-group">
+									<label for="contents">内容</label>
+
+									<form:input path="contents" id="editor" name="content"
+										placeholder="請在這裡填寫內容" class="long-input"></form:input>
+									<button type="submit" class="btn btn-primary">發表</button>
+								</div>
+								
 							</form:form>
 							<a href="${contextRoot}/discussion/allDiscussion"
 								class="btn btn-primary">返回文章列</a>
 						</div>
 					</div>
-					
+
 					
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-<!-- ================================== ck editor ================================== -->
-<script>
-CKEDITOR.replace("editor");
-	// ClassicEditor
-    // .create( document.querySelector( '#editor' ), {
-    //     plugins: [ Essentials, Paragraph, Bold, Italic ],
-    //     toolbar: [ 'bold', 'italic' ]
-    // } )
-    // .then( editor => {
-    //     console.log( 'Editor was initialized', editor );
-    // } )
-    // .catch( error => {
-    //     console.error( error.stack );
-    // } );
-	ClassicEditor.create( document.querySelector( '#editor' ), {
-    plugins: [ Essentials, Paragraph, Bold, Italic ],
-    toolbar: [ 'bold', 'italic' ]
-} )
-</script>
-<!-- ================================== ck editor ================================== -->
 
 </html>
