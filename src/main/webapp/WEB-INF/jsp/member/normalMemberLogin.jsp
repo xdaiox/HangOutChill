@@ -20,7 +20,9 @@
         <div class="box box-border">
             <div class="box-body">
                 <h4>登入</h4>
-                <h4><a href="${contextRoot}/oauth2/authorization/google">Login with Google</a></h4>
+                <h4><a href="${contextRoot}/oauth2/authorization/google">Login with Google</a>
+                    <br/>
+                     <a href="${contextRoot}/oauth2/authorization/facebook">Login with Facebook</a></h4>
                 <form action="${contextRoot}/member/login" method="post">
                     <div class="form-group">
                         <label>使用者信箱</label>
