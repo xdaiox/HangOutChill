@@ -7,12 +7,16 @@
 <meta charset="UTF-8">
 <title>產品詳細資訊頁面</title>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<jsp:include page="../layout/navbar.jsp"/>
 </head>
 
 <body>
-	<main class="col-md-9 ms-sm-auto col-lg-10 px-md-3 mt-3">
-		<div class="table-responsive shadow-sm">
+<div class="container-scroller">
+<jsp:include page="../dbLayout/top_navbar.jsp" />
+<div class="container-fluid page-body-wrapper">
+<jsp:include page="../dbLayout/left_navbar.jsp" />
+<div class="container">
+
+		<div class="row justify-content-center">
 			<h2>產品資料：</h2>
 			<form:form method="put" action="${contextRoot}/shop/edit/product" modelAttribute="product"
 				enctype="multipart/form-data">
@@ -91,19 +95,19 @@
 							</td>
 							</c:forEach>	
 					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td>
-						<form:input path="productId" type="hidden"/>
-						<input type="submit" value="修改送出" id="submit" /> <a
-							href=""><input
-								type="button" value="取消" /></a></td>
-					</tr>
 				</table>
 			</form:form>
+			<form action="${contextRoot}/shop/edit/product" style="display:inline;">
+											<input type="hidden" name="productid"
+												value="${product.productId}" /> <input type="submit"
+												class="btn btn-primary" value="編輯產品" />
+										</form>
+						<a href="${contextRoot}/shop/allproducts" style="display:inline;"><input type="button" value="回前頁" class="btn btn-outline-warning" /></a>
 		</div>
-	</main>
+
+</div>
+</div>
+</div>
 	<script>
       // 動態新增上傳圖片
       let addfile = document.getElementById("addfile");

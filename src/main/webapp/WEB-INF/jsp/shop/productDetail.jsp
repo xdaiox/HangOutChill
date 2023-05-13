@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <html>
 <head>
@@ -20,7 +21,7 @@
 <link rel="stylesheet" href="${contextRoot}/css/shop/templatemo.css">
 <title>產品資訊頁</title>
 
-<jsp:include page="layout/navbar.jsp" />
+<jsp:include page="../layout/navbar.jsp" />
 
 
 </head>
@@ -32,7 +33,7 @@
 					<div class="col-lg-5 mt-5">
 						<div class="card mb-3">
 							<img class="card-img img-fluid"
-								style="height: 500px; width: 500px"
+								style="max-height: 500px; max-width: 500px"
 								src='<c:url value="/shop/getPicture/${product.productId}" />'
 								alt="Card image cap" id="product-detail">
 						</div>
@@ -93,7 +94,7 @@
 						<div class="card">
 							<div class="card-body">
 								<h1 class="h2">${product.productName}</h1>
-								<p class="h3 py-2">$ ${product.unitPrice}</p>
+								
 								<!-- <p class="py-2">
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
@@ -127,6 +128,10 @@
 									<li>${product.productSpec }</li>
 
 								</ul>
+								<c:if test="${product.discount != 1.0}">
+								<span style="text-decoration:line-through; font-size: small;">原價 NT $${ product.unitPrice}</span>
+								</c:if>
+								<p class="h3 py-2">NT $ <fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0" value="${ product.unitPrice*product.discount }"/></p>
 
 									<input type="hidden" name="product-title" value="${product.productId}" id="productid">
 									<div class="row">

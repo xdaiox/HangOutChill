@@ -7,13 +7,17 @@
 <meta charset="UTF-8">
 <title>編輯產品頁面</title>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<jsp:include page="../layout/navbar.jsp"/>
 </head>
 
 <body>
-	<main class="col-md-9 ms-sm-auto col-lg-10 px-md-3 mt-3">
-		<div class="table-responsive shadow-sm">
-			<h2>產品資料：</h2>
+<div class="container-scroller">
+<jsp:include page="../dbLayout/top_navbar.jsp" />
+<div class="container-fluid page-body-wrapper">
+<jsp:include page="../dbLayout/left_navbar.jsp" />
+<div class="container">
+
+		<div class="row justify-content-center">
+			<h2>產品資訊：</h2>
 			<form:form method="put" action="${contextRoot}/shop/edit/product" modelAttribute="product"
 				enctype="multipart/form-data">
 				<table class="table ">
@@ -112,7 +116,10 @@
 				</table>
 			</form:form>
 		</div>
-	</main>
+
+</div>
+</div>
+</div>
 	<script>
       // 動態新增上傳圖片
       let addfile = document.getElementById("addfile");

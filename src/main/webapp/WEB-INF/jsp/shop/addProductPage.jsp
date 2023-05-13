@@ -7,93 +7,94 @@
 <meta charset="UTF-8">
 <title>新增產品頁面</title>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<jsp:include page="../layout/navbar.jsp"/>
 </head>
 
 <body>
-	<main class="col-md-9 ms-sm-auto col-lg-10 px-md-3 mt-3">
-		<div class="table-responsive shadow-sm">
+<div class="container-scroller">
+<jsp:include page="../dbLayout/top_navbar.jsp" />
+<div class="container-fluid page-body-wrapper">
+<jsp:include page="../dbLayout/left_navbar.jsp" />
+<div class="container">
+
+		<div class="row justify-content-center">
 			<h2>請輸入產品資料：</h2>
-			<form:form method="post" action="${contextRoot}/shop/postProduct" modelAttribute="product"
-				enctype="multipart/form-data">
-				<table class="table ">
-<!-- 					<tr> -->
-<!-- 						<td><span>*</span> <label for="proid" class="t1">產品編號 -->
-<!-- 								:</label> -->
-<!-- 							<p>(產品編號為全數字)</p></td> -->
-<!-- 						<td><input type="text" name="proid" id="proid" /> <span -->
-<!-- 							id="iderror" class="error"> </span><span id="idcorrect" -->
-<!-- 							class="correct"></span></td> -->
-<!-- 					</tr> -->
-					<tr>
+			<form:form method="post" action="${contextRoot}/shop/postProduct"
+				modelAttribute="product" enctype="multipart/form-data">
+				<table class="table">
+					<!-- 					<tr> -->
+					<!-- 						<td><span>*</span> <label for="proid" class="t1">產品編號 -->
+					<!-- 								:</label> -->
+					<!-- 							<p>(產品編號為全數字)</p></td> -->
+					<!-- 						<td><input type="text" name="proid" id="proid" /> <span -->
+					<!-- 							id="iderror" class="error"> </span><span id="idcorrect" -->
+					<!-- 							class="correct"></span></td> -->
+					<!-- 					</tr> -->
+          			<tr>
 						<td><span>*</span> <label for="proname">產品名稱 :</label></td>
-						<td><form:input name="proname" id="proname" path="productName"/><span
-							id="nerror" class="error"></span><span
+						<td><form:input name="proname" id="proname"
+								path="productName" /><span id="nerror" class="error"></span><span
 							id="ncorrect" class="correct"></span></td>
 					</tr>
 					<tr>
 						<td><span>*</span> <label for="category">產品分類 :</label></td>
-						<td><form:select name="category" id="category" path="category">
+						<td><form:select name="category" id="category"
+								path="category">
 								<form:option value="-1" label="請選擇..." />
-								<form:option value="實用嚴選" label="實用嚴選"/>
+								<form:option value="實用嚴選" label="實用嚴選" />
 								<form:option value="美味嚐點" label="美味嚐點" />
-								<form:option value="文創商品" label="文創商品"/>
-						</form:select><span id="catgerror" class="error"></span><span id="catgcorrect"
+								<form:option value="文創商品" label="文創商品" />
+							</form:select><span id="catgerror" class="error"></span><span id="catgcorrect"
 							class="correct"></span></td>
 					</tr>
 					<tr>
 						<td><span>* </span><label for="content">產品描述 :</label></td>
-						<td><form:textarea type="text" name="content" id="content" cols="30" rows="10" path="productDesc"/><span
-							id="contenterror" class="error"></span><span
-							id="contentcorrect" class="correct"></span></td>
+						<td><form:textarea type="text" name="content" id="content"
+								cols="30" rows="10" path="productDesc" /><span id="contenterror"
+							class="error"></span><span id="contentcorrect" class="correct"></span></td>
 					</tr>
 					<tr>
 						<td><span>* </span><label for="content">產品規格 :</label></td>
-						<td><form:input type="text" name="content" id="content" path="productSpec"/><span
-							id="contenterror" class="error"></span><span
+						<td><form:input type="text" name="content" id="content"
+								path="productSpec" /><span id="contenterror" class="error"></span><span
 							id="contentcorrect" class="correct"></span></td>
 					</tr>
 					<tr>
 						<td><span>* </span><label for="unitprice">單價(NTD) :</label></td>
-						<td><form:input type="text" name="unitprice" id="unitprice" path="unitPrice"/><span
-							id="prierror" class="error"></span><span
+						<td><form:input type="text" name="unitprice" id="unitprice"
+								path="unitPrice" /><span id="prierror" class="error"></span><span
 							id="pricorrect" class="correct"></span></td>
 					</tr>
 					<tr>
 						<td><span>* </span><label for="discount"> 折扣 :</label><br />
 							<p class="p1">(請填入0~1之間的數值)</p></td>
-						<td><form:input type="text" name="discount" id="discount" path="discount"/><span
-							id="dserror" class="error"></span><span
+						<td><form:input type="text" name="discount" id="discount"
+								path="discount" /><span id="dserror" class="error"></span><span
 							id="dscorrect" class="correct"></span></td>
 					</tr>
 					<tr>
 						<td><span>* </span><label for="launchdate">上架日期:</label></td>
-						<td><form:input type="date" name="launchdate" id="launchdate" path="launchdate"/><span
-							id="dateerror" class="error"></span><span
+						<td><form:input type="date" name="launchdate" id="launchdate"
+								path="launchdate" /><span id="dateerror" class="error"></span><span
 							id="datecorrect" class="correct"></span></td>
 					</tr>
 					<tr>
-					<td>商品封面圖片：</td>
-						<td >
-							<form:input type="file" path="mainImage"/><br />
-						</td>
+						<td>商品封面圖片：</td>
+						<td><form:input type="file" path="mainImage" /><br /></td>
 					</tr>
 					<tr>
 						<td>商品圖片：</td>
 						<td id="dadtd"><input type="button" value="+ 圖片" id="addfile" /><br />
-							<form:input type="file" name="extraphoto" path=""/><br /></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td><input type="submit" value="送出" id="submit" /> <a
-							href="../../GetAllProducts"><input
-								type="button" value="取消" /></a></td>
+							<form:input type="file" name="extraphoto" path="" /><br /></td>
 					</tr>
 				</table>
+				<input type="submit" value="送出" id="submit" /> <a
+							href="${contextRoot}/shop/allproducts"><input type="button" value="取消" /></a>
 			</form:form>
-		</div>
-	</main>
+			</div>
+			
+</div>
+</div>
+</div>
 	<script>
       // 動態新增上傳圖片
       let addfile = document.getElementById("addfile");

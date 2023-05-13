@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
@@ -56,19 +56,103 @@
                             </a>
                         </article>
                         <article class="article_textbox">
-                            <h3 class="title">${product.productName}</h3>
+                            <h4 class="title">${product.productName}</h4>
+                            <c:if test="${product.discount != 1.0}">
+                            <span style="text-decoration:line-through">NT $${ product.unitPrice}</span>
+                            </c:if>
                             <div class="text">
-                                <h4>NT $${product.unitPrice}</h4>
+                                <h5>NT $<fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0" value="${ product.unitPrice*product.discount }"/></h5>
                             </div>
-                            <a href="#" class="read_more">READ MORE</a>
+<!--                             <a href="#" class="read_more">READ MORE</a> -->
+						<button id="submitBtn" class="submitBtn" value="${product.productId}">加入購物車</button>
+                        <input type="hidden" value="${product.productId}" id="productid">
                         </article>
                     </div>
                    </c:forEach>
                    
                 </div>
+            <nav class="blog-pagination justify-content-center d-flex">
+            	<ul class="pagination">
+                              <li class="page-item">
+                                  <a href="#" class="page-link" aria-label="Previous">
+                                      <i class="ti-angle-left"></i>
+                                  </a>
+                              </li>
+                              <li class="page-item">
+                                  <a href="#" class="page-link">1</a>
+                              </li>
+                              <li class="page-item active">
+                                  <a href="#" class="page-link">2</a>
+                              </li>
+                              <li class="page-item">
+                                  <a href="#" class="page-link" aria-label="Next">
+                                      <i class="ti-angle-right"></i>
+                                  </a>
+                              </li>
+                          </ul>
+            </nav>
             </section>
         </div>
     </div>
 	<jsp:include page="../layout/footer.jsp"/>
+	<script>
+		$(document).ready(function () {
+			
+			$('.submitBtn').click(function (event) {
+                console.log(this.value);
+                event.preventDefault();
+                let productId = this.value;
+                let amount = 1;
+                $.ajax({
+                    url: 'http://localhost:8080/hangoutchill/shop/addcart',
+                    type: 'POST',
+                    contentType: "application/json;charset=UTF-8",
+                    datatype: 'text',
+                    data: JSON.stringify({
+                        'productid': productId,
+                        'amount': amount
+                    }),
+                    success: function (result) {
+                        console.log(result);
+                        alert(result);
+                        
+                        // 同步更新購物車按鈕
+                        $.ajax({
+                            url: 'http://localhost:8080/hangoutchill/shop/get/shoppingCartItemNum',
+                            type: 'GET',
+                            contentType: "application/json;charset=UTF-8",
+                            datatype: 'json',
+                            success: function (result) {
+                                console.log(result);
+                                if(result == 0){
+                             		$('.count').hide();
+                             	}else{
+                                $('.count').text(result);
+                             	}
+                            },
+                            error: function (err) {
+                                console.log(err);
+                                $('.count').hide();
+                            }
+                        })
+                        
+                        // 同步更新購物車按鈕結束
+                        
+                        
+
+                    },
+                    error: function (err) {
+                        console.log(err);
+                        alert(err);
+                    }
+                });
+                
+
+            })
+			
+		})
+		
+		
+	</script>
 </body>
 </html>

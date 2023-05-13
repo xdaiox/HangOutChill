@@ -47,13 +47,13 @@
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
           <i class="icon-bar-graph menu-icon"></i>
-          <span class="menu-title">商品管理</span>
+          <span class="menu-title">商城管理</span>
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="charts">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="#">Buttons</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">Dropdowns</a></li>
+            <li class="nav-item"> <a class="nav-link" href="${contextRoot}/shop/allproducts">商品管理</a></li>
+            <li class="nav-item"> <a class="nav-link" href="#">訂單管理</a></li>
             <li class="nav-item"> <a class="nav-link" href="#">Typography</a></li>
           </ul>
         </div>
