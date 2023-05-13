@@ -66,6 +66,7 @@ public class DiscussionsController {
             Discussions discussion = message.getDiscussions();
             Long count = mssRepository.countByDiscussions(discussion);
             replyCountMap.put(discussion.getD_id(), count);
+            System.out.println("====================discussion.getD_id()= "+discussion.getD_id()+"====================");
         }
         
         model.addAttribute("replyCountMap", replyCountMap);

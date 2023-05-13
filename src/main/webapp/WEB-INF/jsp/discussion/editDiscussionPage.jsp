@@ -8,7 +8,7 @@
 <jsp:include page="../layout/navbar.jsp" />
 <jstl:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <meta charset="UTF-8">
-<title>修改文章</title>
+<title>修改討論</title>
 
 <style>
 body {
@@ -205,7 +205,7 @@ body {
 								<button type="submit" class="btn btn-primary">發表</button>
 							</form:form>
 							<a href="${contextRoot}/discussion/allDiscussion"
-								class="btn btn-primary">返回文章列</a>
+								class="btn btn-primary">返回討論列</a>
 						</div>
 					</div>
 					

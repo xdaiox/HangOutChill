@@ -217,7 +217,7 @@
 								<div class="inner-main-body collapse forum-content show">
 									<div class="card">
 										<div class="card-header">
-											<h5 class="card-title text-center">文章</h5>
+											<h5 class="card-title text-center">討論</h5>
 										</div>
 										<div class="card-body">
 											<form:form modelAttribute="discussion" method="post"

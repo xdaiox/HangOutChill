@@ -9,7 +9,7 @@
 	integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o="
 	crossorigin="anonymous" />
 <meta charset="UTF-8">
-<title>回覆文章</title>
+<title>回覆討論</title>
 
 <style>
 body {
@@ -174,7 +174,7 @@ body {
                 <div class="inner-main-body collapse forum-content show">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title text-center">回覆文章</h5>
+                            <h5 class="card-title text-center">回覆討論</h5>
                         </div>
                         <div class="card-body">
                             <form>
@@ -193,7 +193,7 @@ body {
                                     <textarea class="form-control" id="content" rows="5" placeholder="在此現撈回覆内容"></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary">回覆</button>
-								<a href="${contextRoot}/discussion/allDiscussion" class="btn btn-primary">返回文章列</a>
+								<a href="${contextRoot}/discussion/allDiscussion" class="btn btn-primary">返回討論列</a>
                             </form>
                         </div>
                     </div>

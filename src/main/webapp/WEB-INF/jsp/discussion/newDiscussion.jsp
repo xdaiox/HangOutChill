@@ -8,7 +8,7 @@
 <jsp:include page="../layout/navbar.jsp" />
 <jstl:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <meta charset="UTF-8">
-<title>發表文章</title>
+<title>發表討論</title>
 
 <style>
 body {
@@ -174,7 +174,7 @@ body {
 				<div class="inner-main-body collapse forum-content show">
 					<div class="card">
 						<div class="card-header">
-							<h5 class="card-title text-center">發表文章</h5>
+							<h5 class="card-title text-center">發表討論</h5>
 						</div>
 						<div class="card-body">
 							<form:form modelAttribute="discussion" method="post" action="${contextRoot}/discussion/post">
@@ -203,7 +203,7 @@ body {
 								<button type="submit" class="btn btn-primary">發表</button>
 							</form:form>
 							<a href="${contextRoot}/discussion/allDiscussion"
-								class="btn btn-primary">返回文章列</a>
+								class="btn btn-primary">返回討論列</a>
 						</div>
 					</div>
 					

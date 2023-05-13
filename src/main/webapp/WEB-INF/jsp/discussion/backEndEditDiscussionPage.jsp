@@ -8,7 +8,7 @@
 <jsp:include page="../layout/navbar.jsp" />
 <jstl:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <meta charset="UTF-8">
-<title>修改文章</title>
+<title>修改討論</title>
 
 <style>
 body {
@@ -173,7 +173,7 @@ body {
 				<div class="inner-main-body collapse forum-content show">
 					<div class="card">
 						<div class="card-header">
-							<h5 class="card-title text-center">修改文章</h5>
+							<h5 class="card-title text-center">修改討論</h5>
 						</div>
 						<div class="card-body">
 							<form:form modelAttribute="discussion" method="put" action="${contextRoot}/back/backEndEditDiscussion/${discussion.d_id}">
@@ -206,7 +206,7 @@ body {
 								<button type="submit" class="btn btn-primary">發表</button>
 							</form:form>
 							<a href="${contextRoot}/back/allDiscussions"
-								class="btn btn-primary">返回後台文章列</a>
+								class="btn btn-primary">返回後台討論列</a>
 						</div>
 					</div>
 					

@@ -224,7 +224,7 @@ body {
 								
 							</form:form>
 							<a href="${contextRoot}/discussion/allDiscussion"
-								class="btn btn-primary">返回文章列</a>
+								class="btn btn-primary">返回討論列</a>
 						</div>
 					</div>
 

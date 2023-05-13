@@ -184,7 +184,7 @@ body {
 						<button class="btn btn-primary" type="submit">最新</button>
 						<button class="btn btn-primary" type="submit">精選</button>
 						<button class="btn btn-primary" type="submit">熱門</button>
-						<a href="${contextRoot}/discussion/allFavourite"><button class="btn btn-primary" type="submit">珍藏文章</button></a>
+						<a href="${contextRoot}/discussion/allFavourite"><button class="btn btn-primary" type="submit">珍藏討論</button></a>
 						<button type="button" class="btn btn-link ml-auto">分類1</button>
 						<button type="button" class="btn btn-link ml-auto">分類2</button>
 						<button type="button" class="btn btn-link ml-auto">分類3</button>
@@ -197,7 +197,7 @@ body {
 						</span>
 					</div>
 					<div class="inner-main-header2">
-						<a href="${contextRoot}/discussion/newDiscussion"><button class="btn btn-primary" type="submit">新增文章</button></a>
+						<a href="${contextRoot}/discussion/newDiscussion"><button class="btn btn-primary" type="submit">新增討論</button></a>
 						<select class="custom-select custom-select-sm mr-1">
 							<option selected="10">顯示10項結果</option>
 							<option value="20">顯示20項結果</option>
@@ -256,52 +256,52 @@ body {
 						
 						<jstl:forEach var="discussion" items="${page.content}">
 						<div class="card">
-							<div class="card-body p-2 p-sm-3">
-								<div class="media forum-item">
-									<!-- 先從自己的discussion model 外鍵entity名稱 normalMember 再去找到normalMmeber對應的table裡photoB64欄位 -->
-									<a data-toggle="collapse" data-target=".forum-content"><img src="${discussion.normalMember.photoB64}" class="mr-3 rounded-circle" width="50" alt="User" /></a>
-									<a href="" class="star" data-discussion-id="${discussion.d_id}" data-normalmember-id="${discussion.normalMember.id}">
-										<!-- ********************星星******************** -->
-										<i class="far fa-star fa-2x"></i>
+						<div class="card-body p-2 p-sm-3">
+						<div class="media forum-item">
+							<!-- 先從自己的discussion model 外鍵entity名稱 normalMember 再去找到normalMmeber對應的table裡photoB64欄位 -->
+							<a data-toggle="collapse" data-target=".forum-content"><img src="${discussion.normalMember.photoB64}" class="mr-3 rounded-circle" width="50" alt="User" /></a>
+							<a href="" class="star" data-discussion-id="${discussion.d_id}" data-normalmember-id="${discussion.normalMember.id}">
+								<!-- ********************星星******************** -->
+								<i class="far fa-star fa-2x"></i>
+							</a>
+							
+							<div class="media-body">
+								<div class="text-body" onclick="window.location.href='${contextRoot}/message/allMessages/${discussion.d_id}'">	
+									<a href="#" data-toggle="collapse" ata-target=".forum-content" class="text-body">
+										<h3>${discussion.title}</h3>
+										<p class="text-secondary">${discussion.contents}</p>
+										<p class="text-muted">
+											<h5>作者: ${discussion.normalMember.nickName}</h5>
+										</p>
 									</a>
-									
-									<div class="media-body">
-										<div class="text-body" onclick="window.location.href='${contextRoot}/message/allMessages/${discussion.d_id}'">	
-											<a href="#" data-toggle="collapse" ata-target=".forum-content" class="text-body">
-												<h3>${discussion.title}</h3>
-												<p class="text-secondary">${discussion.contents}</p>
-												<p class="text-muted">
-													<h5>作者: ${discussion.normalMember.nickName}</h5>
-												</p>
-											</a>
-										</div>
-										<span class="text-secondary font-weight-bold">發布於 
-											<fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss" value="${discussion.postDate}"/>
-										</span>
-									</div>
-									<!-- <a href="${contextRoot}/discussion/replyDiscussion"><button class="btn btn-primary" type="submit">回覆
-									</button></a>
-
-									<a href="${contextRoot}/discussion/editDiscussion/${discussion.d_id}"><button class="btn btn-primary" type="submit">編輯</button></a>
-
-									<form action="${contextRoot}/discussion/deleteDiscussion/${discussion.d_id}" method="post">
-										<input type="hidden"name="_method" value="delete">
-										<button class="btn btn-primary danger" type="submit">刪除</button>
-									</form> -->
-									
-									<div class="text-muted small text-center align-self-center">
-										<span class="d-none d-sm-inline-block">
-											<!-- ===============計算總共有多少筆回覆=============== -->
-												<i class="far fa-comment ml-2 fa-lg" style="font-size: 20px;"></i>
-												<jstl:if test="${empty replyCountMap[discussion.d_id]}"><i style="font-size: 20px;">0</i></jstl:if>
-												
-												<jstl:if test="${not empty replyCountMap[discussion.d_id]}">
-												<i style="font-size: 20px;"><jstl:out value="${replyCountMap[discussion.d_id]}" /></i>
-												</jstl:if>
-											</span>
-									</div>
 								</div>
+								<span class="text-secondary font-weight-bold">發布於 
+									<fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss" value="${discussion.postDate}"/>
+								</span>
 							</div>
+							<!-- <a href="${contextRoot}/discussion/replyDiscussion"><button class="btn btn-primary" type="submit">回覆
+							</button></a>
+
+							<a href="${contextRoot}/discussion/editDiscussion/${discussion.d_id}"><button class="btn btn-primary" type="submit">編輯</button></a>
+
+							<form action="${contextRoot}/discussion/deleteDiscussion/${discussion.d_id}" method="post">
+								<input type="hidden"name="_method" value="delete">
+								<button class="btn btn-primary danger" type="submit">刪除</button>
+							</form> -->
+							
+							<div class="text-muted small text-center align-self-center">
+								<span class="d-none d-sm-inline-block">
+									<!-- ===============計算總共有多少筆回覆=============== -->
+										<i class="far fa-comment ml-2 fa-lg" style="font-size: 20px;"></i>
+										<jstl:if test="${empty replyCountMap[discussion.d_id]}"><i style="font-size: 20px;">0</i></jstl:if>
+										
+										<jstl:if test="${not empty replyCountMap[discussion.d_id]}">
+										<i style="font-size: 20px;"><jstl:out value="${replyCountMap[discussion.d_id]}" /></i>
+										</jstl:if>
+									</span>
+							</div>
+						</div>
+						</div>
 						</div>
 						</jstl:forEach>
 						
