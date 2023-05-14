@@ -13,6 +13,26 @@
         tr[data-href] {
             cursor: pointer;
         }
+        @media (max-width: 1260px) {
+            .container-scroller {
+            max-width: 96%;
+            } /* 當寬度1259px↓　寬度設定 */
+        }
+        .container-scroller {
+            max-width: 69%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .image-wrapper img {
+            max-width: 25%;
+            max-height: 100px;
+            margin: 3px;
+            /* card裡的討論圖片大小限制 */
+        }
+        .parent-container {
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -38,7 +58,8 @@
                     <tr data-href="${contextRoot}/message/allMessages/${fav.discussions.d_id}">
                         <td class="align-middle">${fav.normalMember.nickName}</td>
                         <td class="align-middle">${fav.discussions.title}</td>
-                        <td class="align-middle">${fav.discussions.contents}</td>
+                        <!-- 把圖片用image-wrapper包起來 -->								
+                        <td class="align-middle"><span class="image-wrapper"></span>${fav.discussions.contents}</span></td>
                         <td class="align-middle">${fav.discussions.type}</td>
                         <td class="align-middle">${fav.discussions.readCount}</td>
                         <td class="align-middle">${fav.postDate}</td>

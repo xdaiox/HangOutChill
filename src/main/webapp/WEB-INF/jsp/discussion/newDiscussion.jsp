@@ -161,6 +161,14 @@ body {
 	width: 150px; /*分頁選單option*/
 	margin-left: 15px;
 }
+@media (max-width: 1260px) {
+	.container {
+	max-width: 96%;
+	} /* 當寬度1259px↓　寬度設定 */
+}
+.container {
+	max-width: 69%;
+}
 </style>
 					<!-- ================================== ck editor ================================== -->
 					<!-- <script src="${contextRoot}/js/ckeditor/ckeditor.js"></script> -->

@@ -81,13 +81,22 @@ public class DiscussionsController {
     	String name = authentication.getName();
         NormalMember result = nMemberService.findNormalUserByAccount(name);
         model.addAttribute("result", result);
+        
     	model.addAttribute("discussion", new Discussions());
     	
     	return"discussion/newDiscussion";
     }
     @PostMapping("/discussion/post")
-    public String postDiscussion(@ModelAttribute("discussion") Discussions dss,Model model) {
-    	System.out.println("==================================================="+dss.getD_id()+dss.getD_id()+dss.getD_id()+dss.getD_id()+"===================================================");
+    public String postDiscussion(@ModelAttribute("discussion") Discussions dss,Model model,
+			@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+    	
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+        
+        result.getId();
+        
+//    	System.out.println("==================================================="+result.getId()+"===================================================");
     	dService.addDiscussions(dss);
     	
 //    	Discussions discussion = dService.getLatest();
@@ -107,21 +116,39 @@ public class DiscussionsController {
 //    }
 //    
     @GetMapping("/discussion/editDiscussion/{id}")
-    public String editDiscussion(@PathVariable("id") Integer id, Model model) {
+    public String editDiscussion(@PathVariable("id") Integer id, Model model,
+    		@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+    	
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+    	
         Discussions dss = dService.findDiscussionById(id);
         model.addAttribute("discussion", dss);
         return "discussion/editDiscussionPage";
     }
     
     @PutMapping("/discussion/editDiscussion/{id}")
-    public String toEditedDiscussion(@ModelAttribute("discussion") Discussions dss,@PathVariable("id") Integer id) {
+    public String toEditedDiscussion(@ModelAttribute("discussion") Discussions dss,@PathVariable("id") Integer id,Model model,
+    		@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+    	
     	dService.updateById(dss.getD_id(),dss.getTitle(),dss.getType(),dss.getContents());
     	return "redirect:/message/allMessages/{id}";
     }
     
     @Transactional
     @DeleteMapping("/discussion/deleteDiscussion/{id}")
-    public String toDeleteButItsNotActuallyDeleteItsHiddenDiscussion(@PathVariable("id") Integer id) {
+    public String toDeleteButItsNotActuallyDeleteItsHiddenDiscussion(@PathVariable("id") Integer id,Model model,
+    		@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+    	
     	dService.deleteDiscussionById(id);
     	return "redirect:/discussion/allDiscussion";
     }

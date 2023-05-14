@@ -171,6 +171,14 @@ body {
         width: 400px; /* 在768px以上的寬度下設置寬度為400px */
     }
 }
+@media (max-width: 1260px) {
+	.container {
+	max-width: 96%;
+	} /* 當寬度1259px↓　寬度設定 */
+}
+.container {
+	max-width: 69%;
+}
 </style>
 
 </head>

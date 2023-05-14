@@ -5,10 +5,11 @@
 <html>
 <head>
     <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
-    <title>所有討論</title>
+    <title>後台所有討論</title>
+
 </head>
 <body>
-<div class="container-scroller">
+<div class="container-scroller" max-width="80%">
     <jsp:include page="../dbLayout/top_navbar.jsp" />
 
     <div class="container-fluid page-body-wrapper">

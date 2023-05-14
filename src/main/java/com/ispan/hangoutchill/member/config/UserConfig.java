@@ -64,6 +64,8 @@ public class UserConfig {
     	http.csrf().disable()
         .authorizeRequests()
             .antMatchers("/discussion/newDiscussion").hasAuthority("USER")
+            .antMatchers("/discussion/allFavourite").hasAuthority("USER")
+            .antMatchers("/message/post/{id}").hasAuthority("USER")
             .antMatchers("/dashboard").hasAuthority("ADMIN")
             .antMatchers("/", "/member/registration", "/NormalMember/registed").permitAll()
         .and()
