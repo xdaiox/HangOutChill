@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,8 +30,15 @@ public class SignUpOrderDetail {
 //=======================訂單成立時間(order_time)===================
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(iso = ISO.DATE)
-	@Column(name="order_time",columnDefinition = "datetime",nullable = false)
+	@Column(name="order_time",columnDefinition = "datetime")
 	private Date orderTime;
+	
+	@PrePersist
+	public void onCreate() {
+		if(orderTime == null) {
+			orderTime = new Date();
+		}
+	}
 //=======================報名會員(member_name)=====================
 	@Column(name="member_name",columnDefinition = "nvarchar(max)",nullable = false)
 	private String memberName;
@@ -57,6 +65,31 @@ public class SignUpOrderDetail {
 //=======================連絡電話(tel)======================
 	@Column(name="tel",columnDefinition = "nvarchar(max)",nullable = false)
 	private String tel;
+//=======================報名人id(member_id)======================
+	@Column(name="member_id",columnDefinition = "int",nullable = false)
+	private Integer memberId;
+//=======================廠商id(member_id)======================
+	
+	@Column(name="shop_id",columnDefinition = "int",nullable = false)
+	private Integer shop_id;
+	
+	
+	
+	public Integer getShop_id() {
+		return shop_id;
+	}
+
+	public void setShop_id(Integer shop_id) {
+		this.shop_id = shop_id;
+	}
+
+	public Integer getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(Integer memberId) {
+		this.memberId = memberId;
+	}
 
 	public Integer getId() {
 		return id;

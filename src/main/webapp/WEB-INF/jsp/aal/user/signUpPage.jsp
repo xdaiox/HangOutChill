@@ -42,7 +42,7 @@
 												test="${aal.topic=='les'}">課程</jstl:if>
 										<td class="align-middle"><span><fmt:formatDate
 													pattern="yyyy-MM-dd" value="${aal.theDayofStarts}" /></span>
-										<td class="align-middle">${aal.fee}
+										<td class="align-middle" id="totalPreview">${aal.fee}
 								</tbody>
 							</table>
 							<form:form method="post"
@@ -62,11 +62,10 @@
 										<tr>
 											<td class="align-middle">${result.account}
 											<td class="align-middle">${result.reallName}
-											<td class="align-middle"><input name="tel"
-												value="${result.tel}" type="text" readonly /> 
+											<td class="align-middle">${result.tel}
 												<jstl:if test="${aal.topic=='act'}">
-													<td class="align-middle"><input name="numbersOfPeople"
-														type="text" value="1" />
+													<td class="align-middle"><input name="numbersOfPeople" id="totalTarget"
+														type="number" value="1" size="5px" min="1" max="${aal.quota-aal.registered}" onkeydown="return false" />
 												</jstl:if> <jstl:if test="${aal.topic=='les'}">
 													<input name="numbersOfPeople" value="1" type="hidden" />
 												</jstl:if>
@@ -76,10 +75,9 @@
 								<jstl:choose>
 									<jstl:when test="${checksignup==0}">
 										<input value="${aal.id}" type="hidden" name="id" />
-										<button type="submit" class="btn btn-primary">確定送出</button>
+										<button type="submit" class="btn btn-primary">確定報名</button>
 									</jstl:when>
 									<jstl:when test="${checksignup==1}">
-										<button type="submit" class="btn btn-primary" disabled>您已報名</button>
 									</jstl:when>
 								</jstl:choose>
 							
@@ -89,12 +87,11 @@
 
 									<jstl:choose>
 										<jstl:when test="${checksignup==0}">
-											<button class="btn btn-primary" disabled>尚未報名</button>
-										</jstl:when>
+											</jstl:when>
 										<jstl:when test="${checksignup==1}">
 											<input name="numbersOfPeople" id="target" type="hidden" />
 											<input value="${aal.id}" type="hidden" name="id" />
-											<button type="submit" class="btn btn-primary">準備結帳</button>
+											<button type="submit" onclick="getthenumber()" class="btn btn-primary">準備結帳</button>
 										</jstl:when>
 									</jstl:choose>
 								</form:form>
@@ -110,12 +107,19 @@
 	<jsp:include page="../../layout/footer.jsp" />
 
 <script>
-
+	function getthenumber(){
 	const number=document.querySelectorAll('[name="numbersOfPeople"]')[0].value
 	console.log(number)
 	document.getElementById("target").value=number;
 
-
+	}
+	const unit_price = document.getElementById("totalPreview").textContent
+	document.getElementById("totalTarget").addEventListener('change',function(){
+		let multiplier = document.getElementById("totalTarget").value
+		const totalpre =document.getElementById("totalPreview")
+		let total = unit_price*multiplier
+		totalpre.innerText=total
+	})
 
 
 </script>

@@ -37,11 +37,13 @@ public class HomepageController {
     @GetMapping("/actandles")
     public String showAllActAndLes(@RequestParam(name="p",defaultValue = "1") Integer pagenumber, Model model,
     		@CurrentSecurityContext(expression="authentication") Authentication authentication) {
-    	Page<ActivitiesandLesson> page = aalService.findByPage(pagenumber);
-		model.addAttribute("page",page);
-		String name = authentication.getName();
+		String value = "approved";
+		Page<ActivitiesandLesson> page = aalService.findByStatus(pagenumber, value);
+    	
+    	String name = authentication.getName();
         NormalMember result = nMemberService.findNormalUserByAccount(name);
         model.addAttribute("result",result);
+        model.addAttribute("page",page);
     	
         return "aal/showAllAaL";
     }

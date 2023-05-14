@@ -42,7 +42,7 @@
 								<tr>
 									<td class="align-middle">${aal.id}
 									<td class="align-middle">${aal.normalMember.id}
-									<td class="align-middle"><a href="${contextRoot}/actandles/${aal.id}">${aal.name}</a>
+									<td class="align-middle">${aal.name}
 									<td class="align-middle">${aal.aalContent}
 									<td class="align-middle"><jstl:if
 											test="${aal.topic=='act'}">活動</jstl:if> <jstl:if
@@ -62,10 +62,15 @@
 										src="data:image/png;base64,${aal.base64image}"> <br />
 									<td class="align-middle">
 										<form:form method="get" action="${contextRoot}/actandles/detail/lessignup">
+											<jstl:choose>
+											<jstl:when test="${(aal.quota-aal.registered)>0}">
 											<input value="${aal.id}" type="hidden" name="id" />
-												<button type="submit" class="btn btn-primary" >報名</button>
-												
-									
+												<button type="submit" class="btn btn-primary" >前往報名</button>
+											</jstl:when>
+											<jstl:when test="${(aal.quota-aal.registered)==0}">
+												<button  disabled class="btn btn-primary">已額滿</button>
+											</jstl:when>
+											</jstl:choose>:
 										</form:form>
 						</tbody>
 					</table>

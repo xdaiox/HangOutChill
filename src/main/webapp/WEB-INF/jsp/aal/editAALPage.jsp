@@ -96,13 +96,9 @@ $(document).ready(function() {
 								</p>
 								<form:input path="deadLine" value="${aal.deadLine}"
 									class="form-control" type="date"></form:input>
-								<p>狀態:</p>
-								<form:select path="currentStatus" class="form-control">
-									<form:option value="上架中">上架中</form:option>
-									<form:option value="審核中">審核中</form:option>
-									<form:option value="已下架">已下架</form:option>
-									<form:option value="已刪除">已刪除</form:option>
-								</form:select>
+
+								<form:input path="currentStatus" class="form-control"
+									type="hidden" value="unreviewed"></form:input>
 								<p>預覽圖-原圖:</p>
 								<img width="200px" height="200px" id="preview"
 									src="data:image/png;base64,${aal.base64image}">
@@ -110,7 +106,8 @@ $(document).ready(function() {
 								<form:input path="imageFile" id="target" class="form-control"
 									type="file"></form:input>
 								<p>文案內容:</p>
-								<form:textarea path="aalContent" id="summernote" value="${aalContent}"/>
+								<form:textarea path="aalContent" id="summernote"
+									value="${aalContent}" />
 								<button type="submit" class="btn btn-primary">送出</button>
 							</form:form>
 
