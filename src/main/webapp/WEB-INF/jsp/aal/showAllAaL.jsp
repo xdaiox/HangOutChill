@@ -21,12 +21,6 @@
 
 			<div class="content"
 				style="background-color: #ffffff00; height: 100%;">
-				<h1>輪播圖</h1>
-				<img style="height: 600px; width: 600px" src="">
-			</div>
-			<div class="content"
-				style="background-color: #ffffff00; height: 100%;">
-				<p>活動總攬
 				<form action="${contextRoot}/actandles/shop/postall">
 					<input type="submit" class="btn btn-outline-info btn-sm"
 						value="活動總覽" />
@@ -35,15 +29,16 @@
 					<input type="submit" class="btn btn-outline-info btn-sm"
 						value="我的活動/課程" />
 				</form>
+			</div>
+			<div class="content"
+				style="background-color: #ffffff00; height: 100%;">
+				<p>活動總攬
 				<div class="table-responsive">
 					<table class="table table-hover table-bordered table-light">
 						<thead>
 							<tr>
-								<th>項目ID
-								<th>商家ID
 								<th>預覽圖
 								<th>名稱
-								<th>內容
 								<th>分類
 								<th>新增時間
 								<th>舉辦日
@@ -51,21 +46,18 @@
 								<th>預計名額
 								<th>最低開辦人數
 								<th>報名截止日
-								<th>當前狀態
+								<th>已報名人數
+								<th>剩餘人數
 						</thead>
 						<tbody>
 							<jstl:forEach var="aal" items="${page.content}">
 								<tr>
-									<td class="align-middle">${aal.id}
-									<td class="align-middle">${aal.normalMember.id}
 									<td class="align-middle"><a
 										href="${contextRoot}/actandles/${aal.id}"><img
 											width="200px" height="200px"
 											src="data:image/png;base64,${aal.base64image}"></a>
 									<td class="align-middle"><a
 										href="${contextRoot}/actandles/${aal.id}">${aal.name}</a>
-									<td class="align-middle"><button class="123 btn btn-primary">預覽</button>
-										
 									<td class="align-middle"><jstl:if
 											test="${aal.topic=='act'}">活動</jstl:if> <jstl:if
 											test="${aal.topic=='les'}">課程</jstl:if>
@@ -79,9 +71,15 @@
 									<td class="align-middle">${aal.lowerLimit}
 									<td class="align-middle"><span><fmt:formatDate
 												pattern="yyyy-MM-dd" value="${aal.deadLine}" /></span>
-									<td class="align-middle">${aal.currentStatus}
-									
-									
+									<td class="align-middle">${aal.registered}
+									<td class="align-middle"><jstl:choose>
+											<jstl:when test="${(aal.quota-aal.registered)<5}">
+												<p style="color: red; font-weight: bold;">${aal.quota-aal.registered}
+											</jstl:when>
+											<jstl:when test="${(aal.quota-aal.registered)>5}">
+												<p>${aal.quota-aal.registered}
+											</jstl:when>
+										</jstl:choose>
 							</jstl:forEach>
 						</tbody>
 					</table>
@@ -93,8 +91,8 @@
 	</div>
 
 	<jsp:include page="../layout/footer.jsp" />
-	
-	
-	
+
+
+
 </body>
 </html>

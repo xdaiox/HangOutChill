@@ -23,6 +23,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Formula;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.web.multipart.MultipartFile;
@@ -91,6 +92,9 @@ public class ActivitiesandLesson {
 
 	@Transient
 	private String base64image;
+	
+	@Transient
+	private Integer registered;
 	
 	 @ManyToMany(cascade = CascadeType.ALL)
 	    @JoinTable(
@@ -252,5 +256,14 @@ public class ActivitiesandLesson {
 		this.base64image = base64image;
 	}
 
+	public Integer getRegistered() {
+		return registered;
+	}
+
+	public void setRegistered(Integer registered) {
+		this.registered = registered;
+	}
+
+	
 
 }

@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
 import com.ispan.hangoutchill.actandles.service.AALservice;
+import com.ispan.hangoutchill.actandles.service.SignUpOrderDetailService;
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.service.NormalMemberService;
 
@@ -41,6 +42,8 @@ public class AALcontroller {
 	private AALservice aalService;
 	@Autowired
 	private NormalMemberService nMemberService;
+	@Autowired
+	private SignUpOrderDetailService suoService;
 
 	@GetMapping("/actandles/shop/add")
 	public String addAAL(Model model,
@@ -55,8 +58,7 @@ public class AALcontroller {
 	}
 
 	@PostMapping("/actandles/shop/post")
-	public String postAAL(@RequestParam("imageFile") MultipartFile imageFile,
-			@ModelAttribute("aal") ActivitiesandLesson aal, Model model) {
+	public String postAAL(@RequestParam("imageFile") MultipartFile imageFile,@ModelAttribute("aal") ActivitiesandLesson aal, Model model) {
 
 		try {
 			aal.setImage(imageFile.getBytes());
@@ -70,30 +72,38 @@ public class AALcontroller {
 	}
 
 	@GetMapping("/actandles/shop/postall")
-	public String goShowAAL(@RequestParam(name = "p", defaultValue = "1") Integer pagenumber, Model model) {
+	public String goShowAAL(@RequestParam(name = "p", defaultValue = "1") Integer pagenumber, Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
 		Page<ActivitiesandLesson> page = aalService.findByPage(pagenumber);
 		model.addAttribute("page", page);
+		String name = authentication.getName();
+		NormalMember result = nMemberService.findNormalUserByAccount(name);
+		model.addAttribute("result", result);
 
 		return "aal/showMyAaL";
 	}
 
 	@DeleteMapping("/actandles/shop/delete")
 	public String deleteAAL(@RequestParam Integer id) {
+		
 		aalService.deleteAALById(id);
 		return "redirect:/actandles/shop/postall";
 	}
 
 	@GetMapping("/actandles/shop/edit")
-	public String editPage(@RequestParam("id") Integer id, Model model) {
+	public String editPage(@RequestParam("id") Integer id, Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
 		ActivitiesandLesson aal = aalService.findAALById(id);
+		String name = authentication.getName();
+		NormalMember result = nMemberService.findNormalUserByAccount(name);
+		model.addAttribute("result", result);
 		model.addAttribute("aal", aal);
 
 		return "aal/editAALPage";
 	}
 
 	@PutMapping("/actandles/shop/edit")
-	public String putEditedAAL(@ModelAttribute("aal") ActivitiesandLesson aal) {
+	public String putEditedAAL(@ModelAttribute("aal") ActivitiesandLesson aal, Model model) {
 		aalService.updateById(aal.getId(), aal);
+
 		return "redirect:/actandles/shop/postall";
 	}
 
@@ -111,12 +121,25 @@ public class AALcontroller {
 
 //====================================管理員部分=========================================	
 
+	//審核列表	
 	@GetMapping("/actandles/admin/chackaal")
-	public String goShowAALForAdmin(@RequestParam(name = "p", defaultValue = "1") Integer pagenumber, Model model) {
-		Page<ActivitiesandLesson> page = aalService.findByPage(pagenumber);
+	public String goShowAALForAdmin(@RequestParam(name = "p", defaultValue = "1") Integer pagenumber, Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
+		String name = authentication.getName();
+		NormalMember result = nMemberService.findNormalUserByAccount(name);
+		model.addAttribute("result", result);
+		
+		String value = "unreviewed";
+		Page<ActivitiesandLesson> page = aalService.findByStatus(pagenumber, value);
+		
 		model.addAttribute("page", page);
 
 		return "aal/admin/checkAaL";
+	}
+	@PutMapping("/actandles/admin/chackaal")
+	public String approvedAAL(@RequestParam(name = "id") Integer id,@RequestParam(name = "currentStatus") String currentStatus) {
+
+		aalService.updateForApproved(id, currentStatus);
+		return "redirect:/actandles/admin/chackaal";
 	}
 
 //===================================結帳測試=========================================	
@@ -129,7 +152,7 @@ public class AALcontroller {
 		ActivitiesandLesson aal = aalService.findAALById(id);
 		String name = authentication.getName();
 		NormalMember result = nMemberService.findNormalUserByAccount(name);
-		
+		if(numbersOfPeople> aal.getQuota()-aal.getRegistered()) {numbersOfPeople=aal.getQuota()-aal.getRegistered();}
 		// 設定金流
 		AllInOne aio = new AllInOne("");
 		AioCheckOutALL aioCheck = new AioCheckOutALL();
@@ -156,10 +179,11 @@ public class AALcontroller {
 //		aioCheck.setReturnURL("https://0ebf-203-204-109-146.ngrok-free.app/hangoutchill/returnURL");
 		/* Client端回傳付款結果網址 */
 
-		aioCheck.setOrderResultURL("http://localhost:8080/hangoutchill/showOrder?ind="+uuNo+timestamp+aal.getId()+"&n="+numbersOfPeople);
+		aioCheck.setOrderResultURL("http://localhost:8080/hangoutchill/actandles/detail/showOrder?on=AaL"+aal.getId()+aal.getNormalMember().getId()+result.getId()+uuNo+timestamp);
+//		aioCheck.setOrderResultURL("http://localhost:8080/hangoutchill/showOrder?ind="+uuNo+timestamp+aal.getId()+"&n="+numbersOfPeople);
 //		aioCheck.setOrderResultURL("https://0ebf-203-204-109-146.ngrok-free.app/hangoutchill/showHistoryOrder?id="+aal.getId());
 		// 輸出畫面
-
+		suoService.createOrder(result, aal, uuNo, timestamp, numbersOfPeople);
 		String form = aio.aioCheckOut(aioCheck, null);
 		
 		return form;

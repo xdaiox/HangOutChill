@@ -28,25 +28,27 @@ public class AALservice {
 	}
 
 	public Page<ActivitiesandLesson> findPageByMemberId(Integer id, Integer pageNumber) {
-		Pageable pgb = PageRequest.of(pageNumber - 1, 3, Sort.Direction.DESC, "theDayofSubmission");
+		Pageable pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "theDayofSubmission");
 		Page<ActivitiesandLesson> page = aalRepository.findPageByMemberId(id, pgb);
 		List<ActivitiesandLesson> contentlist = page.getContent();
 		for (ActivitiesandLesson aal : contentlist) {
 			byte[] imageBytes = aal.getImage(); // 取得圖片二進位數據
 			String base64Image = Base64.getEncoder().encodeToString(imageBytes); // 轉換為base64格式
 			aal.setBase64image(base64Image); // 設置到對應的實體類屬性中
+			aal.setRegistered(aalRepository.findregistered(aal.getId()));
 		}
 		return page;
 	}
 
 	public Page<ActivitiesandLesson> findByaccountsId(Integer id, Integer pageNumber) {
-		Pageable pgb = PageRequest.of(pageNumber - 1, 3, Sort.Direction.DESC, "theDayofSubmission");
+		Pageable pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "theDayofSubmission");
 		Page<ActivitiesandLesson> page = aalRepository.findByaccountsId(id, pgb);
 		List<ActivitiesandLesson> contentlist = page.getContent();
 		for (ActivitiesandLesson aal : contentlist) {
 			byte[] imageBytes = aal.getImage(); // 取得圖片二進位數據
 			String base64Image = Base64.getEncoder().encodeToString(imageBytes); // 轉換為base64格式
 			aal.setBase64image(base64Image); // 設置到對應的實體類屬性中
+			aal.setRegistered(aalRepository.findregistered(aal.getId()));
 		}
 		return page;
 	}
@@ -59,9 +61,50 @@ public class AALservice {
 			byte[] imageBytes = aal.getImage(); // 取得圖片二進位數據
 			String base64Image = Base64.getEncoder().encodeToString(imageBytes); // 轉換為base64格式
 			aal.setBase64image(base64Image); // 設置到對應的實體類屬性中
+			aal.setRegistered(aalRepository.findregistered(aal.getId()));
 		}
 		return page;
 	}
+//	public Page<ActivitiesandLesson> findByStatusforadmin(Integer pageNumber) {
+//		Pageable pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "theDayofSubmission");
+//		Page<ActivitiesandLesson> page = aalRepository.findPageByStatusForAdmin(pgb);
+//		List<ActivitiesandLesson> contentlist = page.getContent();
+//		for (ActivitiesandLesson aal : contentlist) {
+//			byte[] imageBytes = aal.getImage(); // 取得圖片二進位數據
+//			String base64Image = Base64.getEncoder().encodeToString(imageBytes); // 轉換為base64格式
+//			aal.setBase64image(base64Image); // 設置到對應的實體類屬性中
+//		}
+//		return page;
+//	}
+//	
+//	public Page<ActivitiesandLesson> findByStatusforguest(Integer pageNumber) {
+//		Pageable pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "theDayofSubmission");
+//		Page<ActivitiesandLesson> page = aalRepository.findPageByStatusForGuest(pgb);
+//		List<ActivitiesandLesson> contentlist = page.getContent();
+//		for (ActivitiesandLesson aal : contentlist) {
+//			byte[] imageBytes = aal.getImage(); // 取得圖片二進位數據
+//			String base64Image = Base64.getEncoder().encodeToString(imageBytes); // 轉換為base64格式
+//			aal.setBase64image(base64Image); // 設置到對應的實體類屬性中
+//		}
+//		return page;
+//	}
+	
+	public Page<ActivitiesandLesson> findByStatus(Integer pageNumber,String value) {
+		Pageable pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "theDayofSubmission");
+		Page<ActivitiesandLesson> page = aalRepository.findPageByStatus(value, pgb);
+		List<ActivitiesandLesson> contentlist = page.getContent();
+		for (ActivitiesandLesson aal : contentlist) {
+			byte[] imageBytes = aal.getImage(); // 取得圖片二進位數據
+			String base64Image = Base64.getEncoder().encodeToString(imageBytes); // 轉換為base64格式
+			aal.setBase64image(base64Image); // 設置到對應的實體類屬性中
+			//取得報名人數
+			aal.setRegistered(aalRepository.findregistered(aal.getId()));
+			
+		}
+		return page;
+	}
+	
+	
 
 	public void deleteAALById(Integer id) {
 		aalRepository.deleteById(id);
@@ -77,6 +120,7 @@ public class AALservice {
 			byte[] imageBytes = content.getImage(); // 取得圖片二進位數據
 			String base64Image = Base64.getEncoder().encodeToString(imageBytes); // 轉換為base64格式
 			content.setBase64image(base64Image); // 設置到對應的實體類屬性中
+			content.setRegistered(aalRepository.findregistered(content.getId()));
 		}
 
 		return option.get();
@@ -110,6 +154,19 @@ public class AALservice {
 					e.printStackTrace();
 				}
 			}
+			return aalOriginal;
+		}
+		return null;
+	}
+	@Transactional
+	public ActivitiesandLesson updateForApproved(Integer id, String currentStatus) {
+		Optional<ActivitiesandLesson> option = aalRepository.findById(id);
+		
+		if (option.isPresent()) {
+			ActivitiesandLesson aalOriginal = option.get();
+
+			aalOriginal.setCurrentStatus(currentStatus);
+			
 			return aalOriginal;
 		}
 		return null;

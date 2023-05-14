@@ -3,6 +3,8 @@ package com.ispan.hangoutchill.member.config;
 
 
 import com.ispan.hangoutchill.member.UserDetailServiceImpl;
+
+import org.aspectj.weaver.ast.And;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,7 +46,7 @@ public class UserConfig {
         http.cors();
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/discussion/newDiscussion").hasAuthority("USER")
+                .antMatchers("/discussion/newDiscussion","/actandles/detail/*").hasAuthority("USER")
                 .antMatchers("/dashboard").hasAuthority("ADMIN")
                 .antMatchers("/","/member/registration","/NormalMember/registed").permitAll()
                 .and()

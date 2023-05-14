@@ -41,12 +41,11 @@ public class LessonSignUpDetailController {
 	}
 	
 	@PostMapping("/actandles/detail/lessignup")
-	public String lessignup(@RequestParam("id") Integer id ,@RequestParam(name = "numbersOfPeople") String numbersOfPeople ,@RequestParam(name = "tel") String tel,
-			@CurrentSecurityContext(expression="authentication") Authentication authentication) {
+	public String lessignup(@RequestParam("id") Integer id ,@CurrentSecurityContext(expression="authentication") Authentication authentication,Model model) {
 		ActivitiesandLesson aal = aalservice.findAALById(id);
 		 String name = authentication.getName();
 	        NormalMember result = nMemberService.findNormalUserByAccount(name);
-	        
+	        model.addAttribute("result",result);
 	     lessonSignUpDetailService.saveles(aal, result.getId()); 
 		return "redirect:/actandles/detail/showmysignup";
 	}
@@ -69,6 +68,7 @@ public class LessonSignUpDetailController {
         NormalMember result = nMemberService.findNormalUserByAccount(name);
 		Page<ActivitiesandLesson> page = aalservice.findByaccountsId(result.getId(), pagenumber);
 		model.addAttribute("page",page);
+        model.addAttribute("result",result);
 		
 		return "aal/showMemberSignUp";
 	}

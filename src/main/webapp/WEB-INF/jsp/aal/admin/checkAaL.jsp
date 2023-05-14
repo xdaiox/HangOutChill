@@ -22,7 +22,6 @@ height: 100%;
 overflow: auto;
 background-color: rgba(0, 0, 0, 0.4);
 }
-
 .popup-content {
 background-color: #ffffff;
 margin:5% auto;
@@ -95,6 +94,10 @@ color: #3e3e3e;
 									<td class="align-middle">${aal.normalMember.id}
 									<td class="align-middle">${aal.name}
 									<td class="align-middle"><button class="123 btn btn-primary">預覽</button>
+									<div id="popup-date" class="popup">
+											<div class="popup-content" >
+											<span class="close">&times;</span><p>${aal.aalContent}</p></div></div>
+									
 									<td class="align-middle"><jstl:if
 											test="${aal.topic=='act'}">活動</jstl:if> <jstl:if
 											test="${aal.topic=='les'}">課程</jstl:if>
@@ -113,11 +116,11 @@ color: #3e3e3e;
 										src="data:image/png;base64,${aal.base64image}"> <br />
 									<td class="align-middle">
 										<div style="display: flex">
-											<form action="${contextRoot}/actandles/shop/edit">
-												<input type="hidden" name="id" value="${aal.id}" /> <input
-													type="submit" class="btn btn-outline-info btn-sm"
-													value="上架" />
-											</form>
+											<form:form action="${contextRoot}/actandles/admin/chackaal" method="PUT">
+												<input type="hidden" name="id" value="${aal.id}" />
+												<input type="hidden" name="currentStatus" value="approved" />												 
+												 <input type="submit" class="btn btn-outline-info btn-sm" value="上架" />
+											</form:form>
 
 											<form action="${contextRoot}/actandles/shop/delete"
 												method="post">
@@ -126,11 +129,11 @@ color: #3e3e3e;
 													type="submit" class="btn btn-outline-danger btn-sm"
 													value="駁回" onclick="return confirm('確定刪除?')" />
 											</form>
+											</div>
 										</td>
-										</div>
-										<div id="popup-date" class="popup">
-											<div class="popup-content" >
-										<span class="close">&times;</span> <div>${aal.aalContent}</div></div></div>
+										
+									
+										
 							</jstl:forEach>
 						</tbody>
 					</table>

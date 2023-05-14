@@ -82,7 +82,7 @@ $(document).ready(function() {
 								<p>報名截止日:</p>
 								<form:input path="deadLine" class="form-control" type="date"></form:input>
 								<form:input path="currentStatus" class="form-control"
-									type="hidden" value="審核中"></form:input>
+									type="hidden" value="unreviewed"></form:input>
 								<p>預覽圖:</p>
 								<form:input path="imageFile" id="target" class="form-control"
 									type="file"></form:input>
