@@ -30,7 +30,7 @@ public class ProductService {
 	}
 	
 	public Page<Product> findByPage(Integer pageNum){
-		Pageable pgb = PageRequest.of(pageNum-1, 5, Sort.Direction.ASC,"productId");
+		Pageable pgb = PageRequest.of(pageNum-1, 5, Sort.Direction.DESC,"productId");
 		Page<Product> page = productRepository.findAll(pgb);
 		return page;
 	}

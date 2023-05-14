@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <html>
 <head>
@@ -18,9 +19,9 @@
 <link rel="icon" href="" type="image/png">
 <link rel="stylesheet" href="${contextRoot}/css/shop/shoppingcart.css">
 <%-- <link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css"> --%>
-<title>購物車</title>
+<jsp:include page="../layout/navbar.jsp" />
+<title>訂單確認</title>
 
-<jsp:include page="layout/navbar.jsp" />
 
 
 </head>
@@ -150,7 +151,7 @@
 								<div class="col-md-6 text-right">
 									<address>
 										<strong>訂購日期:</strong><br> 
-										 ${order.orderDate}<br>
+										 <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${order.orderDate}"/>
 									</address>
 								</div>
 							</div>
@@ -184,12 +185,17 @@
 											<tr>
 												<td colspan="4"></td>
 												<td class="text-right"><strong>運費</strong></td>
-												<td class="text-right"><strong>100</strong></td>
+												<td class="text-right"><strong id="shipfee">$100</strong></td>
 											</tr>
 											<tr>
 												<td colspan="4"></td>
-												<td class="text-right"><strong>Total</strong></td>
+												<td class="text-right"><strong>小計</strong></td>
 												<td class="text-right" ><strong id="totalPrice"></strong></td>
+											</tr>
+											<tr>
+												<td colspan="4"></td>
+												<td class="text-right"><strong>總計</strong></td>
+												<td class="text-right" ><strong id="totalAllPrice"></strong></td>
 											</tr>
 									</table>
 								</div>
@@ -261,6 +267,9 @@
 		// 計算各項產品價格與總價
 		let cartItems = document.getElementsByClassName('product-title');
 		let cartNum = cartItems.length;
+		let allPrice = document.getElementById('totalAllPrice');
+		let allPriceCount = 0;
+		let shipFee = document.getElementById('shipfee');
 		console.log(cartNum);
 		let totalPrice = document.getElementById('totalPrice');
 		let totalPriceCount = 0;
@@ -286,7 +295,17 @@
 			}
 
 		}
-		totalPrice.innerHTML = totalPriceCount;
+		totalPrice.innerHTML = '$' + totalPriceCount;
+		if(totalPriceCount >= 799){
+			allPrice.innerHTML = '$' + totalPriceCount;
+			shipFee.innerHTML = '$0';
+		}else{
+			allPrice.innerHTML = '$' + (totalPriceCount+100);
+			shipFee.innerHTML = '$100';
+		}
+		
+		
+		
 
 		let paymentState = document.getElementById('paymentState');
 		let paymentVia = document.getElementById('paymentvia').innerHTML;

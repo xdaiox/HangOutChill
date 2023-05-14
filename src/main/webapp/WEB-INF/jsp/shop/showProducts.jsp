@@ -29,7 +29,7 @@
 								<button class="btn btn-outline-secondary" type="button">搜尋</button>
 							</div>
 						</div>
-					<table class="table">
+					<table class="table table-hover table-bordered table-light">
 						<thead>
 							<tr>
 								<th scope="col">產品編號</th>

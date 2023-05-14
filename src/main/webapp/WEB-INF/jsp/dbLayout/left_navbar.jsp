@@ -53,8 +53,7 @@
         <div class="collapse" id="charts">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="${contextRoot}/shop/allproducts">商品管理</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">訂單管理</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">Typography</a></li>
+            <li class="nav-item"> <a class="nav-link" href="${contextRoot}/shop/allorders">訂單管理</a></li>
           </ul>
         </div>
       </li>

@@ -18,9 +18,9 @@
 <link rel="icon" href="" type="image/png">
 <link rel="stylesheet" href="${contextRoot}/css/shop/shoppingcart.css">
 <%-- <link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css"> --%>
+<jsp:include page="../layout/navbar.jsp" />
 <title>購物車</title>
 
-<jsp:include page="layout/navbar.jsp" />
 
 
 </head>
@@ -108,9 +108,10 @@
 						<!-- 						</form> -->
 					</div>
 					<div class="column text-lg">
-						運費: <span class="text-medium" style="font-size: larger;">$588</span><br>
-						總計: <span class="text-medium" id="totalPrice"
-							style="font-size: 1.5em; color: red;"></span>
+					 		<span style="color: red;">全館滿$799免運！</span><br>
+						運費: <span class="text-medium" id="shipfee" style="font-size: larger;">$100</span><br>
+						商品小計: <span class="text-medium" id="totalPrice" style="font-size: larger;"></span><br>
+						總價 :<span class="text-medium" id="totalAllPrice" style="font-size: 2em; color:red; font-weight:bold;"></span>
 					</div>
 				</div>
 				<div class="shopping-cart-footer">
@@ -121,7 +122,7 @@
 					<div class="column">
 						<a
 							class="btn btn-success" href='<c:url value="/shop/orderdetailpagetest" />'>訂單頁面測試</a>
-						<a class="btn btn-primary" href='<c:url value="/shop/products?category=全部商品" />' data-toast=""
+						<a class="btn btn-primary" href='<c:url value="/shop/productcategory?category=全部商品" />' data-toast=""
 							data-toast-type="success" data-toast-position="topRight"
 							data-toast-icon="icon-circle-check" data-toast-title="Your cart"
 							data-toast-message="is updated successfully!">繼續逛逛</a><a
@@ -187,6 +188,10 @@
 		console.log(cartNum);
 		let totalPrice = document.getElementById('totalPrice');
 		let totalPriceCount = 0;
+		let allPrice = document.getElementById('totalAllPrice');
+		let allPriceCount = 0;
+		let shipFee = document.getElementById('shipfee');
+		
 		for (let i = 0; i < cartNum; i++) {
 			let price = document.getElementById('price' + i).innerHTML;
 			//             console.log(price)
@@ -209,8 +214,17 @@
 			}
 
 		}
-		totalPrice.innerHTML = totalPriceCount;
-
+		totalPrice.innerHTML = '$'+ totalPriceCount;
+		if(totalPriceCount >= 799){
+			allPrice.innerHTML = '$' + totalPriceCount;
+			shipFee.innerHTML = '$0';
+		}else{
+			allPrice.innerHTML = '$' + (totalPriceCount+100);
+			shipFee.innerHTML = '$100';
+		}
+		
+		
+		
 		// 數量更改
 		// 但這邊要不要使用AJAX，讓數量隨之更改時更改資料庫的紀錄?
 		for (let i = 0; i < cartNum; i++) {
@@ -241,7 +255,14 @@
 					}
 				}
 			}
-			totalPrice.innerHTML = totalPriceCount
+			totalPrice.innerHTML = '$'+ totalPriceCount;
+			if(totalPriceCount >= 799){
+				allPrice.innerHTML = '$' + totalPriceCount;
+				shipFee.innerHTML = '$0';
+			}else{
+				allPrice.innerHTML = '$' + (totalPriceCount+100);
+				shipFee.innerHTML = '$100';
+			}
 		}
 
 		// 刪除品項
@@ -345,7 +366,7 @@
 				url : 'http://localhost:8080/hangoutchill/shop/put/amountupdate',    
 				method : 'PUT',
 				contentType : "application/json;charset=UTF-8",
-				dataType : 'json',
+				dataType : 'text',
 				data : JSON.stringify({
 						'cartid':sId,
 						'amount': updatedAmount

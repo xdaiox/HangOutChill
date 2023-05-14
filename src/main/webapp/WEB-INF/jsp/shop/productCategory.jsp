@@ -24,16 +24,16 @@
                 <div class="selectbox">
                     <ul>
                         <li>
-                            <a href="/hangoutchill/article/theme?article_theme=life">全部商品</a>
+                            <a href="${contextRoot}/shop/productcategory?category=全部商品">全部商品</a>
                         </li>
                         <li>
-                            <a href="/hangoutchill/article/theme?article_theme=fun">美味嚐點</a>
+                            <a href="${contextRoot}/shop/productcategory?category=美味嚐點">美味嚐點</a>
                         </li>
                         <li>
-                            <a href="/hangoutchill/article/theme?article_theme=life">文創商品</a>    
+                            <a href="${contextRoot}/shop/productcategory?category=文創商品">文創商品</a>    
                         </li>
                         <li>
-                            <a href="/hangoutchill/article/theme?article_theme=eats">實用嚴選</a>
+                            <a href="${contextRoot}/shop/productcategory?category=實用嚴選">實用嚴選</a>
                         </li>
                     </ul>
                 </div>

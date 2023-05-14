@@ -8,6 +8,11 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.ispan.hangoutchill.shop.dao.OrderRepository;
@@ -85,6 +90,12 @@ public class OrderService {
 	
 	public Order findLatestOrderByMemberId(Integer memberId) {
 		return orderRepository.findLatestOrderByMemberId(memberId);
+	}
+	
+	public Page<Order> findOrdersByPage(Integer pageNum){
+		Pageable pgb = PageRequest.of(pageNum-1, 10,Sort.Direction.DESC,"orderId");
+		Page<Order> page = orderRepository.findAll(pgb);
+		return page;
 	}
 	
 }

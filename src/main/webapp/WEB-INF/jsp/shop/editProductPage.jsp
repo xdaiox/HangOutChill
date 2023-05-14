@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>編輯產品頁面</title>
+<style>
+	label{
+		margin:20px 0px;
+	}
+</style>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 </head>
 
@@ -16,106 +21,83 @@
 <jsp:include page="../dbLayout/left_navbar.jsp" />
 <div class="container">
 
-		<div class="row justify-content-center">
-			<h2>產品資訊：</h2>
+<div class="content_box" style="width: 100%">
+
+			<h3 style="text-align: center;">產品資訊：</h3>
+			<div class="content"
+						style="background-color: #ffffff00; height: 100%">
+				<div class="col-12" style="margin: auto">
+				<div class="card">
+				<div class="card-body">
+			
 			<form:form method="put" action="${contextRoot}/shop/edit/product" modelAttribute="product"
 				enctype="multipart/form-data">
-				<table class="table ">
-<!-- 					<tr> -->
-<!-- 						<td><span>*</span> <label for="proid" class="t1">產品編號 -->
-<!-- 								:</label> -->
-<!-- 							<p>(產品編號為全數字)</p></td> -->
-<!-- 						<td><input type="text" name="proid" id="proid" /> <span -->
-<!-- 							id="iderror" class="error"> </span><span id="idcorrect" -->
-<!-- 							class="correct"></span></td> -->
-<!-- 					</tr> -->
-					<tr>
-						<td><span>*</span> <label for="proname">產品名稱 :</label></td>
-						<td><form:input name="proname" id="proname" path="productName"/><span
+
+						<p><span>*</span> <label for="proname">產品名稱 :</label></p>
+						<form:input name="proname" id="proname" path="productName" class="form-control"/><span
 							id="nerror" class="error"></span><span
-							id="ncorrect" class="correct"></span></td>
-					</tr>
-					<tr>
-						<td><span>*</span> <label for="category">產品分類 :</label></td>
-						<td><form:select name="category" id="category" path="category">
+							id="ncorrect" class="correct"></span>
+						<p><span>*</span> <label for="category">產品分類 :</label></p>
+						<form:select name="category" id="category" path="category" class="form-control">
 								<form:option value="-1" label="請選擇..." />
 								<form:option value="實用嚴選" label="實用嚴選"/>
 								<form:option value="美味嚐點" label="美味嚐點" />
 								<form:option value="文創商品" label="文創商品"/>
 						</form:select><span id="catgerror" class="error"></span><span id="catgcorrect"
-							class="correct"></span></td>
-					</tr>
-					<tr>
-						<td><span>* </span><label for="content">產品描述 :</label></td>
-						<td><form:textarea type="text" name="content" id="content" cols="30" rows="10" path="productDesc"/><span
+							class="correct"></span>
+						<p><span>* </span><label for="content">產品描述 :</label></p>
+						<form:textarea type="text" name="content" id="content" cols="30" rows="10" path="productDesc" class="form-control"/><span
 							id="contenterror" class="error"></span><span
-							id="contentcorrect" class="correct"></span></td>
-					</tr>
-					<tr>
-						<td><span>* </span><label for="content">產品規格 :</label></td>
-						<td><form:input type="text" name="content" id="content" path="productSpec"/><span
+							id="contentcorrect" class="correct"></span>
+						<p><span>* </span><label for="content">產品規格 :</label></p>
+						<form:input type="text" name="content" id="content" path="productSpec" class="form-control"/><span
 							id="contenterror" class="error"></span><span
-							id="contentcorrect" class="correct"></span></td>
-					</tr>
-					<tr>
-						<td><span>* </span><label for="unitprice">單價(NTD) :</label></td>
-						<td><form:input type="text" name="unitprice" id="unitprice" path="unitPrice"/><span
+							id="contentcorrect" class="correct"></span>
+						<p><span>* </span><label for="unitprice">單價(NTD) :</label></p>
+						<form:input type="text" name="unitprice" id="unitprice" path="unitPrice" class="form-control" /><span
 							id="prierror" class="error"></span><span
-							id="pricorrect" class="correct"></span></td>
-					</tr>
-					<tr>
-						<td><span>* </span><label for="discount"> 折扣 :</label><br />
-							<p class="p1">(請填入0~1之間的數值)</p></td>
-						<td><form:input type="text" name="discount" id="discount" path="discount"/><span
+							id="pricorrect" class="correct"></span>
+						<p><span>* </span><label for="discount"> 折扣 :</label><br />
+							<p class="p1">(請填入0~1之間的數值)</p></p>
+						<form:input type="text" name="discount" id="discount" path="discount" class="form-control" /><span
 							id="dserror" class="error"></span><span
-							id="dscorrect" class="correct"></span></td>
-					</tr>
-					<tr>
-						<td><span>* </span><label for="launchdate">上架日期:</label></td>
-						<td><form:input type="date" name="launchdate" id="launchdate" path="launchdate"/><span
+							id="dscorrect" class="correct"></span>
+						<p><span>* </span><label for="launchdate">上架日期:</label></p>
+						<form:input type="date" name="launchdate" id="launchdate" path="launchdate" class="form-control" /><span
 							id="dateerror" class="error"></span><span
-							id="datecorrect" class="correct"></span></td>
-					</tr>
-<!-- 					<tr> -->
-<!-- 						<td>商品圖片：</td> -->
-<!-- 						<td id="dadtd"><input type="button" value="+ 圖片" id="addfile" /><br /> -->
-<%-- 							<form:input type="file" name="picture1" path=""/><br /></td> --%>
-<!-- 					</tr> -->
-					<tr>
-					<td>商品封面圖片：</td>
-						<td>
-							<img width='300' height='300' src='<c:url value="/shop/getPicture/${product.productId}" />' />
-							<label>上傳更新封面圖片：</label> <form:input type="file" name="picture1" path="mainImage"/><br />
-						</td>
-					</tr>
-					<tr>
-					<td>其他商品圖片：</td>
+							id="datecorrect" class="correct"></span>
+						<p>商品封面圖片：</p>
+						<div>
+							<img width='300' height='300' src='<c:url value="/shop/getPicture/${product.productId}" />' /><br>
+							<label>上傳更新封面圖片：</label> <form:input type="file" name="picture1" path="mainImage" class="form-control" /><br />
+						</div>
+						<p>其他商品圖片：</p>
+						<div style="display:flex; margin-bottom:20px;">
 							<c:forEach var="photo" items="${photos}">
-							<td class="deletetd" id="deletetd${photos.indexOf(photo)}">
+							<div class="deletetd" id="deletetd${photos.indexOf(photo)}" style="margin:0px 10px;">
 							<img width='300' height='auto' src='<c:url value="/shop/getExtraPicture?photoid=${photo.photoId}" />' />
 							<br>
 							<input type="button" value="刪除" id="deletebutton${photos.indexOf(photo)}"/>
 							<form:input type="hidden" name="delphotoid" value="${photo.photoId}"  path=""/>
-							</td>
-							</c:forEach>	
-					</tr>
-					<tr>
-						<td>新增圖片：</td>
-						<td id="dadtd"><input type="button" value="+ 圖片" id="addfile" /><br />
-							<form:input type="file" name="addphoto" path=""/><br /></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td>
+							</div>
+							</c:forEach>
+						</div>	
+						<p>新增圖片：</p>
+						<div id="dadtd"><input type="button" value="+ 圖片" id="addfile"/><br />
+							<form:input type="file" name="addphoto" path="" class="form-control"/><br /></div>
 						<form:input path="productId" type="hidden"/>
 						<input type="submit" value="修改送出" id="submit" /> <a
 							href=""><input
-								type="button" value="取消" /></a></td>
-					</tr>
-				</table>
-			</form:form>
-		</div>
+								type="button" value="取消" /></a>
+			
+		</form:form>
+</div>
+</div>
+</div>
+			
+			
+</div>
+</div>
 
 </div>
 </div>
@@ -129,6 +111,7 @@
         let addinput = document.createElement("input");
         let addbr = document.createElement("br");
         addinput.setAttribute("type", "file");
+        addinput.setAttribute("class","form-control");
         addinput.setAttribute("name", "addphoto");
         i++;
         dadtd.appendChild(addinput);

@@ -145,8 +145,19 @@ public class ShoppingCartController {
 		model.addAttribute("user",currentmember);
 		
 		// 總價計算
-		Integer totalPrice = shoppingCartService.totalPriceCount(carItemsList);
-		model.addAttribute("totalprice", totalPrice);
+		
+		Integer subtotalPrice = shoppingCartService.totalPriceCount(carItemsList);
+		Integer totalPrice =0;
+		Integer shipFee = 100;
+		if(subtotalPrice >= 799) {
+			totalPrice = subtotalPrice;
+			shipFee = 0;
+		}else {
+			totalPrice = subtotalPrice + 100;
+		}
+		model.addAttribute("subtotalPrice", subtotalPrice);
+		model.addAttribute("totalPrice", totalPrice);
+		model.addAttribute("shipFee", shipFee);
 		model.addAttribute("order", new Order());
 		model.addAttribute("result", currentmember);
 		return "shop/orderDetail";

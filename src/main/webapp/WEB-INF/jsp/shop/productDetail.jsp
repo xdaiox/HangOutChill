@@ -173,10 +173,11 @@
 									</div>
 								<h6>運送及付款方式:</h6>
 								<ul class="list-unstyled pb-3">
-									<li>運送方式：到府、超商取貨</li>
+									<li>運送方式：宅配</li>
 									<li></li>
-									<li>付款方式：信用卡、LINEPay</li>
+									<li>付款方式：信用卡、貨到付款</li>
 									<li></li>
+									<li><span style="color: red;">全館滿$799免運費</span></li>
 								</ul>
 
 							</div>

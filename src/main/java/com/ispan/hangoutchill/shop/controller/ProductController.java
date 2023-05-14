@@ -394,7 +394,8 @@ public class ProductController {
 		return "shop/productDetail";
 	}
 	
-	// 測試用版
+	
+	// 商城更新版 
 	
 	@GetMapping("/shop/productcategory")
 	public String showProductByCategoryTest(@RequestParam(name="category") String category, 
