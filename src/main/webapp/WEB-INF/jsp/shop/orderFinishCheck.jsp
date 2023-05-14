@@ -309,8 +309,12 @@
 
 		let paymentState = document.getElementById('paymentState');
 		let paymentVia = document.getElementById('paymentvia').innerHTML;
-		if(!paymentState.innerHTML && paymentVia === "線上刷卡"){
-			console.log("嗨嚕");
+// 		if(!paymentState.innerHTML && paymentVia === "線上刷卡"){
+// 			console.log("嗨嚕");
+// 			paymentState.innerHTML = "已付款";
+// 		}
+		if(paymentState.innerHTML){
+// 			console.log("嗨嚕");
 			paymentState.innerHTML = "已付款";
 		}
 		console.log(paymentState.innerHTML);

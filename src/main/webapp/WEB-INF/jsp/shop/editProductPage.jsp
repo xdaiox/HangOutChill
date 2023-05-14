@@ -87,7 +87,7 @@
 							<form:input type="file" name="addphoto" path="" class="form-control"/><br /></div>
 						<form:input path="productId" type="hidden"/>
 						<input type="submit" value="修改送出" id="submit" /> <a
-							href=""><input
+							href="${contextRoot}/shop/allproducts"><input
 								type="button" value="取消" /></a>
 			
 		</form:form>

@@ -45,7 +45,6 @@ public class ProductController {
 	private ShoppingCartService shoppingCartService;
 	private NormalMemberService nMemberService;
 	
-	
 	@Autowired
 	public ProductController(ProductService productService, 
 							 ProductPhotoService productPhotoService, 
