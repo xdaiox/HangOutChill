@@ -15,6 +15,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,11 +25,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ispan.hangoutchill.article.model.Article;
+import com.ispan.hangoutchill.article.model.ArticleFavorite;
 import com.ispan.hangoutchill.article.model.ArticlePicture;
+import com.ispan.hangoutchill.article.service.ArticleFavoriteService;
 import com.ispan.hangoutchill.article.service.ArticlePictureService;
 import com.ispan.hangoutchill.article.service.ArticleService;
+import com.ispan.hangoutchill.member.model.NormalMember;
+import com.ispan.hangoutchill.member.service.NormalMemberService;
 
 @Controller
 public class ArticleController {
@@ -37,6 +44,12 @@ public class ArticleController {
 	
 	@Autowired
 	private ArticlePictureService articlePictureService;
+	
+	@Autowired
+	private ArticleFavoriteService articleFavoriteService;
+	
+	@Autowired 
+	NormalMemberService normalMemberService;
 	
 	
 	
@@ -219,16 +232,44 @@ public class ArticleController {
 	}
 	
 	@GetMapping("/article/theme")
-	public String lifeTheme(@RequestParam(name="article_theme") String article_theme, Model model ) {
+	public String lifeTheme(@RequestParam(name="article_theme") String article_theme, Model model,
+							@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+		
+		String name = authentication.getName();
+        NormalMember result = normalMemberService.findNormalUserByAccount(name);
+		
 		System.out.println(article_theme);
 		List<Article> theme = articleService.findArticleByTheme(article_theme);
 		model.addAttribute("theme", theme);
 		model.addAttribute("article_theme", article_theme);
+		model.addAttribute("result", result);
 		return "article/articleTheme";
 	}
 	
+	@GetMapping("/article/AllArticle")
+	public String getAllFavorites(@CurrentSecurityContext(expression = "authentication")Authentication authentication, Model model) {
+			
+		String name = authentication.getName();
+        NormalMember result = normalMemberService.findNormalUserByAccount(name);
+        
+		List<Article> article = articleService.findAllArticle();
+		
+		model.addAttribute("result", result);
+		model.addAttribute("article", article);
+
+		return "article/showAllArticle";
+    }
+	
+	
+	
+	
 	@GetMapping("/article/articleContent")
-	public String showProductDetail(@RequestParam(name="article_id") Integer article_id, Model model) {
+	public String showProductDetail(@RequestParam(name="article_id") Integer article_id,
+									@CurrentSecurityContext(expression = "authentication")Authentication authentication, Model model) {
+		
+		String name = authentication.getName();
+        NormalMember result = normalMemberService.findNormalUserByAccount(name);
+		
 		Article article = articleService.findArticleById(article_id);
 		List<ArticlePicture> pictures = articlePictureService.findArticlePictureById(article_id);
 		String contentHtml = article.getArticle_content();
@@ -243,9 +284,28 @@ public class ArticleController {
 			}
 		}
 		String modifiedHtml = document.outerHtml();
+		
+		model.addAttribute("result", result);
 		model.addAttribute("modifiedHtml", modifiedHtml);
 		model.addAttribute("article", article);
 		return "article/articleContent";
+	}
+	
+	@ResponseBody
+	@GetMapping("/article/checkFavorite")
+	public String checkFavorite(@RequestParam(name="article_id") Integer article_id,
+									@CurrentSecurityContext(expression = "authentication")Authentication authentication, Model model) {
+		
+		String name = authentication.getName();
+        NormalMember result = normalMemberService.findNormalUserByAccount(name);
+        Integer member_id = result.getId();
+		
+        ArticleFavorite isFavorite = articleFavoriteService.isFavoriteArticle(member_id, article_id);
+        if(isFavorite != null) {
+        	return "已收藏";
+        }else {
+        	return "未收藏";
+        }
 	}
 	
 }

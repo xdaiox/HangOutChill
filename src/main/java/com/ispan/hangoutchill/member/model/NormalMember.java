@@ -134,7 +134,6 @@ public class NormalMember {
 		this.actandles = actandles;
 	}
 
-    public Integer getId() {
     //-------------Article----------------
     
     @OneToMany(mappedBy="normalmember", cascade = CascadeType.PERSIST)

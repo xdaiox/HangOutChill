@@ -48,8 +48,7 @@ public class Article {
 	@Column(name = "article_theme", columnDefinition = "nvarchar(30)", nullable = true)
 	private String article_theme;
 	
-	@Column(name = "norma_Account", columnDefinition = "nvarchar(30)", nullable = true)
-	private String normal_Account;
+
 	
 	@Column(name = "status", columnDefinition = "bit", nullable = true)
 	private Boolean status;
@@ -161,13 +160,6 @@ public class Article {
 		this.article_theme = article_theme;
 	}
 
-	public String getNormal_Account() {
-		return normal_Account;
-	}
-
-	public void setNormal_Account(String normal_Account) {
-		this.normal_Account = normal_Account;
-	}
 
 	public Integer getArticle_id() {
 		return article_id;
@@ -191,14 +183,6 @@ public class Article {
 
 	public void setArticle_content(String article_content) {
 		this.article_content = article_content;
-	}
-
-	@Override
-	public String toString() {
-		return "Article [article_id=" + article_id + ", article_name=" + article_name + ", article_excerpt="
-				+ article_excerpt + ", article_content=" + article_content + ", article_theme=" + article_theme
-				+ ", normal_Account=" + normal_Account + ", status=" + status + ", article_mainImg=" + article_mainImg
-				+ ", mainImg=" + mainImg + ", images=" + images + ", createtime=" + createtime + "]";
 	}
 	
 	

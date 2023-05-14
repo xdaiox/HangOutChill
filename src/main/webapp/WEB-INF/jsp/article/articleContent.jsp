@@ -22,7 +22,10 @@
                     <div class="article_title">
                         <div class="h2Box">
                             <h2>HANGOUT News</h2>
-                            <a href=""><h3>+ 加入書籤</h3></a>
+                            <div class="btnBox">
+                                <h3 id="favorBtn">+ 加入書籤</h3>
+                                <h3 id="removeBtn" style="display: none;">– 移除書籤</h3>
+                            </div>
                         </div>
                         <h1>${article.article_name}</h1>
                     </div>
@@ -79,4 +82,102 @@
         </section>
     </div>
   <jsp:include page="../layout/footer.jsp"/>
+
+
+  <script>
+
+    function getArticleIdFromCurrentURL() {
+        var urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('article_id');
+    }
+
+    var articleId = getArticleIdFromCurrentURL();
+    
+    //取得userName
+    $(document).ready(function() {
+		$.ajax({
+			url: 'http://localhost:8080/hangoutchill/article/getUserName',
+			type: 'GET',
+			success: function(response) {
+			  userName = response;
+			  // 在此處設定 userName 的值
+			},
+			error: function(error) {
+			  console.log(error);
+			}
+		});
+		  
+		//重載時判斷是否收藏
+		$.ajax({
+			url: 'http://localhost:8080/hangoutchill/article/checkFavorite',
+	        type: 'GET',
+	        data: {article_id: articleId},
+	        success: function(exist) {
+	        	console.log(exist);
+	            if (exist === '已收藏') {
+	              $('#favorBtn').hide();
+	              $('#removeBtn').show();
+	            } else {
+	              $('#favorBtn').show();
+	              $('#removeBtn').hide();
+	            }
+	        },
+	        error: function(error) {
+            
+	        }
+		})	
+    	  
+   	});
+
+	//加入收藏
+    $('#favorBtn').click(function() {
+        if(userName === 'anonymousUser') {
+        	alert('請登入會員')
+
+        }
+        else{
+	    	$.ajax({
+	            url: 'http://localhost:8080/hangoutchill/article/addfav',
+	            type: 'POST',
+	            data: {article_id: articleId},
+	            success: function(response) {
+	                $('#favorBtn').hide();
+	                $('#removeBtn').show();
+	                alert(response);
+	            },
+	            error: function(error) {
+	                alert(error);
+	            }
+	        })
+        }
+    	
+    });
+    
+	//取消收藏
+    $('#removeBtn').click(function() {
+        $.ajax({
+            url: 'http://localhost:8080/hangoutchill/article/deletefav',
+            type: 'DELETE',
+            data: {article_id: articleId},
+            success: function(response) {
+                $('#removeBtn').hide();
+                $('#favorBtn').show();
+                alert(response);
+                console.log(response);
+            },
+            error: function(error) {
+                alert(error);
+            }
+        })
+    });
+	
+    
+  </script>
+
+
 </body>
+
+
+
+
+

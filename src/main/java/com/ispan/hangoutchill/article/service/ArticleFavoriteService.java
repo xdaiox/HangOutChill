@@ -9,13 +9,17 @@ import com.ispan.hangoutchill.article.model.ArticleFavorite;
 public class ArticleFavoriteService {
 	
 	@Autowired
-	private ArticleFavoriteRespository articleFavoriteRespository;
+	ArticleFavoriteRespository articleFavoriteRespository;
 	
 	public void addFavorite(ArticleFavorite artfav) {
 		articleFavoriteRespository.save(artfav);
 	}
 	
-	public void deleteFavorite(Integer id) {
-		articleFavoriteRespository.deleteById(id);
+	public void deleteFavorite(Integer member_id, Integer article_id) {
+		articleFavoriteRespository.deleteByMemberIdAndArticleId(member_id, article_id);
+	}
+	
+	public ArticleFavorite isFavoriteArticle(Integer member_id, Integer article_id) {
+		return articleFavoriteRespository.findByMemberIdAndArticleId(member_id, article_id);
 	}
 }
