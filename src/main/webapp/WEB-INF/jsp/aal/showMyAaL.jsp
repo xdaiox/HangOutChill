@@ -96,8 +96,6 @@
 						<br />
 						<div style="text-align: center;">
 							<jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}">
-								<%-- 					<jstl:if test="${page.number == pageNumber-1}"><span>${pageNumber}</span></jstl:if> --%>
-								<%-- 					<jstl:if test="${page.number != pageNumber-1}"><a href="${contextRoot}/messages?p=${pageNumber}">${pageNumber}</a></jstl:if> --%>
 								<jstl:choose>
 									<jstl:when test="${page.number == pageNumber-1}">
 										<span>${pageNumber}</span>

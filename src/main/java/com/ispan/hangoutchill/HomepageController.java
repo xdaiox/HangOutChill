@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
 import com.ispan.hangoutchill.actandles.service.AALservice;
@@ -33,17 +34,21 @@ public class HomepageController {
     public String toMemeberChooseIdentity() {
         return "member/chooseIdentity";
     }
-
+    
+   
     @GetMapping("/actandles")
     public String showAllActAndLes(@RequestParam(name="p",defaultValue = "1") Integer pagenumber, Model model,
     		@CurrentSecurityContext(expression="authentication") Authentication authentication) {
-		String value = "approved";
-		Page<ActivitiesandLesson> page = aalService.findByStatus(pagenumber, value);
-    	
+		
+		Page<ActivitiesandLesson> page = aalService.findByStatusforguest(pagenumber);
+		Page<ActivitiesandLesson> pageforAct = aalService.findPageByTopic(pagenumber, "act");
+		Page<ActivitiesandLesson> pageforLes = aalService.findPageByTopic(pagenumber, "les");
     	String name = authentication.getName();
         NormalMember result = nMemberService.findNormalUserByAccount(name);
         model.addAttribute("result",result);
         model.addAttribute("page",page);
+        model.addAttribute("pageforAct",pageforAct);
+        model.addAttribute("pageforLes",pageforLes);
     	
         return "aal/showAllAaL";
     }

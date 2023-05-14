@@ -119,7 +119,8 @@ color: #3e3e3e;
 											<form:form action="${contextRoot}/actandles/admin/chackaal" method="PUT">
 												<input type="hidden" name="id" value="${aal.id}" />
 												<input type="hidden" name="currentStatus" value="approved" />												 
-												 <input type="submit" class="btn btn-outline-info btn-sm" value="上架" />
+												 <input type="submit" class="btn btn-outline-info btn-sm"
+												 onclick="return confirm('確定上架?')" value="上架" />
 											</form:form>
 
 											<form action="${contextRoot}/actandles/shop/delete"
@@ -127,7 +128,7 @@ color: #3e3e3e;
 												<input type="hidden" name="_method" value="delete" /> <input
 													type="hidden" name="id" value="${aal.id}" /> <input
 													type="submit" class="btn btn-outline-danger btn-sm"
-													value="駁回" onclick="return confirm('確定刪除?')" />
+													value="駁回" onclick="return confirm('確定駁回?')" />
 											</form>
 											</div>
 										</td>

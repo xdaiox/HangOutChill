@@ -84,8 +84,8 @@ public class AALcontroller {
 
 	@DeleteMapping("/actandles/shop/delete")
 	public String deleteAAL(@RequestParam Integer id) {
-		
-		aalService.deleteAALById(id);
+		String value = "deleted";
+		aalService.updateStatus(id, value);
 		return "redirect:/actandles/shop/postall";
 	}
 
@@ -138,7 +138,7 @@ public class AALcontroller {
 	@PutMapping("/actandles/admin/chackaal")
 	public String approvedAAL(@RequestParam(name = "id") Integer id,@RequestParam(name = "currentStatus") String currentStatus) {
 
-		aalService.updateForApproved(id, currentStatus);
+		aalService.updateStatus(id, currentStatus);
 		return "redirect:/actandles/admin/chackaal";
 	}
 

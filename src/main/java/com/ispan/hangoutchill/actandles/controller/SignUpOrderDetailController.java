@@ -55,7 +55,7 @@ public class SignUpOrderDetailController {
 			return "aal/user/historyOrder";
 		}
 		
-		@GetMapping("/actandles/detail/gotoMemberCenter")
+		@GetMapping("/actandles/gotoMemberCenter")
 		public String gotoMemberCenter(Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
 			String name = authentication.getName();
 			NormalMember result = nMemberService.findNormalUserByAccount(name);
