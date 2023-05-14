@@ -1,0 +1,277 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.main {
+    padding-top: 80px;
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    border: 1px solid #000;
+    margin-top: 120px;
+}
+
+ul {
+    list-style: none;
+}
+
+form {
+margin: 0;
+padding: 0;
+border: 0;
+font: inherit;
+font-size: 100%;
+vertical-align: baseline;
+width: 60%;
+}
+
+.pickers {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.pickers_ul {
+    width: 100%;
+    text-align: center;
+}
+
+@media screen and (min-width: 1200px) {
+    .pickers_li:not(:last-child)::after {
+        content: '．';
+        position: absolute;
+        top: 50%;
+        right: -10px;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+}
+
+.pickers_li {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 15px;
+    letter-spacing: 4.5px;
+    font-size: 15px;
+    line-height: 22px;
+    color: #636363;
+    position: relative;
+}
+
+.pickers_li a{
+    color: #636363;
+}
+
+
+.my {
+    width: 100%;
+    padding: 0 80px;
+    margin: auto;
+    margin-bottom: 160px;
+}
+
+
+.profile_container {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.my_title {
+    font-weight: 500;
+    font-size: 2.25rem;
+    letter-spacing: 3.6px;
+    text-align: center;
+    color: var(--font-color,#343434);
+    padding: 40px 0 60px;
+}
+
+.my_or {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.my_or::before {
+    content: "";
+    display: block;
+    width: 40%;
+    height: 1px;
+    background-color: var(--nav-color-x,#636363);
+}
+
+.my_or::after {
+    content: "";
+    display: block;
+    width: 40%;
+    height: 1px;
+    background-color: var(--nav-color-x,#636363);
+}
+
+.my_or p {
+    margin-bottom: 0px;
+}
+
+.ImgBox .editPwd {
+    margin-top: 250px;
+}
+
+.ImgBox .editPwd button  {
+    margin-top: 10px;
+}
+
+.fb {
+    background-color: #4888ff !important;
+    color: #fff !important;
+}
+
+.line {
+    background-color: #107b10 !important;
+    color: #fff !important;
+}
+
+.google {
+    background-color: #ea6363 !important;
+    color: #fff !important;
+}
+
+.ImgBox {
+    width: 200px;
+    margin-right: 160px;
+}
+
+.ImgInfo {
+    position: relative;
+}
+
+.ImgBox .headshot{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: absolute;
+    
+}
+
+
+.cameraicon {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    bottom: -196px;
+    left: 156px;
+}
+
+
+
+.contentBox {
+    display: flex;
+    justify-content: center;
+}
+
+
+.editPwd {
+    width: 200px;
+    height: 200px;
+}
+
+.profile_form {
+    margin-top: 80px;
+}
+
+.profile_item {
+    margin-bottom: 40px;
+}
+
+.profile_item p:first-child {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 1.4px;
+    color: #000;
+    margin-bottom: 0px;
+}
+
+.profile_different {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--black,#000);
+}
+
+.profile_different .profile_input {
+    width: 82%;
+    padding: 0 0;
+    border: none;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 10px;
+    outline: none;
+}
+
+.profile_input {
+    width: 100%;
+    display: block;
+    font-size: 16px;
+    padding: 12px 0;
+    color: black;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid #636363;
+    color: #343434;
+}
+
+.profile_sex {
+    width: 110px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile_sexLabel {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.profile_sexRadio {
+    margin-right: 5px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    position: relative;
+}
+
+.profile_sexText {
+    margin-bottom: 0px;
+}
+
+.profile_enter {
+    cursor: pointer;
+    width: 180px;
+    margin: auto;
+    margin-top: 60px;
+    text-align: center;
+    font-size: 16px;
+    padding: 12px 10px;
+    background-color: transparent;
+    outline: none;
+    display: block;
+    color: #343434;
+    border: 1px solid #343434;
+    border-radius: 3px;
+}

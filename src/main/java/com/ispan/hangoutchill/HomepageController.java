@@ -63,9 +63,9 @@ public class HomepageController {
     	return "/article/article";
     }
     
-    @GetMapping("/article/db")
+    @GetMapping("/article/articleform")
     public String toDashBoard() {
-    	return "dashboard";
+    	return "/article/articleForm";
     }
 }
 

@@ -24,7 +24,7 @@
         </a>
         <div class="collapse" id="ui-basic">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="${contextRoot}/article">專欄管理</a></li>
+            <li class="nav-item"> <a class="nav-link" href="${contextRoot}/article/dbShowAll">專欄管理</a></li>
             <li class="nav-item"> <a class="nav-link" href="${contextRoot}/article/add">新增專欄</a></li>
             <li class="nav-item"> <a class="nav-link" href="#">Typography</a></li>
           </ul>

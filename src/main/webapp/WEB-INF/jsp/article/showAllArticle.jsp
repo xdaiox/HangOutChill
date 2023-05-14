@@ -24,7 +24,7 @@
                 <div class="selectbox">
                     <ul>
                         <li>
-                            <a href="${contextRoot}/article/AllArticle">全部專欄</a>
+                            <a href="/hangoutchill/article/showAllArticle">全部專欄</a>
                         </li>
                         <li>
                             <a href="/hangoutchill/article/theme?article_theme=fun">消遣玩樂</a>
@@ -48,7 +48,7 @@
             <section class="contentbox">
                 <div class="all_article">
                 
-				<c:forEach var="article" items="${theme}">
+				<c:forEach var="article" items="${article}">
                     <div class="article_box">
                         <article class="article_img">
                             <a href="/hangoutchill/article/articleContent?article_id=${article.article_id}">

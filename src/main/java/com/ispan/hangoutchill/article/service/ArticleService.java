@@ -82,4 +82,8 @@ public class ArticleService {
 		articleRepository.deleteById(id);
 	}
 	
+	public List<Article> findAllArticle() {
+        return articleRepository.findArticleByStatus(true);
+    }
+	
 }

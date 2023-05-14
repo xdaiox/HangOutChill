@@ -98,13 +98,13 @@ button.btn.btn-primary {
     background-color: #414141;
 }
 
-.uploadbox {
-    width: 90%;
-    height: 340px;
-    border: 2px dashed #6e6e6e;
-    margin: auto;
-    margin-top: 50px;
-}
+/* .uploadbox { */
+/*     width: 90%; */
+/*     height: 340px; */
+/*     border: 2px dashed #6e6e6e; */
+/*     margin: auto; */
+/*     margin-top: 50px; */
+/* } */
 
 .defaultImg {
 	padding-left: 0;

@@ -33,23 +33,20 @@
 				    <tr>
 				      <th scope="col">ID</th>
 				      <th scope="col">標題</th>
-				      <th></th>
-<!-- 				      <th scope="col">圖片</th> -->
 				      <th scope="col">主題</th>
 				      <th scope="col">狀態</th>
 				      <th scope="col">作者</th>
-				      <th></th>
+				      <th scope="col">操作</th>
 				    </tr>
 				  </thead>
 				  <jstl:forEach var="article" items="${page.content}">
 				  <tbody>
 				    <tr>
-				      <th scope="row">${article.article_id}</th>
-				      <td width="30px">${article.article_name}</td>
-				      <td></td>
+				      <td scope="row">${article.article_id}</th>
+				      <td width="20px">${article.article_name}</td>
 				      <td>${article.article_theme}</td>
 				      <td>${article.status}</td>
-				      <td>${article.normal_Account}</td>
+				      <td>1</td>
 				      <td class="btn_group">
 				      	<form action="${contextRoot}/article/status">
 				      		<input type="hidden" name="article_id" value="${article.article_id}" />
