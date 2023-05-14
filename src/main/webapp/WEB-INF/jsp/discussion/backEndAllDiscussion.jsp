@@ -28,7 +28,7 @@
                         <!-- <th scope="col">收藏數</th>
                         <th scope="col">點閱數</th>
                         <th scope="col">分享次數</th> -->
-                        <th scope="col">被檢舉次數</th>
+                        <!-- <th scope="col">被檢舉次數</th> -->
                         <th scope="col">最後更新</th>
                         <th scope="col">功能</th>
                     </tr>
@@ -46,7 +46,7 @@
                             <!-- <td class="align-middle">${allDiscussion.favorite}</td>
                             <td class="align-middle">${allDiscussion.readCount}</td>
                             <td class="align-middle">${allDiscussion.shareCount}</td> -->
-                            <td class="align-middle">${allDiscussion.rportCount}</td>
+                            <!-- <td class="align-middle">${allDiscussion.rportCount}</td> -->
                             <td class="align-middle">${allDiscussion.postDate}</td>
                             
                             <td class="align-middle">
