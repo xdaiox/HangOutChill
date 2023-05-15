@@ -57,10 +57,6 @@ public class NormalMemberController {
         return "member/normalMemberLogin";
     }
 
-    @GetMapping ("/admin/login")
-    public String toAdminLogin(){
-        return  "member/adminLogin";
-    }
 
 
     @GetMapping("/member/LocationRegister")

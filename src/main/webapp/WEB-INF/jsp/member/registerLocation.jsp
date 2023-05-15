@@ -69,7 +69,7 @@
                     <button class="btn btn-primary btn-block" type="submit">註冊</button>
                 </div>
                 <div class="form-group text-center">
-                    <span class="text-muted">已經有帳號了?</span> <a href="login.html">登入</a>
+                    <span class="text-muted">已經有帳號了?</span> <a href="${contextRoot}/member/login">登入</a>
                 </div>
             </form:form>
         </div>

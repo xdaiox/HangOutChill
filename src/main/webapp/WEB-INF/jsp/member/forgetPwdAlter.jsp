@@ -21,10 +21,10 @@
         <div class="box box-border">
             <div class="box-body">
                 <h4>請輸入忘記密碼之信箱</h4>
-                <form action="${contextRoot}/member/ForgetPwd" method="get">
+                <form action="${contextRoot}/member/ForgetPwd" method="get" onblur="checkMail(event)">
                     <div class="form-group">
-                        <label>使用者信箱</label>
-                        <input type="text" name="account" class="form-control">
+                        <label>使用者信箱<span id="wrongMail" style="color: red"></span></label>
+                        <input type="text" name="account" class="form-control"  id="account">
                     </div>
                     <div class="form-group text-right">
                         <button class="btn btn-primary btn-block" type="submit">送出</button>
@@ -38,5 +38,27 @@
         </div>
     </div>
 </div>
+<script>
+    function checkMail() {
+        let mail = document.getElementById('account').value
+        let reg = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
+        if (!(reg.test(mail))) {
+            document.getElementById('wrongMail').innerText = '錯誤的信箱格式'
+            return false
+        }else{
+            return true;
+        }
+    }
+
+    function checked(event){
+        let mailCheck = checkMail();
+        if(mailCheck){
+            this.submit()
+        }else{
+            alert("請確認所有欄位格式皆正確")
+            event.preventDefault()
+        }
+    }
+</script>
 </body>
 </html>
