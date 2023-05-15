@@ -87,7 +87,7 @@ $(document).ready(function() {
 								<div class="mb-3" >
 								<form:input  path="imageFile" id="target" class="form-control"
 									type="file"></form:input></div>
-								<span>圖片預覽:<img id="preview" src=""></span>
+								<span>圖片預覽:<img style="max-width: 200px;" id="preview" src=""></span>
 								<div class="mb-3">文案內容:
 								<form:textarea path="aalContent" id="summernote"/></div>
 								<div style="text-align: center;">

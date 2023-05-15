@@ -70,17 +70,18 @@ public class SignUpOrderDetail {
 	private Integer memberId;
 //=======================廠商id(member_id)======================
 	
-	@Column(name="shop_id",columnDefinition = "int",nullable = false)
-	private Integer shop_id;
+	@Column(name="aal_id",columnDefinition = "int",nullable = false)
+	private Integer aal_id;
 	
 	
 	
-	public Integer getShop_id() {
-		return shop_id;
+
+	public Integer getAal_id() {
+		return aal_id;
 	}
 
-	public void setShop_id(Integer shop_id) {
-		this.shop_id = shop_id;
+	public void setAal_id(Integer aal_id) {
+		this.aal_id = aal_id;
 	}
 
 	public Integer getMemberId() {

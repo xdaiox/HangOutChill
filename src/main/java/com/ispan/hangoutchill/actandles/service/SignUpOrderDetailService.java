@@ -60,7 +60,7 @@ public class SignUpOrderDetailService {
 		suod.setTel(result.getTel());
 		
 		suod.setMemberId(result.getId());
-		suod.setShop_id(aal.getId());
+		suod.setAal_id(aal.getId());
 		
 		suoRepository.save(suod);
 		
