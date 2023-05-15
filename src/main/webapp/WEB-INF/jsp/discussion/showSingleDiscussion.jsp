@@ -231,15 +231,17 @@
 											<form:form modelAttribute="discussion" method="post"
 												action="${contextRoot}/discussion/post">
 												<div class="form-group">
-													<label for="title">標題</label>
-													<p>${discussion.title}</p>
+													<h4><label for="title">標題</label></h4>
+													<p style="font-size: 18px;">${discussion.title}</p>
 												</div>
+
 												<div class="form-group">
-													<label for="category">分類</label>
-													<p>${discussion.type}</p>
+													<h4><label for="category">分類</label></h4>
+													<h4><p>${discussion.type}</p></h4>
 												</div>
+
 												<div class="form-group">
-													<label for="content">内容</label>
+													<h4><label for="content">内容</label></h4>
 													<p>${discussion.contents}</p>
 												</div>
 											</form:form>
