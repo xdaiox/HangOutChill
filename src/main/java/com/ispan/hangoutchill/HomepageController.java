@@ -41,8 +41,8 @@ public class HomepageController {
     		@CurrentSecurityContext(expression="authentication") Authentication authentication) {
 		
 		Page<ActivitiesandLesson> page = aalService.findByStatusforguest(pagenumber);
-		Page<ActivitiesandLesson> pageforAct = aalService.findPageByTopic(pagenumber, "act");
-		Page<ActivitiesandLesson> pageforLes = aalService.findPageByTopic(pagenumber, "les");
+		Page<ActivitiesandLesson> pageforAct = aalService.findPageByTopicforguest(pagenumber, "act");
+		Page<ActivitiesandLesson> pageforLes = aalService.findPageByTopicforguest(pagenumber, "les");
     	String name = authentication.getName();
         NormalMember result = nMemberService.findNormalUserByAccount(name);
         model.addAttribute("result",result);

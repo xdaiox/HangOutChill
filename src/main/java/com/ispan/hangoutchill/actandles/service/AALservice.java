@@ -95,12 +95,27 @@ public class AALservice {
 		}
 		return page;
 	}
+//========================================針對前台用戶的類別搜尋========================================
+	public Page<ActivitiesandLesson> findPageByTopicforguest(Integer pageNumber,String value){
+		Pageable pgb = PageRequest.of(pageNumber - 1, 100, Sort.Direction.DESC, "theDayofSubmission");
+		Page<ActivitiesandLesson> page = aalRepository.findPageByTopicforguest(value, pgb);
+		List<ActivitiesandLesson> contentlist = page.getContent();
+		for (ActivitiesandLesson aal : contentlist) {
+			byte[] imageBytes = aal.getImage(); // 取得圖片二進位數據
+			String base64Image = Base64.getEncoder().encodeToString(imageBytes); // 轉換為base64格式
+			aal.setBase64image(base64Image); // 設置到對應的實體類屬性中
+			//取得報名人數
+			aal.setRegistered(aalRepository.findregistered(aal.getId()));
+			
+		}
+		return page;
+	}
 	
 	
 	
 //========================================針對核准與開放報名來搜索========================================
 	public Page<ActivitiesandLesson> findByStatusforguest(Integer pageNumber) {
-		Pageable pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "theDayofSubmission");
+		Pageable pgb = PageRequest.of(pageNumber - 1, 100, Sort.Direction.ASC, "theDayofSubmission");
 		Page<ActivitiesandLesson> page = aalRepository.findPageByStatusForGuest(pgb);
 		List<ActivitiesandLesson> contentlist = page.getContent();
 		for (ActivitiesandLesson aal : contentlist) {
@@ -171,6 +186,9 @@ public class AALservice {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+			}
+			if (aal.getCause()!=null ) {
+				aalOriginal.setCause(aal.getCause());
 			}
 			return aalOriginal;
 		}

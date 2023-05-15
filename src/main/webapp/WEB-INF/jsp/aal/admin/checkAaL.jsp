@@ -96,7 +96,7 @@ color: #3e3e3e;
 									<td class="align-middle"><button class="123 btn btn-primary">預覽</button>
 									<div id="popup-date" class="popup">
 											<div class="popup-content" >
-											<span class="close">&times;</span><p>${aal.aalContent}</p></div></div>
+											<span class="close">&times;</span>${aal.aalContent}</div></div>
 									
 									<td class="align-middle"><jstl:if
 											test="${aal.topic=='act'}">活動</jstl:if> <jstl:if
@@ -123,13 +123,12 @@ color: #3e3e3e;
 												 onclick="return confirm('確定上架?')" value="上架" />
 											</form:form>
 
-											<form action="${contextRoot}/actandles/shop/delete"
-												method="post">
-												<input type="hidden" name="_method" value="delete" /> <input
-													type="hidden" name="id" value="${aal.id}" /> <input
+											<form:form action="${contextRoot}/actandles/shop/edit"
+												method="put"> 
+												<input type="hidden" name="aal" value="${aal.id}" /> <input
 													type="submit" class="btn btn-outline-danger btn-sm"
 													value="駁回" onclick="return confirm('確定駁回?')" />
-											</form>
+											</form:form>
 											</div>
 										</td>
 										

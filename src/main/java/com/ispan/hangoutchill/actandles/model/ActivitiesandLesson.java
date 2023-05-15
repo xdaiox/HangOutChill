@@ -23,7 +23,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Formula;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.web.multipart.MultipartFile;
@@ -82,6 +81,10 @@ public class ActivitiesandLesson {
 	
 	@Column(name="currentStatus",columnDefinition = "nvarchar(50)",nullable = false)
 	private String currentStatus;
+	
+	@Column(name="cause",columnDefinition = "nvarchar(max)",nullable = true)
+	private String cause;
+	
 	
 	@Lob
 	@Column(name="image",columnDefinition = "varbinary(MAX)")
@@ -262,6 +265,14 @@ public class ActivitiesandLesson {
 
 	public void setRegistered(Integer registered) {
 		this.registered = registered;
+	}
+
+	public String getCause() {
+		return cause;
+	}
+
+	public void setCause(String cause) {
+		this.cause = cause;
 	}
 
 	

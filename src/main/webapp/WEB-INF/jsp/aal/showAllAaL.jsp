@@ -17,11 +17,11 @@
 	<jsp:include page="../layout/navbar.jsp" />
 	<h1 class="text-center">活動與課程</h1>
 
-	<div class="container content_view" 
-		style="background-color: #ffffff00; height: 100%;">
-		<div class="content_box " style="height: 100%;">
-			<div class="d-flex justify-content-around mb-3"
-				style="background-color: #ffffff00; height: 100%;">
+	<div class="container content_view mb-3" 
+		style="background-color: #ffffff00;">
+		<div class="content_box" >
+			<div class="d-flex justify-content-around mb-3 "
+				style="background-color: #ffffff00;">
 			<input type="button" id="showall" class="btn btn-link" value="總攬"/>
 			<input type="button" id="showtheact" class="btn btn-link" value="僅活動"/>
 			<input type="button" id="showtheles" class="btn btn-link" value="僅課程"/>
@@ -34,13 +34,13 @@
 						value="商家活動申辦" />
 				</form>
 			</div>
-			<div class="mb-3 content content_view" id="all"
-				style="background-color: #ffffff00; height: 100%;">
+			<div class="content content_view" id="all"
+				style="background-color: #ffffff00;width: 100%;flex-wrap: wrap;height: unset;">
 							<jstl:forEach var="aal" items="${page.content}">
 							
-							<div class="text-center me-3 mb-3" style="height:450px;width: 350px;border: 1px solid gray;">
-							<div >
-								<a href="${contextRoot}/actandles/${aal.id}"><img style="max-height:200px;max-width: 200px;" class="img-fluid img-thumbnail rounded" src="data:image/png;base64,${aal.base64image}"></a>
+							<div class="text-center  mb-3 aalBox" style="height:450px;width: 25%;border: 1px solid gray;">
+							<div style="height:200px;width: 100%;">
+								<a href="${contextRoot}/actandles/${aal.id}"><img style="background-size: cover;height: 100%;" class="img-fluid img-thumbnail rounded" src="data:image/png;base64,${aal.base64image}"></a>
 							</div>
 								<div class="row d-flex justify-content-center">
 								<div class="col-md-9" ><a style="font-size: 20px;" href="${contextRoot}/actandles/${aal.id}">${aal.name}</a></div> 
@@ -63,14 +63,27 @@
 								</div>
 							</div>
 							</jstl:forEach>
+<!-- 							<div style="text-align: center;"> -->
+<%-- 							<jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}"> --%>
+<%-- 								<jstl:choose> --%>
+<%-- 									<jstl:when test="${page.number == pageNumber-1}"> --%>
+<%-- 										<span>${pageNumber}</span> --%>
+<%-- 									</jstl:when> --%>
+<%-- 									<jstl:otherwise> --%>
+<!-- 										<a -->
+<%-- 											href="${contextRoot}/actandles?p=${pageNumber}">${pageNumber}</a> --%>
+<%-- 									</jstl:otherwise> --%>
+<%-- 								</jstl:choose> --%>
+<%-- 							</jstl:forEach> --%>
+<!-- 						</div> -->
 			</div>
-			<div class="mb-3 content content_view" id="act"
-				style="background-color: #ffffff00; height: 100%; display: none;">
+			<div class="content content_view" id="act"
+				style="background-color: #ffffff00;  display: none;width: 100%;flex-wrap: wrap;height: unset;">
 							<jstl:forEach var="aal" items="${pageforAct.content}">
 							
-							<div class="text-center me-3 mb-3" style="height:450px;width: 350px;border: 1px solid gray;">
-							<div >
-								<a href="${contextRoot}/actandles/${aal.id}"><img style="max-height:200px;max-width: 200px;" class="img-fluid img-thumbnail rounded" src="data:image/png;base64,${aal.base64image}"></a>
+							<div class="text-center  mb-3" style="height:450px;width: 25%;border: 1px solid gray;">
+							<div style="height:200px;width: 100%;">
+								<a href="${contextRoot}/actandles/${aal.id}"><img style="background-size: cover;height: 100%;" class="img-fluid img-thumbnail rounded" src="data:image/png;base64,${aal.base64image}"></a>
 							</div>
 								<div class="row d-flex justify-content-center">
 								<div class="col-md-9" ><a style="font-size: 20px;" href="${contextRoot}/actandles/${aal.id}">${aal.name}</a></div> 
@@ -93,14 +106,27 @@
 								</div>
 							</div>
 							</jstl:forEach>
+<!-- 							<div style="text-align: center;"> -->
+<%-- 							<jstl:forEach var="pageNumber" begin="1" end="${pageforAct.totalPages}"> --%>
+<%-- 								<jstl:choose> --%>
+<%-- 									<jstl:when test="${pageforAct.number == pageNumber-1}"> --%>
+<%-- 										<span>${pageNumber}</span> --%>
+<%-- 									</jstl:when> --%>
+<%-- 									<jstl:otherwise> --%>
+<!-- 										<a -->
+<%-- 											href="${contextRoot}/actandles?p=${pageNumber}">${pageNumber}</a> --%>
+<%-- 									</jstl:otherwise> --%>
+<%-- 								</jstl:choose> --%>
+<%-- 							</jstl:forEach> --%>
+<!-- 						</div> -->
 			</div>
-			<div class="mb-3 content content_view" id="les"
-				style="background-color: #ffffff00; height: 100%;display: none;">
+			<div class="content content_view" id="les"
+				style="background-color: #ffffff00; display: none;width: 100%;flex-wrap: wrap;height: unset;">
 							<jstl:forEach var="aal" items="${pageforLes.content}">
 							
-							<div class="text-center me-3 mb-3" style="height:450px;width: 350px;border: 1px solid gray;">
-							<div >
-								<a href="${contextRoot}/actandles/${aal.id}"><img style="max-height:200px;max-width: 200px;" class="img-fluid img-thumbnail rounded" src="data:image/png;base64,${aal.base64image}"></a>
+							<div class="text-center  mb-3" style="height:450px;width: 25%;border: 1px solid gray;">
+							<div style="height:200px;width: 100%;">
+								<a href="${contextRoot}/actandles/${aal.id}"><img style="background-size: cover;height: 100%;" class="img-fluid img-thumbnail rounded" src="data:image/png;base64,${aal.base64image}"></a>
 							</div>
 								<div class="row d-flex justify-content-center">
 								<div class="col-md-9" ><a style="font-size: 20px;" href="${contextRoot}/actandles/${aal.id}">${aal.name}</a></div> 
@@ -123,6 +149,19 @@
 								</div>
 							</div>
 							</jstl:forEach>
+<!-- 							<div style="text-align: center;"> -->
+<%-- 							<jstl:forEach var="pageNumber" begin="1" end="${pageforLes.totalPages}"> --%>
+<%-- 								<jstl:choose> --%>
+<%-- 									<jstl:when test="${pageforLes.number == pageNumber-1}"> --%>
+<%-- 										<span>${pageNumber}</span> --%>
+<%-- 									</jstl:when> --%>
+<%-- 									<jstl:otherwise> --%>
+<!-- 										<a -->
+<%-- 											href="${contextRoot}/actandles?p=${pageNumber}">${pageNumber}</a> --%>
+<%-- 									</jstl:otherwise> --%>
+<%-- 								</jstl:choose> --%>
+<%-- 							</jstl:forEach> --%>
+<!-- 						</div> -->
 			</div>
 		</div>
 	</div>

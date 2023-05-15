@@ -54,7 +54,7 @@ $(document).ready(function() {
 				style="background-color: #ffffff00; height: 100%">
 				<div class="col-8" style="margin: auto">
 					<div class="card">
-						<div class="card-header">活動/課程修改頁面</div>
+						<div class="card-header text-center">活動/課程修改頁面</div>
 						<div class="card-body">
 							<form:form class="" modelAttribute="aal"
 								enctype="multipart/form-data" method="PUT"
@@ -66,49 +66,63 @@ $(document).ready(function() {
 								<form:input path="normalMember.id"
 									value="${aal.normalMember.id}" class="form-control"
 									type="hidden"></form:input>
-								<p>活動/課程名稱</p>
+								<div class="mb-3">活動/課程名稱
 								<form:input path="name" value="${aal.name}" class="form-control"
-									type="text"></form:input>
+									type="text"></form:input></div>
 								<br>
-								<p>
+								<div class="mb-3">
 									類別:<span id="printTopic"></span>
-								</p>
+								</div>
 								<form:input path="topic" id="targetTopic" value="${aal.topic}"
 									class="form-control" type="hidden"></form:input>
-								<p>
+								<div class="mb-3">
 									舉辦日: <span><fmt:formatDate pattern="yyyy-MM-dd"
 											value="${aal.theDayofStarts}" /></span>
-								</p>
+								
 											更新:<form:input path="theDayofStarts"
-									value="${aal.theDayofStarts}" class="form-control" type="date"></form:input>
-								<p>報名費用:</p>
+									value="${aal.theDayofStarts}" class="form-control" type="date"></form:input></div>
+								<div class="mb-3">報名費用:
 								<form:input path="fee" value="${aal.fee}" class="form-control"
-									type="text"></form:input>
-								<p>預計名額:</p>
+									type="text"></form:input></div>
+								<div class="mb-3">預計名額:
 								<form:input path="quota" value="${aal.quota}"
-									class="form-control" type="text"></form:input>
-								<p>最低開辦人數:</p>
+									class="form-control" type="text"></form:input></div>
+								<div class="mb-3">最低開辦人數:
 								<form:input path="lowerLimit" value="${aal.lowerLimit}"
-									class="form-control" type="text"></form:input>
-								<p>
+									class="form-control" type="text"></form:input></div>
+								<div class="mb-3">
 									報名截止日: <span><fmt:formatDate pattern="yyyy-MM-dd"
-											value="${aal.deadLine}" /></span>
-								</p>
+											value="${aal.deadLine}" /></span></div>
+								
 								<form:input path="deadLine" value="${aal.deadLine}"
 									class="form-control" type="date"></form:input>
-
-								<form:input path="currentStatus" class="form-control"
-									type="hidden" value="unreviewed"></form:input>
-								<p>預覽圖-原圖:</p>
+								<jstl:choose>
+									<jstl:when test="${result.role.roleId!=3}">
+										<form:input path="currentStatus" class="form-control"
+											type="hidden" value="unreviewed"></form:input>
+									</jstl:when>
+									<jstl:when test="${result.role.roleId==3}">
+										<form:input path="currentStatus" class="form-control"
+											type="hidden" value="overruled"></form:input>
+									</jstl:when>							
+								</jstl:choose>
+								<div class="mb-3">預覽圖-原圖:
 								<img width="200px" height="200px" id="preview"
-									src="data:image/png;base64,${aal.base64image}">
-								<p>預覽圖更新:</p>
+									src="data:image/png;base64,${aal.base64image}"></div>
+								<div class="mb-3">預覽圖更新:
 								<form:input path="imageFile" id="target" class="form-control"
-									type="file"></form:input>
-								<p>文案內容:</p>
+									type="file"></form:input></div>
+								<div class="mb-3">文案內容:
 								<form:textarea path="aalContent" id="summernote"
-									value="${aalContent}" />
-								<button type="submit" class="btn btn-primary">送出</button>
+									value="${aalContent}" /></div>
+								<div class="mb-3">	
+								<jstl:if test="${result.role.roleId==3}">
+								<div>駁回原因：</div>
+										<form:textarea path="cause" style="width:100%;height:"
+											class="form-check form-check-inline " type="text" />
+								</jstl:if></div>
+								<div style="text-align: center;">
+								<button type="submit" class="btn btn-primary">送出</button></div>
 							</form:form>
 
 						</div>

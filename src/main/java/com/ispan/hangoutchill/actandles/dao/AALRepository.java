@@ -22,6 +22,9 @@ public interface AALRepository extends JpaRepository<ActivitiesandLesson, Intege
 	
 	@Query("select a from ActivitiesandLesson a where topic = :value")
 	public Page<ActivitiesandLesson> findPageByTopic(@Param(value="value") String value,Pageable pageable);
+	
+	@Query("select a from ActivitiesandLesson a where topic = :value and currentStatus = 'approved' or currentStatus = 'opened'")
+	public Page<ActivitiesandLesson> findPageByTopicforguest(@Param(value="value") String value,Pageable pageable);
 
 //	@Query("select a from ActivitiesandLesson a where currentStatus = 'unreviewed'")
 //	public Page<ActivitiesandLesson> findPageByStatusForAdmin(Pageable pageable);
