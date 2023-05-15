@@ -186,6 +186,19 @@
 						.container {
 							max-width: 69%;
 						}
+						.image-wrapper img {
+							max-width: 25%;
+							max-height: 400px;
+							margin: 3px;
+							/* card裡的討論圖片大小限制 */
+						}
+						.image-wrapper p{
+							font-size: 20px;
+						}
+						.cardreply {
+							margin-top: 10px;
+							margin-left: 20px;
+						}
 					</style>
 					<!-- ================================== ck editor ================================== -->
 					<script src="${contextRoot}/js/ckeditor/ckeditor.js"></script>
@@ -231,18 +244,16 @@
 											<form:form modelAttribute="discussion" method="post"
 												action="${contextRoot}/discussion/post">
 												<div class="form-group">
-													<h4><label for="title">標題</label></h4>
-													<p style="font-size: 18px;">${discussion.title}</p>
+													<h4><p style="font-size: 18px;">${discussion.title}</p></h4>
 												</div>
 
 												<div class="form-group">
-													<h4><label for="category">分類</label></h4>
-													<h4><p>${discussion.type}</p></h4>
+													<p style="color: gray; font-style: italic; font-size: 16px;">${discussion.type}</p>
 												</div>
 
 												<div class="form-group">
 													<h4><label for="content">内容</label></h4>
-													<p>${discussion.contents}</p>
+													<span class="image-wrapper"><p>${discussion.contents}</p></span>
 												</div>
 											</form:form>
 										</div>
@@ -344,33 +355,31 @@
 									</div>
 
 									<div class="card">
-										<!-- =============== 回覆功能 =============== -->
-										<div class="card">
-											<form:form modelAttribute="replyDiscussion" method="post"
-												action="${contextRoot}/message/post/${discussion.d_id}">
+										<div class="cardreply">
+											<!-- =============== 回覆功能 =============== -->
+											
+												<form:form modelAttribute="replyDiscussion" method="post"
+													action="${contextRoot}/message/post/${discussion.d_id}">
+													
+													<form:input type="hidden" path="discussions" value="${discussion.d_id}" />
+													<div class="form-group">
+														<!--  把member_id值設定至message的normalMmeber -->
+														<form:hidden path="normalMmeber" value="${result.id}"></form:hidden>
+														
+														<form:input type="text" class="form-control" aria-label="Text input with dropdown button" path="contents" id="editor" placeholder="請在這裡填寫內容" style="width: 70%"/>
+														
 
-												<form:input type="hidden" path="discussions" value="${discussion.d_id}" />
+														<!-- <form:textarea path="contents" class="form-control" id="content" rows="5"
+												placeholder="輸入内容" ></form:textarea> -->
+													</div>
+													<button type="submit" class="btn btn-primary">發表回覆</button>
+												</form:form>
 												<div class="form-group">
-													<!--  把member_id值設定至message的normalMmeber -->
-													<form:hidden path="normalMmeber" value="${result.id}"></form:hidden>
-													<!-- ================================== ck editor ================================== -->
-													<form:input path="contents" id="editor" placeholder="請在這裡填寫內容" style="width: 70%"/>
-													<!-- ================================== ck editor ================================== -->
-
-													<!-- <form:textarea path="contents" class="form-control" id="content" rows="5"
-											placeholder="輸入内容" ></form:textarea> -->
+												<a href="${contextRoot}/discussion/allDiscussion/5"
+													class="btn btn-primary">返回文章列</a>
 												</div>
-												<button type="submit" class="btn btn-primary">發表回覆</button>
-											</form:form>
-
-											<a href="${contextRoot}/discussion/allDiscussion/5"
-												class="btn btn-primary">返回文章列</a>
 										</div>
 									</div>
-
-
-
-									
 								</div>
 							</div>
 						</div>
