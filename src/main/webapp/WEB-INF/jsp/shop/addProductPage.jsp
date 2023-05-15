@@ -94,7 +94,7 @@
 										<p>商品圖片：</p>
 										<div id="dadtd">
 											<input type="button" value="+ 圖片" id="addfile" /><br />
-											<form:input type="file" name="extraphoto" path="" />
+											<form:input type="file" name="extraphoto" path="" class="form-control"/>
 											<br />
 										</div>
 										<input type="submit" value="送出" id="submit" />
@@ -121,6 +121,7 @@
         let addbr = document.createElement("br");
         addinput.setAttribute("type", "file");
         addinput.setAttribute("name", "extraphoto");
+        addinput.setAttribute("class", "form-control");
         i++;
         dadtd.appendChild(addinput);
         dadtd.appendChild(addbr);

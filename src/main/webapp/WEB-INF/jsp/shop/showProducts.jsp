@@ -24,11 +24,14 @@
 							</a>
 						</div>
 						<div class="col-md-6">
+							<form method="get" action="${contextRoot}/shop/productslistbyname">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="搜尋產品">
-								<button class="btn btn-outline-secondary" type="button">搜尋</button>
+								<input type="text" class="form-control" placeholder="搜尋產品" name="keyword">
+								<button class="btn btn-outline-secondary" type="submit">搜尋</button>
 							</div>
+							</form>
 						</div>
+						<h4>${SearchResult}</h4>
 					<table class="table table-hover table-bordered table-light">
 						<thead>
 							<tr>
@@ -80,14 +83,17 @@
 					<nav aria-label="Page navigation example"
 						style="text-align: center" id="pageNum">
 						<c:forEach var="pageNum" begin="1" end="${page.totalPages}">
-							<c:choose>
+								<c:choose>
 								<c:when test="${page.number+1 == pageNum}">
-					${pageNum}
-				</c:when>
+								${pageNum}
+								</c:when>
+								<c:when test="${search}">
+									<a href="${contextRoot}/shop/productslistbyname?p=${pageNum}&keyword=${keyword}">${pageNum}</a>
+								</c:when>
 								<c:otherwise>
 									<a href="${contextRoot}/shop/allproducts?p=${pageNum}">${pageNum}</a>
 								</c:otherwise>
-							</c:choose>
+								</c:choose>
 
 							<c:if test="${pageNum != page.totalPages}">
 							</c:if>

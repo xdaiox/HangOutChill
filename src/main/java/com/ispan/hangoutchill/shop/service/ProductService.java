@@ -35,6 +35,20 @@ public class ProductService {
 		return page;
 	}
 	
+	// 產品搜尋&分頁
+	public Page<Product> findByNameAndPage(String keyword,Integer pageNum){
+		Pageable pgb = PageRequest.of(pageNum-1, 5, Sort.Direction.DESC,"productId");
+		Page<Product> page = productRepository.findProductByNameSearch(keyword, pgb);
+		return page;
+	}
+	
+	// 產品搜尋&分頁 for 前端
+	public Page<Product> findByNameAndPageForFronend(String keyword,Integer pageNum){
+		Pageable pgb = PageRequest.of(pageNum-1, 20, Sort.Direction.DESC,"productId");
+		Page<Product> page = productRepository.findProductByNameSearch(keyword, pgb);
+		return page;
+	}
+	
 	
 	public Product getProductById(Integer productId) {
 		Optional<Product> op = productRepository.findById(productId);
@@ -74,9 +88,28 @@ public class ProductService {
 		return productRepository.findProductsByCategory(category);
 	}
 	
-	public List<Product> findAllProducts(){
-		
-		return productRepository.findAll();
+	public Page<Product> findProductByCategoryAndPage(String category, Integer pageNum){
+		Pageable page = PageRequest.of(pageNum-1, 20, Sort.Direction.DESC,"productId");
+		Page<Product> pgb = productRepository.findProductsByCategoryAndPage(category, page);
+		return pgb;
+	}
+	
+	
+//	public List<Product> findAllProducts(){
+//		
+//		return productRepository.findAll();
+//	}
+	
+	
+	public Page<Product> findAllProducts(Integer pageNum){
+		Pageable page = PageRequest.of(pageNum-1, 20, Sort.Direction.DESC,"productId");
+		Page<Product> pgb = productRepository.findAll(page);
+		return pgb;
+	}
+	
+	
+	public List<Product> findProductsByNamekeyWord(String keyword){
+		return productRepository.findProductsByKeyWordSearch(keyword);
 	}
 	
 }

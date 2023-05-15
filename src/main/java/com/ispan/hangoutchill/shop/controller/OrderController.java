@@ -108,9 +108,12 @@ public class OrderController {
 	// 付款成功後重導回客戶端
 	@Transactional
 	@PostMapping("/shop/orderdetailcheck")
-	public String showOrderDetailPage(@CurrentSecurityContext(expression = "authentication") Authentication authentication, Model model) {
+	public String showOrderDetailPage(@CurrentSecurityContext(expression = "authentication") Authentication authentication, 
+			@RequestParam("MerchantTradeNo") String merchantTradeNo,
+			Model model) {
 		String name = authentication.getName();
 		System.out.println(name);
+		System.out.println(merchantTradeNo);
 		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
 		Order latestOrder = orderService.findLatestOrderByMemberId(currentmember.getId());
 		List<OrderDetail> ods = new ArrayList<>(latestOrder.getOrderDetails());

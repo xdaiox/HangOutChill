@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -119,6 +121,18 @@ public class ProductController {
 			@RequestParam(name="p", defaultValue="1") Integer pageNum,Model model) {
 		Page<Product> page = productService.findByPage(pageNum);
 		model.addAttribute("page", page);
+		return "shop/showProducts";
+	}
+	
+	// 後臺產品名稱模糊查詢
+	@GetMapping("/shop/productslistbyname")
+	public String showProductListByNameSearch(@RequestParam(name="p", defaultValue="1") Integer pageNum, 
+											  @RequestParam(name="keyword")String keyword, Model model) {
+		Page<Product> page = productService.findByNameAndPage(keyword, pageNum);
+		model.addAttribute("page", page);
+		model.addAttribute("search", true);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("SearchResult", "關鍵字\""+ keyword +"\"搜尋結果");
 		return "shop/showProducts";
 	}
 	
@@ -360,25 +374,25 @@ public class ProductController {
 	
 	// 前台渲染
 	// 商品分類 仍須加上分頁功能與分頁按鈕
-	@GetMapping("/shop/products")
-	public String showProductbyCategory(@RequestParam(name="category") String category,
-										@CurrentSecurityContext(expression = "authentication") Authentication authentication,
-										Model model) {
-		String name = authentication.getName();
-		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);	
-		List<Product> cps;
-		if(category.equals("全部商品")) {
-			cps = productService.findAllProducts();
-			
-		}else {
-			cps = productService.findProductByCategory(category);
-		}
-		
-		model.addAttribute("category", category);
-		model.addAttribute("cateProducts", cps);
-		model.addAttribute("result", currentmember);
-		return "shop/shopCategory";
-	}
+//	@GetMapping("/shop/products")
+//	public String showProductbyCategory(@RequestParam(name="category") String category,
+//										@CurrentSecurityContext(expression = "authentication") Authentication authentication,
+//										Model model) {
+//		String name = authentication.getName();
+//		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);	
+//		List<Product> cps;
+//		if(category.equals("全部商品")) {
+//			cps = productService.findAllProducts();
+//			
+//		}else {
+//			cps = productService.findProductByCategory(category);
+//		}
+//		
+//		model.addAttribute("category", category);
+//		model.addAttribute("cateProducts", cps);
+//		model.addAttribute("result", currentmember);
+//		return "shop/shopCategory";
+//	}
 	
 	// 商品單獨頁面
 	@GetMapping("/shop/productdetail")
@@ -394,26 +408,45 @@ public class ProductController {
 	}
 	
 	
-	// 商城更新版 
-	
+	// 商城更新版頁面 -- 商品分類
 	@GetMapping("/shop/productcategory")
 	public String showProductByCategoryTest(@RequestParam(name="category") String category, 
+											@RequestParam(name="p", defaultValue="1") Integer pageNum,
 											@CurrentSecurityContext(expression = "authentication") Authentication authentication,
 											Model model) {
 		String name = authentication.getName();
 		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
-		List<Product> cps;
+		Page<Product> cps;
 		if(category.equals("全部商品")) {
-			cps = productService.findAllProducts();
+			cps = productService.findAllProducts(pageNum);
 			
 		}else {
-			cps = productService.findProductByCategory(category);
+			cps = productService.findProductByCategoryAndPage(category, pageNum);
 		}
 		
 		model.addAttribute("category", category);
 		model.addAttribute("cateProducts", cps);
 		model.addAttribute("result", currentmember);
 		return "shop/productCategory";
+	}
+	
+	
+	// 商品頁面搜尋
+	@GetMapping("/shop/productnamesearch")
+	public String showProductSearchByNameResult(@RequestParam(name="searchword") String searchword,
+												@RequestParam(name="p", defaultValue="1") Integer pageNum,
+												@CurrentSecurityContext(expression = "authentication") Authentication authentication,
+											    Model model) {
+		String name = authentication.getName();
+		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
+		Page<Product> cps = productService.findByNameAndPageForFronend(searchword, pageNum);
+		model.addAttribute("category", "搜尋結果");
+		model.addAttribute("cateProducts", cps);
+		model.addAttribute("result", currentmember);
+		model.addAttribute("search", true);
+		model.addAttribute("keyword", searchword);
+		
+		return"shop/productCategory";
 	}
 	
 	

@@ -38,17 +38,19 @@
                     </ul>
                 </div>
                 <div class="searchbox">
-                    <input type="text" class="search_input" placeholder="商品搜尋">
+                	<form method="get" action="${contextRoot}/shop/productnamesearch" >
+                    <input type="text" class="search_input" placeholder="商品搜尋" name="searchword">
                     <button class="search_submit" type="submit">
                         <a href="#"><i class="ti-search"></i></a>
                     </button>
+                    </form>
                 </div>
             </section>
 
             <section class="contentbox">
                 <div class="all_article">
                 
-				<c:forEach var="product" items="${cateProducts}">
+				<c:forEach var="product" items="${cateProducts.content}">
                     <div class="article_box">
                         <article class="article_img">
                             <a href="/hangoutchill/shop/productdetail?productid=${product.productId}">
@@ -78,12 +80,32 @@
                                       <i class="ti-angle-left"></i>
                                   </a>
                               </li>
-                              <li class="page-item">
-                                  <a href="#" class="page-link">1</a>
-                              </li>
-                              <li class="page-item active">
-                                  <a href="#" class="page-link">2</a>
-                              </li>
+                              <c:forEach var="pageNum" begin="1" end="${cateProducts.totalPages}">
+                              <c:choose>
+								<c:when test="${cateProducts.number+1 == pageNum}">
+								<li class="page-item active">
+                                  <a href="#" class="page-link">${pageNum}</a>
+                              	</li>
+								</c:when>
+								<c:when test="${search}">
+								<li class="page-item active">
+									<a href="${contextRoot}/shop/productnamesearch?p=${pageNum}&searchword=${keyword}">${pageNum}</a>
+								</li>
+								</c:when>
+								<c:otherwise>
+								<li class="page-item">
+                                  	<a href="${contextRoot}/shop/productcategory?p=${pageNum}" class="page-link">${pageNum}</a>
+                              	</li>
+								</c:otherwise>
+								</c:choose>
+                              </c:forEach>
+                              
+<!--                               <li class="page-item"> -->
+<!--                                   <a href="#" class="page-link">1</a> -->
+<!--                               </li> -->
+<!--                               <li class="page-item active"> -->
+<!--                                   <a href="#" class="page-link">2</a> -->
+<!--                               </li> -->
                               <li class="page-item">
                                   <a href="#" class="page-link" aria-label="Next">
                                       <i class="ti-angle-right"></i>
