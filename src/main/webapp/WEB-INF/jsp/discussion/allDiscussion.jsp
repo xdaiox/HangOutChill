@@ -232,18 +232,18 @@
 									<div class="inner-main-header2">
 										<a href="${contextRoot}/discussion/newDiscussion"><button
 												class="btn btn-primary" type="submit">新增討論</button></a>
-										<select class="custom-select custom-select-sm mr-1">
-											<option selected="10">顯示10項結果</option>
-											<option value="20">顯示20項結果</option>
-											<option value="50">顯示50項結果</option>
-										</select>
+													<select class="custom-select custom-select-sm mr-1" onchange="handleChange(this);">
+													<option value="${contextRoot}/discussion/allDiscussion/5" ${showCount == 5 ? 'selected' : ''}>顯示5項結果</option>
+													<option value="${contextRoot}/discussion/allDiscussion/10" ${showCount == 10 ? 'selected' : ''}>顯示10項結果</option>
+													<option value="${contextRoot}/discussion/allDiscussion/20" ${showCount == 20 ? 'selected' : ''}>顯示20項結果</option>
+												</select>
 										<ul
 											class="pagination pagination-sm pagination-circle justify-content-center mb-1 ml-auto">
 											<jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}">
 												<jstl:choose>
 													<jstl:when test="${page.number+1 != pageNumber }">
 														<li class="page-item"><a class="page-link"
-																href="${contextRoot}/discussion/allDiscussion?p=${pageNumber}">${pageNumber}</a>
+																href="${contextRoot}/discussion/allDiscussion/${showCount}?p=${pageNumber}">${pageNumber}</a>
 														</li>
 														<!-- p 是DiscussionsController,toShowAllDiscussion內的p -->
 													</jstl:when>
@@ -376,7 +376,7 @@
 														<jstl:choose>
 															<jstl:when test="${page.number+1 != pageNumber }">
 																<li class="page-item"><a class="page-link"
-																		href="${contextRoot}/discussion/allDiscussion?p=${pageNumber}">${pageNumber}</a>
+																		href="${contextRoot}/discussion/allDiscussion/${showCount}?p=${pageNumber}">${pageNumber}</a>
 																</li>
 																<!-- p 是DiscussionsController,toShowAllDiscussion內的p -->
 															</jstl:when>
@@ -491,6 +491,18 @@
 
 
 					<script>
+						//點回第一個option時還是會有效果
+						function handleChange(selectElement) {
+						var selectedValue = selectElement.value;
+						if (selectedValue === window.location.href) {
+							// 若所選值與當前URL相同，重新載入頁面以觸發重新導向
+							location.reload();
+						} else {
+							// 否則，將網頁導向所選項目的URL
+							window.location.href = selectedValue;
+						}
+						}
+
 						$(document).ready(function () {
 							$(".star").hover(
 								function () {

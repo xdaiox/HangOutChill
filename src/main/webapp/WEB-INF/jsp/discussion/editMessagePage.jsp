@@ -231,7 +231,7 @@ body {
 								</div>
 								
 							</form:form>
-							<a href="${contextRoot}/discussion/allDiscussion"
+							<a href="${contextRoot}/discussion/allDiscussion/5"
 								class="btn btn-primary">返回討論列</a>
 						</div>
 					</div>

@@ -67,7 +67,7 @@ public class MessagesController {
     }
     
     
-    //==============刪除留言==============
+    //==============刪除回覆==============
     @DeleteMapping("/message/deleteMessage/{id}/{m_id}")
     public String toDeleteButItsNotActuallyDeleteItsHiddenMessage(@PathVariable("id") Integer id,@PathVariable("m_id")Integer m_id,Model model,
 			@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
@@ -86,7 +86,7 @@ public class MessagesController {
     }
     
     
-    //==============編輯留言==============
+    //==============編輯回覆==============
     
     @PostMapping("/message/editMessage/{id}/{m_id}")
     public String editMessage(@PathVariable("id") Integer id,@PathVariable("m_id") Integer m_id, Model model,

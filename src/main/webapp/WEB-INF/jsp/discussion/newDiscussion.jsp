@@ -210,7 +210,7 @@ body {
 								</div>
 								<button type="submit" class="btn btn-primary">發表</button>
 							</form:form>
-							<a href="${contextRoot}/discussion/allDiscussion"
+							<a href="${contextRoot}/discussion/allDiscussion/5"
 								class="btn btn-primary">返回討論列</a>
 						</div>
 					</div>

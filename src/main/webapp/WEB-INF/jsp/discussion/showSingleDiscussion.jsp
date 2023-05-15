@@ -289,28 +289,21 @@
 															</p>
 														</div>
 														<div>
-															<button class="btn btn-primary" type="submit" onclick="showEditMessageConfirmation()">編輯</button>
-														<!--==========編輯討論url==========-->
+															<!--==========編輯討論url==========-->
 														<form id="edit-form-message" action="${contextRoot}/message/editMessage/${discussion.d_id}/${message.dm_id}" method="post">
 															<input type="hidden" name="_method" value="get">
+															<button class="btn btn-primary" type="button" onclick="showEditMessageConfirmation()">編輯</button>														
 														</form>
 
-														<button class="btn btn-primary danger" type="submit" onclick="showDeleteMessageConfirmation()">刪除</button>
+														
 														<!--==========刪除討論url==========-->
 														<form id="delete-form-message" action="${contextRoot}/message/deleteMessage/${discussion.d_id}/${message.dm_id}" method="post">
 															<input type="hidden" name="_method" value="delete">
+															<button class="btn btn-primary danger" type="button" onclick="showDeleteMessageConfirmation()">刪除</button>
 														</form>
 
 														</div>
-														<div class="text-muted small text-center align-self-center">
-															<span>	
-																<!-- 計算總共有多少筆回覆 -->
-																<c:forEach var="message" items="${page.content}">
-																<c:set var="messageCount" value="${messageCount + 1}" /> 
-																</c:forEach>
-																<i class="far fa-comment ml-2"></i><c:out value="${messageCount}" />
-															</span>
-														</div>
+														
 													</div>
 												</div>
 											</div>
@@ -359,7 +352,7 @@
 													<!--  把member_id值設定至message的normalMmeber -->
 													<form:hidden path="normalMmeber" value="${result.id}"></form:hidden>
 													<!-- ================================== ck editor ================================== -->
-													<form:textarea path="contents" id="editor" placeholder="請在這裡填寫內容" />
+													<form:input path="contents" id="editor" placeholder="請在這裡填寫內容" style="width: 70%"/>
 													<!-- ================================== ck editor ================================== -->
 
 													<!-- <form:textarea path="contents" class="form-control" id="content" rows="5"
@@ -368,7 +361,7 @@
 												<button type="submit" class="btn btn-primary">發表回覆</button>
 											</form:form>
 
-											<a href="${contextRoot}/discussion/allDiscussion"
+											<a href="${contextRoot}/discussion/allDiscussion/5"
 												class="btn btn-primary">返回文章列</a>
 										</div>
 									</div>
@@ -402,15 +395,24 @@
 
 						
 						function showEditMessageConfirmation() {
-							if (confirm("您確定要編輯此回覆？")) {
-								document.getElementById("edit-form-message").submit();
-							}
+						if (confirm("您確定要編輯此回覆？")) {
+							document.getElementById("edit-form-message").submit();
 						}
+						}
+
 						function showDeleteMessageConfirmation() {
-							if (confirm("您確定要刪除此回覆？")) {
-								document.getElementById("delete-form-message").submit();
-							}
+						if (confirm("您確定要刪除此回覆？")) {
+							document.getElementById("delete-form-message").submit();
 						}
+						}
+
+						document.getElementById("edit-form-message").addEventListener("submit", function(event) {
+						event.preventDefault(); // 阻止表單的默認提交行為
+						});
+
+						document.getElementById("delete-form-message").addEventListener("submit", function(event) {
+						event.preventDefault(); // 阻止表單的默認提交行為
+						});
 
 					</script>
 					<!-- ================================== ck editor ================================== -->

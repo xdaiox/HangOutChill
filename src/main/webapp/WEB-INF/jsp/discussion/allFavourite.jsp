@@ -47,9 +47,9 @@
                     <th scope="col">內容</th>
                     <th scope="col">分類</th>
                     <!-- <th scope="col">收藏數</th> -->
-                    <th scope="col">點閱數</th>
+                    <!-- <th scope="col">點閱數</th> -->
                     <!-- <th scope="col">分享次數</th> -->
-                    <th scope="col">最後更新</th>
+                    <th scope="col">收藏時間</th>
                     <!-- <th scope="col">功能</th> -->
                 </tr>
                 </thead>
@@ -59,9 +59,9 @@
                         <td class="align-middle">${fav.normalMember.nickName}</td>
                         <td class="align-middle">${fav.discussions.title}</td>
                         <!-- 把圖片用image-wrapper包起來 -->								
-                        <td class="align-middle"><span class="image-wrapper"></span>${fav.discussions.contents}</span></td>
+                        <td class="align-middle"><span class="image-wrapper">${fav.discussions.contents}</span></td>
                         <td class="align-middle">${fav.discussions.type}</td>
-                        <td class="align-middle">${fav.discussions.readCount}</td>
+                        <!-- <td class="align-middle">${fav.discussions.readCount}</td> -->
                         <td class="align-middle">${fav.postDate}</td>
                     </tr>
                 </jstl:forEach>

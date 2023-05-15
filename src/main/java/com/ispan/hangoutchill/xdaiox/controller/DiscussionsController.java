@@ -48,17 +48,18 @@ public class DiscussionsController {
     @Autowired
 	private MessagesRepository mssRepository;
 	
-	@GetMapping("/discussion/allDiscussion")
+	@GetMapping("/discussion/allDiscussion/{showCount}")
 	public String toShowAllDiscussion(@RequestParam(name="p",defaultValue = "1")Integer pageNumber,Model model,
-										@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+										@CurrentSecurityContext(expression = "authentication")Authentication authentication,
+										@PathVariable("showCount") Integer showCount) {
 //		上面的p是在allDiscussion.jsp的href="${contextRoot}/discussion/allDiscussion?p=${pageNumber}">${pageNumber}</a></li>
-		Page<Discussions> page = dService.findByPageWhereVisible(pageNumber);
+		Page<Discussions> page = dService.findByPageWhereVisible(pageNumber,showCount);
 		model.addAttribute("page", page);
 		
         String name = authentication.getName();
         NormalMember result = nMemberService.findNormalUserByAccount(name);
         model.addAttribute("result", result);
-		
+		model.addAttribute("showCount",showCount);
         Page<Messages> pageCount = dService.CountMessageByDiscussion(pageNumber);
         
         Map<Integer, Long> replyCountMap = new HashMap<>();
@@ -105,7 +106,7 @@ public class DiscussionsController {
 //    	image.setFkImgDiscussions(discussion);
     	
     	model.addAttribute("discussion", new Discussions());
-    	return"redirect:/discussion/allDiscussion";
+    	return"redirect:/discussion/allDiscussion/5";
     }
     
 //    @GetMapping("/discussion/editDiscussion")
@@ -140,6 +141,8 @@ public class DiscussionsController {
     	return "redirect:/message/allMessages/{id}";
     }
     
+    
+    //==============刪除討論==============
     @Transactional
     @DeleteMapping("/discussion/deleteDiscussion/{id}")
     public String toDeleteButItsNotActuallyDeleteItsHiddenDiscussion(@PathVariable("id") Integer id,Model model,
@@ -150,7 +153,7 @@ public class DiscussionsController {
         model.addAttribute("result", result);
     	
     	dService.deleteDiscussionById(id);
-    	return "redirect:/discussion/allDiscussion";
+    	return "redirect:/discussion/allDiscussion/5";
     }
     
     //==============找使用者所有的討論收藏==============

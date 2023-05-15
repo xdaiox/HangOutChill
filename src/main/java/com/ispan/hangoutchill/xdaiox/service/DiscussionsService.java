@@ -50,8 +50,8 @@ public class DiscussionsService {
 	}
 	
 	//找所有討論 where visible=true
-	public Page<Discussions> findByPageWhereVisible(Integer pageNumber){
-		Pageable pgb =PageRequest.of(pageNumber-1, 10, Sort.Direction.DESC, "postDate");
+	public Page<Discussions> findByPageWhereVisible(Integer pageNumber,Integer showCount){
+		Pageable pgb =PageRequest.of(pageNumber-1, showCount, Sort.Direction.DESC, "postDate");
 		Page<Discussions> page = dssRepository.findByVisibleTrue(pgb);
 		return page;
 	}
