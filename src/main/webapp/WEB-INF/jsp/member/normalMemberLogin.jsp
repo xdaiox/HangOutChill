@@ -13,6 +13,33 @@
     <jsp:include page="../layout/navbar.jsp"/>
     <link rel="stylesheet" href="${contextRoot}/css/member/register.css">
     <title>一般會員登入</title>
+    <style>
+        .profile_enter {
+            cursor: pointer;
+            width: 165px;
+            margin: auto;
+            margin-top: 10px;
+            text-align: center;
+            font-size: 16px;
+            padding: 12px 10px;
+            background-color: transparent;
+            outline: none;
+            display: block;
+            color: #343434;
+            border: 1px solid #343434;
+            border-radius: 3px;
+        }
+
+        .fb {
+            background-color: #4888ff !important;
+            color: #fff !important;
+        }
+
+        .google {
+            background-color: #ea6363 !important;
+            color: #fff !important;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -20,9 +47,6 @@
         <div class="box box-border">
             <div class="box-body">
                 <h4>登入</h4>
-                <h4><a href="${contextRoot}/oauth2/authorization/google">Login with Google</a>
-                    <br/>
-                     <a href="${contextRoot}/oauth2/authorization/facebook">Login with Facebook</a></h4>
                 <form action="${contextRoot}/member/login" method="post">
                     <div class="form-group">
                         <label>使用者信箱</label>
@@ -37,7 +61,13 @@
                     <div class="form-group text-right">
                         <button class="btn btn-primary btn-block" type="submit">登入</button>
                     </div>
-                    <div class="form-group text-center">
+                    <div style="display: inline-flex">
+                    <a class="profile_enter google" type="button" href="${contextRoot}/oauth2/authorization/google" >Google登入</a>
+                    </div>
+                    <div style="display: inline-flex">
+                    <a class="profile_enter fb" type="button" href="${contextRoot}/oauth2/authorization/facebook">Facebook登入</a>
+                    </div>
+                        <div class="form-group text-center">
                         <span class="text-muted"> 沒有帳號?</span> <a href="${contextRoot}/member/registration">創建帳戶
                     </a>
                     </div>

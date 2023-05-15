@@ -12,45 +12,33 @@
 <head>
 
     <jsp:include page="../layout/navbar.jsp"/>
-    <style>
-        .spacer {
-            text-align: right;
-        }
-
-        .spacel {
-            text-align: left;
-        }
-    </style>
     <title>會員身分</title>
 </head>
 <body>
-
-
 <div class="container overflow-hidden" style="text-align: center">
     <h3>請選擇欲登入的身分</h3>
-    <div class="row gy-5 ">
-
-        <div class="col-md-6 spacer mb-2">
-            <button class="btn btn-primary btn-lg" class=" bg-light" type="button">
-                <a href="${contextRoot}/member/login" style="color:white">一般會員登入</a></button>
-        </div>
-        <div class="col-md-6 spacel mb-2">
-            <button class="btn btn-secondary btn-lg" class=" bg-light" type="button">
-                <a href="${contextRoot}/back/members" style="color:white">後台</a>
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <button class="btn btn-primary btn-lg btn-block" type="button">
+                <a href="${contextRoot}/member/login" style="color:white; text-decoration: none;">會員登入</a>
             </button>
         </div>
-        <div class="col-md-6 spacer mb-2">
-            <button class="btn btn-primary btn-lg " class=" bg-light" type="button">
-                <a href="${contextRoot}/member/registration" style="color: white">一般會員註冊</a>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-4 offset-md-4">
+            <button class="btn btn-secondary btn-lg btn-block" type="button">
+                <a href="${contextRoot}/member/registration" style="color: white; text-decoration: none;">一般會員註冊</a>
             </button>
         </div>
-        <div class="col-md-6 spacel mb-2">
-            <button class="btn btn-secondary btn-lg" class=" bg-light" type="button">
-                <a href="${contextRoot}/member/LocationRegister" style="color: white">商家會員註冊</a></button>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-4 offset-md-4">
+            <button class="btn btn-primary btn-lg btn-block" type="button">
+                <a href="${contextRoot}/member/LocationRegister" style="color: white; text-decoration: none;">商家會員註冊</a>
+            </button>
         </div>
     </div>
 </div>
-
 
 </body>
 </html>

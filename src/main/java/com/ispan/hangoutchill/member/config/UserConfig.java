@@ -64,8 +64,9 @@ public class UserConfig {
     	http.csrf().disable()
         .authorizeRequests()
             .antMatchers("/discussion/newDiscussion").hasAuthority("USER")
-            .antMatchers("/dashboard").hasAuthority("ADMIN")
-            .antMatchers("/", "/member/registration", "/NormalMember/registed").permitAll()
+            .antMatchers("/location/memberLocationInfo/addPage/**").hasAuthority("LOCATION")
+            .antMatchers("/dashboard","/back/**").hasAuthority("ADMIN")
+            .antMatchers("/", "/member/registration", "/NormalMember/registed","/oauth/**","/member/NormalMemberDetail","/member/updateInfo").permitAll()
         .and()
         .logout().logoutSuccessUrl("/").deleteCookies("JSESSIONID")
         .and()
@@ -98,7 +99,7 @@ public class UserConfig {
     @Bean
     public RoleHierarchy roleHierarchy() {
         RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
-        String hierarchy = "ADMIN > USER";
+        String hierarchy = "ADMIN > LOCATION > USER";
         roleHierarchy.setHierarchy(hierarchy);
         return roleHierarchy;
     }
