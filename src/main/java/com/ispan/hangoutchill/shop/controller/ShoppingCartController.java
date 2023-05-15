@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ispan.hangoutchill.member.model.NormalMember;
@@ -56,6 +57,36 @@ public class ShoppingCartController {
 		model.addAttribute("result", currentmember);
 		return "shop/shoppingCart";
 	}
+	
+	
+	// 立即購買加入購物車
+	@PostMapping("/shop/directbuying")
+	public String directBuying(@CurrentSecurityContext(expression = "authentication") Authentication authentication,
+							   @RequestParam(name="product-title") Integer productId,
+							   @RequestParam(name="productAmount") Integer productAmount,
+								Model model) {
+		String name = authentication.getName();
+		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
+		List<Integer> productItems = shoppingCartService.findMemberCartProductIds(currentmember.getId());
+		for(Integer p : productItems) {
+			if(productId == p) {
+				return "redirect:/shop/shoppingCart";
+			}
+		}
+		
+		Product currentProduct = productService.getProductById(productId);
+		ShoppingCart newAdded = new ShoppingCart();
+		
+		newAdded.setMember(currentmember);
+		newAdded.setProduct(currentProduct);
+		newAdded.setAmount(productAmount);
+		
+		shoppingCartService.addShoppingCartItem(newAdded);
+		
+		model.addAttribute("result", currentmember);
+		return "redirect:/shop/shoppingCart";
+	}
+	
 	
 	@ResponseBody
 	@GetMapping("/shop/get/shoppingCartItemNum")

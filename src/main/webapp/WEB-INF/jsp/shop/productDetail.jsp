@@ -94,7 +94,7 @@
 						<div class="card">
 							<div class="card-body">
 								<h1 class="h2">${product.productName}</h1>
-								
+								<form action="${contextRoot}/shop/directbuying" method="post">
 								<!-- <p class="py-2">
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
@@ -112,7 +112,7 @@
                                 </li>
                             </ul> -->
 
-								<h6>產品描述:</h6>
+<!-- 								<h6>產品描述:</h6> -->
 								<p>${product.productDesc}</p>
 								<!-- <ul class="list-inline">
                                 <li class="list-inline-item">
@@ -164,10 +164,13 @@
 									</div>
 									<div class="row pb-3">
 										<div class="col d-grid">
-											<a class="btn btn-success btn-lg" href='<c:url value="/shop/shoppingCart" />'>立即購買</a>
+<!-- 										<form action="" method="post"> -->
+											<input type="hidden" id="amountforbuying" name="productAmount">
+											<button  type="submit" class="btn btn-success btn-lg" >立即購買</button>
+<!-- 										</form> -->
 										</div>
 										<div class="col d-grid">
-											<button type="submit" class="btn btn-success btn-lg"
+											<button type="button" class="btn btn-success btn-lg"
 												name="submit" value="addtocard" id="submitBtn">加入購物車</button>
 										</div>
 									</div>
@@ -179,7 +182,7 @@
 									<li></li>
 									<li><span style="color: red;">全館滿$799免運費</span></li>
 								</ul>
-
+								</form>
 							</div>
 						</div>
 					</div>
@@ -200,6 +203,7 @@
 	<script>
 	// 更新購物車小圖示標示
 	updateCartItems();
+	
 	
     // 加入購物車
 	$('#submitBtn').click(function(){
@@ -228,7 +232,30 @@
 	})
 	
 	
+	// 直接購買 
+	let plus = document.getElementById('btn-plus');
+	let minus = document.getElementById('btn-minus');
+	let amountParam = document.getElementById('amountforbuying');
+	amountParam.value = 1;
 	
+	plus.addEventListener('click', function(){
+		let amount = document.getElementById('var-value');
+		let theValue = amount.innerHTML;
+		console.log(theValue);
+		amountParam.value = parseInt(theValue) + 1;
+	})
+	
+	minus.addEventListener('click', function(){
+		let amount = document.getElementById('var-value');
+		let theValue = amount.innerHTML;
+		console.log(theValue);
+		if(amountParam.value > 1){
+			amountParam.value = parseInt(theValue) - 1;
+			
+		}else{
+			amountParam.value = 1;
+		}
+	})
 	
 	
 	
