@@ -38,9 +38,6 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public Integer getRoleId() {
-        return roleId;
-    }
 
     public Collection<NormalMember> getNormalMember() {
         return normalMember;
@@ -49,4 +46,7 @@ public class Role {
     public void setNormalMember(Collection<NormalMember> normalMember) {
         this.normalMember = normalMember;
     }
+
+
+
 }
