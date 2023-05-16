@@ -1,5 +1,7 @@
 package com.ispan.hangoutchill.xdaiox.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +17,7 @@ import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.xdaiox.dao.DiscussionsRepository;
 import com.ispan.hangoutchill.xdaiox.dao.MessagesRepository;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
+import com.ispan.hangoutchill.xdaiox.model.DiscussionsDTO;
 import com.ispan.hangoutchill.xdaiox.model.Messages;
 
 @Service
@@ -98,12 +101,31 @@ public class DiscussionsService {
 	
 	
 	//查找討論內容
-    public  List<Discussions> findBlurContents(String contents){
-        return dssRepository.findBlurContents(contents);
+    public  List<DiscussionsDTO> findBlurContents(String contents){
+    	List<Discussions> dis = dssRepository.findBlurContents(contents);
+    	
+    	List<DiscussionsDTO> disDTOs = new ArrayList<>();
+    	for(Discussions disf : dis) {
+    		disDTOs.add(convertToDiscussionsDTO(disf));
+    	}
+    	
+        return disDTOs;
         
         
     }
 	
+    
+    public DiscussionsDTO convertToDiscussionsDTO(Discussions discussions) {
+    	DiscussionsDTO disDTO = new DiscussionsDTO();
+    	disDTO.setM_id(discussions.getNormalMember().getId());
+    	disDTO.setPhotoB64(discussions.getNormalMember().getPhotoB64());
+    	disDTO.setNickName(discussions.getNormalMember().getNickName());
+    	disDTO.setD_id(discussions.getD_id());
+    	disDTO.setTitle(discussions.getTitle());;
+    	disDTO.setContents(discussions.getContents());;
+    	disDTO.setUpdateDate(discussions.getUpdateDate());;
+    	return disDTO;
+    }
 //    @Override
 //    @Transactional
 //    public NormalMember updateEnable(Integer id){

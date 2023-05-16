@@ -223,11 +223,11 @@
 										<button class="btn btn-primary" type="submit">熱門</button> -->
 										<a href="${contextRoot}/discussion/allFavourite"><button class="btn btn-primary"
 												type="submit">我的珍藏</button></a>
-										<button type="button" class="btn btn-link ml-auto">分類1</button>
+										<!-- <button type="button" class="btn btn-link ml-auto">分類1</button>
 										<button type="button" class="btn btn-link ml-auto">分類2</button>
 										<button type="button" class="btn btn-link ml-auto">分類3</button>
 										<button type="button" class="btn btn-link ml-auto">分類4</button>
-										<button type="button" class="btn btn-link ml-auto">分類5</button>
+										<button type="button" class="btn btn-link ml-auto">分類5</button> -->
 										<span class="input-icon input-icon-sm ml-auto w-auto"> <input type="text"  class="form-control" placeholder="關鍵字查詢討論" aria-label="Recipient's username" aria-describedby="button-addon2" id="search" name="accountKey">
 										</span>
 									</div>
@@ -239,8 +239,7 @@
 													<option value="${contextRoot}/discussion/allDiscussion/10" ${showCount == 10 ? 'selected' : ''}>顯示10項結果</option>
 													<option value="${contextRoot}/discussion/allDiscussion/20" ${showCount == 20 ? 'selected' : ''}>顯示20項結果</option>
 												</select>
-										<ul
-											class="pagination pagination-sm pagination-circle justify-content-center mb-1 ml-auto">
+										<ul class="pagination pagination-sm pagination-circle justify-content-center mb-1 ml-auto">
 											<jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}">
 												<jstl:choose>
 													<jstl:when test="${page.number+1 != pageNumber }">
@@ -257,12 +256,6 @@
 												</jstl:choose>
 
 											</jstl:forEach>
-											<!-- <li class="page-item active"><span class="page-link">G</span></li>
-												<li class="page-item"><a class="page-link"
-													href="javascript:void(0)">G</a></li>
-												<li class="page-item"><a class="page-link has-icon"
-													href="javascript:void(0)"><i class="material-icons">chevron_right</i></a>
-												</li> -->
 										</ul>
 									</div>
 								
@@ -355,12 +348,14 @@
 															<i class="far fa-comment ml-2 fa-lg"
 																style="font-size: 20px;"></i>
 															<jstl:if test="${empty replyCountMap[discussion.d_id]}"><i
-																	style="font-size: 20px;">0</i></jstl:if>
+																style="font-size: 20px;">0</i>
+															</jstl:if>
 
 															<jstl:if test="${not empty replyCountMap[discussion.d_id]}">
 																<i style="font-size: 20px;">
-																	<jstl:out
-																		value="${replyCountMap[discussion.d_id]}" />
+																	<jstl:out value="${replyCountMap[discussion.d_id]}" />
+																	<input type="hidden" id="replyCountValue" value="${replyCountMap[discussion.d_id]}" />
+
 																</i>
 															</jstl:if>
 														</span>
@@ -579,59 +574,63 @@
 					// //模糊搜尋
 					document.getElementById("search").addEventListener('change', searchContents);
 
-function searchContents() {
-  let searchKey = document.getElementById("search").value;
-
-  axios.get("${contextRoot}/discussion/blurContents?blurSearchContent=" + searchKey)
-    .then((res) => {
-      let discussions = document.getElementById("cardForAJAX");
-      let resultData = '';
-      let contextRoot =`${pageContext.request.contextPath}`;
-      // 通过res.data获取服务器返回的数据
-      res.data.forEach(discussion => {
-        let formattedDate = new Date(discussion.postDate).toLocaleString();
-        resultData += '<div class="card">' +
-          '<div class="card-body p-2 p-sm-3">' +
-          '<div class="media forum-item">' +
-          '<a data-toggle="collapse" data-target=".forum-content" style="transform: scale(1.5); display: inline-block;">' +
-          '<img src="' + discussion.normalMember.photoB64 + '" id="pfpimg" class="mr-3 rounded-circle" width="50" alt="User" style="max-width: 100%; height: auto; aspect-ratio: 1/1; margin : 10px;" />' +
-          '</a>' +
-          '<a href="" class="star" data-discussion-id="' + discussion.d_id + '" data-normalmember-id="' + discussion.normalMember.id + '">' +
-          '<i class="far fa-star fa-2x"></i>' +
-          '</a>' +
-          '<div class="media-body">' +
-          '<div class="text-body" onclick="window.location.href=\'' + contextRoot + '/message/allMessages/' + discussion.d_id + '\'">' +
-          '<a href="#" data-toggle="collapse" data-target=".forum-content" class="text-body">' +
-          '<h3>' + discussion.title + '</h3>' +
-          '<span class="image-wrapper">' +
-          '<p class="text-secondary">' + discussion.contents + '</p>' +
-          '</span>' +
-          '<p class="text-muted">' +
-          '<h5>作者: ' + discussion.normalMember.nickName + '</h5>' +
-          '</p>' +
-          '</a>' +
-          '</div>' +
-          '<span class="text-secondary font-weight-bold">發布於 ' +
-          formattedDate +
-          '</span>' +
-          '</div>' +
-          '<div class="text-muted small text-center align-self-center">' +
-          '<span class="d-none d-sm-inline-block">' +
-          '<i class="far fa-comment ml-2 fa-lg" style="font-size: 20px;"></i>' +
-          '<i style="font-size: 20px;">' + (discussion.replyCount || 0) + '</i>' +
-          '</span>' +
-          '</div>' +
-          '</div>' +
-          '</div>' +
-          '</div>';
-      });
-      
-      discussions.innerHTML = resultData;
-    })
-    .catch((err) => {
-      alert(err);
-    });
-}
+					function searchContents() {
+					let searchKey = document.getElementById("search").value;
+					
+					axios.get("${contextRoot}/discussion/blurContents?blurSearchContent=" + searchKey)
+						.then((res) => {
+						let discussions = document.getElementById("cardForAJAX");
+						let resultData = '';
+						discussions.innerHTML = '';
+						let contextRoot =`${pageContext.request.contextPath}`;
+						
+						// 通過res.data獲取java返回的數據
+						res.data.forEach(discussion => {
+							let formattedDate = new Date(discussion.updateDate).toLocaleString();
+							let replyCount = $('#replyCountValue').val();
+							console.log(replyCount);
+							resultData += '<div class="card">' +
+							'<div class="card-body p-2 p-sm-3">' +
+							'<div class="media forum-item">' +
+							'<a data-toggle="collapse" data-target=".forum-content" style="transform: scale(1.5); display: inline-block;">' +
+							'<img src="' + discussion.photoB64 + '" id="pfpimg" class="mr-3 rounded-circle" width="50" alt="User" style="max-width: 100%; height: auto; aspect-ratio: 1/1; margin : 10px;" />' +
+							'</a>' +
+							'<a href="" class="star" data-discussion-id="' + discussion.d_id + '" data-normalmember-id="' + discussion.m_id + '">' +
+							'<i class="far fa-star fa-2x"></i>' +
+							'</a>' +
+							'<div class="media-body">' +
+							'<div class="text-body" onclick="window.location.href=\'' + contextRoot + '/message/allMessages/' + discussion.d_id + '\'">' +
+							'<a href="#" data-toggle="collapse" data-target=".forum-content" class="text-body">' +
+							'<h3>' + discussion.title + '</h3>' +
+							'<span class="image-wrapper">' +
+							'<p class="text-secondary">' + discussion.contents + '</p>' +
+							'</span>' +
+							'<p class="text-muted">' +
+							'<h5>作者: ' + discussion.nickName + '</h5>' +
+							'</p>' +
+							'</a>' +
+							'</div>' +
+							'<span class="text-secondary font-weight-bold">最後更新於 ' +
+								formattedDate +
+							'</span>' +
+							'</div>' +
+							'<div class="text-muted small text-center align-self-center">' +
+							'<span class="d-none d-sm-inline-block">' +
+							'<i class="far fa-comment ml-2 fa-lg" style="font-size: 20px;"></i>' +
+							'<i style="font-size: 20px;">' + (replyCount || 0) + '</i>' +
+							'</span>' +
+							'</div>' +
+							'</div>' +
+							'</div>' +
+							'</div>';
+						});
+						
+						discussions.innerHTML = resultData;
+						})
+						.catch((err) => {
+						alert(err);
+						});
+					}
 
 					</script>
 				</body>

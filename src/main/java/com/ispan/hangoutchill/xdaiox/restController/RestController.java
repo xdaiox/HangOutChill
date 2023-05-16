@@ -18,6 +18,7 @@ import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.xdaiox.dao.DiscussionsRepository;
 import com.ispan.hangoutchill.xdaiox.dao.ImagesRepository;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
+import com.ispan.hangoutchill.xdaiox.model.DiscussionsDTO;
 import com.ispan.hangoutchill.xdaiox.model.Favourite;
 import com.ispan.hangoutchill.xdaiox.model.FavouriteDTO;
 import com.ispan.hangoutchill.xdaiox.model.Images;
@@ -80,20 +81,19 @@ public class RestController {
     
     @ResponseBody
     @GetMapping("/discussion/blurContents")
-    public List<Discussions> findBlurContents (@RequestParam(name="blurSearchContent")String contents){
+    public List<DiscussionsDTO> findBlurContents (@RequestParam(name="blurSearchContent")String contents){
         System.out.println("******************findBlurContents有進來喔"+contents+"******************");
         
-        List<Discussions> discussionsList = dService.findBlurContents(contents);
+        List<DiscussionsDTO> discussionsList = dService.findBlurContents(contents);
 
-        for (Discussions discussion : discussionsList) {
-            String contentss = discussion.getContents();
-            NormalMember normalMember = discussion.getNormalMember();
+        for (DiscussionsDTO discussionDTO : discussionsList) {
+            String contentss = discussionDTO.getContents();
             
             System.out.println("====================================Contents: " + contentss);
             
-            if (normalMember != null) {
-                System.out.println("===============================Normal Member ID: " + normalMember.getId());
-                System.out.println("===============================Normal Member Name: " + normalMember.getNickName());
+            if (discussionDTO != null) {
+                System.out.println("===============================Normal Member ID: " + discussionDTO.getM_id());
+                System.out.println("===============================Normal Member Name: " + discussionDTO.getNickName());
                 // 可以根据需要打印 Normal Member 的其他属性
             } else {
                 System.out.println("============================Normal Member is null");
@@ -101,8 +101,7 @@ public class RestController {
             
             System.out.println("----------------------");
         }
-        
-        return dService.findBlurContents(contents);
+        return discussionsList;
     }
     
 }
