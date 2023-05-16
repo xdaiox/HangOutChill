@@ -58,7 +58,7 @@
                         </label>
                         <input type="password" name="password" class="form-control">
                     </div>
-                    <div class="form-group text-right">
+                    <div class="form-group text-right" style="margin-bottom: 5px">
                         <button class="btn btn-primary btn-block" type="submit">登入</button>
                     </div>
                     <div style="display: inline-flex">
