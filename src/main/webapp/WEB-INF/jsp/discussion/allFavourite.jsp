@@ -83,7 +83,10 @@
                                                     <td class="align-middle"><span class="image-wrapper">${fav.discussions.contents}</span></td>
                                                     <td class="align-middle">${fav.discussions.type}</td>
                                                     <!-- <td class="align-middle">${fav.discussions.readCount}</td> -->
-                                                    <td class="align-middle">${fav.postDate}</td>
+                                                    <td class="align-middle"><fmt:formatDate pattern="EEEE yyyy-MM-dd HH:mm:ss"
+                                                        value="${fav.postDate}" /></td>
+                                                    
+                                                    </span>
                                                 </tr>
                                             </jstl:forEach>
                                             </tbody>

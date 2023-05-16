@@ -228,7 +228,7 @@
 										<button type="button" class="btn btn-link ml-auto">分類3</button>
 										<button type="button" class="btn btn-link ml-auto">分類4</button>
 										<button type="button" class="btn btn-link ml-auto">分類5</button> -->
-										<span class="input-icon input-icon-sm ml-auto w-auto"> <input type="text"  class="form-control" placeholder="關鍵字查詢討論" aria-label="Recipient's username" aria-describedby="button-addon2" id="search" name="accountKey">
+										<span class="input-icon input-icon-sm ml-auto w-auto"> <input type="text"  class="form-control" placeholder="關鍵字查詢" aria-label="Recipient's username" aria-describedby="button-addon2" id="search" name="accountKey">
 										</span>
 									</div>
 									<div class="inner-main-header2">
@@ -239,7 +239,7 @@
 													<option value="${contextRoot}/discussion/allDiscussion/10" ${showCount == 10 ? 'selected' : ''}>顯示10項結果</option>
 													<option value="${contextRoot}/discussion/allDiscussion/20" ${showCount == 20 ? 'selected' : ''}>顯示20項結果</option>
 												</select>
-										<ul class="pagination pagination-sm pagination-circle justify-content-center mb-1 ml-auto">
+										<ul id="pageNumber" class="pagination pagination-sm pagination-circle justify-content-center mb-1 ml-auto">
 											<jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}">
 												<jstl:choose>
 													<jstl:when test="${page.number+1 != pageNumber }">
@@ -290,8 +290,8 @@
 									</jstl:forEach> -->
 
 									<!-- ********************* 討論區塊 ********************* -->
-									<jstl:forEach var="discussion" items="${page.content}">
 									<div id="cardForAJAX">
+									<jstl:forEach var="discussion" items="${page.content}">
 										<div class="card">
 											<div class="card-body p-2 p-sm-3">
 												<div class="media forum-item">
@@ -363,8 +363,8 @@
 												</div>
 											</div>
 										</div> <!-- <div class="card"> -->
-									</div> <!-- <div id="cardForAJAX"> -->
-									</jstl:forEach>
+										</jstl:forEach>
+									
 
 									<div class="card">
 										<!-- =============== 下面的頁數 =============== -->
@@ -398,6 +398,7 @@
 											</div>
 										</div>
 									</div>
+								</div> <!-- <div id="cardForAJAX"> -->
 
 
 									<!-- 範例card -->
@@ -530,7 +531,6 @@
 								// 控制台顯示 discussionId
 								console.log("discussion ID:", discussionId);
 								console.log("normalMember ID:", normalMemberId);
-
 								let dtoObject = {
 									"discussions": {
 										"d_id": discussionId
@@ -573,7 +573,7 @@
 
 					// //模糊搜尋
 					document.getElementById("search").addEventListener('change', searchContents);
-
+					
 					function searchContents() {
 					let searchKey = document.getElementById("search").value;
 					
@@ -614,25 +614,22 @@
 								formattedDate +
 							'</span>' +
 							'</div>' +
-							'<div class="text-muted small text-center align-self-center">' +
-							'<span class="d-none d-sm-inline-block">' +
-							'<i class="far fa-comment ml-2 fa-lg" style="font-size: 20px;"></i>' +
-							'<i style="font-size: 20px;">' + (replyCount || 0) + '</i>' +
-							'</span>' +
-							'</div>' +
 							'</div>' +
 							'</div>' +
 							'</div>';
 						});
 						
 						discussions.innerHTML = resultData;
+						let elementById = document.getElementById("pageNumber");
+						let page='';
+						elementById.innerHTML = page;
 						})
 						.catch((err) => {
 						alert(err);
 						});
 					}
 
-					</script>
+					</script> 	
 				</body>
 
 				</html>

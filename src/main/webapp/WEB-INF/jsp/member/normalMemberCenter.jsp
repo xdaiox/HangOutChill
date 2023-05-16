@@ -12,32 +12,7 @@
 <head>
     <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
     <link rel="stylesheet" href="${contextRoot}/css/member/register.css">
-    <title>所有收藏</title>
-    <style>
-        tr[data-href] {
-            cursor: pointer;
-        }
-        @media (max-width: 1260px) {
-            .container-scroller {
-            max-width: 96%;
-            } /* 當寬度1259px↓　寬度設定 */
-        }
-        .container-scroller {
-            max-width: 69%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .image-wrapper img {
-            max-width: 25%;
-            max-height: 100px;
-            margin: 3px;
-            /* card裡的討論圖片大小限制 */
-        }
-        .parent-container {
-            display: flex;
-            justify-content: center;
-        }
-    </style>
+    <title>一般會員中心</title>
 </head>
 <body>
 <jsp:include page="../layout/navbar.jsp"/>
@@ -65,35 +40,66 @@
                                     <br>
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-title">收藏討論</h3>
-                                        <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">作者</th>
-                    <th scope="col">標題</th>
-                    <th scope="col">內容</th>
-                    <th scope="col">分類</th>
-                    <!-- <th scope="col">收藏數</th> -->
-                    <!-- <th scope="col">點閱數</th> -->
-                    <!-- <th scope="col">分享次數</th> -->
-                    <th scope="col">收藏時間</th>
-                    <!-- <th scope="col">功能</th> -->
-                </tr>
-                </thead>
-                <tbody>
-                <jstl:forEach var="fav" items="${favouriteDTO}">
-                    <tr data-href="${contextRoot}/message/allMessages/${fav.discussions.d_id}">
-                        <td class="align-middle">${fav.normalMember.nickName}</td>
-                        <td class="align-middle">${fav.discussions.title}</td>
-                        <!-- 把圖片用image-wrapper包起來 -->								
-                        <td class="align-middle"><span class="image-wrapper">${fav.discussions.contents}</span></td>
-                        <td class="align-middle">${fav.discussions.type}</td>
-                        <!-- <td class="align-middle">${fav.discussions.readCount}</td> -->
-                        <td class="align-middle">${fav.postDate}</td>
-                    </tr>
-                </jstl:forEach>
-                </tbody>
-            </table>
+                                        <h3 class="card-title">會員資訊</h3>
+                                        <table class="table table-borderless" >
+                                            <form:form modelAttribute="result" method="PUT" action="${contextRoot}/member/updateInfo" enctype="multipart/form-data">
+                                                <form:input path="id" value="${result.id}" type="hidden"/>
+                                            <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                                <th scope="col" class="col-6"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th scope="row" style="width: 160px">會員註冊信箱：</th>
+                                                <td style=" text-align: left; "><form:input path="account" value="${result.account}" readonly="true"/></td>
+                                                <td style="font-weight: bold">大頭貼</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="width: 160px">會員真實姓名：</th>
+                                                <td style=" text-align: left; "><form:input path="reallName" value="${result.reallName}"/></td>
+                                                <td rowspan="5"><img src="${result.photoB64}" id="preview" ><form:input path="file" type="file" id="target"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="width: 160px">會員暱稱：</th>
+                                                <td style=" text-align: left; "><form:input path="nickName" value="${result.nickName}"/></td>
+
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="width: 160px">會員出生年月日：</th>
+                                                <td style=" text-align: left; "><form:input path="birthdate" value="${result.birthdate}" type="date"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="width: 160px">會員手機：</th>
+                                                <td style=" text-align: left; "><form:input path="tel" value="${result.tel}" /></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="width: 160px">會員性別：</th>
+                                                <td style=" text-align: left; ">
+                                                    <jstl:choose><jstl:when test="${result.gender =='male'}"><form:radiobutton
+                                                        path="gender" value="male" checked="${result.gender} == male"/>
+                                                    <label class="form-check-label">男</label>
+                                                    <form:radiobutton path="gender" value="female"/>
+                                                    <label class="form-check-label">女</label>
+                                                    </jstl:when><jstl:otherwise>
+                                                        <form:radiobutton
+                                                                path="gender" value="male" />
+                                                        <label class="form-check-label">男</label>
+                                                        <form:radiobutton path="gender" value="female" checked="${result.gender} == female"/>
+                                                        <label class="form-check-label">女</label>
+                                                    </jstl:otherwise>
+                                                    </jstl:choose></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="width: 160px"></th>
+                                                <td style=" text-align: left; "><button type="submit" class="btn btn-primary">送出修改</button></td>
+                                                <td><a href="${contextRoot}/member/resetPwd?id=${result.id}" class="link">修改密碼</a></td>
+                                            </tr>
+                                            </tbody>
+                                            </form:form>
+                                        </table>
 
                                     </div>
                                 </div>
@@ -104,6 +110,24 @@
     </div>
 </section>
 <jsp:include page="../layout/footer.jsp"/>
+<script >
+    //圖片上傳前預覽
+    const input = document.getElementById("target")
+    const preview = document.getElementById("preview")
+    input.addEventListener('change', () => {
+        const file = input.files[0];
+        const reader = new FileReader();
 
+        reader.addEventListener('load', () => {
+            preview.src = reader.result;
+        });
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            // preview.src = "";
+        }
+    });
+</script>
 </body>
 </html>

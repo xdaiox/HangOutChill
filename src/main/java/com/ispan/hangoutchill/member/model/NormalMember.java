@@ -111,7 +111,13 @@ public class NormalMember {
 			cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Favourite> favourite = new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "addNormalMember",fetch=FetchType.LAZY,
+    		cascade = {CascadeType.PERSIST},orphanRemoval = true)
+    private Set<Favourite> favDiscussions = new LinkedHashSet<>();
     
+    @ManyToOne
+    @JoinColumn(name="add_m_id", nullable = true)
+    private NormalMember addNormalMember;
     
     public Set<Favourite> getFavourite() {
 		return favourite;

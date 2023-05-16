@@ -6,6 +6,8 @@ import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ispan.hangoutchill.member.model.NormalMember;
+import com.ispan.hangoutchill.member.service.NormalMemberService;
 import com.ispan.hangoutchill.xdaiox.dao.DiscussionsRepository;
 import com.ispan.hangoutchill.xdaiox.dao.ImagesRepository;
+import com.ispan.hangoutchill.xdaiox.dao.MessagesRepository;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
 import com.ispan.hangoutchill.xdaiox.model.DiscussionsDTO;
 import com.ispan.hangoutchill.xdaiox.model.Favourite;
@@ -36,6 +40,9 @@ public class RestController {
 	private DiscussionsService dService;
 	
     @Autowired
+    NormalMemberService nMemberService;
+	
+    @Autowired
     private ImagesRepository imageRepository;
     
 //    @PostMapping("/discussion/addFavourite")
@@ -48,9 +55,13 @@ public class RestController {
     //***********ajax新增最愛***********
     @ResponseBody
 	@PostMapping("api/addFavourite/post")
-	public /*List<FavouriteDTO>*/ void postMessageApi(@RequestBody Favourite fvt){
+	public /*List<FavouriteDTO>*/ void postMessageApi(@RequestBody Favourite fvt,
+			@CurrentSecurityContext(expression = "authentication")Authentication authentication){
 		
-		fService.addFavourite(fvt);
+        String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+    	
+		fService.addFavourite(fvt,result);
 		
 //		System.out.println("========================at Controller=========================="+"fvt.getDiscussions().getD_id() :"+fvt.getDiscussions().getD_id()+"  fvt.getNormalMember().getAccount(): "+fvt.getNormalMember().getAccount()+"==================================================");
 

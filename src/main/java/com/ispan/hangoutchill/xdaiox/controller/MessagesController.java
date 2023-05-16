@@ -35,6 +35,8 @@ public class MessagesController {
     @Autowired
     NormalMemberService nMemberService;
 	
+    
+    //顯示單一討論
 	@GetMapping("/message/allMessages/{id}")
 	public String toShowAllMessages(@RequestParam(name="p",defaultValue = "1")Integer pageNumber,@PathVariable(name="id") Integer d_id,Model model,
 									@CurrentSecurityContext(expression = "authentication")Authentication authentication) {

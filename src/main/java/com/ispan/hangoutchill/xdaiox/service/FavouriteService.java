@@ -1,13 +1,11 @@
 package com.ispan.hangoutchill.xdaiox.service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.xdaiox.dao.FavouriteRepository;
 import com.ispan.hangoutchill.xdaiox.model.Favourite;
 import com.ispan.hangoutchill.xdaiox.model.FavouriteDTO;
@@ -18,7 +16,8 @@ public class FavouriteService {
 	@Autowired
 	private FavouriteRepository favRepository;
 	
-	public void addFavourite(Favourite fvt) {
+	public void addFavourite(Favourite fvt,NormalMember result) {
+		fvt.setAddNormalMember(result);
 		favRepository.save(fvt);
 		
 		}
@@ -33,7 +32,7 @@ public class FavouriteService {
 //	}
 //	
 	public List<Favourite> findAllFavouriteById(Integer normalMemberId) {
-	    List<Favourite> favourites = favRepository.findAllByNormalMemberId(normalMemberId);
+	    List<Favourite> favourites = favRepository.findAllByAddNormalMemberId(normalMemberId);
 	    
 //	    List<FavouriteDTO> favouriteDTOs = new ArrayList<>();
 //	    
@@ -51,6 +50,7 @@ public class FavouriteService {
 	    favouriteDTO.setDiscussions(favourite.getDiscussions().getD_id());
 	    favouriteDTO.setNormalMember(favourite.getNormalMember().getId());
 	    favouriteDTO.setPostDate(favourite.getPostDate());
+	    favouriteDTO.setAddNormalMember(favourite.getAddNormalMember().getId());
 	    return favouriteDTO;
 	}
 }

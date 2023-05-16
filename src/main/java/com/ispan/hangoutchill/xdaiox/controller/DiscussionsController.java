@@ -59,6 +59,7 @@ public class DiscussionsController {
         String name = authentication.getName();
         NormalMember result = nMemberService.findNormalUserByAccount(name);
         model.addAttribute("result", result);
+        
 		model.addAttribute("showCount",showCount);
         Page<Messages> pageCount = dService.CountMessageByDiscussion(pageNumber);
         
