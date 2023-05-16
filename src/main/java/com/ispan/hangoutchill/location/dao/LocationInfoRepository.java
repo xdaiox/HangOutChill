@@ -15,6 +15,22 @@ import java.util.List;
 
 public interface LocationInfoRepository extends JpaRepository<LocationInfo, Integer>, JpaSpecificationExecutor<LocationInfo> {
 
+    //查詢商業會員的地點
+    @Query(value = "from LocationInfo  where  normalMember.id = :id")
+    List<LocationInfo> findLocationByMemberId(@Param(value="id") Integer id);
+
+
+    //查詢所有地點依照狀態
+        Page<LocationInfo> findLocationInfoByLocStatus(boolean status, Pageable pageable);
+
+//    @Query(value = "FROM LocationInfo WHERE locStatus = true")
+//    List<LocationInfo> findLocationInfoByStatusTrue();
+
+
+
+
+
+
 
 //    @Query(value = "SELECT * FROM locationInfo " +
 //            "WHERE (:name IS NULL OR location_name LIKE CONCAT('%', :name, '%')) " +

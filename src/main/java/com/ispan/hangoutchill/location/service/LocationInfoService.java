@@ -36,12 +36,25 @@ public class LocationInfoService {
 
     //    ========================LocationStoreInfoManager 地點資料管理===============================
 
-    //查詢所有地點 透過page
-//    public Page<LocationInfo> findAllLocationInfoByPage(Integer pageNumber){
-//        Pageable pgb = PageRequest.of(pageNumber-1,5,Sort.Direction.DESC,"locId");
-//        Page<LocationInfo> page = locRepo.findAll(pgb);
-//        return page;
-//    }
+
+    //查詢所有 已上架 地點
+    public Page<LocationInfo> findListAllLocationInfoByPage(Integer pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 6, Sort.Direction.DESC, "locId");
+        Page<LocationInfo> page = locRepo.findLocationInfoByLocStatus(true, pageable);
+        return page;
+    }
+
+
+
+
+
+    //查詢會員所有地點 透過page by member_id
+    public  List<LocationInfo> findLocationByMemberId(Integer id){
+        List<LocationInfo> locationByMemberId = locRepo.findLocationByMemberId(id);
+        return  locationByMemberId;
+    }
+
+
 
     //查詢單一地點 by ID
     public LocationInfo findLocationInfoById(Integer locId) {
@@ -98,7 +111,14 @@ public class LocationInfoService {
     }
 
 
-    //====================================多條件搜尋 同時處理前台語後台================================================
+
+
+
+
+
+    //====================================多條件搜尋 ================================================
+
+    //後台多條件查詢
     public Page<LocationInfo> findAllLocationInfoByPage(String name, String category, String price,
                                                         String city, String dist ,Integer pageNumber){
 
@@ -145,6 +165,55 @@ public class LocationInfoService {
     }
 
 
+    //前台List多條件查詢
+    public Page<LocationInfo> findFrontAllLocationInfoByPage(String name, String category, String price,
+                                                        String city, String dist ,Integer pageNumber){
+
+        Specification<LocationInfo> specification = new Specification<LocationInfo>(){
+            @Override
+            public Predicate toPredicate(Root<LocationInfo> root, CriteriaQuery<?> query,
+                                         CriteriaBuilder criteriaBuilder) {
+                List<Predicate> predicateList = new ArrayList<>();
+
+                if (org.apache.commons.lang3.StringUtils.isNotBlank(name)){
+                    Predicate predicate = criteriaBuilder.like(root.get("locName"),"%" + name + "%");
+                    predicateList.add(predicate);
+                }
+                if (org.apache.commons.lang3.StringUtils.isNotBlank(category)){
+                    Predicate predicate = criteriaBuilder.equal(root.get("locCat"),category);
+                    predicateList.add(predicate);
+                }
+                if (org.apache.commons.lang3.StringUtils.isNotBlank(price)){
+                    Predicate predicate = criteriaBuilder.equal(root.get("locPriceLevel"),price);
+                    predicateList.add(predicate);
+                }
+                if (org.apache.commons.lang3.StringUtils.isNotBlank(city)){
+                    Predicate predicate = criteriaBuilder.equal(root.get("locCity"),city);
+                    predicateList.add(predicate);
+                }
+                if (org.apache.commons.lang3.StringUtils.isNotBlank(dist)){
+                    Predicate predicate = criteriaBuilder.equal(root.get("locDist"),dist);
+                    predicateList.add(predicate);
+                }
+                //加入固定條件 限定已上架商品
+                Predicate fixedPredicate = criteriaBuilder.equal(root.get("locStatus"), true);
+                predicateList.add(fixedPredicate);
+
+                Predicate[] predicate = new Predicate[predicateList.size()];
+                return criteriaBuilder.and(predicateList.toArray(predicate));
+            }
+        };
+        Pageable pageable = PageRequest.of(pageNumber-1,6,Sort.Direction.DESC,"locId");
+        if (org.apache.commons.lang3.StringUtils.isNotBlank(name) &&
+                org.apache.commons.lang3.StringUtils.isNotBlank(category) &&
+                price == null &&
+                org.apache.commons.lang3.StringUtils.isNotBlank(city) &&
+                org.apache.commons.lang3.StringUtils.isNotBlank(dist)) {
+            return locRepo.findLocationInfoByLocStatus(true,pageable);
+        } else {
+            return locRepo.findAll(specification, pageable);
+        }
+    }
 
 
 
@@ -290,10 +359,15 @@ public class LocationInfoService {
 
 
 
-    //=============================編輯圖片轉碼=================================
+    //=============================倉庫=================================
 
 
-
+    //查詢所有地點 透過page
+//    public Page<LocationInfo> findAllLocationInfoByPage(Integer pageNumber){
+//        Pageable pgb = PageRequest.of(pageNumber-1,5,Sort.Direction.DESC,"locId");
+//        Page<LocationInfo> page = locRepo.findAll(pgb);
+//        return page;
+//    }
 
 
 

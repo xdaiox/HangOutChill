@@ -1,6 +1,10 @@
 package com.ispan.hangoutchill.location.model;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import com.ispan.hangoutchill.member.model.NormalMember;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -35,6 +39,8 @@ public class LocationInfo {
     private String locTel;
     @Column(name = "location_link")
     private String locLink;
+    @Column(name = "location_status", columnDefinition = "bit", nullable = true)
+    private Boolean locStatus;
 
 
 
@@ -59,6 +65,15 @@ public class LocationInfo {
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "location_image_id")
     private LocationImage locationImage;
+
+
+    //關聯與locationMember
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "member_id")
+    private NormalMember normalMember;
+
+
+
 
     //關聯 與LocationComment
 //    @OneToMany(cascade = CascadeType.ALL,mappedBy = "locationInfo",fetch=FetchType.LAZY)
@@ -159,6 +174,14 @@ public class LocationInfo {
         this.locLink = locLink;
     }
 
+    public Boolean getLocStatus() {
+        return locStatus;
+    }
+
+    public void setLocStatus(Boolean locStatus) {
+        this.locStatus = locStatus;
+    }
+
     public Date getLocInfoUpdateTime() {
         return locInfoUpdateTime;
     }
@@ -183,5 +206,13 @@ public class LocationInfo {
         this.locationImage = locationImage;
     }
 
+
+    public NormalMember getNormalMember() {
+        return normalMember;
+    }
+
+    public void setNormalMember(NormalMember normalMember) {
+        this.normalMember = normalMember;
+    }
 }
 

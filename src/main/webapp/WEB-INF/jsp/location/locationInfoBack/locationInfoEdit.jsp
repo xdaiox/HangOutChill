@@ -220,6 +220,12 @@
 
                                 <br>
                                 <button type="submit" class="btn btn-primary">送出</button>
+                                <a type="button" class="btn btn-primary"
+                                   href='${pageContext.request.contextPath}/location/locationManager'>
+                                    返回
+                                </a>
+
+
                             </form:form>
                         </div>
                     </div>

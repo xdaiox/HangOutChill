@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: willi
-  Date: 2023/4/24
-  Time: 下午 01:58
+  User: RAY
+  Date: 2023/5/14
+  Time: 下午 02:04
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,6 +10,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
+<jsp:include page="../../layout/navbar.jsp"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,9 +25,9 @@
 
 <body>
 <div class="container-scroller">
-    <jsp:include page="../../dbLayout/top_navbar.jsp"/>
+<%--    <jsp:include page="../../dbLayout/top_navbar.jsp"/>--%>
     <div class="container-fluid page-body-wrapper">
-        <jsp:include page="../../dbLayout/left_navbar.jsp"/>
+<%--        <jsp:include page="../../dbLayout/left_navbar.jsp"/>--%>
         <div class="container">
             <div class="content_box" style="width: 100%">
                 <h3 style="text-align: center;">地點管理</h3>
@@ -36,7 +37,8 @@
                             <div class="card-header">新增地點</div>
                             <div class="card-body">
                                 <form:form class="" modelAttribute="locationInfo" enctype="multipart/form-data"
-                                           method="POST" action="${contextRoot}/location/locationManager/addPage/post">
+                                           method="POST" action="${contextRoot}/location/memberLocationInfo/addPage/post">
+                                    <form:hidden path="normalMember" value="${result.id}"></form:hidden>
                                     <p>地點名稱 : </p>
                                     <form:input path="locName" class="form-control" type="text"></form:input>
                                     <br>
@@ -202,7 +204,7 @@
                                     <br>
                                     <br>
 
-<%--                                    審核狀態--%>
+                                    <%--                                    審核狀態--%>
                                     <form:input path="locStatus" class="form-control" type="hidden" value="false" />
 
                                     <br>
@@ -210,7 +212,7 @@
 
 
                                     <a type="button" class="btn btn-primary"
-                                       href='${pageContext.request.contextPath}/location/locationManager'>
+                                            href='${pageContext.request.contextPath}/location/memberLocationInfo/locationManager'>
                                         返回
                                     </a>
                                     <br>

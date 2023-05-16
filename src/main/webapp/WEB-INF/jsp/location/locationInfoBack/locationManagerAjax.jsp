@@ -24,58 +24,59 @@
     <div class="container-fluid page-body-wrapper">
         <jsp:include page="../../dbLayout/left_navbar.jsp"/>
 
-            <div class="content_box" style="width: 100%">
-                <h3 style="text-align: center;">地點管理</h3>
-<%--                <form action="${pageContext.request.contextPath}/location/locationManager/addPage">--%>
-<%--                    <input type="submit" id="" class="btn btn-outline-info btn-sm" value="新增"/></form>--%>
-                <br>
-<%--                <p>搜索功能</p>--%>
-                <form id="searchForm" action="#">
-                    <input type="text" id="name" name="name" placeholder="輸入地點名稱"/>
-                    <select id="category" name="category">
-                        <option value="" label="請選擇分類..."></option>
-                        <option value="酒吧" label="酒吧"></option>
-                        <option value="燒烤" label="燒烤"></option>
-                        <option value="咖啡廳" label="咖啡廳"></option>
-                        <option value="餐館" label="餐館"></option>
-                        <option value="宵夜" label="宵夜"></option>
-                        <option value="未分類" label="未分類"></option>
-                    </select>
-                    <select id="price" name="price">
-                        <option value="" label="請選擇消費費水準..."></option>
-                        <option value="$" label="$"></option>
-                        <option value="$ $" label="$ $"></option>
-                        <option value="$ $ $" label="$ $ $"></option>
-                        <option value="$ $ $ $" label="$ $ $ $"></option>
-                        <option value="$ $ $ $ $" label="$ $ $ $ $"></option>
-                    </select>
-                    <input type="text" id="city" name="city" placeholder="輸入地點城市"/>
-                    <input type="text" id="dist" name="dist" placeholder="輸入地點區域"/>
-                    <input type="button" id="submitBtnSearch" class="btn btn-outline-info btn-sm" value="查詢"
-                           onclick="search()"/>
-                </form>
-                <br>
-                <div class="table-responsive">
-                    <table id="locationInfo-table" class="table table-hover table-bordered table-light">
-                        <thead>
-                        <tr>
-                            <th>地點編號</th>
-                            <th>地點名稱</th>
-                            <th>地點分類</th>
-                            <th>消費水準</th>
-                            <th>地點城市</th>
-                            <th>最後更新時間</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody id="searchResult-list">
-                        </tbody>
-                    </table>
-                </div>
-                <br>
-                <div style="text-align:center;" id="page">
-                </div>
+        <div class="content_box" style="width: 100%">
+            <h3 style="text-align: center;">地點管理</h3>
+            <%--                <form action="${pageContext.request.contextPath}/location/locationManager/addPage">--%>
+            <%--                    <input type="submit" id="" class="btn btn-outline-info btn-sm" value="新增"/></form>--%>
+            <br>
+            <%--                <p>搜索功能</p>--%>
+            <form id="searchForm" action="#">
+                <input type="text" id="name" name="name" placeholder="輸入地點名稱"/>
+                <select id="category" name="category">
+                    <option value="" label="請選擇分類..."></option>
+                    <option value="酒吧" label="酒吧"></option>
+                    <option value="燒烤" label="燒烤"></option>
+                    <option value="咖啡廳" label="咖啡廳"></option>
+                    <option value="餐館" label="餐館"></option>
+                    <option value="宵夜" label="宵夜"></option>
+                    <option value="未分類" label="未分類"></option>
+                </select>
+                <select id="price" name="price">
+                    <option value="" label="請選擇消費費水準..."></option>
+                    <option value="$" label="$"></option>
+                    <option value="$ $" label="$ $"></option>
+                    <option value="$ $ $" label="$ $ $"></option>
+                    <option value="$ $ $ $" label="$ $ $ $"></option>
+                    <option value="$ $ $ $ $" label="$ $ $ $ $"></option>
+                </select>
+                <input type="text" id="city" name="city" placeholder="輸入地點城市"/>
+                <input type="text" id="dist" name="dist" placeholder="輸入地點區域"/>
+                <input type="button" id="submitBtnSearch" class="btn btn-outline-info btn-sm" value="查詢"
+                       onclick="search()"/>
+            </form>
+            <br>
+            <div class="table-responsive">
+                <table id="locationInfo-table" class="table table-hover table-bordered table-light">
+                    <thead>
+                    <tr>
+                        <th>地點編號</th>
+                        <th>地點名稱</th>
+                        <th>地點分類</th>
+                        <th>消費水準</th>
+                        <th>地點城市</th>
+                        <th>最後更新時間</th>
+                        <th>狀態</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="searchResult-list">
+                    </tbody>
+                </table>
             </div>
+            <br>
+            <div style="text-align:center;" id="page">
+            </div>
+        </div>
 
     </div>
 </div>
@@ -111,13 +112,24 @@
             result += "<td class= align-middle>" + e[i].locPriceLevel + "</td>"
             result += "<td class= align-middle>" + e[i].locCity + "</td>"
             result += "<td class= align-middle>" + e[i].locInfoUpdateTime + "</td>"
-            result += '<td class=align-middle>' + '<div style="display: flex">' + '<form action="${contextRoot}/location/locationManager/editPage">'
+            result += '<td class=align-middle>' + '<div style="display: flex">'
+            result += '<form action="${contextRoot}/location/locationManager/status">'
+            result += '<input type="hidden" name="locId" value="' + e[i].locId + '"/>'
+
+            if(e[i].locStatus ==false){
+                result += '<input type="submit" class="btn btn-outline-danger" value="下架中">'
+            }else {
+                result += '<input type="submit" class="btn btn-outline-success" value="上架中">'
+            }
+            // result += '<input id="toggleButton" type="submit" class="btn btn-outline-info btn-sm" value="' +e[i].locStatus +'"/></form>'
+            result += '<td class=align-middle>' + '<div style="display: flex">'
+            result += '<form action="${contextRoot}/location/locationManager/editPage">'
             result += '<input type="hidden" name="locId" value="' + e[i].locId + '"/>'
             result += '<input type="submit" class="btn btn-outline-info btn-sm" value="編輯"/></form>'
             result += '<form action="${contextRoot}/location/locationManager/delete" method="post">'
             result += '<input type="hidden" name="_method" value="delete"/>'
             result += '<input type="hidden" name="locId" value="' + e[i].locId + '"/>'
-            result += '<input type="submit" class="btn btn-outline-danger btn-sm"value="刪除" onclick="return confirm("確定刪除?")"/>'
+            result += '<input type="submit" class="btn btn-outline-danger btn-sm" value="刪除" onclick="return confirm("確定刪除?")"/>'
             result += '    </form></div>'
             result += "</tr>"
         }
@@ -179,6 +191,11 @@
         // console.log(inputDist)
         return inputDist
     }
+
+
+
+
+
 
 
     <%--$(document).ready(function (){--%>

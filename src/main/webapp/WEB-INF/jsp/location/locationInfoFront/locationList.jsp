@@ -39,7 +39,7 @@
     <!--================Blog Area =================-->
     <section class="blog_area area-padding">
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-center">
 
                 <!--================搜尋side bar =================-->
 
@@ -93,7 +93,10 @@
                         </aside>
                     </div>
                 </div>
+                <!--================搜尋side bar 結束=================-->
 
+
+                <!--================搜尋結果 =================-->
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar" id="searchResult-list">
                         <%--                        <article class="blog_item" >--%>
@@ -121,8 +124,8 @@
 
                         <article class="blog_item">
                             <div class="blog_details" style="background-color: white">
-                                <figure>
-                                    <img src="${contextRoot}/img/HangOutChill.png"/>
+                                <figure style="height:178px">
+                                    <img width="300" height="100%" src="${contextRoot}/img/HangOutChill.png" />
                                 </figure>
                                 <div>
                                     <a class="d-inline-block" href="single-blog.html">
@@ -130,18 +133,22 @@
                                     </a>
                                 </div>
                                 <div>
-                                    <p>That dominion stars lights dominion divide years for fourth have don't stars is
-                                        that he earth it first without heaven in place seed it second morning
-                                        saying.</p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>
-                                        <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
-                                    </ul>
+                                    <div>
+                                        <h4 style="display: inline; margin-right: 20px;">這裡放分類</h4>
+                                        <h4 style="display: inline;" >$ $ $</h4>
+                                        <br>
+                                        <h5 style="display: inline; margin-right: 20px;">台南市</h5>
+                                        <h5 style="display: inline;" >永康區</h5>
+                                    </div>
+<%--                                    <br>--%>
+                                    <div>
+                                        <p class="mb-0">位於信義安和的「The Public House」，外觀為傳統的英式PUB風格，而PUB也就是Public House的縮寫，就像是「The Public House」給人的感覺一樣，比起傳統的專業、沉靜的酒吧，這裡的整體風格更貼近日常生活，有時會出現英式小酒館鬧哄哄的氣氛，美味的餐點加上各種專業性十足的調酒，打造出一個輕鬆的氛圍！</p>
+                                    </div>
                                 </div>
                             </div>
                         </article>
 
-
+                            <!--================分頁功能 =================-->
                         <nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">
                                 <li class="page-item">
@@ -162,6 +169,8 @@
                                 </li>
                             </ul>
                         </nav>
+                            <!--================分頁功能 =================-->
+
                     </div>
                 </div>
 
@@ -200,7 +209,7 @@
 
             for (let i = 0; i < e.length; i++) {
                 result += '  <article class="blog_item" ><div class="blog_details" style="background-color: white" >'
-                result += '<figure>'
+                result += '<figure style="height:178px">'
                 if (e[i].locationImage !== null) {
                     if (e[i].locationImage.locImgCover !== null) {
                         base64 = '${contextRoot}/locationInfo/getImgCover/' + e[i].locId;
@@ -212,7 +221,7 @@
                     base64 = "${contextRoot}/img/HangOutChill.png"
                 }
 
-                result += '<img src="' + base64 + '"/>'
+                result += '<img width="300" height="100%"  src="' + base64 + '"/>'
 
                 result += '</figure>'
                 result += ' <div> <a class="d-inline-block" href="#詳細地點controller">'
@@ -226,6 +235,7 @@
                 result += '</ul>' + '</div>'
                 result += '</div></article>'
             }
+
             resultList.innerHTML = result
         }
 

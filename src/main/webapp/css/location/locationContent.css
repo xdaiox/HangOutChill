@@ -1,0 +1,237 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 2rem;
+    letter-spacing: 0.16rem;
+    color:#343434;
+    text-align: justify;
+    margin-bottom: 40px;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.main {
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    border: 1px solid #000;
+    margin-top: 80px;
+}
+
+section {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+.article_wrapper {
+    width: 100%;
+    margin: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    padding-bottom: 80px;
+    position: relative;
+
+}
+
+@media screen and (min-width: 1200px) {
+    .article_wrapper::before {
+        content: "";
+        position: absolute;
+        top: 0%;
+        left: 25%;
+        width: 1px;
+        height: calc( 100% - 80px);
+        background-color:#000;
+    }
+}
+
+
+.article_form {
+    width: 32%;
+}
+
+.article_form h3{
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.article_wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0%;
+    left: 32%;
+    width: 1px;
+    height: calc( 100% - 80px);
+    background-color: #000;
+}
+
+
+.artBox {
+    width: 68%;
+}
+
+.article_content {
+    width: 100%;
+    position: relative;
+    padding-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.location_list{
+    width: 45%;
+    margin:auto;
+    background-color: #d8d4d8;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.location_name {
+    font-size: 1.5rem;
+    padding: 16px 22px 10px;
+    display: flex;
+    justify-content: space-between;
+} 
+
+.location_name img {
+    width: 30px;
+}
+
+.location_infoBox{
+    padding: 0 10px 10px 22px;
+}
+
+.location_photo {
+    width: 100%;
+    overflow: hidden;
+}
+
+.location_photo img {
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+}
+
+.category{
+    margin-right: 77px;
+}
+
+.city{
+    margin-right: 94px;
+}
+
+.row1 {
+    display: flex;
+    margin-top: 10px;
+}
+
+.row1 p {
+    margin-bottom: 6px;
+}
+
+.row2{
+    display: flex;
+}
+
+.row2 p {
+    margin-bottom: 6px;
+}
+
+.city img{
+    width: 26px;
+    vertical-align: sub;
+}
+
+.tel img{
+    width: 14px;
+}
+
+
+.my_or {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile_different {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 12px;
+}
+
+.profile_different select{
+    width: 100%;
+    display: block;
+    font-size: 16px;
+    padding: 12px 8px;
+    outline: none;
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+.profile_different button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px 8px;
+    background-color: transparent;
+    border-radius: 2px;
+    letter-spacing: 5px;
+    border: 1.6px solid #6a6666;
+}
+
+.profile_input {
+    width: 100%;
+    display: block;
+    font-size: 16px;
+    padding: 12px 6px;
+    outline: none;
+    border: none;
+    background-color: #fff;
+    border-radius: 2px;
+    border-bottom: 1px solid #6a6666;
+}
+
+.profile_form {
+    padding: 0 30px;
+}
+
+.profile_item {
+    margin-bottom: 13px;
+}
+
+
+
+
+
+
+
+
+

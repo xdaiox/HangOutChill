@@ -61,6 +61,7 @@ public class UserConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
     	http.csrf().disable()
         .authorizeRequests()
             .antMatchers("/discussion/newDiscussion").hasAuthority("USER")
@@ -79,6 +80,9 @@ public class UserConfig {
             .userInfoEndpoint()
             .userService(oauth2UserService).and().successHandler(oauth2LoginSuccessHandler);
     return http.build();
+
+
+
     }
 
 
