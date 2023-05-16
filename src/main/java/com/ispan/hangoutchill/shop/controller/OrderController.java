@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
@@ -41,6 +42,26 @@ public class OrderController {
 		this.shoppingCartService = shoppingCartService;
 	}
 
+	// 後台顯示所有訂單
+	@GetMapping("/shop/allorders")
+	public String goShowOrders(@RequestParam(name="p", defaultValue="1") Integer pageNum,Model model) {
+		Page<Order> page = orderService.findOrdersByPage(pageNum);
+		model.addAttribute("orderPage", page);
+		return "shop/showOrders";
+	}
+	
+	
+	// 後臺顯示單筆訂單資訊
+	
+	@GetMapping("/shop/order/orderinfo")
+	public String showOrderInfo(@RequestParam(name="orderno") String orderNo,Model model) {
+		Order order = orderService.findOrderByOrderNo(orderNo);
+		List<OrderDetail> ods = new ArrayList<>(order.getOrderDetails());
+		model.addAttribute("order", order);
+		model.addAttribute("orderDetails", ods);
+		return "shop/productInfo";
+	}
+	
 	
 	// 結帳controller
 	@ResponseBody
@@ -63,13 +84,19 @@ public class OrderController {
 			od.setOrder(order);
 			ods.add(od);
 		}
-		
 		order.setOrderDetails(ods);
 		order.setMember(currentmember);
+		order.setPaymentState(false);
 		orderService.addOrder(order);
 		
 		// 購物總價計算
-		Integer totalPrice = shoppingCartService.totalPriceCount(cartItems);
+		Integer subtotalPrice = shoppingCartService.totalPriceCount(cartItems);
+		Integer totalPrice =0;
+		if(subtotalPrice >= 799) {
+			totalPrice = subtotalPrice;
+		}else {
+			totalPrice = subtotalPrice + 100;
+		}
 		String checkOutForm = orderService.ecpayCheckout(order, totalPrice);
 		return checkOutForm;
 	}
@@ -93,14 +120,20 @@ public class OrderController {
 	// 付款成功後重導回客戶端
 	@Transactional
 	@PostMapping("/shop/orderdetailcheck")
-	public String showOrderDetailPage(@CurrentSecurityContext(expression = "authentication") Authentication authentication, Model model) {
+	public String showOrderDetailPage(@CurrentSecurityContext(expression = "authentication") Authentication authentication, 
+			@RequestParam("MerchantTradeNo") String merchantTradeNo,
+			Model model) {
 		String name = authentication.getName();
 		System.out.println(name);
+		System.out.println(merchantTradeNo);
 		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
 		Order latestOrder = orderService.findLatestOrderByMemberId(currentmember.getId());
+		List<OrderDetail> ods = new ArrayList<>(latestOrder.getOrderDetails());
 		latestOrder.setPaymentState(true);
 		model.addAttribute("order", latestOrder);
-		
+		model.addAttribute("orderDetails", ods);
+		model.addAttribute("result",currentmember);
+		shoppingCartService.deleteShoppingCartItmesByMemberId(currentmember.getId());
 		return "shop/orderFinishCheck";
 	}
 	
@@ -113,9 +146,10 @@ public class OrderController {
 		List<OrderDetail> ods = new ArrayList<>(latestOrder.getOrderDetails());
 		model.addAttribute("order", latestOrder);
 		model.addAttribute("orderDetails", ods);
+		model.addAttribute("result",currentmember);
 		return "shop/orderFinishCheck";
 //		return "redirect:/";
 	}
-	
+
 	
 }

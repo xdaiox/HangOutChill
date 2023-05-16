@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <html>
 <head>
@@ -20,7 +21,7 @@
 <link rel="stylesheet" href="${contextRoot}/css/shop/templatemo.css">
 <title>產品資訊頁</title>
 
-<jsp:include page="layout/navbar.jsp" />
+<jsp:include page="../layout/navbar.jsp" />
 
 
 </head>
@@ -32,7 +33,7 @@
 					<div class="col-lg-5 mt-5">
 						<div class="card mb-3">
 							<img class="card-img img-fluid"
-								style="height: 500px; width: 500px"
+								style="max-height: 500px; max-width: 500px"
 								src='<c:url value="/shop/getPicture/${product.productId}" />'
 								alt="Card image cap" id="product-detail">
 						</div>
@@ -93,7 +94,7 @@
 						<div class="card">
 							<div class="card-body">
 								<h1 class="h2">${product.productName}</h1>
-								<p class="h3 py-2">$ ${product.unitPrice}</p>
+								<form action="${contextRoot}/shop/directbuying" method="post">
 								<!-- <p class="py-2">
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
@@ -111,7 +112,7 @@
                                 </li>
                             </ul> -->
 
-								<h6>產品描述:</h6>
+<!-- 								<h6>產品描述:</h6> -->
 								<p>${product.productDesc}</p>
 								<!-- <ul class="list-inline">
                                 <li class="list-inline-item">
@@ -127,6 +128,10 @@
 									<li>${product.productSpec }</li>
 
 								</ul>
+								<c:if test="${product.discount != 1.0}">
+								<span style="text-decoration:line-through; font-size: small;">原價 NT $${ product.unitPrice}</span>
+								</c:if>
+								<p class="h3 py-2">NT $ <fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0" value="${ product.unitPrice*product.discount }"/></p>
 
 									<input type="hidden" name="product-title" value="${product.productId}" id="productid">
 									<div class="row">
@@ -159,21 +164,25 @@
 									</div>
 									<div class="row pb-3">
 										<div class="col d-grid">
-											<a class="btn btn-success btn-lg" href='<c:url value="/shop/shoppingCart" />'>立即購買</a>
+<!-- 										<form action="" method="post"> -->
+											<input type="hidden" id="amountforbuying" name="productAmount">
+											<button  type="submit" class="btn btn-success btn-lg" >立即購買</button>
+<!-- 										</form> -->
 										</div>
 										<div class="col d-grid">
-											<button type="submit" class="btn btn-success btn-lg"
+											<button type="button" class="btn btn-success btn-lg"
 												name="submit" value="addtocard" id="submitBtn">加入購物車</button>
 										</div>
 									</div>
 								<h6>運送及付款方式:</h6>
 								<ul class="list-unstyled pb-3">
-									<li>運送方式：到府、超商取貨</li>
+									<li>運送方式：宅配</li>
 									<li></li>
-									<li>付款方式：信用卡、LINEPay</li>
+									<li>付款方式：信用卡、貨到付款</li>
 									<li></li>
+									<li><span style="color: red;">全館滿$799免運費</span></li>
 								</ul>
-
+								</form>
 							</div>
 						</div>
 					</div>
@@ -194,6 +203,7 @@
 	<script>
 	// 更新購物車小圖示標示
 	updateCartItems();
+	
 	
     // 加入購物車
 	$('#submitBtn').click(function(){
@@ -222,7 +232,30 @@
 	})
 	
 	
+	// 直接購買 
+	let plus = document.getElementById('btn-plus');
+	let minus = document.getElementById('btn-minus');
+	let amountParam = document.getElementById('amountforbuying');
+	amountParam.value = 1;
 	
+	plus.addEventListener('click', function(){
+		let amount = document.getElementById('var-value');
+		let theValue = amount.innerHTML;
+		console.log(theValue);
+		amountParam.value = parseInt(theValue) + 1;
+	})
+	
+	minus.addEventListener('click', function(){
+		let amount = document.getElementById('var-value');
+		let theValue = amount.innerHTML;
+		console.log(theValue);
+		if(amountParam.value > 1){
+			amountParam.value = parseInt(theValue) - 1;
+			
+		}else{
+			amountParam.value = 1;
+		}
+	})
 	
 	
 	

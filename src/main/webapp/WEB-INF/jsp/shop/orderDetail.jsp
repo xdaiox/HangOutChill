@@ -15,9 +15,9 @@
 <link rel="icon" href="" type="image/png">
 <link rel="stylesheet" href="${contextRoot}/css/shop/shoppingcart.css">
 <%-- <link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css"> --%>
+<jsp:include page="../layout/navbar.jsp" />
 <title>訂單明細</title>
 
-<jsp:include page="layout/navbar.jsp" />
 
 
 </head>
@@ -84,9 +84,9 @@
 						<!-- 						</form> -->
 					</div>
 					<div class="column text-lg">
-						運費: <span class="text-medium" style="font-size: larger;">$588</span><br>
-						總計: <span class="text-medium" id="totalPrice"
-							style="font-size: 1.5em; color: red;">${totalprice}</span>
+						運費: <span class="text-medium" id="shipfee" style="font-size: larger;">$${shipFee}</span><br>
+						商品小計: <span class="text-medium" id="totalPrice" style="font-size: larger;">$${subtotalPrice}</span><br>
+						總價 :<span class="text-medium" id="totalAllPrice" style="font-size: 2em; color:red; font-weight:bold;">$${totalPrice}</span>
 					</div>
 				</div>
 				<div class="container" style="background-color: white">

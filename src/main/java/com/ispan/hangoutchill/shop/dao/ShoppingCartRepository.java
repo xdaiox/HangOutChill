@@ -3,8 +3,10 @@ package com.ispan.hangoutchill.shop.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ispan.hangoutchill.shop.model.Product;
 import com.ispan.hangoutchill.shop.model.ShoppingCart;
@@ -20,4 +22,8 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Inte
 	@Query("from ShoppingCart where member_id = :memberId")
 	public List<ShoppingCart> findShoppingCartItemsByMemberId(@Param(value="memberId") Integer memberId);
 	
+	@Transactional
+	@Modifying
+	@Query("delete from ShoppingCart where member_id = :memberId")
+	public Integer deleteShoppingCartItemsByMemberId(@Param(value="memberId") Integer memberId);
 }

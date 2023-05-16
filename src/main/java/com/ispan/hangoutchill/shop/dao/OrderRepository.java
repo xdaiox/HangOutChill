@@ -1,5 +1,7 @@
 package com.ispan.hangoutchill.shop.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,4 +15,8 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
 	@Query(value="select top(1) * from orders where member_id = :memberId order by order_id desc",nativeQuery=true)
 	public Order findLatestOrderByMemberId(@Param(value="memberId") Integer memberId);
+	
+	@Query("from Order where member_id = :memberId")
+	public List<Order> findOrdersByMemberId(@Param(value="memberId") Integer memberId);
+
 }
