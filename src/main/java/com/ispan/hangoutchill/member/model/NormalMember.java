@@ -361,4 +361,6 @@ public class NormalMember {
     public void setIdentity(String identity) {
         this.identity = identity;
     }
+    
+    
 }

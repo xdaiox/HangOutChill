@@ -197,10 +197,9 @@ body {
 								<div class="form-group">
 									<label for="category">分類</label> <form:select path="type" class="form-control"
 										id="category">
-										<option>分類1</option>
-										<option>分類2</option>
-										<option>分類3</option>
-										<option>分類4</option>
+										<option>生活</option>
+										<option>吃喝</option>
+										<option>玩樂</option>
 									</form:select>
 								</div>
 								<div class="form-group">

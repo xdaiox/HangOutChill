@@ -252,7 +252,7 @@
 												</div>
 
 												<div class="form-group">
-													<h4><label for="content">内容</label></h4>
+													<h4><label for="content">内容 : </label></h4>
 													<span class="image-wrapper"><p>${discussion.contents}</p></span>
 												</div>
 											</form:form>
