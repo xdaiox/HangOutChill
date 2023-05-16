@@ -244,6 +244,9 @@
 											<form:form modelAttribute="discussion" method="post"
 												action="${contextRoot}/discussion/post">
 												<div class="form-group">
+													<h5>作者: ${discussion.normalMember.nickName}</h5>
+												</div>
+												<div class="form-group">
 													<h4><p style="font-size: 18px;">${discussion.title}</p></h4>
 												</div>
 
@@ -257,23 +260,25 @@
 												</div>
 											</form:form>
 										</div>
-										<div class="inner-main-header">
-											<button	class="btn btn-primary" type="submit" onclick="showEditConfirmation()">編輯</button>
+										<jstl:if test="${result.id eq discussion.normalMember.id}">
+											<div class="inner-main-header">
+												<button	class="btn btn-primary" type="submit" onclick="showEditConfirmation()">編輯</button>
 
-											<!-- <form action="${contextRoot}/discussion/deleteDiscussion/${discussion.d_id}"
-												method="post" >
-												<input type="hidden" name="_method" value="delete" >
-												<button class="btn btn-primary danger" type="submit" onclick="confirmDelete()">刪除</button>
-											</form> -->
+												<!-- <form action="${contextRoot}/discussion/deleteDiscussion/${discussion.d_id}"
+													method="post" >
+													<input type="hidden" name="_method" value="delete" >
+													<button class="btn btn-primary danger" type="submit" onclick="confirmDelete()">刪除</button>
+												</form> -->
 
 
-											<button class="btn btn-primary danger" type="button" onclick="showDeleteConfirmation()">刪除</button>
-											<!--==========刪除討論url==========-->
-											<form id="delete-form" action="${contextRoot}/discussion/deleteDiscussion/${discussion.d_id}" method="post" style="display:none">
-												<input type="hidden" name="_method" value="delete">
-											</form>
+												<button class="btn btn-primary danger" type="button" onclick="showDeleteConfirmation()">刪除</button>
+												<!--==========刪除討論url==========-->
+												<form id="delete-form" action="${contextRoot}/discussion/deleteDiscussion/${discussion.d_id}" method="post" style="display:none">
+													<input type="hidden" name="_method" value="delete">
+												</form>
 
-										</div>
+											</div>
+										</jstl:if>
 									</div>
 									<div class="card">
 										<div class="card-header">
@@ -302,19 +307,18 @@
 															</p>
 														</div>
 														<div>
-															<!--==========編輯討論url==========-->
-														<form id="edit-form-message" action="${contextRoot}/message/editMessage/${discussion.d_id}/${message.dm_id}" method="post">
-															<input type="hidden" name="_method" value="get">
-															<button class="btn btn-primary" type="button" onclick="showEditMessageConfirmation()">編輯</button>														
-														</form>
-
-														
-														<!--==========刪除討論url==========-->
-														<form id="delete-form-message" action="${contextRoot}/message/deleteMessage/${discussion.d_id}/${message.dm_id}" method="post">
-															<input type="hidden" name="_method" value="delete">
-															<button class="btn btn-primary danger" type="button" onclick="showDeleteMessageConfirmation()">刪除</button>
-														</form>
-
+														<jstl:if test="${result.id eq message.normalMmeber.id}">
+															<!--==========編輯回覆url==========-->
+															<form id="edit-form-message" action="${contextRoot}/message/editMessage/${discussion.d_id}/${message.dm_id}" method="post">
+																<input type="hidden" name="_method" value="get">
+																<button class="btn btn-primary" type="button" onclick="showEditMessageConfirmation()">編輯</button>												
+															</form>
+															<!--==========刪除回覆url==========-->
+															<form id="delete-form-message" action="${contextRoot}/message/deleteMessage/${discussion.d_id}/${message.dm_id}" method="post">
+																<input type="hidden" name="_method" value="delete">
+																<button class="btn btn-primary danger" type="button" onclick="showDeleteMessageConfirmation()">刪除</button>
+															</form>
+														</jstl:if>
 														</div>
 														
 													</div>
