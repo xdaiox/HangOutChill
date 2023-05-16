@@ -24,6 +24,7 @@ public class ArticleService {
 	
 	
 	public void addArticle(Article article) {
+		article.setStatus(false);
 		articleRepository.save(article);
 	}
 	public Page<Article> findByPage(Integer pageNumber){
@@ -41,6 +42,7 @@ public class ArticleService {
 		
 		return option.get();
 	}
+	
 	
 	public List<Article> findArticleByTheme(String article_theme) {
 		
@@ -60,6 +62,7 @@ public class ArticleService {
 			art.setArticle_content(arts.getArticle_content());
 			art.setArticle_excerpt(arts.getArticle_excerpt());
 			art.setArticle_theme(arts.getArticle_theme());
+			art.setNormalmember(arts.getNormalmember());
 			art.setStatus(arts.getStatus());
 			art.setImages(arts.getImages());
 			if(!arts.getMainImg().isEmpty()) {

@@ -1,5 +1,7 @@
 package com.ispan.hangoutchill.article.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +16,8 @@ public interface ArticleFavoriteRespository extends JpaRepository<ArticleFavorit
 	@Query("from ArticleFavorite where member_id = :member_id AND article_id = :article_id")
 	public ArticleFavorite findByMemberIdAndArticleId(@Param(value="member_id") Integer member_id, @Param("article_id") Integer article_id);
 	
+	@Query("from ArticleFavorite where member_id = :member_id")
+	public List<ArticleFavorite> findArticleIdByMemberId(@Param(value="member_id") Integer member_id);
 	
 	@Transactional
 	@Modifying

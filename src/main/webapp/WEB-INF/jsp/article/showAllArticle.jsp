@@ -35,6 +35,9 @@
                         <li>
                             <a href="/hangoutchill/article/theme?article_theme=eats">深夜美食</a>
                         </li>
+                        <li>
+                            <a href="${contextRoot}/article/articleAttention">我要投稿</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="searchbox">

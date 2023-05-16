@@ -1,8 +1,12 @@
 package com.ispan.hangoutchill.article.controller;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,4 +76,36 @@ public class ArticleFavoriteController {
 		
 		return "成功移除收藏！";
 	}
+	
+	@GetMapping("/article/allfavs")
+	public String showAllUserFavs(
+			@CurrentSecurityContext(expression = "authentication") Authentication authentication, Model model) {
+		
+		String name = authentication.getName();
+		NormalMember result = nMemberService.findNormalUserByAccount(name);
+		Integer member_id = result.getId();
+		
+		System.out.println("--------------------------");
+		System.out.println(member_id);
+		
+		List<ArticleFavorite> artfavs = articleFavoriteService.findArticleIdByMemberId(member_id);
+		
+		System.out.println("--------------------------");
+		System.out.println(artfavs);
+		
+		List<Article> article = new ArrayList<>();
+		for(ArticleFavorite af :artfavs) {
+			Integer article_id = af.getArticle().getArticle_id();
+			Article artcontent = articleService.findArticleById(article_id);
+			article.add(artcontent);
+		}
+
+		
+		model.addAttribute("result", result);
+		model.addAttribute("article", article);
+		
+		return "article/articleFav";
+	}
+	
+	
 }
