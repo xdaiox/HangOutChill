@@ -121,16 +121,17 @@
             }else {
                 result += '<input type="submit" class="btn btn-outline-success" value="上架中">'
             }
+            result += '</form>'
             // result += '<input id="toggleButton" type="submit" class="btn btn-outline-info btn-sm" value="' +e[i].locStatus +'"/></form>'
             result += '<td class=align-middle>' + '<div style="display: flex">'
-            result += '<form action="${contextRoot}/location/locationManager/editPage">'
+            result += '<form action="${contextRoot}/location/locationManager/editPage" method="get">'
             result += '<input type="hidden" name="locId" value="' + e[i].locId + '"/>'
             result += '<input type="submit" class="btn btn-outline-info btn-sm" value="編輯"/></form>'
             result += '<form action="${contextRoot}/location/locationManager/delete" method="post">'
             result += '<input type="hidden" name="_method" value="delete"/>'
             result += '<input type="hidden" name="locId" value="' + e[i].locId + '"/>'
             result += '<input type="submit" class="btn btn-outline-danger btn-sm" value="刪除" onclick="return confirm("確定刪除?")"/>'
-            result += '    </form></div>'
+            result += '</form></div>'
             result += "</tr>"
         }
         resultlist.innerHTML = result
