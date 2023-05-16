@@ -10,6 +10,16 @@
 	label{
 		margin:20px 0px;
 	}
+	
+	span.error {
+        color: red;
+        font-size: 85%;
+      }
+
+      span.correct {
+        color: green;
+        font-size: 85%;
+      }
 </style>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 </head>
@@ -24,7 +34,7 @@
 				<div class="content_box" style="width: 100%">
 
 
-					<h3 style="text-align: center;">請輸入產品資料：</h3>
+					<h3 style="text-align: center;">請輸入欲新增產品資訊：</h3>
 					<div class="content"
 						style="background-color: #ffffff00; height: 100%">
 						<div class="col-12" style="margin: auto">
@@ -54,12 +64,12 @@
 										<span id="catgerror" class="error"></span>
 										<span id="catgcorrect" class="correct"></span>
 										<p>
-											<span>* </span><label for="content">產品描述 :</label>
+											<span>* </span><label for="descrp">產品描述 :</label>
 										</p>
-										<form:textarea type="text" name="content" id="content"
+										<form:textarea type="text" name="descrp" id="descrp"
 											class="form-control" cols="30" rows="10" path="productDesc" />
-										<span id="contenterror" class="error"></span>
-										<span id="contentcorrect" class="correct"></span>
+										<span id="descterror" class="error"></span>
+										<span id="desccorrect" class="correct"></span>
 										<p>
 											<span>* </span><label for="content">產品規格 :</label>
 										</p>
@@ -88,18 +98,17 @@
 											class="form-control" path="launchdate" />
 										<span id="dateerror" class="error"></span>
 										<span id="datecorrect" class="correct"></span>
-										<p>商品封面圖片：</p>
+										<p style="margin-top:20px;">商品封面圖片：</p>
 										<form:input type="file" path="mainImage" class="form-control" />
-										<br />
-										<p>商品圖片：</p>
+										<p style="margin-top:20px;">商品圖片：</p>
 										<div id="dadtd">
 											<input type="button" value="+ 圖片" id="addfile" /><br />
 											<form:input type="file" name="extraphoto" path="" class="form-control"/>
 											<br />
 										</div>
-										<input type="submit" value="送出" id="submit" />
+										<input class="btn btn-primary" type="submit" value="送出" id="submit" />
 										<a href="${contextRoot}/shop/allproducts"><input
-											type="button" value="取消" /></a>
+											type="button" value="取消" class="btn btn-outline-warning" /></a>
 									</form:form>
 
 								</div>
@@ -107,7 +116,6 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -129,12 +137,12 @@
 
       // 標籤格式確認
       // binding
-      document.getElementById("proid").addEventListener("blur", checkId);
-      document.getElementById("proname").addEventListener("blur", checkName);
+      document.getElementById("descrp").addEventListener("blur", checkDesc); // 產品描述
+      document.getElementById("proname").addEventListener("blur", checkName); // 產品名稱
       document
         .getElementById("category")
-        .addEventListener("blur", checkCategory);
-      document.getElementById("content").addEventListener("blur", checkContent);
+        .addEventListener("blur", checkCategory); // 產品類別
+      document.getElementById("content").addEventListener("blur", checkContent); // 產品規格
       document
         .getElementById("unitprice")
         .addEventListener("blur", checkUniprice);
@@ -151,35 +159,24 @@
         }
       });
 
-      // Product ID check effect
+      // Product description check effect
       let flag1 = true;
-      function checkId() {
-        let theIdObj = document.getElementById("proid");
+      function checkDesc() {
+        let theIdObj = document.getElementById("descrp");
         let theIdObjVal = theIdObj.value;
-        let spError = document.getElementById("iderror");
-        let spCorrect = document.getElementById("idcorrect");
+        let spError = document.getElementById("descterror");
+        let spCorrect = document.getElementById("desccorrect");
         let theIdObjValLen = theIdObjVal.length;
         if (theIdObjValLen == "") {
           spError.innerHTML = "欄位不可空白";
           spCorrect.innerHTML = "";
           flag1 = true;
         } else {
-          for (let i = 0; i < theIdObjValLen; i++) {
-            let chCode = theIdObjVal.charCodeAt(i);
-            if (chCode < 0x30 || chCode > 0x39) {
-              spError.innerHTML = "請輸入0~9的數字";
-              spCorrect.innerHTML = "";
-              flag1 = true;
-              break;
-            } else {
-              spError.innerHTML = "";
-              spCorrect.innerHTML = "  <img src='correct.png'>";
-              flag1 = false;
-            }
-          }
+          spError.innerHTML = "";
+          spCorrect.innerHTML = "格式正確 <img src='${contextRoot}/img/correct.png'>";
+          flag1 = false;
         }
       }
-
       // Product name check
       let flag2 = true;
       function checkName() {
@@ -193,7 +190,7 @@
           flag2 = true;
         } else {
           nError.innerHTML = "";
-          nCorrect.innerHTML = "  <img src='correct.png'>";
+          nCorrect.innerHTML = "格式正確 <img src='${contextRoot}/img/correct.png'>";
           flag2 = false;
         }
       }
@@ -212,7 +209,7 @@
           flag3 = true;
         } else {
           catgError.innerHTML = "";
-          catgCorrect.innerHTML = "  <img src='correct.png'>";
+          catgCorrect.innerHTML = "格式正確 <img src='${contextRoot}/img/correct.png'>";
           flag3 = false;
         }
       }
@@ -230,7 +227,7 @@
           flag4 = true;
         } else {
           contentError.innerHTML = "";
-          contentCorrect.innerHTML = "  <img src='correct.png'>";
+          contentCorrect.innerHTML = "格式正確 <img src='${contextRoot}/img/correct.png'>";
           flag4 = false;
         }
       }
@@ -257,7 +254,7 @@
               break;
             } else {
               priError.innerHTML = "";
-              priCorrect.innerHTML = "  <img src='correct.png'>";
+              priCorrect.innerHTML = "格式正確 <img src='${contextRoot}/img/correct.png'>";
               flag5 = false;
             }
           }
@@ -278,7 +275,7 @@
         } else {
           if (theDsObjVal <= 1 && theDsObjVal > 0) {
             dsError.innerHTML = "";
-            dsCorrect.innerHTML = "  <img src='correct.png'>";
+            dsCorrect.innerHTML = "格式正確 <img src='${contextRoot}/img/correct.png'>";
             flag6 = false;
           } else {
             dsError.innerHTML = "請輸入0~1，且大於0的數值";

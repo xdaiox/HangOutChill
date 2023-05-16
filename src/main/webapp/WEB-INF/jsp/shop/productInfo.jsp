@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>產品詳細資訊頁面</title>
+<style>
+	label{
+		margin:20px 0px;
+	}
+</style>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 </head>
 
@@ -18,7 +23,7 @@
 
 <div class="content_box" style="width: 100%">
 
-			<h3  style="text-align: center;">產品資訊：</h3>
+			<h3  style="text-align: center;">產品資訊</h3>
 			
 			<div class="content"
 						style="background-color: #ffffff00; height: 100%">
@@ -54,7 +59,6 @@
 							id="prierror" class="error"></span><span
 							id="pricorrect" class="correct"></span>
 						<p><span>* </span><label for="discount"> 折扣 :</label><br />
-							<p class="p1">(請填入0~1之間的數值)</p></p>
 						<form:input type="text" name="discount" id="discount" path="discount" disabled="true" class="form-control" /><span
 							id="dserror" class="error"></span><span
 							id="dscorrect" class="correct"></span>

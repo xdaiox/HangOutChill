@@ -14,12 +14,12 @@
 
 		<div class="container-fluid page-body-wrapper">
 			<jsp:include page="../dbLayout/left_navbar.jsp" />
-			<div class="content_box" style="width: 100%">
+			<div class="content_box" style="width: 100%; margin-top:20px;">
 				<div class="row justify-content-center">
 					<!-- 			<h2>產品資料</h2> -->
 					<h3>${sucessMessage}</h3>
 						<div class="col-md-6">
-							<a  href="/hangoutchill/shop/add">
+							<a  href="${contextRoot}/shop/add/product">
 								<button class="btn btn-outline-info">新增商品</button>
 							</a>
 						</div>

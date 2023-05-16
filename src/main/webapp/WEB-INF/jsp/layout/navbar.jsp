@@ -53,7 +53,7 @@
 						<li><a href="${contextRoot}/shop/shoppingCart" class="site-cart">
                         
                          <i class="ti-btnshopcart"></i>
-                      		<span class="count"></span>
+                      		<span class="count" style="display:none;"></span>
                         </a>
                         </li>
                         <li><a href="#"><i class="ti-user"></i>
@@ -137,7 +137,8 @@
              	if(result == 0){
              		$('.count').hide();
              	}else{
-                $('.count').text(result);
+             		$('.count').show();
+                	$('.count').text(result);
              	}
              	
             },

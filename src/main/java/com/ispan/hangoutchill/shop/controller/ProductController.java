@@ -58,10 +58,10 @@ public class ProductController {
 		this.nMemberService = nMemberService;
 	}
 
-	@GetMapping("/shop/add")
+	@GetMapping("/shop/add/product")
 	public String addProduct(Model model) {
 		model.addAttribute("product", new Product());
-		return "shop/addProductPage";
+		return "shop/insertProductPage";
 	}
 	
 	@PostMapping("/shop/postProduct")
@@ -179,7 +179,8 @@ public class ProductController {
 	@PutMapping("/shop/edit/product")
 	public String editProduct(@ModelAttribute("product") Product product,
 								@RequestParam(name="delphotoid", required=false) Integer[] deletePhotoId,
-								@RequestParam(name="addphoto", required=false) MultipartFile[] addphotos) {
+								@RequestParam(name="addphoto", required=false) MultipartFile[] addphotos,
+								Model model) {
 //		// 封面照片更改處理
 		MultipartFile productImage = product.getMainImage();
 		if(productImage != null && !productImage.isEmpty()) {
@@ -300,6 +301,7 @@ public class ProductController {
 		// 新增產品修改成功敘述
 		
 		return "redirect:/shop/allproducts";
+//		return "redirect:/shop/singleproduct";
 	}
 	
 	

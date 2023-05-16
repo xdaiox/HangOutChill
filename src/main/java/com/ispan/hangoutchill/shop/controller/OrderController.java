@@ -123,14 +123,19 @@ public class OrderController {
 	public String showOrderDetailPage(@CurrentSecurityContext(expression = "authentication") Authentication authentication, 
 			@RequestParam("MerchantTradeNo") String merchantTradeNo,
 			Model model) {
+		System.out.println(merchantTradeNo);
+		String actOrderNo = merchantTradeNo.substring(0, merchantTradeNo.length()-2);
+		Order theOrder = orderService.findOrderByOrderNo(actOrderNo);
+		theOrder.setPaymentState(true);
+		List<OrderDetail> ods = new ArrayList<>(theOrder.getOrderDetails());
 		String name = authentication.getName();
 		System.out.println(name);
-		System.out.println(merchantTradeNo);
 		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
-		Order latestOrder = orderService.findLatestOrderByMemberId(currentmember.getId());
-		List<OrderDetail> ods = new ArrayList<>(latestOrder.getOrderDetails());
-		latestOrder.setPaymentState(true);
-		model.addAttribute("order", latestOrder);
+//		Order latestOrder = orderService.findLatestOrderByMemberId(currentmember.getId());
+//		List<OrderDetail> ods = new ArrayList<>(latestOrder.getOrderDetails());
+//		latestOrder.setPaymentState(true);
+//		model.addAttribute("order", latestOrder);
+		model.addAttribute("order", theOrder);
 		model.addAttribute("orderDetails", ods);
 		model.addAttribute("result",currentmember);
 		shoppingCartService.deleteShoppingCartItmesByMemberId(currentmember.getId());
