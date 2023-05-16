@@ -14,7 +14,8 @@
 
 		<div class="container-fluid page-body-wrapper">
 			<jsp:include page="../dbLayout/left_navbar.jsp" />
-			<div class="container">
+<!-- 			<div class="container"> -->
+			<div class="content_box" style="width: 100%">
 				<div class="row justify-content-center">
 					<!-- 			<h2>產品資料</h2> -->
 					<h3>${sucessMessage}</h3>
@@ -35,29 +36,29 @@
 								<th scope="col">物流方式</th>
 								<th scope="col">訂購日期</th>
 								<th scope="col">出貨日期</th>
-								<th scope="col">刪除</th>
+<!-- 								<th scope="col">刪除</th> -->
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="order" items="${orderPage.content}">
 								<tr>
 									<td><a
-										href="${contextRoot}/shop/singleproduct?productid=${order.orderId}">${order.orderNo}</a></td>
+										href="${contextRoot}/shop/order/orderinfo?orderno=${order.orderNo}">${order.orderNo}</a></td>
 									<td>${order.member.reallName}</td>
 									<td>${order.recipientName}</td>
 									<td>${order.paymentVia}</td>
-									<td>${order.paymentState}</td>
+									<td class="paymentstate">${order.paymentState}</td>
 									<td>${order.shipVia}</td>
 									<td>${order.orderDate}</td>
-									<td>${order.shippedDate}</td>
-									<td>
-										<form action="${contextRoot}/shop/delete/product"
-											method="post">
-											<input type="hidden" name="_method" value="delete" /> <input
-												type="hidden" name="productid" value="${order.orderId}" />
-											<input type="submit" class="btn btn-danger" value="刪除" />
-										</form>
-									</td>
+									<td class="shippedDate">${order.shippedDate}</td>
+<!-- 									<td> -->
+<%-- 										<form action="${contextRoot}/shop/delete/product" --%>
+<!-- 											method="post"> -->
+<!-- 											<input type="hidden" name="_method" value="delete" /> <input -->
+<%-- 												type="hidden" name="productid" value="${order.orderId}" /> --%>
+<!-- 											<input type="submit" class="btn btn-danger" value="刪除" /> -->
+<!-- 										</form> -->
+<!-- 									</td> -->
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -80,8 +81,28 @@
 					</nav>
 				</div>
 			</div>
-
 		</div>
 	</div>
+	<script>
+		// 出貨狀態
+		let theShipDate = document.getElementsByClassName('shippedDate');
+		for(let i=0; i<theShipDate.length; i++){
+			if(!theShipDate[i].innerHTML){
+				theShipDate[i].innerHTML = '待出貨';
+			}
+		}
+
+		// 付款狀態
+		let paymentState = document.getElementsByClassName('paymentstate');
+		for(let i=0; i<paymentState.length; i++){
+			if(paymentState[i].innerHTML === "true"){
+				paymentState[i].innerHTML = '<span style="color:blue">已付款</span>'; 
+			}else{
+				paymentState[i].innerHTML = '<span style="color:red">未付款</span>';
+			}
+		}
+
+
+	</script>
 </body>
 </html>

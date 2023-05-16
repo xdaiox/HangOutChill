@@ -98,4 +98,9 @@ public class OrderService {
 		return page;
 	}
 	
+	
+	public List<Order> finOrdersByMemeberId(Integer memberId){
+		return orderRepository.findOrdersByMemberId(memberId);
+	}
+	
 }

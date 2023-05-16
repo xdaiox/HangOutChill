@@ -27,76 +27,6 @@
 </head>
 <body>
 	<main>
-		<!-- 		<section class="category-page area-padding"> -->
-		<!-- 			<link -->
-		<!-- 				href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" -->
-		<!-- 				rel="stylesheet"> -->
-
-		<!-- 			<div class="container center" style="width: 30%;"> -->
-		<!-- 				<div class="row"> -->
-		<!-- 					<h2>訂單資訊</h2> -->
-		<!-- 					<table class="table" style="width: 100%; background-color: white"> -->
-		<!-- 						<tbody> -->
-		<!-- 							<tr> -->
-		<!-- 								<th>訂單編號</th> -->
-		<%-- 								<td><span>${order.orderNo}</span></td> --%>
-		<!-- 							</tr> -->
-		<!-- 							<tr> -->
-		<!-- 								<th>訂單成立日期</th> -->
-		<%-- 								<td><span>${order.orderDate}</span></td> --%>
-		<!-- 							</tr> -->
-		<!-- 							<tr> -->
-		<!-- 								<th>購買人姓名</th> -->
-		<%-- 								<td><span>${order.member.reallName}</span></td> --%>
-		<!-- 							</tr> -->
-		<!-- 							<tr> -->
-		<!-- 								<th>購買人電話</th> -->
-		<%-- 								<td><span>${order.memberPhone}</span></td> --%>
-		<!-- 							</tr> -->
-		<!-- 							<tr> -->
-		<!-- 								<th>購買人Email</th> -->
-		<%-- 								<td><span>${order.memberMail}</span></td> --%>
-		<!-- 							</tr> -->
-		<!-- 							<tr> -->
-		<!-- 								<th>收件人姓名</th> -->
-		<%-- 								<td><span>${order.recipientName}</span></td> --%>
-		<!-- 							</tr> -->
-		<!-- 							<tr> -->
-		<!-- 								<th>收件人電話</th> -->
-		<%-- 								<td><span>${order.recipientPhone}</span></td> --%>
-		<!-- 							</tr> -->
-		<!-- 							<tr> -->
-		<!-- 								<th>收件人Email</th> -->
-		<%-- 								<td><span>${order.recipientMail}</span></td> --%>
-		<!-- 							</tr> -->
-		<!-- 							<tr> -->
-		<!-- 								<th>收件地址</th> -->
-		<%-- 								<td><span>${order.shipAddress}</span></td> --%>
-		<!-- 							</tr> -->
-		<!-- 							<tr> -->
-		<!-- 								<th>付款狀態</th> -->
-		<%-- 								<td><span>${order.paymentVia}</span></td> --%>
-		<!-- 							</tr> -->
-		<!-- 							<tr> -->
-		<!-- 								<th>出貨狀態</th> -->
-		<%-- 								<td><span>${order.shippedDate}</span></td> --%>
-		<!-- 							</tr> -->
-		<!-- 						</tbody> -->
-		<!-- 					</table> -->
-		<!-- 				</div> -->
-		<!-- 				<h4>感謝您的訂購！</h4> -->
-		<!-- 			<div class="shopping-cart-footer"> -->
-		<!-- 				<div class="column"> -->
-		<!-- 					<a class="btn btn-primary" href="#" data-toast="" -->
-		<!-- 						data-toast-type="success" data-toast-position="topRight" -->
-		<!-- 						data-toast-icon="icon-circle-check" data-toast-title="Your cart" -->
-		<!-- 						data-toast-message="is updated successfully!">回商城首頁</a><a -->
-		<%-- 						class="btn btn-success" href='<c:url value="/shop/orderdetail" />'>回HangoutChill首頁</a> --%>
-		<!-- 				</div> -->
-		<!-- 			</div> -->
-		<!-- 			</div> -->
-
-		<!-- 				test -->
 		<h5 style="text-align: center;">感謝您的訂購！</h5>
 		<div class="container"
 			style="background-color: white; display: flex; justify-content: center; align-items: center; width: 65%">
@@ -203,6 +133,8 @@
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
 					<div class="shopping-cart-footer">
 						<div class="column" style="text-align: center;">
 							<a class="btn btn-primary" href='<c:url value="/shop/index" />' data-toast=""
@@ -212,8 +144,6 @@
 								class="btn btn-success" href='<c:url value="/" />'>回HangoutChill首頁</a>
 						</div>
 					</div>
-			</div>
-		</div>
 
 
 		<!-- 		</section> -->

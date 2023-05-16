@@ -50,6 +50,19 @@ public class OrderController {
 		return "shop/showOrders";
 	}
 	
+	
+	// 後臺顯示單筆訂單資訊
+	
+	@GetMapping("/shop/order/orderinfo")
+	public String showOrderInfo(@RequestParam(name="orderno") String orderNo,Model model) {
+		Order order = orderService.findOrderByOrderNo(orderNo);
+		List<OrderDetail> ods = new ArrayList<>(order.getOrderDetails());
+		model.addAttribute("order", order);
+		model.addAttribute("orderDetails", ods);
+		return "shop/productInfo";
+	}
+	
+	
 	// 結帳controller
 	@ResponseBody
 	@PostMapping("/shop/ecpaycheckout")
@@ -87,7 +100,6 @@ public class OrderController {
 		String checkOutForm = orderService.ecpayCheckout(order, totalPrice);
 		return checkOutForm;
 	}
-	
 	
 	// 綠界交易回傳值接收
 	@Transactional
@@ -138,6 +150,6 @@ public class OrderController {
 		return "shop/orderFinishCheck";
 //		return "redirect:/";
 	}
-	
+
 	
 }

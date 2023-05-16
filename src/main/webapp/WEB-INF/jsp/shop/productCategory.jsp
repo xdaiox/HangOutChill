@@ -165,7 +165,7 @@
                     },
                     error: function (err) {
                         console.log(err);
-                        alert(err);
+                        alert("請先登入會員");
                     }
                 });
                 

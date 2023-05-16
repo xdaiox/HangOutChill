@@ -112,4 +112,7 @@ public class ProductService {
 		return productRepository.findProductsByKeyWordSearch(keyword);
 	}
 	
+	public List<Product> findLatestFiveProducts(){
+		return productRepository.findLatestFiveProducts();
+	}
 }

@@ -31,6 +31,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 			 countQuery = "SELECT COUNT(*) FROM Product  WHERE product_name LIKE %:keyword%")
 	public Page<Product> findProductByNameSearch(@Param(value="keyword") String keyword , Pageable pageable);
 	
-//	public Page<Product> findByNameContaining(String keyword, Pageable pageable);
+	@Query(value="select top(5) * from products order by product_id desc",nativeQuery=true)
+	public List<Product> findLatestFiveProducts();
+
 	
 }

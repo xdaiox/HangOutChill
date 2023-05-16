@@ -14,7 +14,7 @@
 
 		<div class="container-fluid page-body-wrapper">
 			<jsp:include page="../dbLayout/left_navbar.jsp" />
-			<div class="container">
+			<div class="content_box" style="width: 100%">
 				<div class="row justify-content-center">
 					<!-- 			<h2>產品資料</h2> -->
 					<h3>${sucessMessage}</h3>

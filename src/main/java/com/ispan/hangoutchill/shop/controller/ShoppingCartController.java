@@ -54,6 +54,7 @@ public class ShoppingCartController {
 		Set<ShoppingCart> cartItems = currentmember.getShoppingCart();
 		List<ShoppingCart> carItemsList = new ArrayList<>(cartItems);
 		model.addAttribute("shoppingCartItems", carItemsList);
+		model.addAttribute("itemsAmount", carItemsList.size());
 		model.addAttribute("result", currentmember);
 		return "shop/shoppingCart";
 	}

@@ -99,7 +99,7 @@
 					</table>
 				</div>
 				<div class="shopping-cart-footer">
-					<div class="column">
+					<div class="column" id="insteadinfo">
 						<!-- 						<form class="coupon-form" method="post"> -->
 						<!-- 							<input class="form-control form-control-sm" type="text" -->
 						<!-- 								placeholder="Coupon code" required=""> -->
@@ -107,12 +107,19 @@
 						<!-- 								Coupon</button> -->
 						<!-- 						</form> -->
 					</div>
-					<div class="column text-lg">
+					<c:choose>
+					<c:when test="${itemsAmount > 0}">
+					<div class="column text-lg" id="suminfo">
 					 		<span style="color: red;">全館滿$799免運！</span><br>
 						運費: <span class="text-medium" id="shipfee" style="font-size: larger;">$100</span><br>
 						商品小計: <span class="text-medium" id="totalPrice" style="font-size: larger;"></span><br>
 						總價 :<span class="text-medium" id="totalAllPrice" style="font-size: 2em; color:red; font-weight:bold;"></span>
 					</div>
+					</c:when>
+					<c:otherwise>
+					  <h4>您的購物車內目前沒有商品！</h4>
+					</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="shopping-cart-footer">
 					<div class="column">
@@ -125,8 +132,10 @@
 						<a class="btn btn-primary" href='<c:url value="/shop/productcategory?category=全部商品" />' data-toast=""
 							data-toast-type="success" data-toast-position="topRight"
 							data-toast-icon="icon-circle-check" data-toast-title="Your cart"
-							data-toast-message="is updated successfully!">繼續逛逛</a><a
-							class="btn btn-success" href='<c:url value="/shop/orderdetail" />'>確認結帳</a>
+							data-toast-message="is updated successfully!">繼續逛逛</a>
+							<c:if test="${itemsAmount > 0}">
+							<a class="btn btn-success" href='<c:url value="/shop/orderdetail" />' id="confirmcheck">確認結帳</a>
+							</c:if>
 					</div>
 				</div>
 
@@ -316,6 +325,9 @@
 					console.log(result);
 					if(result == 0){
 						$('.count').hide();
+						$('#confirmcheck').hide();
+						$('#suminfo').hide();
+						$('#insteadinfo').append('<h4>您的購物車內目前沒有商品！</h4>');
 					}else{
 						$('.count').text(result);
 					}
