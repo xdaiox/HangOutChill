@@ -46,7 +46,7 @@
 				      <td width="20px">${article.article_name}</td>
 				      <td>${article.article_theme}</td>
 				      <td>${article.status}</td>
-				      <td>1</td>
+				      <td>${article.normalmember.id}</td>
 				      <td class="btn_group">
 				      	<form action="${contextRoot}/article/status">
 				      		<input type="hidden" name="article_id" value="${article.article_id}" />

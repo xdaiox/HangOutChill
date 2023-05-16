@@ -72,7 +72,10 @@
                             </div>
                         </div>
                         <div class="interactive">
-
+							<div class="UserImgBox">
+								<img alt="" src="${article.normalmember.photoB64}">
+								<p>${article.normalmember.reallName}</p>
+							</div>
                         </div>
                     </div>
                 </div>

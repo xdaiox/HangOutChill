@@ -17,7 +17,7 @@
   	<jsp:include page="../dbLayout/top_navbar.jsp" />
 
     <div class="container-fluid page-body-wrapper">
-		<jsp:include page="../dbLayout/left_navbar.jsp" />
+	<jsp:include page="../dbLayout/left_navbar.jsp" />
 		<div class="main-panel">
 			<div class="titleSpace d-flex">
 			    <h3 class="createContent col-8">新增專欄</h3>

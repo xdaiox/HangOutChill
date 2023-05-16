@@ -26,6 +26,7 @@
 		          <div class="form-floating mb-3">
 		            <form:form class="row g-3" modelAttribute="articles" enctype="multipart/form-data" method="put" action="${contextRoot}/article/edit">
 		              <form:input type="hidden" path="article_id"/>
+		              <form:input type="hidden" path="normalmember.id"/>
 		              <div class="col-12">
 		                <div class="titleName">
 		                  <form:input path="article_name" class="title" type="text" name="" id="articleName" placeholder="專欄名稱"/>

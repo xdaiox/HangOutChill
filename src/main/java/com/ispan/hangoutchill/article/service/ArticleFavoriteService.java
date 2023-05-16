@@ -1,4 +1,7 @@
 package com.ispan.hangoutchill.article.service;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,4 +25,11 @@ public class ArticleFavoriteService {
 	public ArticleFavorite isFavoriteArticle(Integer member_id, Integer article_id) {
 		return articleFavoriteRespository.findByMemberIdAndArticleId(member_id, article_id);
 	}
+	
+	public List<ArticleFavorite> findArticleIdByMemberId(Integer member_id) {
+		return articleFavoriteRespository.findArticleIdByMemberId(member_id);
+		
+	}
+	
+	
 }
