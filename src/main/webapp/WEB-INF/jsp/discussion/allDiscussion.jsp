@@ -324,6 +324,7 @@
 																</span>
 																<p class="text-muted">
 																	<h5>作者: ${discussion.normalMember.nickName}</h5>
+																	<p style="color: gray; font-style: italic; font-size: 16px;">類型: ${discussion.type}</p>
 																</p>
 															</a>
 														</div>
