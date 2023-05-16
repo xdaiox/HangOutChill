@@ -1,31 +1,44 @@
 package com.ispan.hangoutchill.member.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
-import com.ispan.hangoutchill.xdaiox.model.Discussions;
-import com.ispan.hangoutchill.xdaiox.model.Favourite;
-import com.ispan.hangoutchill.xdaiox.model.Images;
-import com.ispan.hangoutchill.xdaiox.model.Messages;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.ispan.hangoutchill.shop.model.Order;
-import com.ispan.hangoutchill.shop.model.ShoppingCart;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
-import com.ispan.hangoutchill.actandles.model.LessonSignUpDetail;
-
 import com.ispan.hangoutchill.article.model.Article;
 import com.ispan.hangoutchill.article.model.ArticleFavorite;
-
-import javax.persistence.*;
-import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import com.ispan.hangoutchill.shop.model.Order;
+import com.ispan.hangoutchill.shop.model.ShoppingCart;
+import com.ispan.hangoutchill.xdaiox.model.Discussions;
+import com.ispan.hangoutchill.xdaiox.model.Favourite;
+import com.ispan.hangoutchill.xdaiox.model.Messages;
 
 @Entity
 @Table(name="normalAccount")
@@ -86,10 +99,12 @@ public class NormalMember {
     
     @OneToMany(mappedBy = "normalMember",fetch=FetchType.LAZY,
     		cascade = {CascadeType.PERSIST},orphanRemoval = true)
+    @JsonManagedReference
     private Set<Discussions> discussions = new LinkedHashSet<>();
     
     @OneToMany(mappedBy = "normalMmeber",fetch=FetchType.LAZY,
 			cascade = {CascadeType.PERSIST},orphanRemoval = true)
+    
     private Set<Messages> messages = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "normalMember",fetch=FetchType.LAZY,

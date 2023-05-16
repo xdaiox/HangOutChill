@@ -5,6 +5,7 @@
 				<html>
 
 				<head>
+					<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 					<link rel="stylesheet"
 						href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 					<jsp:include page="../layout/navbar.jsp" />
@@ -191,6 +192,9 @@
 							margin: 3px;
 							/* card裡的討論圖片大小限制 */
 						}
+						.image-wrapper p{
+							font-size: 16px;
+						}
 
 						@media (max-width: 1260px) {
 							.container {
@@ -224,9 +228,7 @@
 										<button type="button" class="btn btn-link ml-auto">分類3</button>
 										<button type="button" class="btn btn-link ml-auto">分類4</button>
 										<button type="button" class="btn btn-link ml-auto">分類5</button>
-										<span class="input-icon input-icon-sm ml-auto w-auto"> <input type="text"
-												class="form-control form-control-sm bg-gray-200 border-gray-200 shadow-none mb-4 mt-4"
-												placeholder="Search forum" />
+										<span class="input-icon input-icon-sm ml-auto w-auto"> <input type="text"  class="form-control" placeholder="關鍵字查詢討論" aria-label="Recipient's username" aria-describedby="button-addon2" id="search" name="accountKey">
 										</span>
 									</div>
 									<div class="inner-main-header2">
@@ -294,7 +296,9 @@
 									</div>
 									</jstl:forEach> -->
 
+									<!-- ********************* 討論區塊 ********************* -->
 									<jstl:forEach var="discussion" items="${page.content}">
+									<div id="cardForAJAX">
 										<div class="card">
 											<div class="card-body p-2 p-sm-3">
 												<div class="media forum-item">
@@ -364,6 +368,7 @@
 												</div>
 											</div>
 										</div> <!-- <div class="card"> -->
+									</div> <!-- <div id="cardForAJAX"> -->
 									</jstl:forEach>
 
 									<div class="card">
@@ -505,17 +510,21 @@
 
 						$(document).ready(function () {
 							$(".star").hover(
-								function () {
-									// hover實心星星
-									$(this).find("i").removeClass("far fa-star");
-									$(this).find("i").addClass("fas fa-star");
-								},
-								function () {
-									// 移開變空心星星
-									$(this).find("i").removeClass("fas fa-star");
-									$(this).find("i").addClass("far fa-star");
-								}
-							);
+							function () {
+								// hover實心星星
+								$(this).find("i").removeClass("far fa-star");
+								$(this).find("i").addClass("fas fa-star");
+							},
+							function () {
+								// 移開變空心星星
+								$(this).find("i").removeClass("fas fa-star");
+								$(this).find("i").addClass("far fa-star");
+							}
+							).click(function () {
+							// 點擊時顯示收藏提示
+							alert("已將此討論加入收藏！");
+							});
+							
 							$(".star").click(function () {
 								event.preventDefault();
 
@@ -566,6 +575,64 @@
 								})
 							});
 						});
+
+					// //模糊搜尋
+					document.getElementById("search").addEventListener('change', searchContents);
+
+function searchContents() {
+  let searchKey = document.getElementById("search").value;
+
+  axios.get("${contextRoot}/discussion/blurContents?blurSearchContent=" + searchKey)
+    .then((res) => {
+      let discussions = document.getElementById("cardForAJAX");
+      let resultData = '';
+      let contextRoot =`${pageContext.request.contextPath}`;
+      // 通过res.data获取服务器返回的数据
+      res.data.forEach(discussion => {
+        let formattedDate = new Date(discussion.postDate).toLocaleString();
+        resultData += '<div class="card">' +
+          '<div class="card-body p-2 p-sm-3">' +
+          '<div class="media forum-item">' +
+          '<a data-toggle="collapse" data-target=".forum-content" style="transform: scale(1.5); display: inline-block;">' +
+          '<img src="' + discussion.normalMember.photoB64 + '" id="pfpimg" class="mr-3 rounded-circle" width="50" alt="User" style="max-width: 100%; height: auto; aspect-ratio: 1/1; margin : 10px;" />' +
+          '</a>' +
+          '<a href="" class="star" data-discussion-id="' + discussion.d_id + '" data-normalmember-id="' + discussion.normalMember.id + '">' +
+          '<i class="far fa-star fa-2x"></i>' +
+          '</a>' +
+          '<div class="media-body">' +
+          '<div class="text-body" onclick="window.location.href=\'' + contextRoot + '/message/allMessages/' + discussion.d_id + '\'">' +
+          '<a href="#" data-toggle="collapse" data-target=".forum-content" class="text-body">' +
+          '<h3>' + discussion.title + '</h3>' +
+          '<span class="image-wrapper">' +
+          '<p class="text-secondary">' + discussion.contents + '</p>' +
+          '</span>' +
+          '<p class="text-muted">' +
+          '<h5>作者: ' + discussion.normalMember.nickName + '</h5>' +
+          '</p>' +
+          '</a>' +
+          '</div>' +
+          '<span class="text-secondary font-weight-bold">發布於 ' +
+          formattedDate +
+          '</span>' +
+          '</div>' +
+          '<div class="text-muted small text-center align-self-center">' +
+          '<span class="d-none d-sm-inline-block">' +
+          '<i class="far fa-comment ml-2 fa-lg" style="font-size: 20px;"></i>' +
+          '<i style="font-size: 20px;">' + (discussion.replyCount || 0) + '</i>' +
+          '</span>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '</div>';
+      });
+      
+      discussions.innerHTML = resultData;
+    })
+    .catch((err) => {
+      alert(err);
+    });
+}
+
 					</script>
 				</body>
 

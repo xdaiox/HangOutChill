@@ -29,7 +29,7 @@ import com.ispan.hangoutchill.member.model.NormalMember;
 
 @Entity
 @Table(name="discussion")
-public class Discussions {
+public class DiscussionsDTO {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -120,7 +120,7 @@ public class Discussions {
 	}
 
     
-	public Discussions() {
+	public DiscussionsDTO() {
 	}
 	
 	

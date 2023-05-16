@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ispan.hangoutchill.member.model.NormalMember;
 
 @Entity
@@ -60,10 +61,12 @@ public class Messages {
 
 	@ManyToOne
     @JoinColumn(name="fk_member_id", nullable = true)
+
     private NormalMember normalMmeber;
 	
     @ManyToOne
     @JoinColumn(name="fk_dscussion_id", nullable = true)
+
     private Discussions discussions;
 
 	public Integer getDm_id() {

@@ -1,5 +1,6 @@
 package com.ispan.hangoutchill.xdaiox.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.xdaiox.dao.DiscussionsRepository;
 import com.ispan.hangoutchill.xdaiox.dao.MessagesRepository;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
@@ -93,6 +95,14 @@ public class DiscussionsService {
 		dssRepository.save(discussion);
 		return discussion;
 	}
+	
+	
+	//查找討論內容
+    public  List<Discussions> findBlurContents(String contents){
+        return dssRepository.findBlurContents(contents);
+        
+        
+    }
 	
 //    @Override
 //    @Transactional
