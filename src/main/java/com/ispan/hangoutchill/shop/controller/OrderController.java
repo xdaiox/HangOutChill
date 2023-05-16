@@ -59,7 +59,7 @@ public class OrderController {
 		List<OrderDetail> ods = new ArrayList<>(order.getOrderDetails());
 		model.addAttribute("order", order);
 		model.addAttribute("orderDetails", ods);
-		return "shop/productInfo";
+		return "shop/orderInfo";
 	}
 	
 	
