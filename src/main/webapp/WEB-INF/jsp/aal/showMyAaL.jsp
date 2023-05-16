@@ -87,6 +87,11 @@
 												<input value="${aal.id}" type="hidden" name="id" />
 												<button type="submit" class="btn btn-primary" >報名</button>
 										</form:form>
+												<form:form method="PUT" action="${contextRoot}/actandles/shop/postall">
+												<input value="${aal.id}" type="hidden" name="id" />
+												<input value="opened" type="hidden" name="currentStatus" />
+												<button type="submit" class="btn btn-primary" >開放報名</button>
+										</form:form>
 												</div>
 									</jstl:forEach>
 								</tbody>

@@ -116,8 +116,12 @@ $(document).ready(function() {
 								<form:textarea path="aalContent" id="summernote"
 									value="${aalContent}" /></div>
 								<div class="mb-3">	
+								<jstl:if test="${not empty aal.cause}">
+									<input type="hidden" name="cause">
+									<input style="color: red;" type="text" readonly value="駁回原因:${aal.cause}">
+								</jstl:if>
 								<jstl:if test="${result.role.roleId==3}">
-								<div>駁回原因：</div>
+									<div>駁回原因：</div>
 										<form:textarea path="cause" style="width:100%;height:"
 											class="form-check form-check-inline " type="text" />
 								</jstl:if></div>

@@ -68,20 +68,32 @@ public class SignUpOrderDetail {
 //=======================報名人id(member_id)======================
 	@Column(name="member_id",columnDefinition = "int",nullable = false)
 	private Integer memberId;
-//=======================廠商id(member_id)======================
+//=======================活動id(member_id)======================
 	
 	@Column(name="aal_id",columnDefinition = "int",nullable = false)
-	private Integer aal_id;
+	private Integer aalId;
+	
+//=======================連絡電話(tel)======================
+	@Column(name="email",columnDefinition = "nvarchar(max)",nullable = false)
+	private String email;
 	
 	
 	
 
-	public Integer getAal_id() {
-		return aal_id;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setAal_id(Integer aal_id) {
-		this.aal_id = aal_id;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Integer getAalId() {
+		return aalId;
+	}
+
+	public void setAalId(Integer aalId) {
+		this.aalId = aalId;
 	}
 
 	public Integer getMemberId() {

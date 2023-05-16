@@ -45,6 +45,9 @@ public class AALcontroller {
 	@Autowired
 	private SignUpOrderDetailService suoService;
 
+	
+	
+//====================================活動申辦頁面====================================
 	@GetMapping("/actandles/shop/add")
 	public String addAAL(Model model,
 			@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
@@ -57,6 +60,9 @@ public class AALcontroller {
 		return "aal/addAALPage";
 	}
 
+	
+//====================================執行新增頁面====================================
+	
 	@PostMapping("/actandles/shop/post")
 	public String postAAL(@RequestParam("imageFile") MultipartFile imageFile,@ModelAttribute("aal") ActivitiesandLesson aal, Model model) {
 
@@ -71,6 +77,8 @@ public class AALcontroller {
 		return "redirect:/actandles/shop/postall";
 	}
 
+	
+//====================================商家活動管理頁面====================================
 	@GetMapping("/actandles/shop/postall")
 	public String goShowAAL(@RequestParam(name = "p", defaultValue = "1") Integer pagenumber, Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
 		Page<ActivitiesandLesson> page = aalService.findByPage(pagenumber);
@@ -82,6 +90,18 @@ public class AALcontroller {
 		return "aal/showMyAaL";
 	}
 
+	
+//====================================狀態切換====================================
+	@Transactional
+	@PutMapping("/actandles/shop/postall")
+	public String closeTheRegistration(@RequestParam(name = "id") Integer id,@RequestParam(name = "currentStatus") String currentStatus) {
+
+		aalService.updateStatus(id, currentStatus);
+		return "redirect:/actandles/shop/postall";
+	}
+	
+
+	@Transactional
 	@DeleteMapping("/actandles/shop/delete")
 	public String deleteAAL(@RequestParam Integer id) {
 		String value = "deleted";
@@ -89,6 +109,7 @@ public class AALcontroller {
 		return "redirect:/actandles/shop/postall";
 	}
 
+//====================================活動編輯頁面====================================
 	@GetMapping("/actandles/shop/edit")
 	public String editPage(@RequestParam("id") Integer id, Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
 		ActivitiesandLesson aal = aalService.findAALById(id);
@@ -99,14 +120,22 @@ public class AALcontroller {
 
 		return "aal/editAALPage";
 	}
-
+	
+	@Transactional
 	@PutMapping("/actandles/shop/edit")
-	public String putEditedAAL(@ModelAttribute("aal") ActivitiesandLesson aal, Model model) {
+	public String putEditedAAL(@ModelAttribute("aal") ActivitiesandLesson aal, Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
 		aalService.updateById(aal.getId(), aal);
-
+		String name = authentication.getName();
+		NormalMember result = nMemberService.findNormalUserByAccount(name);
+		
+		if(result.getRole().getRoleId()==3) {
+			return "redirect:/actandles/admin/chackaal";
+		}
+		
 		return "redirect:/actandles/shop/postall";
 	}
 
+//====================================活動詳細頁面====================================
 	@GetMapping("/actandles/{id}")
 	public String showTheDetail(@PathVariable Integer id, Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
 		ActivitiesandLesson aal = aalService.findAALById(id);
@@ -135,6 +164,7 @@ public class AALcontroller {
 
 		return "aal/admin/checkAaL";
 	}
+	@Transactional
 	@PutMapping("/actandles/admin/chackaal")
 	public String approvedAAL(@RequestParam(name = "id") Integer id,@RequestParam(name = "currentStatus") String currentStatus) {
 

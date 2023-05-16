@@ -43,7 +43,7 @@
 								<a href="${contextRoot}/actandles/${aal.id}"><img style="background-size: cover;height: 100%;" class="img-fluid img-thumbnail rounded" src="data:image/png;base64,${aal.base64image}"></a>
 							</div>
 								<div class="row d-flex justify-content-center">
-								<div class="col-md-9" ><a style="font-size: 20px;" href="${contextRoot}/actandles/${aal.id}">${aal.name}</a></div> 
+								<div class="col-md-9"  ><a style="font-size: 20px;" href="${contextRoot}/actandles/${aal.id}">${aal.name}</a></div> 
 								<div class="col-md-9" ><jstl:if test="${aal.topic=='act'}">類型：活動</jstl:if> 
 									<jstl:if test="${aal.topic=='les'}">類型：課程</jstl:if></div> 
 								<div class="col-md-9" >舉辦日：<fmt:formatDate pattern="yyyy-MM-dd" value="${aal.theDayofStarts}" /></div>

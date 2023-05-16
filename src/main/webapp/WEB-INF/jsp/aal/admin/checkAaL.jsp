@@ -33,15 +33,14 @@ max-width: 80%;
 position: relative;
 border-radius: 10px;
 box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-text-align: center;
-overflow:auto
+overflow:scroll;
 }
-pop-content p img{
-width: auto;
-height: auto;
-white-space: normal;
-border-radius: unset;
-}
+ pop-content p img{ 
+ width: auto; 
+ height: auto; 
+ white-space: normal; 
+ border-radius: unset; 
+ } 
 .close {
 position: absolute;
 top: 10px;
@@ -94,9 +93,6 @@ color: #3e3e3e;
 									<td class="align-middle">${aal.normalMember.id}
 									<td class="align-middle">${aal.name}
 									<td class="align-middle"><button class="123 btn btn-primary">預覽</button>
-									<div id="popup-date" class="popup">
-											<div class="popup-content" >
-											<span class="close">&times;</span>${aal.aalContent}</div></div>
 									
 									<td class="align-middle"><jstl:if
 											test="${aal.topic=='act'}">活動</jstl:if> <jstl:if
@@ -124,15 +120,27 @@ color: #3e3e3e;
 											</form:form>
 
 											<form:form action="${contextRoot}/actandles/shop/edit"
-												method="put"> 
-												<input type="hidden" name="aal" value="${aal.id}" /> <input
-													type="submit" class="btn btn-outline-danger btn-sm"
+												method="get" modelAttribute="aal" > 
+												<input type="hidden" name="id" value="${aal.id}" />
+												<input type="hidden" name="normalMember.id" value="${aal.normalMember.id}" />
+												<input type="hidden" name="name" value="${aal.name}" />
+												<input type="hidden" name="aalContent" value="${aal.aalContent}" />
+												<input type="hidden" name="topic" value="${aal.topic}" />
+												<input type="hidden" name="theDayofSubmission" value="${aal.theDayofSubmission}" />
+												<input type="hidden" name="fee" value="${aal.fee}" />
+												<input type="hidden" name="quota" value="${aal.quota}" />
+												<input type="hidden" name="lowerLimit" value="${aal.lowerLimit}" />
+												<input type="hidden" name="currentStatus" value="${currentStatus}" />
+												<input type="hidden" name="currentStatus" value="${currentStatus}" />
+												 <input	type="submit" class="btn btn-outline-danger btn-sm"
 													value="駁回" onclick="return confirm('確定駁回?')" />
 											</form:form>
 											</div>
 										</td>
-										
-									
+										<div id="popup-date" class="popup">
+											<div class="popup-content" >
+											<span class="close">&times;</span>${aal.aalContent}
+											</div></div>
 										
 							</jstl:forEach>
 						</tbody>

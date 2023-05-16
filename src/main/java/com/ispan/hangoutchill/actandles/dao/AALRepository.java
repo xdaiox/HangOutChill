@@ -1,5 +1,7 @@
 package com.ispan.hangoutchill.actandles.dao;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +17,9 @@ public interface AALRepository extends JpaRepository<ActivitiesandLesson, Intege
 	//找使用者已報名資料
 	public Page<ActivitiesandLesson> findByaccountsId(Integer id,Pageable pageable);
 	
+	//找指定商家會員的開放報名活動
+	@Query("select a from ActivitiesandLesson a where a.normalMember.id = :memberId and currentStatus = 'opened'")
+	public List<ActivitiesandLesson> findIDByMemberIdAndOpened(@Param(value="memberId") Integer id);
 	
 	//指定商家ID搜尋
 	@Query("select a from ActivitiesandLesson a where a.normalMember.id = :memberId")
@@ -23,7 +28,7 @@ public interface AALRepository extends JpaRepository<ActivitiesandLesson, Intege
 	@Query("select a from ActivitiesandLesson a where topic = :value")
 	public Page<ActivitiesandLesson> findPageByTopic(@Param(value="value") String value,Pageable pageable);
 	
-	@Query("select a from ActivitiesandLesson a where topic = :value and currentStatus = 'approved' or currentStatus = 'opened'")
+	@Query("select a from ActivitiesandLesson a where topic = :value and (currentStatus = 'approved' or currentStatus = 'opened')")
 	public Page<ActivitiesandLesson> findPageByTopicforguest(@Param(value="value") String value,Pageable pageable);
 
 //	@Query("select a from ActivitiesandLesson a where currentStatus = 'unreviewed'")
@@ -41,6 +46,10 @@ public interface AALRepository extends JpaRepository<ActivitiesandLesson, Intege
 	
 	@Query("SELECT COUNT(*) FROM LessonSignUpDetail  WHERE activitiesandLesson.id = :lesid")
 	public Integer findregistered(@Param(value ="lesid") Integer lesid );
+	
+	
+	@Query(value = "SELECT * FROM ActivitiesandLesson ORDER BY theDayofSubmission DESC LIMIT 5", nativeQuery = true)
+	public List<ActivitiesandLesson> findLastestTopFive();
 	 
 
 }

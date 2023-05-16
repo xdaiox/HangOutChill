@@ -158,6 +158,13 @@ public class AALservice {
 
 		return option.get();
 	}
+//========================================針對商家-搜尋已開放報名活動========================================
+	public List<ActivitiesandLesson> findByMemberandOpened(Integer id){
+		return aalRepository.findIDByMemberIdAndOpened(id);
+	}
+	
+	
+	
 //========================================更新========================================
 	@Transactional
 	public ActivitiesandLesson updateById(Integer id, ActivitiesandLesson aal) {
@@ -214,4 +221,9 @@ public class AALservice {
 		return aalRepository.findSignUpDetail(lesid, memberid);		
 	}
  
+//========================================查看最新的前5筆資料========================================
+	public List<ActivitiesandLesson> findLastestTopFive(){
+		return aalRepository.findLastestTopFive();
+	}
+	
 }

@@ -52,62 +52,48 @@
 								<jstl:when test="${result.role.roleId==1}">一般會員</jstl:when>
 								<jstl:when test="${result.role.roleId==2}">
 									<div class="row justify-content-center">
-										<div class="" style="margin: auto;">
-											<h1 style="text-align: center;">活動/課程管理</h1>
+										<div class="col" style="margin: auto;">
+											<h1 style="text-align: center;">開放報名項目查詢</h1>
+											<div>
+											<form method="GET" action="${contextRoot}/actandles/gotoMemberCenter">
+											<span><select name="aalid"  >
+													<option value="" selected disabled>選擇ID:</option>
+												<jstl:forEach  var="aalid" items="${openedaal}">
+													<option value="${aalid.id}" >${aalid.id}</option>
+												</jstl:forEach>
+											</select></span>
+											<button type="submit" >提交</button>
+											</form>
+											</div>
+											</div>
 											<div class="table-responsive">
 												<table class="table table-hover table-bordered table-light">
 													<thead>
 														<tr>
-															<th>ID
-															<th>名稱
-															<th>分類
-															<th>新增時間
-															<th>舉辦日
-															
-															<th>報名截止日
+															<th>活動名稱
+															<th>活動類別
+															<th>報名會員
+															<th>報名人數
+															<th>付款方式
+															<th>付款金額
+															<th>連絡電話
+															<th>Email
 														
-															<th>預覽圖
-															<th>
 													</thead>
 													<tbody>
-														<jstl:forEach var="aal" items="${page.content}">
+														<jstl:forEach var="orderdetail" items="${orderdetail.content}">
 															<tr>
-																<td class="align-middle">${aal.id}
+																<td class="align-middle">${orderdetail.aalName}																
 																
-																<td class="align-middle">${aal.name}
+																<td class="align-middle">${orderdetail.aalTopic}
 																
-																<td class="align-middle"><jstl:if
-																		test="${aal.topic=='act'}">活動</jstl:if> <jstl:if
-																		test="${aal.topic=='les'}">課程</jstl:if>
-																<td class="align-middle"><fmt:formatDate
-																		pattern="yyyy-MM-dd HH:mm:ss"
-																		value="${aal.theDayofSubmission}" />
-																<td class="align-middle"><span><fmt:formatDate
-																			pattern="yyyy-MM-dd" value="${aal.theDayofStarts}" /></span>
+																<td class="align-middle">${orderdetail.memberName}
+																<td class="align-middle">${orderdetail.amount}
+																<td class="align-middle">${orderdetail.payment}
+																<td class="align-middle">${orderdetail.paymentAmount}
+																<td class="align-middle">${orderdetail.tel}
+																<td class="align-middle">${orderdetail.email}
 																
-																<td class="align-middle"><span><fmt:formatDate
-																			pattern="yyyy-MM-dd" value="${aal.deadLine}" /></span>
-
-																<td class="align-middle"><img width="200px"
-																	height="200px"
-																	src="data:image/png;base64,${aal.base64image}"> <br />
-																<td class="align-middle">
-																	<div style="display: flex">
-																		<form action="${contextRoot}/actandles/shop/edit">
-																			<input type="hidden" name="id" value="${aal.id}" />
-																			<input type="submit"
-																				class="btn btn-outline-info btn-sm" value="編輯" />
-																		</form>
-
-																		<form action="${contextRoot}/actandles/shop/delete"
-																			method="post">
-																			<input type="hidden" name="_method" value="delete" />
-																			<input type="hidden" name="id" value="${aal.id}" />
-																			<input type="submit"
-																				class="btn btn-outline-danger btn-sm" value="刪除"
-																				onclick="return confirm('確定刪除?')" />
-																		</form>
-																	</div>
 														</jstl:forEach>
 													</tbody>
 												</table>
@@ -116,14 +102,14 @@
 											<br />
 											<div style="text-align: center;">
 												<jstl:forEach var="pageNumber" begin="1"
-													end="${page.totalPages}">
+													end="${orderdetail.totalPages}">
 													<jstl:choose>
-														<jstl:when test="${page.number == pageNumber-1}">
+														<jstl:when test="${orderdetail.number == pageNumber-1}">
 															<span>${pageNumber}</span>
 														</jstl:when>
 														<jstl:otherwise>
 															<a
-																href="${contextRoot}/actandles/shop/postall?p=${pageNumber}">${pageNumber}</a>
+																href="${contextRoot}/actandles/gotoMemberCenter?aalid=${orderdetail.aalId}&p=${pageNumber}">${pageNumber}</a>
 														</jstl:otherwise>
 													</jstl:choose>
 												</jstl:forEach>
@@ -133,13 +119,7 @@
 								</jstl:when>
 								<jstl:when test="${result.role.roleId==3}">管理員</jstl:when>
 							</jstl:choose>
-							<div class="card">
-								<div class="card-body">
-									<h3 class="card-title">會員資訊</h3>
-
-
-								</div>
-							</div>
+							
 						</div>
 					</div>
 				</div>
