@@ -21,11 +21,7 @@ public class Role {
 //    @OneToMany(mappedBy = "role")
 //    private Collection<Admin> admin;
 
-    @OneToMany(mappedBy = "role")
-    private Collection<LocationMember> locationMembers;
-    public Integer getRoleId() {
-        return roleId;
-    }
+
 
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;

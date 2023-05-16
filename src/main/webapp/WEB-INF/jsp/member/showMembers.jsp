@@ -26,7 +26,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col" style="font-size: large">順序</th>
+                    <th scope="col" c>順序</th>
                     <th scope="col"  style="font-size: large">會員身分</th>
                     <th scope="col"  style="font-size: large">會員Email</th>
                     <th scope="col"  style="font-size: large">會員姓名</th>
