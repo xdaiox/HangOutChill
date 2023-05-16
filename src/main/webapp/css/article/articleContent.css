@@ -224,3 +224,20 @@ section {
 .article_hashtag a {
     color: #8F5E13;
 }
+
+.UserImgBox {
+	width: 110px;
+	margin: auto;
+}
+
+.UserImgBox img {
+	border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 50%;
+    margin-top: 35px;
+}
+
+.UserImgBox p {
+	margin-top: 10px;
+	text-align: center;
+	color: #8F5E13;
+}

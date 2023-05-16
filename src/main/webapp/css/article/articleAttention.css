@@ -1,0 +1,133 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.main {
+    padding-top: 80px;
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    border: 1px solid #000;
+    margin-top: 25px;
+    margin-bottom: 100px;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.pickers {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.pickers_ul {
+    width: 100%;
+    text-align: center;
+}
+
+@media screen and (min-width: 1200px) {
+    .pickers_li:not(:last-child)::after {
+        content: '．';
+        position: absolute;
+        top: 50%;
+        right: -10px;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+}
+
+.pickers_li {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 15px;
+    letter-spacing: 4.5px;
+    font-size: 15px;
+    line-height: 22px;
+    color: #636363;
+    position: relative;
+}
+
+.pickers_li a{
+    color: #636363;
+}
+
+
+.my {
+    width: 100%;
+    padding: 0 80px;
+    margin: auto;
+    margin-bottom: 160px;
+}
+
+
+.profile_container {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.my_title {
+    font-weight: 500;
+    font-size: 2.25rem;
+    letter-spacing: 3.6px;
+    text-align: center;
+    color: var(--font-color,#343434);
+    padding: 40px 0 60px;
+}
+
+.policy_list {
+    width: 100%;
+    margin-bottom: 80px;
+}
+
+.policy_listTitle {
+    font-weight: 500;
+    font-size: 1.375rem;
+    line-height: 2.125rem;
+    letter-spacing: 0.1375rem;
+    color: #343434;
+}
+
+.policy_line {
+    width: 100%;
+    height: 0.8px;
+    background-color: #636363;
+    margin: 15px 0;
+}
+
+.policy_text {
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.5625rem;
+    text-align: justify;
+    letter-spacing: 0.1rem;
+    color: #343434;
+}
+
+.profile_enter {
+    cursor: pointer;
+    width: 180px;
+    margin: auto;
+    margin-top: 140px;
+    text-align: center;
+    font-size: 16px;
+    padding: 12px 10px;
+    background-color: transparent;
+    outline: none;
+    display: block;
+    color: #343434;
+    border: 1px solid #343434;
+    border-radius: 3px;
+}

@@ -35,7 +35,7 @@ public class Order {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@Column(name="orderdate", columnDefinition="date")
+	@Column(name="orderdate", columnDefinition="datetime")
 	private Date orderDate;
 	
 	@Column(name="shipvia", columnDefinition="nvarchar(30)")

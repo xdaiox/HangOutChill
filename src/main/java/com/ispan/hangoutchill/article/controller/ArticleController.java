@@ -53,6 +53,108 @@ public class ArticleController {
 	
 	
 	
+	@GetMapping("/article/articleAttention")
+	public String articleAttention(@CurrentSecurityContext(expression = "authentication")Authentication authentication, Model model) {
+		
+		String name = authentication.getName();
+        NormalMember result = normalMemberService.findNormalUserByAccount(name);
+		model.addAttribute("result", result);
+		
+		return "article/articleAttention";
+	}
+	
+	@GetMapping("/article/articleForm")
+	public String articleForm(@CurrentSecurityContext(expression = "authentication")Authentication authentication, Model model) {
+		
+		String name = authentication.getName();
+        NormalMember result = normalMemberService.findNormalUserByAccount(name);
+        
+		model.addAttribute("result", result);
+		model.addAttribute("articles", new Article());
+		
+		return "article/articleForm";
+	}
+	
+	
+	@PostMapping("/article/articleForm")
+	public String articleForm(
+			@ModelAttribute("articles") Article article,
+			@CurrentSecurityContext(expression = "authentication")Authentication authentication, Model model) {
+		
+		String name = authentication.getName();
+        NormalMember result = normalMemberService.findNormalUserByAccount(name);
+		
+		try {
+			//封面圖
+			byte[] mainfileBytes = article.getMainImg().getBytes();
+	        String mainBase64File = "data:image/png;base64,"+Base64.getEncoder().encodeToString(mainfileBytes);
+	        article.setArticle_mainImg(mainBase64File);
+			
+	        
+	        //內文圖
+			Set<ArticlePicture> images = new LinkedHashSet<>();
+	        
+			//提取編輯器圖片base64
+	        String contentHtml = article.getArticle_content();
+	        Document document = Jsoup.parse(contentHtml);
+	        Elements images_element = document.select("img");
+	        for(Element imgele : images_element) {
+	        	ArticlePicture ap = new ArticlePicture();
+	        	ap.setArticle(article);
+	        	String imageUrl = imgele.attr("src");
+	        	String imageName = imgele.attr("data-filename");
+	        	
+	        	//置換base64存入src名稱，改善Article table效能
+	        	imgele.attr("src", "${image.picture_url}");
+	        	
+	        	//將document轉回html，存入db
+	        	String modifiedHtml = document.outerHtml();
+	        	
+	        	//遍歷html中img內的src，存入陣列，逐一存入Article_Picture table
+	        	List<String> imagesbase64 = new ArrayList<>();
+	        	
+	        	imagesbase64.add(imageUrl);
+	        	
+	        	ap.setPicture_url(imagesbase64.get(0));
+	        	ap.setPicture_name(imageName);
+	        	article.setArticle_content(modifiedHtml);
+	            images.add(ap);
+	        
+	        }
+	        
+	        article.setNormalmember(result);
+            article.setImages(images);
+            articleService.addArticle(article);
+                       
+            return "redirect:/article/AllArticle";
+		}
+		
+		catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@GetMapping("/article/add")
 	public String addArticle(Model model) {
 		model.addAttribute("articles", new Article());
@@ -157,11 +259,7 @@ public class ArticleController {
 	public String putEditedMessage(@ModelAttribute("articles") Article article) {
 			
 			List<ArticlePicture> deleteAll = articlePictureService.findArticlePictureById(article.getArticle_id());
-			articlePictureService.deletePictureAll(deleteAll);
-			
-			//封面圖
-			
-	        
+			articlePictureService.deletePictureAll(deleteAll);	        
 	        
 	        //內文圖
 			Set<ArticlePicture> images = new LinkedHashSet<>();
