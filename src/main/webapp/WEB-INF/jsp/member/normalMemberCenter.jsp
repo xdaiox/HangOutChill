@@ -26,17 +26,10 @@
                             <ul>
                                 <li class="btn btn-primary btn-lg" style="margin: 0px 0px 0px -1px; background: #9C84BC;border: #c8cbcf 0px; border-radius: 5px 5px 0px 0px"><a href="${contextRoot}/member/orders" style="color: azure;">我的訂單</a>
                                 </li>
-<<<<<<< HEAD
                                 <li class="btn btn-secondary btn-lg" style="background: #E1E3E5; border: #c8cbcf 0px"><a href="${contextRoot}/article/allfavs" style="color: #7455bb;">收藏文章</a></li>
                                 <li class="btn btn-primary btn-lg" style=" background: #9C84BC;border: #c8cbcf 0px;"><a href="${contextRoot}/actandles/detail/gotoMemberCenter"  style="color: azure;" >我的活動</a></li>
-                                <li class="btn btn-secondary btn-lg" style="background: #E1E3E5; border: #c8cbcf 0px ;" ><a href="${contextRoot}/normalMember/showFavoriteLocation" style="color: #7455bb;">我的地點</a></li>
-                                <a href="${contextRoot}/discussion/allFavourite"  style="color: azure;" ><li class="btn btn-primary btn-lg" style=" background: #9C84BC;border: #c8cbcf 0px;  border-radius: 0px 0px 5px 5px">收藏討論</li></a>
-=======
-                                <li class="btn btn-secondary btn-lg" style="background: #E1E3E5; border: #c8cbcf 0px"><a href="#" style="color: #7455bb;">收藏文章</a></li>
-                                <li class="btn btn-primary btn-lg" style=" background: #9C84BC;border: #c8cbcf 0px;"><a href="#"  style="color: azure;" >我的活動</a></li>
                                 <li class="btn btn-secondary btn-lg" style="background: #E1E3E5; border: #c8cbcf 0px ;" ><a href="${pageContext.request.contextPath}/location/memberLocationInfo/locationManager" style="color: #7455bb;">收藏地點</a></li>
-                                <li class="btn btn-primary btn-lg" style=" background: #9C84BC;border: #c8cbcf 0px;  border-radius: 0px 0px 5px 5px"><a href="#"  style="color: azure;" >收藏討論</a></li>
->>>>>>> 2ae9094d45088d203bb27e390c72b32c0437b9c1
+                                <a href="${contextRoot}/discussion/allFavourite"  style="color: azure;" ><li class="btn btn-primary btn-lg" style=" background: #9C84BC;border: #c8cbcf 0px;  border-radius: 0px 0px 5px 5px">收藏討論</li></a>
                             </ul>
                         </div>
                     </div>
