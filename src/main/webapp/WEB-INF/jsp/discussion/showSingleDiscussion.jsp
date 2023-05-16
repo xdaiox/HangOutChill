@@ -379,7 +379,7 @@
 													<button type="submit" class="btn btn-primary">發表回覆</button>
 												</form:form>
 												<div class="form-group">
-												<a href="${contextRoot}/discussion/allDiscussion/5"
+												<a href="${contextRoot}/discussion/allDiscussion/10"
 													class="btn btn-primary">返回文章列</a>
 												</div>
 										</div>

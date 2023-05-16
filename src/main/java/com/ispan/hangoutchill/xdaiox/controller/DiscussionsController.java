@@ -107,7 +107,7 @@ public class DiscussionsController {
 //    	image.setFkImgDiscussions(discussion);
     	
     	model.addAttribute("discussion", new Discussions());
-    	return"redirect:/discussion/allDiscussion/5";
+    	return"redirect:/discussion/allDiscussion/10";
     }
     
 //    @GetMapping("/discussion/editDiscussion")
@@ -154,7 +154,7 @@ public class DiscussionsController {
         model.addAttribute("result", result);
     	
     	dService.deleteDiscussionById(id);
-    	return "redirect:/discussion/allDiscussion/5";
+    	return "redirect:/discussion/allDiscussion/10";
     }
     
     //==============找使用者所有的討論收藏==============
