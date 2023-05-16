@@ -86,5 +86,8 @@ public class OrderService {
 	public Order findLatestOrderByMemberId(Integer memberId) {
 		return orderRepository.findLatestOrderByMemberId(memberId);
 	}
-	
+
+	public List<Order> finOrdersByMemeberId(Integer memberId){
+		return orderRepository.findOrdersByMemberId(memberId);
+	}
 }

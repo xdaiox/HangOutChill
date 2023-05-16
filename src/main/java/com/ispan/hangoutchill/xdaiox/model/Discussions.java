@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.ispan.hangoutchill.member.model.NormalMember;
@@ -66,6 +67,7 @@ public class Discussions {
 	
 	@ManyToOne
 	@JoinColumn(name="fk_member_id", nullable = true)
+	@JsonIgnoreProperties("discussions")
 	private NormalMember normalMember;
 	
     @OneToMany(mappedBy = "discussions",fetch=FetchType.LAZY,

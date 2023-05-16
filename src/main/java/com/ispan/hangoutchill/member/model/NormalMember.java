@@ -1,6 +1,7 @@
 package com.ispan.hangoutchill.member.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.ispan.hangoutchill.location.model.LocationFavorite;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
@@ -8,10 +9,7 @@ import com.ispan.hangoutchill.xdaiox.model.Favourite;
 import com.ispan.hangoutchill.xdaiox.model.Images;
 import com.ispan.hangoutchill.xdaiox.model.Messages;
 import javax.persistence.*;
-import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import com.ispan.hangoutchill.shop.model.Order;
 import com.ispan.hangoutchill.shop.model.ShoppingCart;
@@ -86,6 +84,7 @@ public class NormalMember {
     
     @OneToMany(mappedBy = "normalMember",fetch=FetchType.LAZY,
     		cascade = {CascadeType.PERSIST},orphanRemoval = true)
+    @JsonIgnoreProperties("normalMember")
     private Set<Discussions> discussions = new LinkedHashSet<>();
     
     @OneToMany(mappedBy = "normalMmeber",fetch=FetchType.LAZY,
@@ -206,7 +205,25 @@ public class NormalMember {
     }
 	// shop 自行加入
 
-	public void setAccount(String account) {
+
+    //==================收藏地點===================
+
+
+    @OneToMany(mappedBy="normalMember", cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties("normalMember")
+    private List<LocationFavorite> locationFavorites;
+
+    public List<LocationFavorite> getLocationFavorites() {
+        return locationFavorites;
+    }
+
+    public void setLocationFavorites(List<LocationFavorite> locationFavorites) {
+        this.locationFavorites = locationFavorites;
+    }
+
+    //==================收藏地點===================
+
+    public void setAccount(String account) {
         this.account = account;
     }
 

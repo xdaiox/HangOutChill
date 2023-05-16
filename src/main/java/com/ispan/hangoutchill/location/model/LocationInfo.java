@@ -1,5 +1,6 @@
 package com.ispan.hangoutchill.location.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -63,8 +64,9 @@ public class LocationInfo {
 //    @OneToMany(cascade = CascadeType.ALL,mappedBy = "locationInfo",fetch=FetchType.LAZY)
 //    private Set<LocationComment> locationComments = new HashSet<LocationComment>();
 
-
-
+    @OneToMany(mappedBy="locationInfo", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("locationInfo")
+    private List<LocationFavorite> locationFavorites;
 
     //參數建構子
     public LocationInfo(){}

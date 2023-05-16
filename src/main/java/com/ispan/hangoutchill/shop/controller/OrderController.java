@@ -116,6 +116,19 @@ public class OrderController {
 		return "shop/orderFinishCheck";
 //		return "redirect:/";
 	}
-	
+
+
+	@GetMapping("/member/orders")
+	public String findOrdersByMemberId(@CurrentSecurityContext(expression = "authentication") Authentication authentication, Model model,Model model2){
+		String name = authentication.getName();
+		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
+		List<Order> orders = orderService.finOrdersByMemeberId(currentmember.getId());
+		model.addAttribute("orders", orders);
+		model2.addAttribute("result",currentmember);
+		return "shop/memberOrders";
+	}
+
+
+
 	
 }
