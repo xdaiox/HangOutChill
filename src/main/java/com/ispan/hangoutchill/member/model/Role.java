@@ -45,4 +45,7 @@ public class Role {
     public void setNormalMember(Collection<NormalMember> normalMember) {
         this.normalMember = normalMember;
     }
+
+
+
 }
