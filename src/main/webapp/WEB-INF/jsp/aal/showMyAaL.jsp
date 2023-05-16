@@ -87,6 +87,11 @@
 												<input value="${aal.id}" type="hidden" name="id" />
 												<button type="submit" class="btn btn-primary" >報名</button>
 										</form:form>
+												<form:form method="PUT" action="${contextRoot}/actandles/shop/postall">
+												<input value="${aal.id}" type="hidden" name="id" />
+												<input value="opened" type="hidden" name="currentStatus" />
+												<button type="submit" class="btn btn-primary" >開放報名</button>
+										</form:form>
 												</div>
 									</jstl:forEach>
 								</tbody>
@@ -96,8 +101,6 @@
 						<br />
 						<div style="text-align: center;">
 							<jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}">
-								<%-- 					<jstl:if test="${page.number == pageNumber-1}"><span>${pageNumber}</span></jstl:if> --%>
-								<%-- 					<jstl:if test="${page.number != pageNumber-1}"><a href="${contextRoot}/messages?p=${pageNumber}">${pageNumber}</a></jstl:if> --%>
 								<jstl:choose>
 									<jstl:when test="${page.number == pageNumber-1}">
 										<span>${pageNumber}</span>

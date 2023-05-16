@@ -53,44 +53,45 @@ $(document).ready(function() {
 				style="background-color: #ffffff00; height: 100%">
 				<div class="col-8" style="margin: auto">
 					<div class="card">
-						<div class="card-header">活動/課程申辦頁面</div>
-						<div class="card-body">
-							<form:form class="" modelAttribute="aal"
+						<div class="card-header text-center" style="font-size: 20px;" >活動/課程申辦頁面</div>
+						<div class="card-body" style="font-size: 15px;">
+							<form:form class="col" modelAttribute="aal"
 								enctype="multipart/form-data" method="POST"
 								action="${contextRoot}/actandles/shop/post">
 								<!-- 								<p>項目ID:</p> -->
 								<%-- 								<form:input path="id" class="form-control" type="text"></form:input> --%>
-								<p>提交者ID:</p>
+								
 								<form:input path="normalMember.id" class="form-control"
-									type="text" value="${result.id }"></form:input>
-								<p>活動/課程名稱</p>
-								<form:input path="name" class="form-control" type="text"></form:input>
-								<p>類別:</p>
+									type="hidden" value="${result.id }"></form:input>
+								<div class="mb-3">名稱
+								<form:input path="name" class="form-control" type="text"></form:input></div>
+								<div class="mb-3">類別:
 								<form:radiobutton path="topic"
 									class="form-check form-check-inline " value="act" />活動
 								<form:radiobutton path="topic"
 									class="form-check form-check-inline " value="les" />課程
-								<p>舉辦日:</p>
+								</div>	
+								<div class="mb-3">舉辦日:
 								<form:input path="theDayofStarts" class="form-control"
-									type="date"></form:input>
-								<p>報名費用:</p>
-								<form:input path="fee" class="form-control" type="text"></form:input>
-								<p>預計名額:</p>
-								<form:input path="quota" class="form-control" type="text"></form:input>
-								<p>最低開辦人數:</p>
-								<form:input path="lowerLimit" class="form-control" type="text"></form:input>
-								<p>報名截止日:</p>
-								<form:input path="deadLine" class="form-control" type="date"></form:input>
+									type="date"></form:input></div>
+								<div class="mb-3">報名費用:
+								<form:input path="fee" class="form-control" type="text"></form:input></div>
+								<div class="mb-3">預計名額:
+								<form:input path="quota" class="form-control" type="text"></form:input></div>
+								<div class="mb-3">最低開辦人數:
+								<form:input path="lowerLimit" class="form-control" type="text"></form:input></div>
+								<div class="mb-3">報名截止日:
+								<form:input path="deadLine" class="form-control" type="date"></form:input></div>
 								<form:input path="currentStatus" class="form-control"
 									type="hidden" value="unreviewed"></form:input>
-								<p>預覽圖:</p>
-								<form:input path="imageFile" id="target" class="form-control"
-									type="file"></form:input>
-								<span><img id="preview" src=""></span>
-								<p>文案內容:</p>
-								<form:textarea path="aalContent" id="summernote"/>
-
-								<button type="submit" class="btn btn-primary">送出</button>
+								<div class="mb-3" >
+								<form:input  path="imageFile" id="target" class="form-control"
+									type="file"></form:input></div>
+								<span>圖片預覽:<img style="max-width: 200px;" id="preview" src=""></span>
+								<div class="mb-3">文案內容:
+								<form:textarea path="aalContent" id="summernote"/></div>
+								<div style="text-align: center;">
+								<button type="submit" class="btn btn-primary" >送出</button></div>
 							</form:form>
 
 						</div>

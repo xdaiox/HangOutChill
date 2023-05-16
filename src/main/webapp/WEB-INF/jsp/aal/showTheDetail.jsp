@@ -70,7 +70,7 @@
 											<jstl:when test="${(aal.quota-aal.registered)==0}">
 												<button  disabled class="btn btn-primary">已額滿</button>
 											</jstl:when>
-											</jstl:choose>:
+											</jstl:choose>
 										</form:form>
 						</tbody>
 					</table>

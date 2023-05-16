@@ -42,7 +42,7 @@ public class SignUpOrderDetailService {
 //		suoRepository.save(suod);
 //		
 //	}
-	
+//==============================================訂單成立==============================================
 	public void createOrder(NormalMember result , ActivitiesandLesson aal,String uuid,String time,Integer number) {
 		SignUpOrderDetail suod = new SignUpOrderDetail();
 		System.out.println("uuid："+uuid);
@@ -58,18 +58,23 @@ public class SignUpOrderDetailService {
 		suod.setPayment("信用卡一次付清");
 		suod.setPaymentAmount(aal.getFee()*number);
 		suod.setTel(result.getTel());
-		
+		suod.setEmail(result.getAccount());
 		suod.setMemberId(result.getId());
-		suod.setShop_id(aal.getId());
+		suod.setAalId(aal.getId());
 		
 		suoRepository.save(suod);
 		
 	}
+
 	
+//==============================================透過編號找訂單==============================================
+
 	public SignUpOrderDetail findByorderNumber(String orderNumber) {
 		return suoRepository.findByorderNumber(orderNumber);	
 	}
 	
+//==============================================找到指定會員訂單紀錄==============================================
+
 	public Page<SignUpOrderDetail> findPageBymemberId(Integer memberId, Integer pageNumber){
 		Pageable pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "orderTime");
 		Page<SignUpOrderDetail> page = suoRepository.findBymemberId(memberId, pgb);
@@ -78,5 +83,20 @@ public class SignUpOrderDetailService {
 		
 		
 	}
+//==============================================找到指定商家活動報名紀錄==============================================
 
+	public Page<SignUpOrderDetail> findPageByaalId( Integer pageNumber,Integer aalId){
+		Pageable pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "orderTime");
+		Page<SignUpOrderDetail> page = suoRepository.findByaalId(aalId, pgb);
+		
+		return page;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 }
