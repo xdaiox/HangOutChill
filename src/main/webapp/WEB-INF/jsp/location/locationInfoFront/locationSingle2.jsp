@@ -54,19 +54,19 @@
                     <article class="blog_item">
                         <div class="blog_details" style="background-color: white ; height:250px">
                             <figure style="height:180px">
-                                <img width="300" height="178px" src="${contextRoot}/locationInfo/getImgCover/${locationInfo.locId}"/>
+                                <img width="300" height="178px" src="${contextRoot}/img/HangOutChill.png"/>
                             </figure>
 
                             <div>
-                                <h2 style="color: black;">${locationInfo.locName}</h2>
+                                <h2 style="color: black;">The Public House</h2>
                             </div>
 
                             <div>
-                                <h4 style="display: inline; margin-right: 20px;">${locationInfo.locCat}</h4>
-                                <h4 style="display: inline; margin-right: 20px;">${locationInfo.locPriceLevel}</h4>
+                                <h4 style="display: inline; margin-right: 20px;">這裡放分類</h4>
+                                <h4 style="display: inline; margin-right: 20px;">$ $ $ $</h4>
                                 <br>
-                                <h5 style="display: inline; margin-right: 5px;">${locationInfo.locCity}</h5>
-                                <h5 style="display: inline; margin-right: 5px;">${locationInfo.locDist}</h5>
+                                <h5 style="display: inline; margin-right: 5px;">台北市</h5>
+                                <h5 style="display: inline; margin-right: 5px;">大安區</h5>
                             </div>
 
                         </div>
@@ -83,7 +83,9 @@
                             </div>
 
                             <div>
-                                <p>${locationInfo.locDesc}</p>
+                                <p>位於信義安和的「The Public House」，外觀為傳統的英式PUB風格，而PUB也就是Public
+                                    House的縮寫，就像是「The Public
+                                    House」給人的感覺一樣，比起傳統的專業、沉靜的酒吧，這裡的整體風格更貼近日常生活，有時會出現英式小酒館鬧哄哄的氣氛，美味的餐點加上各種專業性十足的調酒，打造出一個輕鬆的氛圍！</p>
                             </div>
                         </div>
                     </article>
@@ -98,35 +100,35 @@
 
                             <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; height: 100%;">
                                 <div style="width: 300px; height: 178px; margin: 10px;">
-                                    <img src="${contextRoot}/locationInfo/getImgG1/${locationInfo.locId}"
+                                    <img src="${contextRoot}/img/HangOutChill.png"
                                          style="width: 100%; height: 100%; object-fit: contain;" alt="Image 1">
                                 </div>
                                 <div style="width: 300px; height: 178px; margin: 10px;">
-                                    <img src="${contextRoot}/locationInfo/getImgG2/${locationInfo.locId}"
+                                    <img src="${contextRoot}/img/HangOutChill.png"
                                          style="width: 100%; height: 100%; object-fit: contain;" alt="Image 2">
                                 </div>
                                 <div style="width: 300px; height: 178px; margin: 10px;">
-                                    <img src="${contextRoot}/locationInfo/getImgG3/${locationInfo.locId}" style="width: 100%; height: 100%; object-fit: contain;"
+                                    <img src="image3.jpg" style="width: 100%; height: 100%; object-fit: contain;"
                                          alt="Image 3">
                                 </div>
                                 <div style="width: 300px; height: 178px; margin: 10px;">
-                                    <img src="${contextRoot}/locationInfo/getImgG4/${locationInfo.locId}" style="width: 100%; height: 100%; object-fit: contain;"
+                                    <img src="image4.jpg" style="width: 100%; height: 100%; object-fit: contain;"
                                          alt="Image 4">
                                 </div>
                                 <div style="width: 300px; height: 178px; margin: 10px;">
-                                    <img src="${contextRoot}/locationInfo/getImgG5/${locationInfo.locId}" style="width: 100%; height: 100%; object-fit: contain;"
+                                    <img src="image5.jpg" style="width: 100%; height: 100%; object-fit: contain;"
                                          alt="Image 5">
                                 </div>
                                 <div style="width: 300px; height: 178px; margin: 10px;">
-                                    <img src="${contextRoot}/locationInfo/getImgG6/${locationInfo.locId}" style="width: 100%; height: 100%; object-fit: contain;"
+                                    <img src="image6.jpg" style="width: 100%; height: 100%; object-fit: contain;"
                                          alt="Image 6">
                                 </div>
                                 <div style="width: 300px; height: 178px; margin: 10px;">
-                                    <img src="${contextRoot}/locationInfo/getImgG7/${locationInfo.locId}" style="width: 100%; height: 100%; object-fit: contain;"
+                                    <img src="image7.jpg" style="width: 100%; height: 100%; object-fit: contain;"
                                          alt="Image 7">
                                 </div>
                                 <div style="width: 300px; height: 178px; margin: 10px;">
-                                    <img src="${contextRoot}/locationInfo/getImgG8/${locationInfo.locId}" style="width: 100%; height: 100%; object-fit: contain;"
+                                    <img src="image8.jpg" style="width: 100%; height: 100%; object-fit: contain;"
                                          alt="Image 8">
                                 </div>
                             </div>
@@ -135,21 +137,21 @@
 
 
                     <!--================左4 =================-->
-<%--                    <article class="blog_item" style="background-color: white">--%>
+                    <article class="blog_item" style="background-color: white">
 
 
-<%--                        <div class="blog_details">--%>
-<%--                            <a class="d-inline-block" href="single-blog.html">--%>
-<%--                                <h2>Google inks pact for new 35-storey office</h2>--%>
-<%--                            </a>--%>
-<%--                            <p>That dominion stars lights dominion divide years for fourth have don't stars is that he--%>
-<%--                                earth it first without heaven in place seed it second morning saying.</p>--%>
-<%--                            <ul class="blog-info-link">--%>
-<%--                                <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>--%>
-<%--                                <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>--%>
-<%--                            </ul>--%>
-<%--                        </div>--%>
-<%--                    </article>--%>
+                        <div class="blog_details">
+                            <a class="d-inline-block" href="single-blog.html">
+                                <h2>Google inks pact for new 35-storey office</h2>
+                            </a>
+                            <p>That dominion stars lights dominion divide years for fourth have don't stars is that he
+                                earth it first without heaven in place seed it second morning saying.</p>
+                            <ul class="blog-info-link">
+                                <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>
+                                <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
+                            </ul>
+                        </div>
+                    </article>
 
 
                 </div>
@@ -181,22 +183,22 @@
                     <aside class="single_sidebar_widget post_category_widget">
                         <h4 class="widget_title">資訊</h4>
                         <ul class="list cat-list">
-                                <li><span class="d-flex">地址： ${locationInfo.locCity}${locationInfo.locDist}${locationInfo.locAdd} </span></li>
-                                <li><span class="d-flex">電話： ${locationInfo.locTel}</span></li>
-                                <li>Link： <a class="d-flex">${locationInfo.locLink}</a></li>
+                                <li><span class="d-flex">地址： 開始時間 - 結束時間</span></li>
+                                <li><span class="d-flex">電話： 開始時間 - 結束時間</span></li>
+                                <li><span class="d-flex">Link： 開始時間 - 結束時間</span></li>
                             </ul>
                     </aside>
 
                     <aside class="single_sidebar_widget post_category_widget">
                         <h4 class="widget_title">營業時間</h4>
                         <ul class="list cat-list">
-                            <li><span class="d-flex">星期一： <jstl:if test="${locationInfo.locationOperationTime.mondayOpen == null}">無營業</jstl:if><fmt:formatDate value="${locationInfo.locationOperationTime.mondayOpen}" pattern="HH:mm"/> - <jstl:if test="${locationInfo.locationOperationTime.mondayClose == null}">無營業</jstl:if><fmt:formatDate value="${locationInfo.locationOperationTime.mondayClose}" pattern="HH:mm"/></span></li>
-                            <li><span class="d-flex">星期二： <jstl:if test="${locationInfo.locationOperationTime.tuesdayOpen == null}">無營業</jstl:if><fmt:formatDate value="${locationInfo.locationOperationTime.tuesdayOpen}" pattern="HH:mm"/> - <jstl:if test="${locationInfo.locationOperationTime.tuesdayClose == null}">無營業</jstl:if><fmt:formatDate value="${locationInfo.locationOperationTime.tuesdayClose}" pattern="HH:mm"/></span></li>
-                            <li><span class="d-flex">星期三： <jstl:if test="${locationInfo.locationOperationTime.wednesdayOpen == null}">無營業</jstl:if><fmt:formatDate value="${locationInfo.locationOperationTime.wednesdayOpen}" pattern="HH:mm"/> - <jstl:if test="${locationInfo.locationOperationTime.wednesdayClose == null}">無營業</jstl:if><fmt:formatDate value="${locationInfo.locationOperationTime.wednesdayClose}" pattern="HH:mm"/></span></li>
-                            <li><span class="d-flex">星期四： <jstl:if test="${locationInfo.locationOperationTime.thursdayOpen == null}">無營業</jstl:if><fmt:formatDate value="${locationInfo.locationOperationTime.thursdayOpen}" pattern="HH:mm"/> - <jstl:if test="${locationInfo.locationOperationTime.thursdayClose == null}">無營業</jstl:if><fmt:formatDate value="${locationInfo.locationOperationTime.thursdayClose}" pattern="HH:mm"/></span></li>
-                            <li><span class="d-flex">星期五： <jstl:if test="${locationInfo.locationOperationTime.fridayOpen == null}">無營業</jstl:if><fmt:formatDate value="${locationInfo.locationOperationTime.fridayOpen}" pattern="HH:mm"/> - <jstl:if test="${locationInfo.locationOperationTime.fridayClose == null}">無營業</jstl:if><fmt:formatDate value="${locationInfo.locationOperationTime.fridayClose}" pattern="HH:mm"/></span></li>
-                            <li><span class="d-flex">星期六： <jstl:if test="${locationInfo.locationOperationTime.saturdayOpen == null}">無營業</jstl:if><fmt:formatDate value="${locationInfo.locationOperationTime.saturdayOpen}" pattern="HH:mm"/> - <jstl:if test="${locationInfo.locationOperationTime.saturdayClose == null}">無營業</jstl:if><fmt:formatDate value="${locationInfo.locationOperationTime.saturdayClose}" pattern="HH:mm"/></span></li>
-                            <li><span class="d-flex">星期日： <jstl:if test="${locationInfo.locationOperationTime.sundayOpen == null}">無營業</jstl:if><fmt:formatDate value="${locationInfo.locationOperationTime.sundayOpen}" pattern="HH:mm"/> - <jstl:if test="${locationInfo.locationOperationTime.sundayClose == null}">無營業</jstl:if><fmt:formatDate value="${locationInfo.locationOperationTime.sundayClose}" pattern="HH:mm"/></span></li>
+                            <li><span class="d-flex">星期一： 開始時間 - 結束時間</span></li>
+                            <li><span class="d-flex">星期二： 開始時間 - 結束時間</span></li>
+                            <li><span class="d-flex">星期三： 開始時間 - 結束時間</span></li>
+                            <li><span class="d-flex">星期四： 開始時間 - 結束時間</span></li>
+                            <li><span class="d-flex">星期五： 開始時間 - 結束時間</span></li>
+                            <li><span class="d-flex">星期六： 開始時間 - 結束時間</span></li>
+                            <li><span class="d-flex">星期日： 開始時間 - 結束時間</span></li>
                         </ul>
                     </aside>
 
@@ -216,7 +218,6 @@
 
 
 <jsp:include page="../../layout/footer.jsp"/>
-
 
 </body>
 </html>

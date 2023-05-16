@@ -160,7 +160,7 @@
                 }
                 result += '<img src="' + base64 + '" width="300px" height="178px"/>'
                 result += '</figure>'
-                result += '<div> <a class="d-inline-block" href="#詳細地點controller">'
+                result += '<div> <a class="d-inline-block" href="${contextRoot}/location/locationList/single?locId='+e[i].locId+'">'
                 result += '<h2>' + e[i].locName + '</h2>'
                 result += '</a></div>'
                 result += '<div>'

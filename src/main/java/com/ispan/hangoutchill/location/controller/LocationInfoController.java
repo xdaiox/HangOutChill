@@ -74,7 +74,13 @@ public class LocationInfoController {
 
     //    顯示單一LocationInfo BY ID
 //    @GetMapping("/location/locationManager/locationInfo")
-//    public String showDetailLocationInfo(@RequestParam(name = "locId") Integer locId, Model model) {
+//    public String showDetailLocationInfo(@CurrentSecurityContext(expression = "authentication") Authentication authentication,
+//                                         @RequestParam(name = "locId") Integer locId, Model model) {
+//
+//        String name = authentication.getName();
+//        NormalMember result = nMemberService.findNormalUserByAccount(name);
+//        model.addAttribute("result", result);
+//
 //        LocationInfo locationInfo = locationInfoService.findLocationInfoById(locId);
 //        model.addAttribute("locId", locId);
 //        return "location/locationInfoBack/locationInfoDetail";
@@ -333,18 +339,18 @@ public class LocationInfoController {
 
 
     //查詢地點詳細資訊   開發中
-//    @GetMapping("/location/locationList/single")
-//    public String showLocationSingle(@CurrentSecurityContext(expression = "authentication") Authentication authentication,
-//                                     @RequestParam(name = "locId") Integer locId, Model model) {
-//
-//        String name = authentication.getName();
-//        NormalMember result = nMemberService.findNormalUserByAccount(name);
-//        model.addAttribute("result", result);
-//
-//        LocationInfo locationInfo = locationInfoService.findLocationInfoById(locId);
-//        model.addAttribute("locId", locationInfo);
-//        return "location/locationInfoFront/locationSingle";
-//    }
+    @GetMapping("/location/locationList/single")
+    public String showLocationSingle(@CurrentSecurityContext(expression = "authentication") Authentication authentication,
+                                     @RequestParam(name = "locId") Integer locId, Model model) {
+
+        String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+
+        LocationInfo locationInfo = locationInfoService.findLocationInfoById(locId);
+        model.addAttribute("locationInfo", locationInfo);
+        return "location/locationInfoFront/locationSingle";
+    }
 
 
     //收藏地點功能
@@ -941,10 +947,10 @@ public class LocationInfoController {
 //    }
 
 
-    @GetMapping("/location/locationList/single")
-    public String toLocationSingle(){
-        return "location/locationInfoFront/locationSingle";
-    }
+//    @GetMapping("/location/locationList/single")
+//    public String toLocationSingle(){
+//        return "location/locationInfoFront/locationSingle";
+//    }
 
 
 }
