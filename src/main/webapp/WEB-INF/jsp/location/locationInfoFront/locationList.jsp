@@ -30,7 +30,6 @@
         figure img {
             width: 100%;
         }
-
     </style>
 </head>
 <body>
@@ -86,7 +85,7 @@
                                     <div>
                                         <input type="button" id="submitBtnSearch"
                                                class="button rounded-0 primary-bg text-white w-100"
-                                               onclick="search()" value="Search"/>
+                                               onclick="search()" value="Search" style="border: 1px solid #744FC6; background:#744FC6 "/>
                                     </div>
                                 </div>
                             </form>
@@ -99,81 +98,17 @@
                 <!--================搜尋結果 =================-->
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar" id="searchResult-list">
-                        <%--                        <article class="blog_item" >--%>
-                        <%--                            <div class="blog_details" style="background-color: white" >--%>
-                        <%--                                <figure>--%>
-                        <%--                                    <img src="${contextRoot}/img/HangOutChill.png"/>--%>
-                        <%--                                </figure>--%>
-                        <%--                                <div>--%>
-                        <%--                                    <a class="d-inline-block" href="single-blog.html">--%>
-                        <%--                                        <h2>這裡放地點名稱</h2>--%>
-                        <%--                                    </a>--%>
-                        <%--                                </div>--%>
-                        <%--                                <div>--%>
-                        <%--                                    <p>That dominion stars lights dominion divide years for fourth have don't stars is--%>
-                        <%--                                        that he earth it first without heaven in place seed it second morning--%>
-                        <%--                                        saying.</p>--%>
-                        <%--                                    <ul class="blog-info-link">--%>
-                        <%--                                        <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>--%>
-                        <%--                                        <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>--%>
-                        <%--                                    </ul>--%>
-                        <%--                                </div>--%>
-                        <%--                            </div>--%>
-                        <%--                        </article>--%>
-
-
-                        <article class="blog_item">
-                            <div class="blog_details" style="background-color: white">
-                                <figure style="height:178px">
-                                    <img width="300" height="100%" src="${contextRoot}/img/HangOutChill.png" />
-                                </figure>
-                                <div>
-                                    <a class="d-inline-block" href="single-blog.html">
-                                        <h2>這裡放地點名稱</h2>
-                                    </a>
-                                </div>
-                                <div>
-                                    <div>
-                                        <h4 style="display: inline; margin-right: 20px;">這裡放分類</h4>
-                                        <h4 style="display: inline;" >$ $ $</h4>
-                                        <br>
-                                        <h5 style="display: inline; margin-right: 20px;">台南市</h5>
-                                        <h5 style="display: inline;" >永康區</h5>
-                                    </div>
-<%--                                    <br>--%>
-                                    <div>
-                                        <p class="mb-0">位於信義安和的「The Public House」，外觀為傳統的英式PUB風格，而PUB也就是Public House的縮寫，就像是「The Public House」給人的感覺一樣，比起傳統的專業、沉靜的酒吧，這裡的整體風格更貼近日常生活，有時會出現英式小酒館鬧哄哄的氣氛，美味的餐點加上各種專業性十足的調酒，打造出一個輕鬆的氛圍！</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-
-                            <!--================分頁功能 =================-->
+                    </div>
+                    <div class="blog_left_sidebar">
                         <nav class="blog-pagination justify-content-center d-flex">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Previous">
-                                        <i class="ti-angle-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">1</a>
-                                </li>
-                                <li class="page-item active">
-                                    <a href="#" class="page-link">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Next">
-                                        <i class="ti-angle-right"></i>
-                                    </a>
-                                </li>
+                            <ul class="pagination" id="page">
+
                             </ul>
                         </nav>
                             <!--================分頁功能 =================-->
 
                     </div>
                 </div>
-
 
             </div>
         </div>
@@ -183,6 +118,9 @@
 
     <jsp:include page="../../layout/footer.jsp"/>
     <script>
+
+
+
         window.addEventListener("load", () => {
             return loadLocationInfo(1, '', '', '', '', '')
         })
@@ -194,7 +132,7 @@
                     params: {pageNumber, name, category, price, city, dist}
                 });
                 console.log(response.data)
-                // displayLocationInfo(response.data.page.content);
+                displayLocationInfo(response.data.page.content,response.data);
                 // setupPagination(response.data);
             } catch (error) {
                 console.error('Error loading LocationInfo:', error);
@@ -202,13 +140,13 @@
         }
 
 
-        function displayLocationInfo(e) {
+        function displayLocationInfo(e,p) {
             let resultList = document.getElementById("searchResult-list")
             let result = '';
             let base64 = '';
 
             for (let i = 0; i < e.length; i++) {
-                result += '  <article class="blog_item" ><div class="blog_details" style="background-color: white" >'
+                result += '<article class="blog_item" ><div class="blog_details" style="background-color: white; height: 238px; margin-bottom: 10px"  >'
                 result += '<figure style="height:178px">'
                 if (e[i].locationImage !== null) {
                     if (e[i].locationImage.locImgCover !== null) {
@@ -220,32 +158,64 @@
                 } else {
                     base64 = "${contextRoot}/img/HangOutChill.png"
                 }
-
-                result += '<img width="300" height="100%"  src="' + base64 + '"/>'
-
+                result += '<img src="' + base64 + '" width="300px" height="178px"/>'
                 result += '</figure>'
-                result += ' <div> <a class="d-inline-block" href="#詳細地點controller">'
-                result += ' <h2>' + e[i].locName + '</h2>'
+                result += '<div> <a class="d-inline-block" href="#詳細地點controller">'
+                result += '<h2>' + e[i].locName + '</h2>'
                 result += '</a></div>'
-                result += '<div><p>' + e[i].locDesc + '</p>' + '<ul class="blog-info-link">'
-                result += '<li><i class="far fa-user"></i>' + e[i].locCat + '</li>'
-                result += '<li><i class="far fa-comments"></i>' + e[i].locPriceLevel + '</li> '
-                result += '<li><i class="far fa-user"></i>' + e[i].locCity + '</li>'
-                result += '<li><i class="far fa-comments"></i>' + e[i].locDist + '</li> '
-                result += '</ul>' + '</div>'
+                result += '<div>'
+                result += '<div>'
+                result += '<h5 style="display: inline; margin-right: 20px;">'+ e[i].locCat+'</h5>'
+                result += '<h5 style="display: inline;" >'+ e[i].locPriceLevel+'</h5><br>'
+                result += '<h6 style="display: inline; margin-right: 20px;">'+e[i].locCity+'</h6>'
+                result += '<h6 style="display: inline;" >'+e[i].locDist+'</h6>'
+                result += '</div>'
+                result += '<div><p class="mb-0" id="my-paragraph">'+e[i].locDesc+'</p></div>'
+
+                result += '</div>'
                 result += '</div></article>'
             }
 
             resultList.innerHTML = result
+
+            //分頁功能
+            let page = document.getElementById("page")
+            let pageNum = ""
+            for (let i = 1; i <= p.page.totalPages; i++) {
+                if (p.pageNumber == i) {
+                    pageNum += '<li class="page-item"><span  class="page-link">' + i + '</span></li>';
+                } else {
+                    pageNum += '<li class="page-item"><a href="#" onclick="loadLocationInfo(' + i + ', \'\' ,\'\' ,\'\' ,\'\')"  class="page-link">' + i + '</a></li>';
+                }
+            }
+            page.innerHTML = pageNum
+
+            let paragraphs = document.querySelectorAll(".blog_item p");
+            let maxLength = 90;
+
+            paragraphs.forEach(function(paragraph) {
+                let content = paragraph.textContent.trim();
+
+                if (content.length > maxLength) {
+                    let truncatedContent = content.substring(0, maxLength) + "...";
+                    paragraph.textContent = truncatedContent;
+                }
+            })
         }
 
-        // function search(){
-        //     getNameValue()
-        //     getCategoryValue()
-        //     getCityValue()
-        //     getPriceValue()
-        //     getDistValue()
-        // }
+        function search(){
+            getNameValue()
+            getCategoryValue()
+            getCityValue()
+            getPriceValue()
+            getDistValue()
+        }
+
+        function search() {
+
+            loadLocationInfo(1, getNameValue(), getCategoryValue(), getPriceValue(), getCityValue(), getDistValue())
+
+        }
 
 
         //獲取查詢值name
