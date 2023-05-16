@@ -4,11 +4,28 @@ import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ispan.hangoutchill.member.model.NormalMember;
 
 @Entity
@@ -67,11 +84,12 @@ public class Discussions {
 	
 	@ManyToOne
 	@JoinColumn(name="fk_member_id", nullable = true)
-	@JsonIgnoreProperties("discussions")
+	@JsonBackReference
 	private NormalMember normalMember;
 	
     @OneToMany(mappedBy = "discussions",fetch=FetchType.LAZY,
 	cascade = {CascadeType.PERSIST},orphanRemoval = true)
+    @JsonIgnoreProperties("NormalMember")
     private Set<Messages> messages = new LinkedHashSet<>();
     
     @OneToMany(mappedBy = "discussions",fetch=FetchType.LAZY,

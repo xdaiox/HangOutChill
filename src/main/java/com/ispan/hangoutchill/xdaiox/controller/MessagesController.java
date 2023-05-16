@@ -35,6 +35,8 @@ public class MessagesController {
     @Autowired
     NormalMemberService nMemberService;
 	
+    
+    //顯示單一討論
 	@GetMapping("/message/allMessages/{id}")
 	public String toShowAllMessages(@RequestParam(name="p",defaultValue = "1")Integer pageNumber,@PathVariable(name="id") Integer d_id,Model model,
 									@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
@@ -53,7 +55,12 @@ public class MessagesController {
 	
     @PostMapping("/message/post/{id}")
     public String postMessage(@ModelAttribute("replyDiscussion") Messages mss, Model model,
-    							@PathVariable(name="id")Integer d_id) {
+    							@PathVariable(name="id")Integer d_id,
+    							@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+    	
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
     	
     	mService.addMessage(mss);
     	model.addAttribute("message", new Messages());
@@ -62,9 +69,16 @@ public class MessagesController {
     }
     
     
-    //==============刪除留言==============
+    //==============刪除回覆==============
     @DeleteMapping("/message/deleteMessage/{id}/{m_id}")
-    public String toDeleteButItsNotActuallyDeleteItsHiddenMessage(@PathVariable("id") Integer id,@PathVariable("m_id")Integer m_id) {
+    public String toDeleteButItsNotActuallyDeleteItsHiddenMessage(@PathVariable("id") Integer id,@PathVariable("m_id")Integer m_id,Model model,
+			@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+    	
+    	
     	System.out.println("============================before delete============================="+m_id+"============================before delete=============================");
 
     	mService.deleteMessageById(m_id);
@@ -74,10 +88,16 @@ public class MessagesController {
     }
     
     
-    //==============編輯留言==============
+    //==============編輯回覆==============
     
     @PostMapping("/message/editMessage/{id}/{m_id}")
-    public String editMessage(@PathVariable("id") Integer id,@PathVariable("m_id") Integer m_id, Model model) {
+    public String editMessage(@PathVariable("id") Integer id,@PathVariable("m_id") Integer m_id, Model model,
+    		@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+    	
         Discussions dss = dService.findDiscussionById(id);
         model.addAttribute("discussion", dss);
         
@@ -88,7 +108,13 @@ public class MessagesController {
     }
     								
     @PutMapping("/message/editMessage/{id}")
-    public String toEditeMessage(@ModelAttribute("message") Messages mss,@PathVariable("id") Integer id) {
+    public String toEditeMessage(@ModelAttribute("message") Messages mss,@PathVariable("id") Integer id,Model model,
+    		@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+    	
     	mService.updateMessageById(mss.getDm_id(),mss.getContents());
     	return "redirect:/message/allMessages/{id}";
     }

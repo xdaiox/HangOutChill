@@ -8,7 +8,7 @@
 <jsp:include page="../layout/navbar.jsp" />
 <jstl:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <meta charset="UTF-8">
-<title>修改文章</title>
+<title>修改討論</title>
 
 <style>
 body {
@@ -161,6 +161,14 @@ body {
 	width: 150px; /*分頁選單option*/
 	margin-left: 15px;
 }
+@media (max-width: 1260px) {
+	.container {
+	max-width: 96%;
+	} /* 當寬度1259px↓　寬度設定 */
+}
+.container {
+	max-width: 69%;
+}
 </style>
 <!-- ================================== ck editor ================================== -->
 <!-- <script src="${contextRoot}/js/ckeditor/ckeditor.js"></script> -->
@@ -204,8 +212,8 @@ body {
 								</div>
 								<button type="submit" class="btn btn-primary">發表</button>
 							</form:form>
-							<a href="${contextRoot}/discussion/allDiscussion"
-								class="btn btn-primary">返回文章列</a>
+							<a href="${contextRoot}/discussion/allDiscussion/5"
+								class="btn btn-primary">返回討論列</a>
 						</div>
 					</div>
 					

@@ -31,10 +31,13 @@ public class Favourite {
     @JoinColumn(name="fk_member_id", nullable = true)
     private NormalMember normalMember;
 	
-	
     @ManyToOne
     @JoinColumn(name="fk_discussion_id", nullable = true)
     private Discussions discussions;
+    
+    @ManyToOne
+    @JoinColumn(name="add_m_id", nullable = true)
+    private NormalMember addNormalMember;
     
 	@Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
@@ -79,6 +82,16 @@ public class Favourite {
 
 	public void setPostDate(Date postDate) {
 		this.postDate = postDate;
+	}
+
+
+	public NormalMember getAddNormalMember() {
+		return addNormalMember;
+	}
+
+
+	public void setAddNormalMember(NormalMember addNormalMember) {
+		this.addNormalMember = addNormalMember;
 	}
 	
     

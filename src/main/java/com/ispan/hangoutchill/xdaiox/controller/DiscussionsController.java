@@ -48,17 +48,19 @@ public class DiscussionsController {
     @Autowired
 	private MessagesRepository mssRepository;
 	
-	@GetMapping("/discussion/allDiscussion")
+	@GetMapping("/discussion/allDiscussion/{showCount}")
 	public String toShowAllDiscussion(@RequestParam(name="p",defaultValue = "1")Integer pageNumber,Model model,
-										@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+										@CurrentSecurityContext(expression = "authentication")Authentication authentication,
+										@PathVariable("showCount") Integer showCount) {
 //		上面的p是在allDiscussion.jsp的href="${contextRoot}/discussion/allDiscussion?p=${pageNumber}">${pageNumber}</a></li>
-		Page<Discussions> page = dService.findByPageWhereVisible(pageNumber);
+		Page<Discussions> page = dService.findByPageWhereVisible(pageNumber,showCount);
 		model.addAttribute("page", page);
 		
         String name = authentication.getName();
         NormalMember result = nMemberService.findNormalUserByAccount(name);
         model.addAttribute("result", result);
-		
+        
+		model.addAttribute("showCount",showCount);
         Page<Messages> pageCount = dService.CountMessageByDiscussion(pageNumber);
         
         Map<Integer, Long> replyCountMap = new HashMap<>();
@@ -66,6 +68,7 @@ public class DiscussionsController {
             Discussions discussion = message.getDiscussions();
             Long count = mssRepository.countByDiscussions(discussion);
             replyCountMap.put(discussion.getD_id(), count);
+            System.out.println("====================discussion.getD_id()= "+discussion.getD_id()+"====================");
         }
         
         model.addAttribute("replyCountMap", replyCountMap);
@@ -80,13 +83,22 @@ public class DiscussionsController {
     	String name = authentication.getName();
         NormalMember result = nMemberService.findNormalUserByAccount(name);
         model.addAttribute("result", result);
+        
     	model.addAttribute("discussion", new Discussions());
     	
     	return"discussion/newDiscussion";
     }
     @PostMapping("/discussion/post")
-    public String postDiscussion(@ModelAttribute("discussion") Discussions dss,Model model) {
-    	System.out.println("==================================================="+dss.getD_id()+dss.getD_id()+dss.getD_id()+dss.getD_id()+"===================================================");
+    public String postDiscussion(@ModelAttribute("discussion") Discussions dss,Model model,
+			@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+    	
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+        
+        result.getId();
+        
+//    	System.out.println("==================================================="+result.getId()+"===================================================");
     	dService.addDiscussions(dss);
     	
 //    	Discussions discussion = dService.getLatest();
@@ -95,7 +107,7 @@ public class DiscussionsController {
 //    	image.setFkImgDiscussions(discussion);
     	
     	model.addAttribute("discussion", new Discussions());
-    	return"redirect:/discussion/allDiscussion";
+    	return"redirect:/discussion/allDiscussion/5";
     }
     
 //    @GetMapping("/discussion/editDiscussion")
@@ -106,23 +118,43 @@ public class DiscussionsController {
 //    }
 //    
     @GetMapping("/discussion/editDiscussion/{id}")
-    public String editDiscussion(@PathVariable("id") Integer id, Model model) {
+    public String editDiscussion(@PathVariable("id") Integer id, Model model,
+    		@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+    	
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+    	
         Discussions dss = dService.findDiscussionById(id);
         model.addAttribute("discussion", dss);
         return "discussion/editDiscussionPage";
     }
     
     @PutMapping("/discussion/editDiscussion/{id}")
-    public String toEditedDiscussion(@ModelAttribute("discussion") Discussions dss,@PathVariable("id") Integer id) {
+    public String toEditedDiscussion(@ModelAttribute("discussion") Discussions dss,@PathVariable("id") Integer id,Model model,
+    		@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+    	
     	dService.updateById(dss.getD_id(),dss.getTitle(),dss.getType(),dss.getContents());
     	return "redirect:/message/allMessages/{id}";
     }
     
+    
+    //==============刪除討論==============
     @Transactional
     @DeleteMapping("/discussion/deleteDiscussion/{id}")
-    public String toDeleteButItsNotActuallyDeleteItsHiddenDiscussion(@PathVariable("id") Integer id) {
+    public String toDeleteButItsNotActuallyDeleteItsHiddenDiscussion(@PathVariable("id") Integer id,Model model,
+    		@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+    	
     	dService.deleteDiscussionById(id);
-    	return "redirect:/discussion/allDiscussion";
+    	return "redirect:/discussion/allDiscussion/5";
     }
     
     //==============找使用者所有的討論收藏==============

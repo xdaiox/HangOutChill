@@ -33,7 +33,7 @@ public class BackEndDiscussionsAndMessagesController {
     @Autowired
     NormalMemberService nMemberService;
 	
-
+    
     //==============後台顯示全部討論==============  
 	@GetMapping("/back/allDiscussions")
 	public String toBackShowAllDiscussion(@RequestParam(name="p",defaultValue = "1")Integer pageNumber,Model model,
@@ -66,15 +66,27 @@ public class BackEndDiscussionsAndMessagesController {
     
 	//==============後台編輯討論==============
     @GetMapping("/back/backEndEditDiscussion/{id}")
-    public String editDiscussion(@PathVariable("id") Integer id, Model model) {
-        Discussions dss = dService.findDiscussionById(id);
+    public String editDiscussion(@PathVariable("id") Integer id, Model model,
+    							@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+        
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+    	
+    	Discussions dss = dService.findDiscussionById(id);
         model.addAttribute("discussion", dss);
         return "discussion/backEndEditDiscussionPage";
     }
     
 	//==============後台put編輯討論==============
     @PutMapping("/back/backEndEditDiscussion/{id}")
-    public String toEditedDiscussion(@ModelAttribute("discussion") Discussions dss,@PathVariable("id") Integer id) {
+    public String toEditedDiscussion(@ModelAttribute("discussion") Discussions dss,@PathVariable("id") Integer id,Model model,
+    								@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+    	
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+    	
     	dService.updateById(dss.getD_id(),dss.getTitle(),dss.getType(),dss.getContents());
     	return "redirect:/back/backCheckDiscussion/{id}";
     }
@@ -82,7 +94,13 @@ public class BackEndDiscussionsAndMessagesController {
 	//==============後台刪除單一討論及回覆==============
     @Transactional
     @DeleteMapping("/back/deleteDiscussion/{id}")
-    public String toDeleteButItsNotActuallyDeleteItsHiddenDiscussion(@PathVariable("id") Integer id) {
+    public String toDeleteButItsNotActuallyDeleteItsHiddenDiscussion(@PathVariable("id") Integer id,Model model,
+    																@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+    	
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+    	
     	dService.deleteDiscussionById(id);
     	System.out.println("========================after delete========================"+id+"========================after delete========================");
     	return "redirect:/back/allDiscussions";
@@ -90,7 +108,12 @@ public class BackEndDiscussionsAndMessagesController {
 
     //==============後台post新增回覆==============
     @PostMapping("/back/post/{id}")
-    public String postMessage(@ModelAttribute("replyDiscussion") Messages mss, Model model,@PathVariable(name="id")Integer d_id) {
+    public String postMessage(@ModelAttribute("replyDiscussion") Messages mss, Model model,@PathVariable(name="id")Integer d_id,
+							@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
     	
     	mService.addMessage(mss);
     	model.addAttribute("message", new Messages());
@@ -101,7 +124,13 @@ public class BackEndDiscussionsAndMessagesController {
     
 	//==============後台刪除回覆==============
     @DeleteMapping("/back/deleteMessage/{id}/{m_id}")
-    public String toDeleteButItsActuallyHiddenMessage(@PathVariable("id") Integer id,@PathVariable("m_id")Integer m_id) {
+    public String toDeleteButItsActuallyHiddenMessage(@PathVariable("id") Integer id,@PathVariable("m_id")Integer m_id,Model model,
+    												@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+
+		String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+    																							
     	mService.deleteMessageById(m_id);
       	return "redirect:/back/backCheckDiscussion/{id}";
     }
@@ -109,20 +138,38 @@ public class BackEndDiscussionsAndMessagesController {
     
 	//==============後台編輯回覆==============
     @GetMapping("/back/editMessage/{id}")
-    public String editMessage(@PathVariable("id") Integer id, Model model) {
+    public String editMessage(@PathVariable("id") Integer id, Model model,
+    		@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+    	
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+    	
         Discussions dss = dService.findDiscussionById(id);
         model.addAttribute("discussion", dss);
         return "discussion/editDiscussionPage";
     }
     
     @PutMapping("/back/editMessage/{id}")
-    public String toEditMessage(@ModelAttribute("discussion") Discussions dss,@PathVariable("id") Integer id) {
+    public String toEditMessage(@ModelAttribute("discussion") Discussions dss,@PathVariable("id") Integer id,Model model,
+    		@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+    	
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+    	
     	dService.updateById(dss.getD_id(),dss.getTitle(),dss.getType(),dss.getContents());
     	return "redirect:/message/allMessages/{id}";
     }
     
     @PutMapping("/back/visiable")
-    public String toHiddenDiscussion(@ModelAttribute("id") Integer id) {
+    public String toHiddenDiscussion(@ModelAttribute("id") Integer id,Model model,
+    		@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
+    	
+    	String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
+    	
     	dService.visibleDiscussion(id);
     	return "redirect:/back/allDiscussions";
     }

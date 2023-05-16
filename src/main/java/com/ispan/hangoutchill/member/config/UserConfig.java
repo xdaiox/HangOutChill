@@ -68,6 +68,8 @@ public class UserConfig {
             .antMatchers("/location/memberLocationInfo/addPage/**").hasAuthority("LOCATION")
             .antMatchers("/dashboard","/back/**").hasAuthority("ADMIN")
             .antMatchers("/", "/member/registration", "/NormalMember/registed","/oauth/**","/member/NormalMemberDetail","/member/updateInfo").permitAll()
+            .antMatchers("/discussion/allFavourite").hasAuthority("USER")
+            .antMatchers("/message/post/{id}").hasAuthority("USER")
         .and()
         .logout().logoutSuccessUrl("/").deleteCookies("JSESSIONID")
         .and()

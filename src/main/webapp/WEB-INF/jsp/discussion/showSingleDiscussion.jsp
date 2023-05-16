@@ -178,6 +178,27 @@
 							/*分頁選單option*/
 							margin-left: 15px;
 						}
+						@media (max-width: 1260px) {
+							.container {
+							max-width: 96%;
+							} /* 當寬度1259px↓　寬度設定 */
+						}
+						.container {
+							max-width: 69%;
+						}
+						.image-wrapper img {
+							max-width: 25%;
+							max-height: 400px;
+							margin: 3px;
+							/* card裡的討論圖片大小限制 */
+						}
+						.image-wrapper p{
+							font-size: 20px;
+						}
+						.cardreply {
+							margin-top: 10px;
+							margin-left: 20px;
+						}
 					</style>
 					<!-- ================================== ck editor ================================== -->
 					<script src="${contextRoot}/js/ckeditor/ckeditor.js"></script>
@@ -217,22 +238,22 @@
 								<div class="inner-main-body collapse forum-content show">
 									<div class="card">
 										<div class="card-header">
-											<h5 class="card-title text-center">文章</h5>
+											<h5 class="card-title text-center">討論</h5>
 										</div>
 										<div class="card-body">
 											<form:form modelAttribute="discussion" method="post"
 												action="${contextRoot}/discussion/post">
 												<div class="form-group">
-													<label for="title">標題</label>
-													<p>${discussion.title}</p>
+													<h4><p style="font-size: 18px;">${discussion.title}</p></h4>
 												</div>
+
 												<div class="form-group">
-													<label for="category">分類</label>
-													<p>${discussion.type}</p>
+													<p style="color: gray; font-style: italic; font-size: 16px;">${discussion.type}</p>
 												</div>
+
 												<div class="form-group">
-													<label for="content">内容</label>
-													<p>${discussion.contents}</p>
+													<h4><label for="content">内容</label></h4>
+													<span class="image-wrapper"><p>${discussion.contents}</p></span>
 												</div>
 											</form:form>
 										</div>
@@ -281,28 +302,21 @@
 															</p>
 														</div>
 														<div>
-															<button class="btn btn-primary" type="submit" onclick="showEditMessageConfirmation()">編輯</button>
-														<!--==========編輯討論url==========-->
+															<!--==========編輯討論url==========-->
 														<form id="edit-form-message" action="${contextRoot}/message/editMessage/${discussion.d_id}/${message.dm_id}" method="post">
 															<input type="hidden" name="_method" value="get">
+															<button class="btn btn-primary" type="button" onclick="showEditMessageConfirmation()">編輯</button>														
 														</form>
 
-														<button class="btn btn-primary danger" type="submit" onclick="showDeleteMessageConfirmation()">刪除</button>
+														
 														<!--==========刪除討論url==========-->
 														<form id="delete-form-message" action="${contextRoot}/message/deleteMessage/${discussion.d_id}/${message.dm_id}" method="post">
 															<input type="hidden" name="_method" value="delete">
+															<button class="btn btn-primary danger" type="button" onclick="showDeleteMessageConfirmation()">刪除</button>
 														</form>
 
 														</div>
-														<div class="text-muted small text-center align-self-center">
-															<span>	
-																<!-- 計算總共有多少筆回覆 -->
-																<c:forEach var="message" items="${page.content}">
-																<c:set var="messageCount" value="${messageCount + 1}" /> 
-																</c:forEach>
-																<i class="far fa-comment ml-2"></i><c:out value="${messageCount}" />
-															</span>
-														</div>
+														
 													</div>
 												</div>
 											</div>
@@ -341,33 +355,31 @@
 									</div>
 
 									<div class="card">
-										<!-- =============== 回覆功能 =============== -->
-										<div class="card">
-											<form:form modelAttribute="replyDiscussion" method="post"
-												action="${contextRoot}/message/post/${discussion.d_id}">
+										<div class="cardreply">
+											<!-- =============== 回覆功能 =============== -->
+											
+												<form:form modelAttribute="replyDiscussion" method="post"
+													action="${contextRoot}/message/post/${discussion.d_id}">
+													
+													<form:input type="hidden" path="discussions" value="${discussion.d_id}" />
+													<div class="form-group">
+														<!--  把member_id值設定至message的normalMmeber -->
+														<form:hidden path="normalMmeber" value="${result.id}"></form:hidden>
+														
+														<form:input type="text" class="form-control" aria-label="Text input with dropdown button" path="contents" id="editor" placeholder="請在這裡填寫內容" style="width: 70%"/>
+														
 
-												<form:input type="hidden" path="discussions" value="${discussion.d_id}" />
+														<!-- <form:textarea path="contents" class="form-control" id="content" rows="5"
+												placeholder="輸入内容" ></form:textarea> -->
+													</div>
+													<button type="submit" class="btn btn-primary">發表回覆</button>
+												</form:form>
 												<div class="form-group">
-													<!--  把member_id值設定至message的normalMmeber -->
-													<form:hidden path="normalMmeber" value="${result.id}"></form:hidden>
-													<!-- ================================== ck editor ================================== -->
-													<form:textarea path="contents" id="editor" placeholder="請在這裡填寫內容" />
-													<!-- ================================== ck editor ================================== -->
-
-													<!-- <form:textarea path="contents" class="form-control" id="content" rows="5"
-											placeholder="輸入内容" ></form:textarea> -->
+												<a href="${contextRoot}/discussion/allDiscussion/5"
+													class="btn btn-primary">返回文章列</a>
 												</div>
-												<button type="submit" class="btn btn-primary">發表回覆</button>
-											</form:form>
-
-											<a href="${contextRoot}/discussion/allDiscussion"
-												class="btn btn-primary">返回文章列</a>
 										</div>
 									</div>
-
-
-
-									
 								</div>
 							</div>
 						</div>
@@ -394,15 +406,24 @@
 
 						
 						function showEditMessageConfirmation() {
-							if (confirm("您確定要編輯此回覆？")) {
-								document.getElementById("edit-form-message").submit();
-							}
+						if (confirm("您確定要編輯此回覆？")) {
+							document.getElementById("edit-form-message").submit();
 						}
+						}
+
 						function showDeleteMessageConfirmation() {
-							if (confirm("您確定要刪除此回覆？")) {
-								document.getElementById("delete-form-message").submit();
-							}
+						if (confirm("您確定要刪除此回覆？")) {
+							document.getElementById("delete-form-message").submit();
 						}
+						}
+
+						document.getElementById("edit-form-message").addEventListener("submit", function(event) {
+						event.preventDefault(); // 阻止表單的默認提交行為
+						});
+
+						document.getElementById("delete-form-message").addEventListener("submit", function(event) {
+						event.preventDefault(); // 阻止表單的默認提交行為
+						});
 
 					</script>
 					<!-- ================================== ck editor ================================== -->

@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.ispan.hangoutchill.xdaiox.model.Favourite;
 
 public interface FavouriteRepository extends JpaRepository<Favourite, Integer> {
-    public List<Favourite> findAllByNormalMemberId(Integer id);
+    public List<Favourite> findAllByAddNormalMemberId(Integer id);
 }
