@@ -47,7 +47,7 @@ public class SignUpOrderDetailController {
 //		return "aal/user/historyOrder";
 //		}
 	//跳轉頁面&單向訂單查詢
-		@Transactional
+		
 		@PostMapping("/actandles/detail/showOrder")
 		public String showECPAYHistoryurder (Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication,@RequestParam(name = "on")String on) {
 			String name = authentication.getName();
@@ -58,17 +58,35 @@ public class SignUpOrderDetailController {
 			model.addAttribute("detail",detail);
 			return "aal/user/historyOrder";
 		}
-		
-		@GetMapping("/actandles/gotoMemberCenter")
-		public String gotoMemberCenter(Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication , @RequestParam(name = "aalid",required = false)Integer aalid,
-				@RequestParam(name = "p", defaultValue = "1") Integer pagenumber) {
+	//重新查詢訂單
+		@GetMapping("/actandles/detail/showorder")
+		public String showtheHistoryurder (Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication,
+				@RequestParam(name = "aalid")Integer aalid) {
 			String name = authentication.getName();
 			NormalMember result = nMemberService.findNormalUserByAccount(name);
 			model.addAttribute("result",result);
+			
+			SignUpOrderDetail detail = suoService.findOrderDetail(result.getId(), aalid);
+			model.addAttribute("detail",detail);
+			return "aal/user/historyOrder";
+		}
+//================================會員中心================================
+		@GetMapping("/actandles/MemberCenter")
+		public String gotoMemberCenter(Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication , @RequestParam(name = "aalid",required = false)Integer aalid,
+				@RequestParam(name = "p", defaultValue = "1") Integer pagenumber,@RequestParam(name = "pd", defaultValue = "1") Integer detailpagenumber) {
+			String name = authentication.getName();
+			NormalMember result = nMemberService.findNormalUserByAccount(name);
+			model.addAttribute("result",result);
+		//==================================給商家的資料====================================
 			 List<ActivitiesandLesson> openedaal = aalService.findByMemberandOpened(result.getId());
 			 model.addAttribute("openedaal",openedaal);
 			 Page<SignUpOrderDetail> orderdetail = suoService.findPageByaalId(pagenumber, aalid);
 			model.addAttribute("orderdetail",orderdetail);
+		//==================================給用戶的資料====================================
+			Page<ActivitiesandLesson> signup = aalService.findByaccountsId(result.getId(), pagenumber);
+			model.addAttribute("signup",signup);
+			Page<SignUpOrderDetail> checkout = suoService.findPageBymemberId(result.getId(), detailpagenumber);
+			model.addAttribute("checkout",checkout);
 			
 			return "aal/normalMemberCenterOfAaL";
 		}

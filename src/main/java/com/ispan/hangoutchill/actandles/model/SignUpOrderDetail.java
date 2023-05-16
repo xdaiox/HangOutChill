@@ -68,12 +68,12 @@ public class SignUpOrderDetail {
 //=======================報名人id(member_id)======================
 	@Column(name="member_id",columnDefinition = "int",nullable = false)
 	private Integer memberId;
-//=======================活動id(member_id)======================
+//=======================活動id(aal_id)======================
 	
 	@Column(name="aal_id",columnDefinition = "int",nullable = false)
 	private Integer aalId;
 	
-//=======================連絡電話(tel)======================
+//=======================連絡電話(email)======================
 	@Column(name="email",columnDefinition = "nvarchar(max)",nullable = false)
 	private String email;
 	

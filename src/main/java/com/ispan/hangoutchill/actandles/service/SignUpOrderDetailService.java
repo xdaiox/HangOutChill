@@ -79,21 +79,24 @@ public class SignUpOrderDetailService {
 		Pageable pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "orderTime");
 		Page<SignUpOrderDetail> page = suoRepository.findBymemberId(memberId, pgb);
 		
-		return page;
-		
-		
+		return page;	
 	}
 //==============================================找到指定商家活動報名紀錄==============================================
 
 	public Page<SignUpOrderDetail> findPageByaalId( Integer pageNumber,Integer aalId){
 		Pageable pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "orderTime");
-		Page<SignUpOrderDetail> page = suoRepository.findByaalId(aalId, pgb);
-		
-		return page;
-		
-		
+		Page<SignUpOrderDetail> page = suoRepository.findByaalId(aalId, pgb);		
+		return page;				
 	}
-	
+//==============================================查詢交易紀錄==============================================
+	public SignUpOrderDetail findOrderDetail(Integer memberId,Integer aalId) {
+		return suoRepository.findOrderDetail(memberId, aalId);
+	}
+
+//==============================================確認有無交易紀錄==============================================
+	public Integer checktheOrder(Integer memberId,Integer aalId) {
+		return suoRepository.findOrder(memberId, aalId);
+	}
 	
 	
 	

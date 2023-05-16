@@ -22,6 +22,9 @@ public class Role {
 //    private Collection<Admin> admin;
 
 
+    public Integer getRoleId() {
+        return roleId;
+    }
 
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;

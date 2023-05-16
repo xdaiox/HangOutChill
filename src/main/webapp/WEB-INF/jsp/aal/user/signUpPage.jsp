@@ -72,6 +72,8 @@
 									</tbody>
 								</table>
 								
+								
+							<div style="text-align: center;">	
 								<jstl:choose>
 									<jstl:when test="${checksignup==0}">
 										<input value="${aal.id}" type="hidden" name="id" />
@@ -80,21 +82,26 @@
 									<jstl:when test="${checksignup==1}">
 									</jstl:when>
 								</jstl:choose>
-							
+							</div>
 							</form:form>
+							<div style="text-align: center;">
 								<form:form method="post"
 									action="${contextRoot}/actandles/detail/checkout">
-
+									<jstl:if test="${checksignup==1}">
 									<jstl:choose>
-										<jstl:when test="${checksignup==0}">
+										<jstl:when test="${checkorder==1}">
+											<a href="${contextRoot}/actandles/detail/showorder?aalid=${aal.id}">
+											<button type="button" class="btn btn-primary">查看紀錄</button> </a>
 											</jstl:when>
-										<jstl:when test="${checksignup==1}">
+										<jstl:when test="${checkorder==0}">
 											<input name="numbersOfPeople" id="target" type="hidden" />
 											<input value="${aal.id}" type="hidden" name="id" />
 											<button type="submit" onclick="getthenumber()" class="btn btn-primary">準備結帳</button>
 										</jstl:when>
 									</jstl:choose>
+									</jstl:if>
 								</form:form>
+							</div>
 
 						</div>
 
