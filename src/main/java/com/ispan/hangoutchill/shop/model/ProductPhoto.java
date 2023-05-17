@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
@@ -25,6 +27,7 @@ public class ProductPhoto {
 	
 	@ManyToOne
 	@JoinColumn(name="product_id")
+	@JsonIgnore
 	private Product product;
 	
 	@Column(name="photo",columnDefinition = "varbinary(max)")

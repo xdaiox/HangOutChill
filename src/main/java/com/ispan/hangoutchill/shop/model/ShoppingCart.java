@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ispan.hangoutchill.member.model.NormalMember;
 
 @Entity
@@ -32,6 +34,7 @@ public class ShoppingCart {
 	
 	// 購物車測試用加入
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	@JoinColumn(name="member_id")
 	private NormalMember member;
 	
@@ -51,6 +54,7 @@ public class ShoppingCart {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="product_id")
+	@JsonIgnore
 	private Product product;
 	
 	
