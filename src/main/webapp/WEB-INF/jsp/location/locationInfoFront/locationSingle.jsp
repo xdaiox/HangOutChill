@@ -213,7 +213,7 @@
                                             ];
                                             var map = new google.maps.Map(document.getElementById('map'), {
                                                 center: {lat: location.lat(), lng: location.lng()},
-                                                zoom: 20,
+                                                zoom: 18,
                                                 styles: null,
                                                 scrollwheel: true
                                             });

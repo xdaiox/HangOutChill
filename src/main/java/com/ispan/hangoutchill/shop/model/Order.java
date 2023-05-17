@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.ispan.hangoutchill.member.model.NormalMember;
@@ -82,6 +83,7 @@ public class Order {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="member_id")
+	@JsonIgnore
 	private NormalMember member;
 	
 	@OneToMany(mappedBy="order",

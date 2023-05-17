@@ -219,7 +219,8 @@ public class NormalMember {
     	this.shoppingCart = shoppingCart;
     }
     
-    
+
+    @JsonIgnore
 	@OneToMany(mappedBy="member",
                 cascade = CascadeType.PERSIST, orphanRemoval = true)
 	private Set<Order> orders = new LinkedHashSet<>();
