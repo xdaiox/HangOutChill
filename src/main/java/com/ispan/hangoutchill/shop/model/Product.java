@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -55,6 +57,7 @@ public class Product {
 	
 	@OneToMany(mappedBy="product",
 		       cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<ProductPhoto> photos = new LinkedHashSet<>();
 	
 	
