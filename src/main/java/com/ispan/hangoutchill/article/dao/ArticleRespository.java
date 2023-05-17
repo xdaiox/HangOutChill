@@ -16,4 +16,7 @@ public interface ArticleRespository extends JpaRepository<Article, Integer>{
 	@Query("from Article where status = :status")
 	public List<Article> findArticleByStatus(@Param(value="status")boolean status);
 	
+	@Query("from Article where member_id = :member_id")
+	public List<Article> findArticleByMemberId(@Param(value="member_id")Integer member_id);
+	
 }

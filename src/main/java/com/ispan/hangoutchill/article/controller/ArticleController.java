@@ -136,25 +136,7 @@ public class ArticleController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	@GetMapping("/article/add")
 	public String addArticle(Model model) {
 		model.addAttribute("articles", new Article());
@@ -343,6 +325,29 @@ public class ArticleController {
 		model.addAttribute("result", result);
 		return "article/articleTheme";
 	}
+	
+	@GetMapping("/article/authorArticle")
+	public String authorArticle(@RequestParam(name="auth_id") Integer auth_id,
+			@CurrentSecurityContext(expression = "authentication")Authentication authentication, Model model) {
+		
+		String name = authentication.getName();
+        NormalMember result = normalMemberService.findNormalUserByAccount(name);
+        
+        List<Article> authart = articleService.findArticleByMemberId(auth_id);
+        
+        NormalMember authName = normalMemberService.findNormalMemberById(auth_id);
+        
+        model.addAttribute("authart",authart);
+        model.addAttribute("authName",authName);
+        model.addAttribute("result", result);
+        
+        System.out.println("00000000000000000000000000000000000");
+        System.out.println(authart);
+		
+		return "article/authArticle";
+	}
+	
+	
 	
 	@GetMapping("/article/AllArticle")
 	public String getAllFavorites(@CurrentSecurityContext(expression = "authentication")Authentication authentication, Model model) {

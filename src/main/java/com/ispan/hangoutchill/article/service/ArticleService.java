@@ -43,6 +43,12 @@ public class ArticleService {
 		return option.get();
 	}
 	
+	public List<Article> findArticleByMemberId(Integer id) {
+		 return articleRepository.findArticleByMemberId(id);
+	}
+	
+	
+	
 	
 	public List<Article> findArticleByTheme(String article_theme) {
 		
