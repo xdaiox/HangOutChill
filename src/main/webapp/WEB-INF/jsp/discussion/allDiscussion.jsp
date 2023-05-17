@@ -3,22 +3,18 @@
 		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
 			<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 				<html>
-
 				<head>
 					<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 					<link rel="stylesheet"
 						href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 					<jsp:include page="../layout/navbar.jsp" />
 					<jstl:set var="contextRoot" value="${pageContext.request.contextPath}" />
-
 					<link rel="stylesheet" href="${contextRoot}/css/all.min.css"
 						integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
-
 					<meta charset="UTF-8">
 					<title>論壇首頁</title>
 					<style>
 						body {
-							margin-top: 20px;
 							color: #1a202c;
 							text-align: left;
 							background-color: #e2e8f0;
