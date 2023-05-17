@@ -73,8 +73,10 @@
                         </div>
                         <div class="interactive">
 							<div class="UserImgBox">
-								<img alt="" src="${article.normalmember.photoB64}">
-								<p>${article.normalmember.reallName}</p>
+								<a href="${contextRoot}/article/authorArticle?auth_id=${article.normalmember.id}">
+									<img alt="" src="${article.normalmember.photoB64}">
+									<p>${article.normalmember.reallName}</p>
+								</a>
 							</div>
                         </div>
                     </div>

@@ -33,14 +33,13 @@
                 		<input type="hidden" id="article_id" value="${allfavs.article_id}">
 	                    <div class="favs_list">
 	                        <div class="favs_photo">
-	                            <a href="">
+	                            <a href="/hangoutchill/article/articleContent?article_id=${allfavs.article_id}">
 	                                <img src="${allfavs.article_mainImg}" alt="">
 	                            </a>
 	                        </div>
 	                        <div class="favs_info">
-	                            <p class="favs_description"><a href="">${allfavs.article_theme}</a></p>
-	                            <h3 class="listTitle"><a href="">${allfavs.article_name}</a></h3>
-	                            <p class="listText"><a href="">${allfavs.article_excerpt}</a></p>
+	                            <h3 class="listTitle"><a href="/hangoutchill/article/articleContent?article_id=${allfavs.article_id}">${allfavs.article_name}</a></h3>
+	                            <p class="listText"><a href="/hangoutchill/article/articleContent?article_id=${allfavs.article_id}">${allfavs.article_excerpt}</a></p>
 	                        </div>
 	                        <div class="favs_btn" ><p id="favs_btn"></p></div>
 	                    </div>

@@ -22,6 +22,7 @@ public class HomepageController {
 	
 	@Autowired
 	private AALservice aalService;
+	
 	 @Autowired
 	 private NormalMemberService nMemberService;
 	
@@ -68,9 +69,6 @@ public class HomepageController {
     	return "/article/article";
     }
     
-    @GetMapping("/article/articleform")
-    public String toDashBoard() {
-    	return "/article/articleForm";
-    }
+    
 }
 
