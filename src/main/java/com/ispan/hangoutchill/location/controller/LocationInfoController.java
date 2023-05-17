@@ -326,7 +326,7 @@ public class LocationInfoController {
 
         Page<LocationInfo> page;
         Map<String, Object> response = new HashMap<>();
-        page = locationInfoService.findAllLocationInfoByPage(name, category, price, city, dist, pageNumber);
+        page = locationInfoService.findFrontAllLocationInfoByPage(name, category, price, city, dist, pageNumber);
         response.put("name", name);
         response.put("category", category);
         response.put("price", price);
@@ -338,7 +338,7 @@ public class LocationInfoController {
     }
 
 
-    //查詢地點詳細資訊   開發中
+    //查詢地點詳細資訊
     @GetMapping("/location/locationList/single")
     public String showLocationSingle(@CurrentSecurityContext(expression = "authentication") Authentication authentication,
                                      @RequestParam(name = "locId") Integer locId, Model model) {
@@ -815,6 +815,11 @@ public class LocationInfoController {
         ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
         return responseEntity;
     }
+
+
+
+
+
 
 
 //    ==========================測試==============================

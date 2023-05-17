@@ -106,19 +106,24 @@
         let resultlist = document.getElementById("searchResult-list")
         let result = '';
         for (let i = 0; i < e.length; i++) {
-            result += '<tr><td class= align-middle>' + e[i].locId + "</td>"
-            result += "<td class= align-middle>" + e[i].locName + "</td>"
-            result += "<td class= align-middle>" + e[i].locCat + "</td>"
-            result += "<td class= align-middle>" + e[i].locPriceLevel + "</td>"
-            result += "<td class= align-middle>" + e[i].locCity + "</td>"
-            result += "<td class= align-middle>" + e[i].locInfoUpdateTime + "</td>"
-            result += '<td class=align-middle>' + '<div style="display: flex">'
-            result += '<form action="${contextRoot}/location/locationManager/status">'
-            result += '<input type="hidden" name="locId" value="' + e[i].locId + '"/>'
 
-            if(e[i].locStatus ==false){
+
+            result += "<tr>";
+            result += '<td class="align-middle">';
+            result += '<div><a href="${contextRoot}/location/locationList/single?locId=' + e[i].locId + '">' + e[i].locId + '</a></div>';
+            result += '</td>';
+            result += '<td class="align-middle">' + e[i].locName + '</td>';
+            result += '<td class="align-middle">' + e[i].locCat + '</td>';
+            result += '<td class="align-middle">' + e[i].locPriceLevel + '</td>';
+            result += '<td class="align-middle">' + e[i].locCity + '</td>';
+            result += '<td class="align-middle">' + e[i].locInfoUpdateTime + '</td>';
+            result += '<td class="align-middle">' + '<div style="display: flex">';
+            result += '<form action="${contextRoot}/location/locationManager/status">';
+            result += '<input type="hidden" name="locId" value="' + e[i].locId + '"/>';
+
+            if (e[i].locStatus == false) {
                 result += '<input type="submit" class="btn btn-outline-danger" value="下架中">'
-            }else {
+            } else {
                 result += '<input type="submit" class="btn btn-outline-success" value="上架中">'
             }
             result += '</form>'
@@ -192,11 +197,6 @@
         // console.log(inputDist)
         return inputDist
     }
-
-
-
-
-
 
 
     <%--$(document).ready(function (){--%>

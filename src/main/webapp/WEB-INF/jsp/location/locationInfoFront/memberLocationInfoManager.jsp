@@ -68,9 +68,12 @@
                                         <jstl:forEach var="locationInfo" items="${locationInfo}">
                                         <tr>
 
-                                            <td class="align-middle">${locationInfo.locName}
-                                            <td class="align-middle">${locationInfo.locCat}
-                                            <td class="align-middle">${locationInfo.locCity}
+                                            <td class="align-middle">
+                                                <a href="${contextRoot}/location/locationList/single?locId=${locationInfo.locId}">${locationInfo.locName}</a></td>
+
+
+                                            <td class="align-middle">${locationInfo.locCat}</td>
+                                            <td class="align-middle">${locationInfo.locCity}</td>
                                             <td class="align-middle">
                                                 <div style="display: flex">
                                                     <form action="${contextRoot}/location/memberLocationInfo/locationManager/status">
