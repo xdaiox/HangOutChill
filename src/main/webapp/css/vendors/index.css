@@ -1,0 +1,426 @@
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height:100%;
+    background-color: #fbfbfb;
+    color: #3c3c3d;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #3c3c3d;
+}
+
+/* h1 {
+    position: absolute;
+    color: transparent;
+    -webkit-text-stroke: 2px #14D5B3;
+    font-size: 150px;
+    cursor: default;
+} */
+  
+#left {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    transition: 0.5s;
+
+}
+
+#right {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+
+.carouserl {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ffffff;
+    padding-top: 5%;
+    background-color: #fff;
+}
+
+.contentbox {
+    width: 100%;
+    margin: 0 78px 30px;
+}
+
+/* .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+} */
+
+.img {
+    display: flex;
+    justify-content: center;
+    height: 500px;
+    z-index: 4;
+    width: 100%;
+}
+
+.dotsbox {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    margin-top: 10px;
+}
+
+.dots {
+    width: 30px;
+    height: 3px;
+    border-radius: 12px;
+    margin-left: 20px;
+    cursor: pointer;
+    border: 2px solid #3c3c3d;
+    transition: 0.3s;
+}
+
+.active,
+.dots:hover {
+    background-color: #ac0c0c;
+    /* border-radius: 0px; */
+}
+
+.neon{
+    opacity: 0.8;
+    position: absolute;
+    -webkit-text-stroke: 2px #14D5B3;
+    font-size: 150px;
+    color: rgba(255,255,255,0.5);
+}
+
+.neon > span {
+    animation: neon 5s steps(1) infinite;
+}
+
+@keyframes neon {
+    5%, 9%, 13%, 25% {
+        color: rgba(255,255,255,0.5);
+        text-shadow: none;
+    }
+    7%, 11%, 15%, 19%, 30%, 100% {
+        color: var(--color);
+        text-shadow:
+            0px 0px 5px var(--color),
+            0px 0px 20px var(--color),
+            0px 0px 50px var(--color),
+            0px 0px 70px var(--color);
+    }
+}
+
+.newArticle {
+    width: 100%;
+
+}
+
+.titlebox h1{
+    text-align: center;
+    padding-top: 50px;
+    font-size: 50px;
+    letter-spacing: 0.6rem;
+    margin-bottom: 55px;
+}
+
+.content_wrapper {
+    max-width: 1200px;
+    display: flex;
+    margin: auto;
+}
+
+.content_wrapper:not(:first-child) {
+    border-bottom: 1px solid #3c3c3d;
+}
+
+.contentBox {
+    width: 100%;
+    display: flex;
+    margin-bottom: 70px;
+    flex-wrap: wrap;
+}
+
+
+/* 商品 */
+
+.product_list {
+    width: 30%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    color: #3c3c3d;
+}
+
+.product_list:nth-of-type(3n) {
+    margin-right: 0;
+}
+
+.product_photo {
+    width: 100%;
+}
+
+.product_photo img{
+    width: 100%;
+}
+
+
+.product_title {
+    margin-top: 15px;
+}
+
+.product_title p{
+    font-size: 18px;
+    font-weight: 600;
+    padding: 8px 10px;
+    border-top: 1px solid #b7b7b7;
+    border-bottom: 1px solid #9f9f9f;
+}
+
+.product_info {
+    margin-top: 15px;
+}
+
+.product_price {
+    font-weight: 500;
+    font-size: 1.3rem;
+    line-height: 1.5625rem;
+    letter-spacing: 0.1rem;
+    color: #8F5E13;
+}
+
+.product_price span {
+    padding-left: 6px;
+}
+
+.readmore_btn {
+    width: 100%;
+}
+
+.readmore{
+    cursor: pointer;
+    display: block;
+    width: 180px;
+    margin: auto;
+    margin-bottom: 80px;
+    padding: 10px 8px;
+    text-align: center;
+    border: 1px solid #3c3c3d;
+}
+
+.readmore:hover{
+    color: #fbfbfb;
+    background-color: #3c3c3d;
+}
+
+
+/* 專欄 */
+
+.article_lists {
+    border-top: 1px solid #3c3c3d;
+}
+
+.art a {
+    position: relative;
+    color: #3c3c3d;
+    display: flex;
+    box-sizing: border-box;
+    text-decoration: none;
+    overflow: hidden;
+    padding: 8px 0;
+}
+
+.art .art_img {
+    width: 300px;
+    margin-right: 20px;
+}
+
+.art .art_img img{
+    width: 100%;
+}
+
+.art_content {
+    flex: 1;
+    padding-right: 160px;
+    padding-top: 40px;
+}
+
+.art_toptitle {
+    display: flex;
+    margin-bottom: 12px;
+    align-items: baseline;
+}
+
+.art_time {
+    margin-right: 20px;
+}
+
+.art_name {
+    display: block;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.art_arrow{
+position: absolute;
+top: 50%;
+right: 0;
+width: 26px;
+height: 26px;
+transform: translateY(-50%);
+color: #14D5B3;
+}
+
+.art_arrow::after {
+    content: ">";
+    position: relative;
+    top: -7px;
+    display: block;
+    font-size: 46px;
+}
+
+/* .nybox {
+    filter: contrast(18);
+    text-align: center;
+    background-color: #030303;
+}
+
+.ny{
+    color: #ffffff;
+    font-size: 4rem;
+    text-transform: uppercase;
+    animation: lettermove 3s infinite alternate ease-in-out;
+    white-space: nowrap;
+} */
+
+.activity_list {
+    width: 48%;
+    margin-right: 10px;
+    
+}
+
+.act {
+    border: 1px solid #3c3c3d;
+    margin-bottom: 10px;
+}
+
+.act:last-child {
+    margin-bottom: 0;
+}
+
+.act_photo {
+    display: flex;
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #3c3c3d;
+}
+
+.act_photo a{
+    width: 30%;
+    display: flex;
+    margin-right: 20px;
+}
+
+.act_photo img {
+    width: 100%;
+}
+
+.act_title {
+    width: 60%;
+    align-self: center;
+}
+
+.act_info{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 10px;
+}
+
+
+.lesson_list {
+    width: 48%;
+    margin-right: 2%;
+    border: 1px solid #3c3c3d;
+}
+
+.lesson_list:last-child {
+    margin-right: 0;
+    margin-left: 2%;
+}
+
+.lesson_photo {
+    width: 100%;
+    background-color: #fbfbfb;
+    overflow: hidden;
+}
+
+.lesson_photo img {
+    width: 100%;
+}
+
+.lesson {
+    padding: 10px 10px;
+}
+
+.lesson_title {
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+.lesson_info {
+    line-height: 1.625rem;
+    text-align: justify;
+    letter-spacing: 0.1rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.lesson_readmore {
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 4px;
+    float: right;
+    color: #8F5E13;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+}
+
+.lesson_readmore:hover {
+    border: 1px solid #3c3c3d;
+    
+}
+
+
+
+@keyframes lettermove {
+    from {
+        letter-spacing: -2rem;
+        filter: blur(20px);
+    }
+    to{
+        letter-spacing: 1rem;
+        filter: blur(0);
+    }
+}
