@@ -50,7 +50,7 @@
                 <div class="right-button">
                     <ul>
 <!--                         <li><a href="#"><i class="ti-btnshopcart"></i></a></li> -->
-						<li><a href="${contextRoot}/shop/shoppingCart" class="site-cart">
+						<li><a href="${contextRoot}/shop/shoppingCart" class="site-cart" style="display: inline">
                         
                          <i class="ti-btnshopcart"></i>
                       		<span class="count" style="display:none;"></span>
