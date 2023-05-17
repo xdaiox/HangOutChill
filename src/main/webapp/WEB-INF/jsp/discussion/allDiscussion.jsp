@@ -200,14 +200,16 @@
 							max-width: 96%;
 							} /* 當寬度1259px↓　寬度設定 */
 						}
-						.container {
+						.container2 {
 							max-width: 69%;
+							margin-left: auto;
+   							margin-right: auto;
 						}
 					</style>
 				</head>
 
 				<body>
-					<div class="container">
+					<div class="container2 ">
 						<div class="main-body p-0">
 							<div class="inner-wrapper">
 

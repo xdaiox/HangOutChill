@@ -163,6 +163,7 @@ public class DiscussionsController {
 										Authentication authentication,Model model) {
     	String name = authentication.getName();
     	NormalMember result = nMemberService.findNormalUserByAccount(name);
+    	model.addAttribute("result", result);
 //    	System.out.println("============/discussion/allFavourite=================name: "+name+"===============================");
 //    	System.out.println("============/discussion/allFavourite=================result: "+result+"===============================");
 
