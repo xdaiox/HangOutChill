@@ -81,13 +81,15 @@ public class Discussions {
     public void setVisibleTrue() {
         this.visible = true;
     }
-	
+
 	@ManyToOne
 	@JoinColumn(name="fk_member_id", nullable = true)
+	@JsonIgnore
 	private NormalMember normalMember;
-	
+
     @OneToMany(mappedBy = "discussions",fetch=FetchType.LAZY,
 	cascade = {CascadeType.PERSIST},orphanRemoval = true)
+	@JsonIgnore
     private Set<Messages> messages = new LinkedHashSet<>();
     
     @OneToMany(mappedBy = "discussions",fetch=FetchType.LAZY,

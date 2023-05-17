@@ -105,11 +105,13 @@ public class NormalMember {
             registTime = new Date();
         }
     }
-    
+
+    @JsonIgnore
     @OneToMany(mappedBy = "normalMember",fetch=FetchType.LAZY,
     		cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Discussions> discussions = new LinkedHashSet<>();
-    
+
+    @JsonIgnore
     @OneToMany(mappedBy = "normalMmeber",fetch=FetchType.LAZY,
 			cascade = {CascadeType.PERSIST},orphanRemoval = true)
     private Set<Messages> messages = new LinkedHashSet<>();

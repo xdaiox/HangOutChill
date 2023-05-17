@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -61,10 +62,12 @@ public class Messages {
 
 	@ManyToOne
     @JoinColumn(name="fk_member_id", nullable = true)
+	@JsonIgnore
     private NormalMember normalMmeber;
 	
     @ManyToOne
     @JoinColumn(name="fk_dscussion_id", nullable = true)
+	@JsonIgnore
     private Discussions discussions;
 
 	public Integer getDm_id() {
