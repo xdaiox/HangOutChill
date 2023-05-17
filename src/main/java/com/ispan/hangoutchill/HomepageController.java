@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
 import com.ispan.hangoutchill.actandles.service.AALservice;
+import com.ispan.hangoutchill.article.model.Article;
+import com.ispan.hangoutchill.article.service.ArticleService;
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.service.NormalMemberService;
 import com.ispan.hangoutchill.shop.model.Product;
@@ -32,14 +34,24 @@ public class HomepageController {
 	 
 	 @Autowired
 	 private ProductService productService;
+	 
+	@Autowired
+	private ArticleService articleService;
 	
     @GetMapping("/")
     public String home(Model model) {
     	List<Product> products = productService.findLatestFiveProducts();
     	
     	
+    	List<ActivitiesandLesson> al = aalService.findLastest();
+    	ActivitiesandLesson ac = aalService.findTheMostPopularAct();
+    	
+    	List<Article> art = articleService.findLatestThreeArticle();
     	
     	model.addAttribute("products",products);
+    	model.addAttribute("al",al);
+    	model.addAttribute("ac",ac);
+    	model.addAttribute("art",art);
     	
     	
         return "IndexPage";

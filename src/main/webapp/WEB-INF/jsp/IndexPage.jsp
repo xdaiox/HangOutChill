@@ -32,28 +32,16 @@
         </div>
         <div class="contentbox">
             <div class="content">
+            <jstl:forEach var="art" items="${art}">
                 <div class="imgbox">
-                    <img class="img" id="img1" src="/images/wcc-bar-01.jpg" alt="">
+                    <img class="img" id="img1" src="${art.article_mainImg}" alt="">
                 </div>
-                <div class="imgbox">
-                    <img class="img" id="img2" src="/images/archipelago.jpg" alt="">
-                </div>
-                <!-- <div class="imgbox">
-                    <img class="img" id="img3" src="" alt="">
-                </div>
-                <div class="imgbox">
-                    <img class="img" id="img4" src="" alt="">
-                </div>
-                <div class="imgbox">
-                    <img class="img" id="img5" src="" alt="">
-                </div> -->
+            </jstl:forEach>
             </div>
             <div class="dotsbox">
                 <div class="dots" onclick="currentSlide(1)"></div>
                 <div class="dots" onclick="currentSlide(2)"></div>
-                <!-- <div class="dots" onclick="currentSlide(3)"></div>
-                <div class="dots" onclick="currentSlide(4)"></div>
-                <div class="dots" onclick="currentSlide(5)"></div> -->
+                <div class="dots" onclick="currentSlide(3)"></div>
             </div>
         </div>
         <div class="rightbox">
@@ -78,52 +66,60 @@
             </div>
 
             <div class="contentBox act_box">
-                <!-- 活動 -->
-                <div class="activity_list">
-                    <div class="act">
-                        <div class="act_photo">
-                            <a href="#">
-                                <img src="/images/archipelago.jpg" alt="">
-                            </a>
-                            <div class="act_title">
-                                <p>台灣人工智慧實驗室（Taiwan AI Labs）sssssssssssssssss</p>
-                            </div>
-                        </div>
-                        <div class="act_info">
-                            <div class="art_text">報名截止日: 2023/5/17</div>
-                            <div class="act_lavenum">剩餘人數 : 23</div>
-                        </div>
-                    </div>
 
-                </div>
+	                <div class="activity_list">
+						<jstl:forEach var="al" items="${al}">
+		                    <div class="act">
+		                        <div class="act_photo">
+		                            <a href="#">
+		                                <img src="" alt="">
+		                            </a>
+		                            <div class="act_title">
+		                                <p>${al.name}</p>
+		                            </div>
+		                        </div>
+		                        <div class="act_info">
+		                            <div class="art_text">報名截止日: ${al.deadLine}</div>     
+		                            <jstl:choose>
+									    <jstl:when test="${(al.quota-aal.registered)<5}">
+		                            		<div class="act_lavenum">剩餘人數: ${al.quota-aal.registered}</div>
+										</jstl:when>
+										<jstl:when test="${(al.quota-aal.registered)>5}">
+											<div class="act_lavenum">剩餘人數：${al.quota-aal.registered}</div>
+										</jstl:when>
+									</jstl:choose>                            
+		                        </div>
+		                    </div>
+						</jstl:forEach>
+                    </div>
                 <!-- 課程 -->
                 <div class="lesson_list">
                     <div class="lesson_photo">
                         <a href="#">
-                            <img src="/images/archipelago.jpg" alt="">
+                            <img src="" alt="">
                         </a>
                     </div>
                     <div class="lesson">
                         <div class="lesson_title">
-                            <p>台灣人工智慧實驗室（Taiwan AI Labs）</p>
+                            <p>${ac.name}</p>
                         </div>
                         <div class="lesson_info">
-                            Nihonshu Sake Space店內提供兩款光榮菊清酒，一款為「雄町」，特色在於酒體表現雖具層次感，但酒體卻纖細透明，顛覆既有對雄町米調性的印象；另一款「愛山」瀰漫花果香調，口感也討喜，實際上因使用原料稀少且製程困難的米種，製作過程充滿挑戰。
+                            ${ac.aalContent}
                         </div>
                         <a href=""><div class="lesson_readmore">READMORE ></READMORE></div></a>
                     </div>
                 </div>
             </div>
-
-        </div>
+           </div>
     </section>
+    
 	    <section class="content_wrapper">
 	        <div class="newArticle">
 	            <div class="titlebox">
 	                <h1>Product</h1>
 	            </div>
 	            <div class="contentBox">
-	<jstl:forEach var="products" items="${products}">
+				<jstl:forEach var="products" items="${products}">
 	                <div class="product_list">
 	                    <div class="product_photo">
 	                        <a href="">
@@ -139,7 +135,7 @@
 	                        </div>
 	                    </div>
 	                </div>
-    </jstl:forEach>
+    			</jstl:forEach>
 	            </div>
 	            <div class="readmore_btn">
 	                <a href=""><div class="readmore">READ MORE</div></a>
@@ -181,25 +177,27 @@
             <div class="titlebox">
                 <h1>Article</h1>
             </div>
-            <ul class="article_lists">
-                <li class="art">
-                    <a href="#">
-                        <div class="art_img">
-                            <img src="/images/archipelago.jpg" alt="">
-                        </div>
-                        <div class="art_content">
-                            <div class="art_toptitle">
-                                <p class="art_time">2023/5/17</p>
-                                <p class="art theme">人物． 生活</p>
-                            </div>
-                            <div class="art_name">
-                                <span>台灣人工智慧實驗室（Taiwan AI Labs）、交通部科技顧問室及觀光局一同打造「海陸漫行」</span>
-                            </div>
-                        </div>
-                        <div class="art_arrow"></div>
-                    </a>
-                </li>
-            </ul>
+            <jstl:forEach var="art" items="${art}">
+	            <ul class="article_lists">
+	                <li class="art">
+	                    <a href="#">
+	                        <div class="art_img">
+	                            <img src="${art.article_mainImg}" alt="">
+	                        </div>
+	                        <div class="art_content">
+	                            <div class="art_toptitle">
+	                                <p class="art_time">${art.createtime}</p>
+	                                <p class="art theme">${art.article_theme}</p>
+	                            </div>
+	                            <div class="art_name">
+	                                <span>${art.article_excerpt}</span>
+	                            </div>
+	                        </div>
+	                        <div class="art_arrow"></div>
+	                    </a>
+	                </li>
+	            </ul>
+            </jstl:forEach>
 
         </div>
     </section>

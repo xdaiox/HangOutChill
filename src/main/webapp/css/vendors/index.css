@@ -55,7 +55,6 @@ a {
     align-items: center;
     border-bottom: 1px solid #ffffff;
     padding-top: 5%;
-    background-color: #fff;
 }
 
 .contentbox {
@@ -70,12 +69,17 @@ a {
     
 } */
 
+.imgBox {
+	height: 495px;
+}
+
 .img {
     display: flex;
     justify-content: center;
     height: 500px;
     z-index: 4;
     width: 100%;
+    object-fit: cover;
 }
 
 .dotsbox {
@@ -94,12 +98,6 @@ a {
     cursor: pointer;
     border: 2px solid #3c3c3d;
     transition: 0.3s;
-}
-
-.active,
-.dots:hover {
-    background-color: #ac0c0c;
-    /* border-radius: 0px; */
 }
 
 .neon{
@@ -175,10 +173,13 @@ a {
 
 .product_photo {
     width: 100%;
+    height: 250px;
 }
 
 .product_photo img{
     width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 
@@ -276,7 +277,13 @@ a {
     display: block;
     font-size: 24px;
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 1.625rem;
+    text-align: justify;
+    letter-spacing: 0.1rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 
 .art_arrow{
@@ -285,7 +292,6 @@ top: 50%;
 right: 0;
 width: 26px;
 height: 26px;
-transform: translateY(-50%);
 color: #14D5B3;
 }
 
