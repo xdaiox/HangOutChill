@@ -39,9 +39,11 @@
 
                         <tr>
                             <th scope="row" class="align-middle">${page.content.indexOf(allDiscussion)+1}</th>
-                            <td class="align-middle">${allDiscussion.normalMember.nickName}</td>
+                            <td class="align-middle"><img src="${allDiscussion.normalMember.photoB64}" id="pfpimg"
+                                class="mr-3 rounded-circle" width="50" alt="User"
+                                style="max-width: 100%; height: auto; aspect-ratio: 1/1; margin : 10px;" />${allDiscussion.normalMember.nickName}</td>
                             <td class="align-middle">${allDiscussion.title}</td>
-                            <td class="align-middle">${allDiscussion.contents}</td>
+                            <td class="align-middle"><div class="content-wrapper">${allDiscussion.contents}</div></td>
                             <td class="align-middle">${allDiscussion.type}</td>
                             <!-- <td class="align-middle">${allDiscussion.favorite}</td>
                             <td class="align-middle">${allDiscussion.readCount}</td>
@@ -82,6 +84,41 @@
 </div>
 
 
+<script>
+    var contentWrappers = document.querySelectorAll('.content-wrapper');
 
+contentWrappers.forEach(function (wrapper) {
+    var content = wrapper.innerHTML;
+
+    // 判断文本内容是否超过20个字符
+    if (content.length > 20) {
+        // 截取前20个字符
+        var truncatedContent = content.substring(0, 20);
+
+        // 检查是否在20个字符后存在闭合的<img>标签
+        var closingImgIndex = truncatedContent.lastIndexOf('</img>');
+        var closingImgExists = closingImgIndex > -1;
+
+        // 获取处理后的文本内容
+        var processedContent = closingImgExists
+            ? truncatedContent.substring(0, closingImgIndex + 6) + '...' // 添加闭合的img标签并添加省略号
+            : truncatedContent + '...'; // 直接添加省略号
+
+        // 使用DOM解析器创建临时元素，将处理后的文本内容添加到其中
+        var tempElement = document.createElement('div');
+        tempElement.innerHTML = processedContent;
+
+        // 检查临时元素中是否存在<img>标签
+        var imgElement = tempElement.querySelector('img');
+
+        // 如果存在<img>标签，则将其添加回处理后的文本中
+        if (imgElement) {
+            wrapper.innerHTML = tempElement.innerHTML;
+        } else {
+            wrapper.innerHTML = processedContent;
+        }
+    }
+});
+</script>
 </body>
 </html>
