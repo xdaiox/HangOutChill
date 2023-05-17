@@ -127,8 +127,8 @@
 						<!-- 							class="icon-arrow-left"></i>&nbsp;繼續購物</a> -->
 					</div>
 					<div class="column">
-						<a
-							class="btn btn-success" href='<c:url value="/shop/orderdetailpagetest" />'>訂單頁面測試</a>
+<!-- 						<a -->
+<%-- 							class="btn btn-success" href='<c:url value="/shop/orderdetailpagetest" />'>訂單頁面測試</a> --%>
 						<a class="btn btn-primary" href='<c:url value="/shop/productcategory?category=全部商品" />' data-toast=""
 							data-toast-type="success" data-toast-position="topRight"
 							data-toast-icon="icon-circle-check" data-toast-title="Your cart"
