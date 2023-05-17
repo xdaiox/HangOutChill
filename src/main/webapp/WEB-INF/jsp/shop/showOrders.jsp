@@ -88,7 +88,7 @@
 		let theShipDate = document.getElementsByClassName('shippedDate');
 		for(let i=0; i<theShipDate.length; i++){
 			if(!theShipDate[i].innerHTML){
-				theShipDate[i].innerHTML = '待出貨';
+				theShipDate[i].innerHTML = '<span class="badge badge-pill badge-success">待出貨</span>';
 			}
 		}
 
@@ -96,9 +96,9 @@
 		let paymentState = document.getElementsByClassName('paymentstate');
 		for(let i=0; i<paymentState.length; i++){
 			if(paymentState[i].innerHTML === "true"){
-				paymentState[i].innerHTML = '<span style="color:blue">已付款</span>'; 
+				paymentState[i].innerHTML = '<span class="badge badge-pill badge-info">已付款</span>'; 
 			}else{
-				paymentState[i].innerHTML = '<span style="color:red">未付款</span>';
+				paymentState[i].innerHTML = '<span class="badge badge-pill badge-danger">未付款</span>';
 			}
 		}
 

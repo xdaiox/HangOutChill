@@ -1,16 +1,16 @@
 package com.ispan.hangoutchill.shop.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -34,7 +34,6 @@ import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.service.NormalMemberService;
 import com.ispan.hangoutchill.shop.model.Product;
 import com.ispan.hangoutchill.shop.model.ProductPhoto;
-import com.ispan.hangoutchill.shop.model.ProductPhotoPK;
 import com.ispan.hangoutchill.shop.service.ProductPhotoService;
 import com.ispan.hangoutchill.shop.service.ProductService;
 import com.ispan.hangoutchill.shop.service.ShoppingCartService;
@@ -58,10 +57,14 @@ public class ProductController {
 		this.nMemberService = nMemberService;
 	}
 
-	@GetMapping("/shop/add")
+	@GetMapping("/shop/add/product")
 	public String addProduct(Model model) {
+		Map<String,Boolean> launchedState = new HashMap<>();
+		launchedState.put("已上架", true);
+		launchedState.put("未上架", false);		
 		model.addAttribute("product", new Product());
-		return "shop/addProductPage";
+		model.addAttribute("launchedMap", launchedState);
+		return "shop/insertProductPage";
 	}
 	
 	@PostMapping("/shop/postProduct")
@@ -128,7 +131,7 @@ public class ProductController {
 	@GetMapping("/shop/productslistbyname")
 	public String showProductListByNameSearch(@RequestParam(name="p", defaultValue="1") Integer pageNum, 
 											  @RequestParam(name="keyword")String keyword, Model model) {
-		Page<Product> page = productService.findByNameAndPage(keyword, pageNum);
+		Page<Product> page = productService.findByNameAndPageForBack(keyword, pageNum);
 		model.addAttribute("page", page);
 		model.addAttribute("search", true);
 		model.addAttribute("keyword", keyword);
@@ -179,7 +182,8 @@ public class ProductController {
 	@PutMapping("/shop/edit/product")
 	public String editProduct(@ModelAttribute("product") Product product,
 								@RequestParam(name="delphotoid", required=false) Integer[] deletePhotoId,
-								@RequestParam(name="addphoto", required=false) MultipartFile[] addphotos) {
+								@RequestParam(name="addphoto", required=false) MultipartFile[] addphotos,
+								Model model) {
 //		// 封面照片更改處理
 		MultipartFile productImage = product.getMainImage();
 		if(productImage != null && !productImage.isEmpty()) {
@@ -199,27 +203,6 @@ public class ProductController {
 		// 刪除圖片
 		List<Integer> deleteList = null; //未來再懂 HQL語法可以這樣寫
 		List<Integer> originalIds = productPhotoService.findPhotosIdByProductId(product.getProductId());
-		
-//		if(deletePhotoId.length >0) {
-//			for(Integer i : deletePhotoId) {
-//				if(i!=null) {
-//					for(Integer j : originalIds) {
-//						if(i==j) {
-//							break;
-//						}
-//						productPhotoService.deltePhotoByPhotoId(i);
-//					}
-//					
-//				}
-//				
-//			}
-//			
-//		}else if(deletePhotoId==null) {
-//			for(Integer i :originalIds ) {
-//				productPhotoService.deltePhotoByPhotoId(i);
-//			}
-//		}
-		
 		
 		
 		Boolean flag = false;
@@ -244,26 +227,6 @@ public class ProductController {
 			}
 			
 		}
-		
-		
-		
-				
-			
-		
-//		for(Integer i : deletePhotoId) {
-//			if(i!=null) {
-//				for(Integer j : originalIds) {
-//					if(j==i) {
-//						break;
-//						
-//					}
-//					productPhotoService.deltePhotoByPhotoId(j);
-//				}
-//				
-//			}
-//			
-//		}
-//		
 		
 		
 		// 新增圖片
@@ -300,6 +263,7 @@ public class ProductController {
 		// 新增產品修改成功敘述
 		
 		return "redirect:/shop/allproducts";
+//		return "redirect:/shop/singleproduct";
 	}
 	
 	
@@ -418,7 +382,7 @@ public class ProductController {
 		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
 		Page<Product> cps;
 		if(category.equals("全部商品")) {
-			cps = productService.findAllProducts(pageNum);
+			cps = productService.findAllLaunchedProduct(pageNum);
 			
 		}else {
 			cps = productService.findProductByCategoryAndPage(category, pageNum);

@@ -75,11 +75,11 @@
                 </div>
             <nav class="blog-pagination justify-content-center d-flex">
             	<ul class="pagination">
-                              <li class="page-item">
-                                  <a href="#" class="page-link" aria-label="Previous">
-                                      <i class="ti-angle-left"></i>
-                                  </a>
-                              </li>
+<!--                               <li class="page-item"> -->
+<!--                                   <a href="#" class="page-link" aria-label="Previous"> -->
+<!--                                       <i class="ti-angle-left"></i> -->
+<!--                                   </a> -->
+<!--                               </li> -->
                               <c:forEach var="pageNum" begin="1" end="${cateProducts.totalPages}">
                               <c:choose>
 								<c:when test="${cateProducts.number+1 == pageNum}">
@@ -106,11 +106,11 @@
 <!--                               <li class="page-item active"> -->
 <!--                                   <a href="#" class="page-link">2</a> -->
 <!--                               </li> -->
-                              <li class="page-item">
-                                  <a href="#" class="page-link" aria-label="Next">
-                                      <i class="ti-angle-right"></i>
-                                  </a>
-                              </li>
+<!--                               <li class="page-item"> -->
+<!--                                   <a href="#" class="page-link" aria-label="Next"> -->
+<!--                                       <i class="ti-angle-right"></i> -->
+<!--                                   </a> -->
+<!--                               </li> -->
                           </ul>
             </nav>
             </section>

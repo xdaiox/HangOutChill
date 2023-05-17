@@ -14,12 +14,12 @@
 
 		<div class="container-fluid page-body-wrapper">
 			<jsp:include page="../dbLayout/left_navbar.jsp" />
-			<div class="content_box" style="width: 100%">
+			<div class="content_box" style="width: 100%; margin-top:20px;">
 				<div class="row justify-content-center">
 					<!-- 			<h2>產品資料</h2> -->
 					<h3>${sucessMessage}</h3>
 						<div class="col-md-6">
-							<a  href="/hangoutchill/shop/add">
+							<a  href="${contextRoot}/shop/add/product">
 								<button class="btn btn-outline-info">新增商品</button>
 							</a>
 						</div>
@@ -43,6 +43,7 @@
 								<th scope="col">單價</th>
 								<th scope="col">折扣</th>
 								<th scope="col">上架日期</th>
+								<th scope="col">上架狀態</th>
 								<th scope="col">編輯</th>
 								<th scope="col">刪除</th>
 							</tr>
@@ -61,6 +62,7 @@
 									<td>${product.unitPrice}</td>
 									<td>${product.discount}</td>
 									<td>${product.launchdate}</td>
+									<td class="launchstaus">${product.launchedState}</td>
 									<td>
 										<form action="${contextRoot}/shop/edit/product">
 											<input type="hidden" name="productid"
@@ -104,5 +106,16 @@
 
 		</div>
 	</div>
+	<script>
+		let launchedState = document.getElementsByClassName('launchstaus');
+		for(let i=0; i< launchedState.length; i++){
+			if(launchedState[i].innerHTML === "true"){
+				launchedState[i].innerHTML = '<span class="badge badge-pill badge-success">已上架</span>';
+			}else{
+				launchedState[i].innerHTML = '<span class="badge badge-pill badge-warning">未上架</span>';
+			}
+		}
+
+	</script>
 </body>
 </html>

@@ -68,6 +68,10 @@ public class Product {
 	private Set<ShoppingCart> shoppingCarts = new LinkedHashSet<>();
 	
 	
+	@Column(name="launched_state", columnDefinition="bit")
+	private Boolean launchedState;
+	
+	
 	public Product() {
 	}
 	
@@ -202,6 +206,14 @@ public class Product {
 
 	public void setShoppingCarts(Set<ShoppingCart> shoppingCarts) {
 		this.shoppingCarts = shoppingCarts;
+	}
+
+	public Boolean getLaunchedState() {
+		return launchedState;
+	}
+
+	public void setLaunchedState(Boolean launchedState) {
+		this.launchedState = launchedState;
 	}
 
 	
