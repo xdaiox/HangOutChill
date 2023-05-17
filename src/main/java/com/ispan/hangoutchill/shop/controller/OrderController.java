@@ -88,7 +88,7 @@ public class OrderController {
 		order.setMember(currentmember);
 		order.setPaymentState(false);
 		orderService.addOrder(order);
-		
+		shoppingCartService.deleteShoppingCartItmesByMemberId(currentmember.getId());
 		// 購物總價計算
 		Integer subtotalPrice = shoppingCartService.totalPriceCount(cartItems);
 		Integer totalPrice =0;
@@ -138,7 +138,7 @@ public class OrderController {
 		model.addAttribute("order", theOrder);
 		model.addAttribute("orderDetails", ods);
 		model.addAttribute("result",currentmember);
-		shoppingCartService.deleteShoppingCartItmesByMemberId(currentmember.getId());
+//		shoppingCartService.deleteShoppingCartItmesByMemberId(currentmember.getId());
 		return "shop/orderFinishCheck";
 	}
 	
