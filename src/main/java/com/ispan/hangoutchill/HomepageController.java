@@ -1,5 +1,7 @@
 package com.ispan.hangoutchill;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
@@ -14,6 +16,8 @@ import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
 import com.ispan.hangoutchill.actandles.service.AALservice;
 import com.ispan.hangoutchill.member.model.NormalMember;
 import com.ispan.hangoutchill.member.service.NormalMemberService;
+import com.ispan.hangoutchill.shop.model.Product;
+import com.ispan.hangoutchill.shop.service.ProductService;
 
 
 
@@ -25,10 +29,20 @@ public class HomepageController {
 	
 	 @Autowired
 	 private NormalMemberService nMemberService;
+	 
+	 @Autowired
+	 private ProductService productService;
 	
     @GetMapping("/")
-    public String home() {
-        return "index";
+    public String home(Model model) {
+    	List<Product> products = productService.findLatestFiveProducts();
+    	
+    	
+    	
+    	model.addAttribute("products",products);
+    	
+    	
+        return "IndexPage";
     }
 
     @GetMapping("/member/loginHome")
@@ -69,6 +83,6 @@ public class HomepageController {
     	return "/article/article";
     }
     
-    
 }
+    
 
