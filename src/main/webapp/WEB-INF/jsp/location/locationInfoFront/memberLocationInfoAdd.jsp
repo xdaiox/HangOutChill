@@ -270,7 +270,7 @@
 
     const inputG3 = document.getElementById("targetG3");
     const previewG3 = document.getElementById("previewG3");
-    previewImage(inputG1, previewG3);
+    previewImage(inputG3, previewG3);
 
     const inputG4 = document.getElementById("targetG4");
     const previewG4 = document.getElementById("previewG4");
