@@ -150,72 +150,77 @@
                                 <p>上傳圖片 : </p>
 
                                 <span>封面照片 :</span>
-                                <img width="300" height="auto"
-                                     src='${contextRoot}/locationInfo/getImgCover/${locationInfo.locId}'/>
-                                <form:input path="locationImage.imagCover"
+                                <form:input path="locationImage.imagCover" id="targetCover"
                                             class="form-control" type="file" accept="image/png, image/jpeg"/>
+                                <img style="width: 300px; height: auto; margin: 10px;" id="previewCover"
+                                     src='${contextRoot}/locationInfo/getImgCover/${locationInfo.locId}'/>
                                 <br>
 
                                 <span>相簿照片1 :</span>
-                                <img width="300" height="auto"
-                                     src='${contextRoot}/locationInfo/getImgG1/${locationInfo.locId}'/>
-                                <form:input path="locationImage.imagG1"
+                                <form:input path="locationImage.imagG1" id="targetG1"
                                             class="form-control" type="file" accept="image/png, image/jpeg"/>
+                                <img style="width: 300px; height: auto; margin: 10px;" id="previewG1"
+                                     src='${contextRoot}/locationInfo/getImgG1/${locationInfo.locId}'/>
                                 <br>
 
                                 <span>相簿照片2 :</span>
-                                <img width="300" height="auto"
-                                     src='${contextRoot}/locationInfo/getImgG2/${locationInfo.locId}'/>
-                                <form:input path="locationImage.imagG2"
+
+                                <form:input path="locationImage.imagG2" id="targetG2"
                                             class="form-control" type="file" accept="image/png, image/jpeg"/>
+                                <img style="width: 300px; height: auto; margin: 10px;" id="previewG2"
+                                     src='${contextRoot}/locationInfo/getImgG2/${locationInfo.locId}'/>
                                 <br>
 
                                 <span>相簿照片3 :</span>
-                                <img width="300" height="auto"
-                                     src='${contextRoot}/locationInfo/getImgG3/${locationInfo.locId}'/>
-                                <form:input path="locationImage.imagG3"
+
+                                <form:input path="locationImage.imagG3" id="targetG3"
                                             class="form-control"
                                             type="file" accept="image/png, image/jpeg"/>
+
+                                <img style="width: 300px; height: auto; margin: 10px;" id="previewG3"
+                                     src='${contextRoot}/locationInfo/getImgG3/${locationInfo.locId}'/>
                                 <br>
 
                                 <span>相簿照片4 :</span>
-                                <img width="300" height="auto"
-                                     src='${contextRoot}/locationInfo/getImgG4/${locationInfo.locId}'/>
-                                <form:input path="locationImage.imagG4"
+
+                                <form:input path="locationImage.imagG4" id="targetG4"
                                             class="form-control"
                                             type="file" accept="image/png, image/jpeg"/>
+                                <img style="width: 300px; height: auto; margin: 10px;" id="previewG4"
+                                     src='${contextRoot}/locationInfo/getImgG4/${locationInfo.locId}'/>
                                 <br>
 
                                 <span>相簿照片5 :</span>
-                                <img width="300" height="auto"
-                                     src='${contextRoot}/locationInfo/getImgG5/${locationInfo.locId}'/>
-                                <form:input path="locationImage.imagG5"
+                                <form:input path="locationImage.imagG5" id="targetG5"
                                             class="form-control"
                                             type="file" accept="image/png, image/jpeg"/>
+                                <img style="width: 300px; height: auto; margin: 10px;" id="previewG5"
+                                     src='${contextRoot}/locationInfo/getImgG5/${locationInfo.locId}'/>
                                 <br>
 
                                 <span>相簿照片6 :</span>
-                                <img width="300" height="auto"
-                                     src='${contextRoot}/locationInfo/getImgG6/${locationInfo.locId}'/>
-                                <form:input path="locationImage.imagG6"
+                                <form:input path="locationImage.imagG6" id="targetG6"
                                             class="form-control"
                                             type="file" accept="image/png, image/jpeg"/>
+                                <img style="width: 300px; height: auto; margin: 10px;" id="previewG6"
+                                     src='${contextRoot}/locationInfo/getImgG6/${locationInfo.locId}'/>
                                 <br>
 
                                 <span>相簿照片7 :</span>
-                                <img width="300" height="auto"
-                                     src='${contextRoot}/locationInfo/getImgG7/${locationInfo.locId}'/>
-                                <form:input path="locationImage.imagG7"
+                                <form:input path="locationImage.imagG7" id="targetG7"
                                             class="form-control"
                                             type="file" accept="image/png, image/jpeg"/>
+                                <img style="width: 300px; height: auto; margin: 10px;" id="previewG7"
+                                     src='${contextRoot}/locationInfo/getImgG7/${locationInfo.locId}'/>
                                 <br>
 
                                 <span>相簿照片8 :</span>
-                                <img width="300" height="auto"
-                                     src='${contextRoot}/locationInfo/getImgG8/${locationInfo.locId}'/>
-                                <form:input path="locationImage.imagG8"
+
+                                <form:input path="locationImage.imagG8" id="targetG8"
                                             class="form-control"
                                             type="file" accept="image/png, image/jpeg"/>
+                                <img style="width: 300px; height: auto; margin: 10px;" id="previewG8"
+                                     src='${contextRoot}/locationInfo/getImgG1/${locationInfo.locId}'/>
 
 
                                 <br>
@@ -235,6 +240,68 @@
     </div>
 </div>
 </div>
+
+
+
+<script>
+
+    //處圖片上傳預覽
+    function previewImage(input, preview) {
+        input.addEventListener('change', () => {
+            const file = input.files[0];
+            const reader = new FileReader();
+
+            reader.addEventListener('load', () => {
+                preview.src = reader.result;
+            });
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+            }
+        });
+    }
+    // 函數處理預覽
+    const inputCover = document.getElementById("targetCover");
+    const previewCover = document.getElementById("previewCover");
+    previewImage(inputCover, previewCover);
+
+    const inputG1 = document.getElementById("targetG1");
+    const previewG1 = document.getElementById("previewG1");
+    previewImage(inputG1, previewG1);
+
+    const inputG2 = document.getElementById("targetG2");
+    const previewG2 = document.getElementById("previewG2");
+    previewImage(inputG2, previewG2);
+
+    const inputG3 = document.getElementById("targetG3");
+    const previewG3 = document.getElementById("previewG3");
+    previewImage(inputG3, previewG3);
+
+    const inputG4 = document.getElementById("targetG4");
+    const previewG4 = document.getElementById("previewG4");
+    previewImage(inputG4, previewG4);
+
+    const inputG5 = document.getElementById("targetG5");
+    const previewG5 = document.getElementById("previewG5");
+    previewImage(inputG5, previewG5);
+
+    const inputG6 = document.getElementById("targetG6");
+    const previewG6 = document.getElementById("previewG6");
+    previewImage(inputG6, previewG6);
+
+    const inputG7 = document.getElementById("targetG7");
+    const previewG7 = document.getElementById("previewG7");
+    previewImage(inputG7, previewG7);
+
+    const inputG8 = document.getElementById("targetG8");
+    const previewG8 = document.getElementById("previewG8");
+    previewImage(inputG8, previewG8);
+
+</script>
+
+
 
 
 </body>
