@@ -11,6 +11,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <jsp:include page="../../layout/navbar.jsp"/>
     <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
     <meta charset="UTF-8">
@@ -164,16 +165,14 @@
 
                     <!--================右1 =================-->
                     <aside class="single_sidebar_widget search_widget">
-                        <form action="#">
                             <div class="form-group">
-                                <div class="input-group" style="margin-bottom: 0;">
-                                    <input type="button" id="submitBtnSearch"
-                                           class="button rounded-0 primary-bg text-white w-100"
-                                           onclick="search()" value="收藏"
-                                           style="border: 1px solid #744FC6; background:#744FC6 "/>
+                                <div class="input-group" style="margin-bottom: 0;" id="favorite">
+<%--                                    <input type="button" id="submitBtnSearch"--%>
+<%--                                           class="button rounded-0 primary-bg text-white w-100"--%>
+<%--                                           value="收藏" style="border: 1px solid #744FC6; background:#744FC6 " />--%>
                                 </div>
                             </div>
-                        </form>
+
                     </aside>
 
 
@@ -215,7 +214,55 @@
 
 
 
+
 <jsp:include page="../../layout/footer.jsp"/>
+<script>
+let favorite = document.getElementById("favorite");
+let  favoriteStyle = "";
+
+ window.addEventListener("load",loaded);
+ function loaded (){
+     axios.get("${contextRoot}/normalMember/findFavoriteExisted?locId="+${locationInfo.locId})
+         .then((res)=>{
+             if (res.data){
+                 favoriteStyle +=' <input type="button" id="submitBtnSearch"class="button rounded-0 primary-bg text-white w-100"value="取消收藏" style="border: 1px solid #744FC6; background:#744FC6 " onclick="deleteFavorite()"/>'
+             }else {
+                 favoriteStyle +=' <input type="button" id="submitBtnSearch"class="button rounded-0 primary-bg text-white w-100"value="加入收藏" style="border: 1px solid #744FC6; background:#744FC6 " onclick="addFavorite()"/>'
+             }
+             favorite.innerHTML = favoriteStyle
+         }).catch((err)=>{
+             alert(err)
+     })
+ }
+
+ function deleteFavorite(){
+     axios.delete("${contextRoot}/normalMenber/deleteFavoriteLocationBySingle?locId="+${locationInfo.locId})
+         .then((response) =>{
+             if (response.data){
+                 favoriteStyle = ""
+                 favorite.innerHTML = favoriteStyle
+                 favoriteStyle +=' <input type="button" id="submitBtnSearch"class="button rounded-0 primary-bg text-white w-100"value="加入收藏" style="border: 1px solid #744FC6; background:#744FC6 " onclick="addFavorite()"/>'
+             }
+             favorite.innerHTML = favoriteStyle
+         }).catch((error)=>{
+             alert(error)
+     })
+}
+
+function  addFavorite(){
+     axios.post("${contextRoot}/normalMember/addFavoriteLocation?locationInfoId="+${locationInfo.locId})
+         .then((resp)=>{
+             if (resp.data){
+                 favoriteStyle = ""
+                 favorite.innerHTML = favoriteStyle
+                 favoriteStyle +=' <input type="button" id="submitBtnSearch"class="button rounded-0 primary-bg text-white w-100"value="取消收藏" style="border: 1px solid #744FC6; background:#744FC6 " onclick="deleteFavorite()"/>'
+             }
+             favorite.innerHTML = favoriteStyle
+         }).catch((errr)=>{
+             alert(errr)
+     })
+}
+</script>
 
 
 </body>

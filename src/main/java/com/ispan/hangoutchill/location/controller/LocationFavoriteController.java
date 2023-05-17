@@ -14,8 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class LocationFavoriteController {
@@ -31,16 +30,17 @@ public class LocationFavoriteController {
 
     @ResponseBody
     @PostMapping("/normalMember/addFavoriteLocation")
-    public LocationFavorite addFavoriteLocationByLocationId(@RequestParam(name = "locationInfoId")Integer locId, @RequestParam(name = "memberId")Integer memberId){
+    public boolean addFavoriteLocationByLocationId(@CurrentSecurityContext(expression = "authentication") Authentication authentication, @RequestParam(name = "locationInfoId")Integer locId, Model model) {
         LocationInfo locationInfoById = locationInfoService.findLocationInfoById(locId);
-        NormalMember member = normalMemberService.findNormalMemberById(memberId);
+        String name = authentication.getName();
+        NormalMember currentMember = normalMemberService.findNormalUserByAccount(name);
         LocationFavorite locationFavorite = new LocationFavorite();
         locationFavorite.setLocationInfo(locationInfoById);
-        locationFavorite.setNormalMember(member);
+        locationFavorite.setNormalMember(currentMember);
         locationFavoriteService.addLocationFavorite(locationFavorite);
-        List<LocationFavorite> favoritesLocationList= new ArrayList<>();
-        favoritesLocationList.add(locationFavorite);
-        return locationFavorite;
+        model.addAttribute("result", currentMember);
+        boolean b = locationFavoriteService.findAddedLocationFavorite(currentMember.getId(), locId);
+        return  b;
     }
 
 
@@ -58,6 +58,33 @@ public class LocationFavoriteController {
     @DeleteMapping("/normalMember/deleteFavoriteLocation")
     public boolean deleteFavoriteByFavoriteId(@RequestParam(name = "favoriteId")Integer id){
        return locationFavoriteService.deleteFavoriteById(id);
+    }
+
+
+    @ResponseBody
+    @GetMapping("/normalMember/findFavoriteExisted")
+    public boolean findLocationFavoriteExisted(@RequestParam(name="locId")Integer locationId, @CurrentSecurityContext(expression = "authentication") Authentication authentication){
+        String name = authentication.getName();
+        NormalMember currentMember = normalMemberService.findNormalUserByAccount(name);
+        boolean b = locationFavoriteService.findAddedLocationFavorite(currentMember.getId(), locationId);
+        return  b;
+    }
+
+//    @ResponseBody
+//    @GetMapping("/normalMember/findFavoriteExisted")
+//    public boolean findLocationFavoriteExisted(@RequestParam(name="locId")Integer locationId, @RequestParam(name="memberId")Integer memberId){
+//        boolean b = locationFavoriteService.findAddedLocationFavorite(memberId, locationId);
+//        return  b;
+//    }
+
+    @ResponseBody
+    @DeleteMapping("/normalMenber/deleteFavoriteLocationBySingle")
+    public  boolean deleteFavoriteLocation(@RequestParam(name="locId")Integer locationId, @CurrentSecurityContext(expression = "authentication") Authentication authentication){
+        String name = authentication.getName();
+        NormalMember currentMember = normalMemberService.findNormalUserByAccount(name);
+        System.out.println(currentMember.getId());
+        System.out.println(locationId);
+       return locationFavoriteService.deleteFavoriteByMemberIdAndLocationId(currentMember.getId(), locationId);
     }
 
 }
