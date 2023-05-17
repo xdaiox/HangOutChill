@@ -1,6 +1,7 @@
 package com.ispan.hangoutchill.actandles.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -226,23 +227,28 @@ public class AALservice {
 		return aalRepository.findLastest();
 	}
 //========================================查看最新的前5筆資料========================================
-//	public ActivitiesandLesson findTheMostPopularAct() {
-//		List<ActivitiesandLesson> actlist = aalRepository.findTheMostPopularAct();
-//		for (ActivitiesandLesson aal : actlist) {
-//			byte[] imageBytes = aal.getImage(); // 取得圖片二進位數據
-//			String base64Image = Base64.getEncoder().encodeToString(imageBytes); // 轉換為base64格式
-//			aal.setBase64image(base64Image); // 設置到對應的實體類屬性中
-//			//取得報名人數
-//			aal.setRegistered(aalRepository.findregistered(aal.getId()));
-//		}
-//		
-//		for (ActivitiesandLesson aal : actlist) {
-//			Integer RegisteredNum = aal.getQuota()-aal.getRegistered();
-//			
-//			
-//		}
+	public ActivitiesandLesson findTheMostPopularAct() {
+		List<ActivitiesandLesson> actlist = aalRepository.findTheMostPopularAct();
+		for (ActivitiesandLesson aal : actlist) {
+			byte[] imageBytes = aal.getImage(); // 取得圖片二進位數據
+			String base64Image = Base64.getEncoder().encodeToString(imageBytes); // 轉換為base64格式
+			aal.setBase64image(base64Image); // 設置到對應的實體類屬性中
+			//取得報名人數
+			aal.setRegistered(aalRepository.findregistered(aal.getId()));
+		}
+		Integer target=null ;
+		for(int i=0;i<actlist.size();i++) {
+			for(int j=0;j<actlist.size();j++) {
+				if(actlist.get(j).getRegistered()>actlist.get(i).getRegistered()) {
+					target=actlist.get(j).getId();
+				}
+			}
+		}	
+		System.out.println("取得id"+target);
+		ActivitiesandLesson top =(aalRepository.findById(target)).get();
 		
-//	}
+		return top;
+	}
 	
 	
 }
