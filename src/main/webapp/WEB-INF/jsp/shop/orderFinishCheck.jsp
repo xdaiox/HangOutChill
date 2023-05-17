@@ -137,7 +137,7 @@
 		</div>
 					<div class="shopping-cart-footer">
 						<div class="column" style="text-align: center;">
-							<a class="btn btn-primary" href='<c:url value="shop/productcategory?category=全部商品" />' data-toast=""
+							<a class="btn btn-primary" href='<c:url value="/shop/productcategory?category=全部商品" />' data-toast=""
 								data-toast-type="success" data-toast-position="topRight"
 								data-toast-icon="icon-circle-check" data-toast-title="Your cart"
 								data-toast-message="is updated successfully!">回商城首頁</a><a
