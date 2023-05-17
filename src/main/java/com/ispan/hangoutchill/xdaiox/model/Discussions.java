@@ -84,12 +84,10 @@ public class Discussions {
 	
 	@ManyToOne
 	@JoinColumn(name="fk_member_id", nullable = true)
-	@JsonBackReference
 	private NormalMember normalMember;
 	
     @OneToMany(mappedBy = "discussions",fetch=FetchType.LAZY,
 	cascade = {CascadeType.PERSIST},orphanRemoval = true)
-    @JsonIgnoreProperties("NormalMember")
     private Set<Messages> messages = new LinkedHashSet<>();
     
     @OneToMany(mappedBy = "discussions",fetch=FetchType.LAZY,
