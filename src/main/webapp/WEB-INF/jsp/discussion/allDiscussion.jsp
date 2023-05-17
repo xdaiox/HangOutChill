@@ -18,7 +18,6 @@
 					<title>論壇首頁</title>
 					<style>
 						body {
-							margin-top: 20px;
 							color: #1a202c;
 							text-align: left;
 							background-color: #e2e8f0;
