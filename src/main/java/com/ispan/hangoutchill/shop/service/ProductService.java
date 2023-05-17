@@ -42,12 +42,29 @@ public class ProductService {
 		return page;
 	}
 	
-	// 產品搜尋&分頁 for 前端
+	// 產品搜尋&分頁 for 前台
 	public Page<Product> findByNameAndPageForFronend(String keyword,Integer pageNum){
 		Pageable pgb = PageRequest.of(pageNum-1, 20, Sort.Direction.DESC,"productId");
 		Page<Product> page = productRepository.findProductByNameSearch(keyword, pgb);
 		return page;
 	}
+	
+	// 全部上架產品
+	public Page<Product> findAllLaunchedProduct(Integer pageNum){
+		Pageable pgb = PageRequest.of(pageNum-1, 20, Sort.Direction.DESC,"productId");
+		Page<Product> page = productRepository.findAllLaunchedProductsAndPage(pgb);
+		return page;
+	}
+	
+	
+	
+	// 產品搜尋&分頁 for 後台
+	public Page<Product> findByNameAndPageForBack(String keyword,Integer pageNum){
+		Pageable pgb = PageRequest.of(pageNum-1, 20, Sort.Direction.DESC,"productId");
+		Page<Product> page = productRepository.findProductByNameSearchBeckEnd(keyword, pgb);
+		return page;
+	}
+	
 	
 	
 	public Product getProductById(Integer productId) {
@@ -77,6 +94,7 @@ public class ProductService {
 			updateP.setDiscount(product.getDiscount());
 			updateP.setCoverImage(product.getCoverImage());
 			updateP.setPhotos(product.getPhotos());
+			updateP.setLaunchedState(product.getLaunchedState());
 			return updateP;
 		}
 		

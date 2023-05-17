@@ -106,6 +106,19 @@
 											<form:input type="file" name="extraphoto" path="" class="form-control"/>
 											<br />
 										</div>
+<%-- 										<form:radiobuttons path="launchedState" items="${launchedMap}" /> --%>
+<%-- 										<form:errors path="launchedState" /><br> --%>
+										<p>
+											<span>* </span><label for="content">選擇產品上下架狀態 :</label>
+										</p>
+										<div class="form-check form-check-inline" id="form-check-inline">
+		                    				<form:radiobutton path="launchedState" class="form-check-input" name="" id="" value="1"/>
+		                    				<label class="form-check-label" for="inlineRadio1">上架</label>
+		                  				</div>
+		                  				<div class="form-check form-check-inline">
+		                    				<form:radiobutton path="launchedState" class="form-check-input" name="" id="" value="0"/>
+		                    				<label class="form-check-label" for="inlineRadio2">下架</label>
+		                  				</div>
 										<input class="btn btn-primary" type="submit" value="送出" id="submit" />
 										<a href="${contextRoot}/shop/allproducts"><input
 											type="button" value="取消" class="btn btn-outline-warning" /></a>

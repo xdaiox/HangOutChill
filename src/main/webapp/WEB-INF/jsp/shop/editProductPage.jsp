@@ -97,6 +97,17 @@
 						<div id="dadtd"><input type="button" value="+ 圖片" id="addfile"/><br />
 							<form:input type="file" name="addphoto" path="" class="form-control"/><br /></div>
 						<form:input path="productId" type="hidden"/>
+						<p>
+											<span>* </span><label for="content">選擇產品上下架狀態 :</label>
+										</p>
+										<div class="form-check form-check-inline" id="form-check-inline">
+		                    				<form:radiobutton path="launchedState" class="form-check-input" name="" id="" value="1"/>
+		                    				<label class="form-check-label" for="inlineRadio1">上架</label>
+		                  				</div>
+		                  				<div class="form-check form-check-inline">
+		                    				<form:radiobutton path="launchedState" class="form-check-input" name="" id="" value="0"/>
+		                    				<label class="form-check-label" for="inlineRadio2">下架</label>
+		                  				</div>
 						<input class="btn btn-primary" type="submit" value="修改送出" id="submit" /> <a
 							href="${contextRoot}/shop/allproducts"><input class="btn btn-outline-warning"
 								type="button" value="取消" /></a>
