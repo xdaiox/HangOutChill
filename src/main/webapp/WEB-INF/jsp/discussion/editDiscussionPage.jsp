@@ -12,7 +12,6 @@
 
 <style>
 body {
-	margin-top: 20px;
 	color: #1a202c;
 	text-align: left;
 	background-color: #e2e8f0;
@@ -166,8 +165,10 @@ body {
 	max-width: 96%;
 	} /* 當寬度1259px↓　寬度設定 */
 }
-.container {
+.container2 {
 	max-width: 69%;
+	margin-left: auto;
+	margin-right: auto;
 }
 </style>
 <!-- ================================== ck editor ================================== -->
@@ -175,7 +176,7 @@ body {
 <script src="${contextRoot}/js/ckeditor5-build-classic/ckeditor.js"></script>
 <!-- ================================== ck editor ================================== -->
 </head>
-<div class="container">
+<div class="container2">
 	<div class="main-body p-0">
 		<div class="inner-wrapper">
 			<div class="inner-main">

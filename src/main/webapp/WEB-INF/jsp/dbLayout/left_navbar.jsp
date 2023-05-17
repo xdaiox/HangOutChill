@@ -26,7 +26,6 @@
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="${contextRoot}/article/dbShowAll">專欄管理</a></li>
             <li class="nav-item"> <a class="nav-link" href="${contextRoot}/article/add">新增專欄</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">Typography</a></li>
           </ul>
         </div>
       </li>
@@ -39,8 +38,6 @@
         <div class="collapse" id="form-elements">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="${contextRoot}/actandles/admin/chackaal">待審核項目</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">Dropdowns</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">Typography</a></li>
           </ul>
         </div>
       </li>
@@ -66,8 +63,6 @@
         <div class="collapse" id="tables">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="${contextRoot}/back/allDiscussions">顯示所有討論</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">Dropdowns</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">Typography</a></li>
           </ul>
         </div>
       </li>
