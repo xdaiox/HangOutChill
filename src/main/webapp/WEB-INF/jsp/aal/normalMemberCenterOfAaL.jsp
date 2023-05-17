@@ -89,7 +89,7 @@
 																			pattern="yyyy-MM-dd" value="${signup.deadLine}" /></span>
 																<td class="align-middle">${signup.normalMember.tel}
 																<td class="align-middle">${signup.normalMember.account}
-																<td class="align-middle">
+																<td class="align-middle" style="display: flex;">
 																	
 																	
 																
