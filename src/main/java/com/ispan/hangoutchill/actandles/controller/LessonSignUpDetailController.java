@@ -55,7 +55,7 @@ public class LessonSignUpDetailController {
 	        NormalMember result = nMemberService.findNormalUserByAccount(name);
 	        model.addAttribute("result",result);
 	     lessonSignUpDetailService.saveles(aal, result.getId()); 
-		return "redirect:/actandles/detail/showmysignup";
+		return "redirect:/actandles/MemberCenter";
 	}
 	
 	@DeleteMapping("/actandles/detail/cancal")

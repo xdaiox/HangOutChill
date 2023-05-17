@@ -96,6 +96,8 @@
 																<jstl:forEach var="checkout" items="${checkout.content}" >
 																	<jstl:if test="${checkout.aalId==signup.id}">
 																	<button disabled class="btn btn-primary">已完成付款</button>
+																	<a href="${contextRoot}/actandles/detail/showorder?aalid=${signup.id}">
+																	<button type="button" class="btn btn-primary">查看紀錄</button> </a>
 																	</jstl:if>
 																	
 																	
@@ -106,10 +108,10 @@
 																		<input type="hidden" name="id" value="${signup.id}" />
 																		<input type="submit"
 																			class="btn btn-primary" value="取消報名"
-																			onclick="return confirm('確定取消?')" />												
+																			onclick="return confirm('確定取消?')" /></form>												
 																	<jstl:choose>
 																		<jstl:when test="${signup.currentStatus=='opened'}">
-																		</form> <form:form method="get"
+																		 <form:form method="get"
 																			action="${contextRoot}/actandles/detail/lessignup">
 																			<input value="${signup.id}" type="hidden" name="id" />
 																			<button type="submit" class="btn btn-primary">前往結帳</button>
