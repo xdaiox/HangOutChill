@@ -95,4 +95,8 @@ public class ArticleService {
         return articleRepository.findArticleByStatus(true);
     }
 	
+	public List<Article> findLatestThreeArticle() {
+        return articleRepository.findLatestThreeArticle();
+    }
+	
 }
