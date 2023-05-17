@@ -237,8 +237,8 @@
 												class="btn btn-primary" type="submit">新增討論</button></a>
 													<select class="custom-select custom-select-sm mr-1" onchange="handleChange(this);">
 													<option value="${contextRoot}/discussion/allDiscussion/10" ${showCount == 10 ? 'selected' : ''}>顯示10項結果</option>
+													<option value="${contextRoot}/discussion/allDiscussion/15" ${showCount == 15 ? 'selected' : ''}>顯示15項結果</option>
 													<option value="${contextRoot}/discussion/allDiscussion/20" ${showCount == 20 ? 'selected' : ''}>顯示20項結果</option>
-													<option value="${contextRoot}/discussion/allDiscussion/50" ${showCount == 50 ? 'selected' : ''}>顯示50項結果</option>
 												</select>
 										<ul id="pageNumber" class="pagination pagination-sm pagination-circle justify-content-center mb-1 ml-auto">
 											<jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}">
