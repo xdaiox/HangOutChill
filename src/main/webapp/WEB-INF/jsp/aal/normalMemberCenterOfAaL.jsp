@@ -53,9 +53,9 @@
 						<div class="col-sm-12">
 							<br>
 							<jstl:choose>
-								<jstl:when test="${result.role.roleId==1}">一般會員
+								<jstl:when test="${result.role.roleId==1}">
 										<div class="card">
-										<div class="card-header" style="text-align: center;">報名紀錄</div>
+										<div class="card-header" style="text-align: center;font-size: 20px;">報名紀錄</div>
 										<div class="card-body">
 											<div class="table-responsive">
 												<table class="table table-hover table-bordered table-light">
@@ -90,14 +90,23 @@
 																<td class="align-middle">${signup.normalMember.tel}
 																<td class="align-middle">${signup.normalMember.account}
 																<td class="align-middle">
+																	
+																	
+																
+																<jstl:forEach var="checkout" items="${checkout.content}" >
+																	<jstl:if test="${checkout.aalId==signup.id}">
+																	<button disabled class="btn btn-primary">已完成付款</button>
+																	</jstl:if>
+																	
+																	
+																<jstl:if test="${checkout.aalId!=signup.id}">
 																	<form action="${contextRoot}/actandles/detail/cancal"
 																		method="post">
 																		<input type="hidden" name="_method" value="delete" />
 																		<input type="hidden" name="id" value="${signup.id}" />
 																		<input type="submit"
-																			class="btn btn-outline-danger btn-sm" value="取消報名"
-																			onclick="return confirm('確定取消?')" />
-																
+																			class="btn btn-primary" value="取消報名"
+																			onclick="return confirm('確定取消?')" />												
 																	<jstl:choose>
 																		<jstl:when test="${signup.currentStatus=='opened'}">
 																		</form> <form:form method="get"
@@ -110,6 +119,9 @@
 																		<button disabled class="btn btn-primary">尚未開放</button>
 																		</jstl:when>
 																	</jstl:choose>
+																</jstl:if>
+																</jstl:forEach>
+																
 																
 														</jstl:forEach>
 													</tbody>
@@ -135,7 +147,7 @@
 										</div>
 									</div>
 									<div class="card">
-										<div class="card-header" style="text-align: center;">交易紀錄</div>
+										<div class="card-header" style="text-align: center;font-size: 20px;">交易紀錄</div>
 										<div class="card-body">
 											<div class="table-responsive">
 												<table class="table table-hover table-bordered table-light">

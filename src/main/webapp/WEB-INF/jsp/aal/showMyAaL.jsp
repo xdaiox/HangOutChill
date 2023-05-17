@@ -21,10 +21,29 @@
 				<div class="row justify-content-center">
 					<div class="" style="margin: auto;">
 						<h1 style="text-align: center;">活動/課程管理</h1>
-						<form action="${contextRoot}/actandles/shop/add">
-							<input type="submit" class="btn btn-outline-info btn-sm"
-								value="新增" />
-						</form>
+						<ul class="d-flex justify-content-between form-control-lg">
+						<li><form action="${contextRoot}/actandles/shop/postall">							
+							<input type="hidden" name="currentStatus" value="approved" >
+							<input type="submit" class="btn btn-primary"
+								value="上架中" /></form>
+						<li><form action="${contextRoot}/actandles/shop/postall">							
+							<input type="hidden" name="currentStatus" value="opened" >
+							<input type="submit" class="btn btn-primary"
+								value="開放付款" /></form>
+						<li><form action="${contextRoot}/actandles/shop/postall">							
+							<input type="hidden" name="currentStatus" value="overruled" >
+							<input type="submit" class="btn btn-primary"
+								value="提案駁回" /></form>
+						<li><form action="${contextRoot}/actandles/shop/postall">							
+							<input type="hidden" name="currentStatus" value="unreviewed" >
+							<input type="submit" class="btn btn-primary"
+								value="審核中" /></form>
+						<li><form action="${contextRoot}/actandles/shop/add">
+							<input type="submit" class="btn btn-primary"
+								value="新增方案" />
+						</form>						
+						</ul>
+						
 						<div class="table-responsive">
 							<table class="table table-hover table-bordered table-light">
 								<thead>
@@ -67,10 +86,10 @@
 												height="200px"
 												src="data:image/png;base64,${aal.base64image}"> <br />
 											<td class="align-middle">
-												<div style="display: flex">
+												<div>
 													<form action="${contextRoot}/actandles/shop/edit">
 														<input type="hidden" name="id" value="${aal.id}" /> <input
-															type="submit" class="btn btn-outline-info btn-sm"
+															type="submit" class="btn btn-primary"
 															value="編輯" onclick="return confirm('啟用編輯將重新審核，確定繼續?')" />
 													</form>
 
@@ -78,7 +97,7 @@
 														method="post">
 														<input type="hidden" name="_method" value="delete" /> <input
 															type="hidden" name="id" value="${aal.id}" /> <input
-															type="submit" class="btn btn-outline-danger btn-sm"
+															type="submit" class="btn btn-primary"
 															value="刪除" onclick="return confirm('確定刪除?')" />
 													</form>
 	
@@ -104,7 +123,7 @@
 									</jstl:when>
 									<jstl:otherwise>
 										<a
-											href="${contextRoot}/actandles/shop/postall?p=${pageNumber}">${pageNumber}</a>
+											href="${contextRoot}/actandles/shop/postall?p=${pageNumber}&currentStatus=${aal.currentStatus}">${pageNumber}</a>
 									</jstl:otherwise>
 								</jstl:choose>
 							</jstl:forEach>

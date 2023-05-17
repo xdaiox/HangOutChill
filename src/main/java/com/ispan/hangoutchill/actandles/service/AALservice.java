@@ -222,8 +222,27 @@ public class AALservice {
 	}
  
 //========================================查看最新的前5筆資料========================================
-	public List<ActivitiesandLesson> findLastestTopFive(){
-		return aalRepository.findLastestTopFive();
+	public List<ActivitiesandLesson> findLastest(){
+		return aalRepository.findLastest();
 	}
+//========================================查看最新的前5筆資料========================================
+//	public ActivitiesandLesson findTheMostPopularAct() {
+//		List<ActivitiesandLesson> actlist = aalRepository.findTheMostPopularAct();
+//		for (ActivitiesandLesson aal : actlist) {
+//			byte[] imageBytes = aal.getImage(); // 取得圖片二進位數據
+//			String base64Image = Base64.getEncoder().encodeToString(imageBytes); // 轉換為base64格式
+//			aal.setBase64image(base64Image); // 設置到對應的實體類屬性中
+//			//取得報名人數
+//			aal.setRegistered(aalRepository.findregistered(aal.getId()));
+//		}
+//		
+//		for (ActivitiesandLesson aal : actlist) {
+//			Integer RegisteredNum = aal.getQuota()-aal.getRegistered();
+//			
+//			
+//		}
+		
+//	}
+	
 	
 }

@@ -80,8 +80,9 @@ public class AALcontroller {
 	
 //====================================商家活動管理頁面====================================
 	@GetMapping("/actandles/shop/postall")
-	public String goShowAAL(@RequestParam(name = "p", defaultValue = "1") Integer pagenumber, Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
-		Page<ActivitiesandLesson> page = aalService.findByPage(pagenumber);
+	public String goShowAAL(@RequestParam(name = "p", defaultValue = "1") Integer pagenumber, Model model,@RequestParam(name = "currentStatus",defaultValue = "approved") String currentStatus,
+			@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
+		Page<ActivitiesandLesson> page = aalService.findByStatus(pagenumber, currentStatus);
 		model.addAttribute("page", page);
 		String name = authentication.getName();
 		NormalMember result = nMemberService.findNormalUserByAccount(name);
