@@ -25,14 +25,16 @@
 			<input type="button" id="showall" class="btn btn-link" value="總攬"/>
 			<input type="button" id="showtheact" class="btn btn-link" value="僅活動"/>
 			<input type="button" id="showtheles" class="btn btn-link" value="僅課程"/>
-				<form action="${contextRoot}/actandles/detail/showmysignup">
+				<form action="${contextRoot}/actandles/MemberCenter">
 					<input type="submit" class="btn btn-link"
 						value="個人報名管理" />
 				</form>
+			<jstl:if test="${result.role.roleId==2}">
 				<form action="${contextRoot}/actandles/shop/postall">
 					<input type="submit" class="btn btn-link"
 						value="商家活動申辦" />
 				</form>
+			</jstl:if>	
 			</div>
 			<div class="content content_view" id="all"
 				style="background-color: #ffffff00;width: 100%;flex-wrap: wrap;height: unset;">

@@ -1,7 +1,7 @@
 package com.ispan.hangoutchill.member.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.ispan.hangoutchill.location.model.LocationFavorite;
+//import com.ispan.hangoutchill.location.model.LocationFavorite;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 import com.ispan.hangoutchill.xdaiox.model.Discussions;
@@ -238,17 +238,17 @@ public class NormalMember {
     //==================收藏地點===================
 
 
-    @OneToMany(mappedBy="normalMember", cascade = CascadeType.PERSIST)
-    @JsonIgnoreProperties("normalMember")
-    private List<LocationFavorite> locationFavorites;
-
-    public List<LocationFavorite> getLocationFavorites() {
-        return locationFavorites;
-    }
-
-    public void setLocationFavorites(List<LocationFavorite> locationFavorites) {
-        this.locationFavorites = locationFavorites;
-    }
+//    @OneToMany(mappedBy="normalMember", cascade = CascadeType.PERSIST)
+//    @JsonIgnoreProperties("normalMember")
+//    private List<LocationFavorite> locationFavorites;
+//
+//    public List<LocationFavorite> getLocationFavorites() {
+//        return locationFavorites;
+//    }
+//
+//    public void setLocationFavorites(List<LocationFavorite> locationFavorites) {
+//        this.locationFavorites = locationFavorites;
+//    }
 
     //==================收藏地點===================
 

@@ -138,7 +138,6 @@ public class ActivitiesandLesson {
 	}
 
 
-
 	public NormalMember getNormalMember() {
 		return normalMember;
 	}
@@ -147,13 +146,6 @@ public class ActivitiesandLesson {
 		this.normalMember = normalMember;
 	}
 
-//	public Integer getShop_Id() {
-//		return shop_Id;
-//	}
-//
-//	public void setShop_Id(Integer shop_Id) {
-//		this.shop_Id = shop_Id;
-//	}
 
 	public String getName() {
 		return name;

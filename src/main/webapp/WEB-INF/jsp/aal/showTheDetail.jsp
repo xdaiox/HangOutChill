@@ -60,6 +60,8 @@
 									<td class="align-middle">${aal.currentStatus}
 									<td class="align-middle"><img width="200px" height="200px"
 										src="data:image/png;base64,${aal.base64image}"> <br />
+										
+									<jstl:if test="${result.role.roleId!=3}">
 									<td class="align-middle">
 										<form:form method="get" action="${contextRoot}/actandles/detail/lessignup">
 											<jstl:choose>
@@ -72,6 +74,7 @@
 											</jstl:when>
 											</jstl:choose>
 										</form:form>
+									</jstl:if>
 						</tbody>
 					</table>
 
