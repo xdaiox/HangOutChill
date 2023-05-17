@@ -64,8 +64,8 @@ public class UserConfig {
 
     	http.csrf().disable()
         .authorizeRequests()
-            .antMatchers("/discussion/newDiscussion","/shop/shoppingCart","/shop/directbuying").hasAuthority("USER")
-            .antMatchers("/location/memberLocationInfo/addPage/**").hasAuthority("LOCATION")
+            .antMatchers("/discussion/newDiscussion","/shop/shoppingCart","/shop/directbuying","/actandles/detail/**").hasAuthority("USER")
+            .antMatchers("/location/memberLocationInfo/addPage/**","/actandles/shop/**").hasAuthority("LOCATION")
             .antMatchers("/dashboard","/back/**").hasAuthority("ADMIN")
             .antMatchers("/", "/member/registration", "/NormalMember/registed","/oauth/**","/member/NormalMemberDetail","/member/updateInfo").permitAll()
             .antMatchers("/discussion/allFavourite").hasAuthority("USER")

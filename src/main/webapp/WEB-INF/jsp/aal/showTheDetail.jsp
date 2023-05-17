@@ -15,9 +15,8 @@
 	<div class="container content_view" style="background-color: #ffffff00">
 		<div class="content_box">
 
-			<div class="content-sm" style="background-color: #ffffff00;">
-				
-			</div>
+			
+			
 			<div class="content" style="background-color: #ffffff00;height: 100%;">
 				
 				<div class="table-responsive">

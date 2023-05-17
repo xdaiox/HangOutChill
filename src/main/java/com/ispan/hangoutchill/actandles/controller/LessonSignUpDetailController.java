@@ -1,6 +1,6 @@
 package com.ispan.hangoutchill.actandles.controller;
 
-import javax.sound.midi.Soundbank;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -57,7 +57,7 @@ public class LessonSignUpDetailController {
 	     lessonSignUpDetailService.saveles(aal, result.getId()); 
 		return "redirect:/actandles/MemberCenter";
 	}
-	
+	@Transactional
 	@DeleteMapping("/actandles/detail/cancal")
 	public String cancal(@RequestParam("id") Integer id ,@CurrentSecurityContext(expression="authentication")
     Authentication authentication) {
@@ -66,7 +66,7 @@ public class LessonSignUpDetailController {
 	        NormalMember result = nMemberService.findNormalUserByAccount(name);
 	        
 	     lessonSignUpDetailService.cancalById(aal, result.getId()); 
-		return "redirect:/actandles/detail/showmysignup";
+		return "redirect:/actandles/MemberCenter";
 	}
 	
 	@GetMapping("/actandles/detail/showmysignup")

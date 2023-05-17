@@ -64,7 +64,7 @@ public class AALcontroller {
 //====================================執行新增頁面====================================
 	
 	@PostMapping("/actandles/shop/post")
-	public String postAAL(@RequestParam("imageFile") MultipartFile imageFile,@ModelAttribute("aal") ActivitiesandLesson aal, Model model) {
+	public String postAAL(@RequestParam("imageFile") MultipartFile imageFile,@ModelAttribute("aal") ActivitiesandLesson aal) {
 
 		try {
 			aal.setImage(imageFile.getBytes());
@@ -74,7 +74,7 @@ public class AALcontroller {
 		}
 		aalService.addAAL(aal);
 
-		return "redirect:/actandles/shop/postall";
+		return "redirect:/actandles/shop/postall?currentStatus=unreviewed";
 	}
 
 	
@@ -87,6 +87,7 @@ public class AALcontroller {
 		String name = authentication.getName();
 		NormalMember result = nMemberService.findNormalUserByAccount(name);
 		model.addAttribute("result", result);
+		model.addAttribute("currentStatus", currentStatus);
 
 		return "aal/showMyAaL";
 	}
@@ -95,10 +96,17 @@ public class AALcontroller {
 //====================================狀態切換====================================
 	@Transactional
 	@PutMapping("/actandles/shop/postall")
-	public String closeTheRegistration(@RequestParam(name = "id") Integer id,@RequestParam(name = "currentStatus") String currentStatus) {
-
+	public String closeTheRegistration(@RequestParam(name = "id") Integer id,@RequestParam(name = "currentStatus") String currentStatus,Model model,
+			@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
+		
+		String name = authentication.getName();
+		NormalMember result = nMemberService.findNormalUserByAccount(name);
 		aalService.updateStatus(id, currentStatus);
-		return "redirect:/actandles/shop/postall";
+		
+		if(result.getRole().getRoleId()==3) {
+			return "redirect:/actandles/shop/postall?currentStatus=overruled";
+		}
+		return "redirect:/actandles/shop/postall?currentStatus=unreviewed";
 	}
 	
 

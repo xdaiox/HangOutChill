@@ -226,7 +226,7 @@ public class AALservice {
 	public List<ActivitiesandLesson> findLastest(){
 		return aalRepository.findLastest();
 	}
-//========================================查看最新的前5筆資料========================================
+//========================================找報名最多的活動========================================
 	public ActivitiesandLesson findTheMostPopularAct() {
 		List<ActivitiesandLesson> actlist = aalRepository.findTheMostPopularAct();
 		for (ActivitiesandLesson aal : actlist) {
