@@ -39,21 +39,23 @@ public class HomepageController {
 	private ArticleService articleService;
 	
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(Model model,@CurrentSecurityContext(expression = "authentication")Authentication authentication) {
     	List<Product> products = productService.findLatestFiveProducts();
-    	
-    	
+        String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+
     	List<ActivitiesandLesson> al = aalService.findLastest();
     	ActivitiesandLesson ac = aalService.findTheMostPopularAct();
-    	
+
     	List<Article> art = articleService.findLatestThreeArticle();
-    	
+
     	model.addAttribute("products",products);
     	model.addAttribute("al",al);
     	model.addAttribute("ac",ac);
     	model.addAttribute("art",art);
-    	
-    	
+        model.addAttribute("result", result);
+
+
         return "IndexPage";
     }
 
