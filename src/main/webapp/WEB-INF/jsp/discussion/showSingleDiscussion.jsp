@@ -187,8 +187,8 @@
 							max-width: 69%;
 						}
 						.image-wrapper img {
-							max-width: 25%;
-							max-height: 400px;
+							/* max-width: 50%; */
+							max-height: 600px;
 							margin: 3px;
 							/* card裡的討論圖片大小限制 */
 						}
