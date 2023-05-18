@@ -154,7 +154,7 @@ public class AALcontroller {
 		model.addAttribute("aal", aal);
 		model.addAttribute("result",result);
 //		model.addAttribute("checksignup",aalService.findSignUpDetail(aal.getId(), result.getId()));
-		return "aal/showTheDetail";
+		return "aal/showTheDetail2";
 	}
 
 //====================================管理員部分=========================================	

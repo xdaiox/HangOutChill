@@ -2,8 +2,6 @@ package com.ispan.hangoutchill.actandles.controller;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ispan.hangoutchill.actandles.model.ActivitiesandLesson;
-import com.ispan.hangoutchill.actandles.model.LessonSignUpDetail;
 import com.ispan.hangoutchill.actandles.model.SignUpOrderDetail;
 import com.ispan.hangoutchill.actandles.service.AALservice;
 import com.ispan.hangoutchill.actandles.service.SignUpOrderDetailService;
@@ -48,7 +45,7 @@ public class SignUpOrderDetailController {
 //		}
 	//跳轉頁面&單向訂單查詢
 		
-		@PostMapping("/actandles/detail/showOrder")
+		@PostMapping("/actandles/showOrder")
 		public String showECPAYHistoryurder (Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication,@RequestParam(name = "on")String on) {
 			String name = authentication.getName();
 			NormalMember result = nMemberService.findNormalUserByAccount(name);
@@ -87,8 +84,7 @@ public class SignUpOrderDetailController {
 			model.addAttribute("signup",signup);
 			Page<SignUpOrderDetail> checkout = suoService.findPageBymemberId(result.getId(), detailpagenumber);
 			model.addAttribute("checkout",checkout);
-			
-			return "aal/normalMemberCenterOfAaL";
+			return "normalMemberCenterOfAaL";
 		}
 		
 

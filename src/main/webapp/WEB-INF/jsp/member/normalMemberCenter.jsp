@@ -68,7 +68,7 @@
                                             <tr>
                                                 <th scope="row" style="width: 160px">會員真實姓名：</th>
                                                 <td style=" text-align: left; "><form:input path="reallName" value="${result.reallName}"/></td>
-                                                <td rowspan="5"><img src="${result.photoB64}" id="preview" ><form:input path="file" type="file" id="target"/></td>
+                                                <td rowspan="5"><img src="${result.photoB64}" id="preview" style="width:200px;height:200px" ><form:input path="file" type="file" id="target"/></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="width: 160px">會員暱稱：</th>

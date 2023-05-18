@@ -46,7 +46,6 @@
                                         <table class="table table-borderless" >
                                             <thead>
                                             <tr>
-                                                <th scope="col" style="font-size: large">順序</th>
                                                 <th scope="col" style="font-size: large">地點名稱</th>
                                                 <th scope="col" style="font-size: large">地點分類</th>
                                                 <th scope="col" style="font-size: large">地點城市</th>
@@ -57,8 +56,7 @@
                                             <tbody>
                                             <jstl:forEach items="${favoriteLocation}" var="favorites">
                                             <tr>
-                                                <th scope="row">${favoriteLocation.indexOf(favorites)+1}</th>
-                                                <td>${favorites.locationInfo.locName}</td>
+                                                <td><a href="${contextRoot}/location/locationList/single?locId=${favorites.locationInfo.locId}">${favorites.locationInfo.locName}</a></td>
                                                 <td>${favorites.locationInfo.locCat}</td>
                                                 <td>${favorites.locationInfo.locCity}</td>
                                                 <td>${favorites.locationInfo.locDist}</td>

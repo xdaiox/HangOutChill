@@ -22,7 +22,7 @@
 		<div class="content_box" >
 			<div class="d-flex justify-content-around mb-3 "
 				style="background-color: #ffffff00;">
-			<input type="button" id="showall" class="btn btn-link" value="總攬"/>
+			<input type="button" id="showall" class="btn btn-link" value="總覽"/>
 			<input type="button" id="showtheact" class="btn btn-link" value="僅活動"/>
 			<input type="button" id="showtheles" class="btn btn-link" value="僅課程"/>
 				<form action="${contextRoot}/actandles/MemberCenter">
