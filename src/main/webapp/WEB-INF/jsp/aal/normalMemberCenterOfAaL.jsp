@@ -94,14 +94,14 @@
 																	
 																
 																
-																	<jstl:if test="${signup.chekckedout>0}">
+																	<jstl:if test="${signup.checkedout>0}">
 																	<button disabled class="btn btn-primary">已完成付款</button>
 																	<a href="${contextRoot}/actandles/detail/showorder?aalid=${signup.id}">
 																	<button type="button" class="btn btn-primary">查看紀錄</button> </a>
 																	</jstl:if>
 																	
 																	
-																<jstl:if test="${signup.chekckedout==0}">
+																<jstl:if test="${signup.checkedout==0}">
 																	<form action="${contextRoot}/actandles/detail/cancal"
 																		method="post">
 																		<input type="hidden" name="_method" value="delete" />

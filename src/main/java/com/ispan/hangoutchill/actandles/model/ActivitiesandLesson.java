@@ -100,7 +100,7 @@ public class ActivitiesandLesson {
 	private Integer registered;
 
 	@Transient
-	private Integer chekckedout;
+	private Integer checkedout;
 	
 	 @ManyToMany(cascade = CascadeType.ALL)
 	    @JoinTable(
@@ -270,13 +270,14 @@ public class ActivitiesandLesson {
 		this.cause = cause;
 	}
 
-	public Integer getChekckedout() {
-		return chekckedout;
+	public Integer getCheckedout() {
+		return checkedout;
 	}
 
-	public void setChekckedout(Integer chekckedout) {
-		this.chekckedout = chekckedout;
+	public void setCheckedout(Integer checkedout) {
+		this.checkedout = checkedout;
 	}
+
 
 	
 
