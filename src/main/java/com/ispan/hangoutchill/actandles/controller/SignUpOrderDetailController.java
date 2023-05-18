@@ -84,7 +84,8 @@ public class SignUpOrderDetailController {
 			model.addAttribute("signup",signup);
 			Page<SignUpOrderDetail> checkout = suoService.findPageBymemberId(result.getId(), detailpagenumber);
 			model.addAttribute("checkout",checkout);
-			return "normalMemberCenterOfAaL";
+			
+			return "aal/normalMemberCenterOfAaL";
 		}
 		
 
