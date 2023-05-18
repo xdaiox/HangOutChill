@@ -98,6 +98,9 @@ public class ActivitiesandLesson {
 	
 	@Transient
 	private Integer registered;
+
+	@Transient
+	private Integer chekckedout;
 	
 	 @ManyToMany(cascade = CascadeType.ALL)
 	    @JoinTable(
@@ -265,6 +268,14 @@ public class ActivitiesandLesson {
 
 	public void setCause(String cause) {
 		this.cause = cause;
+	}
+
+	public Integer getChekckedout() {
+		return chekckedout;
+	}
+
+	public void setChekckedout(Integer chekckedout) {
+		this.chekckedout = chekckedout;
 	}
 
 	

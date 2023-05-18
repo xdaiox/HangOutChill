@@ -47,9 +47,16 @@ public interface AALRepository extends JpaRepository<ActivitiesandLesson, Intege
 	@Query("SELECT COUNT(*) FROM LessonSignUpDetail  WHERE activitiesandLesson.id = :lesid")
 	public Integer findregistered(@Param(value ="lesid") Integer lesid );
 	
+	//=======================================找指定訂單=======================================
+	@Query("SELECT COUNT(*) FROM SignUpOrderDetail  WHERE aalId = :aalId and memberId=:memberId")
+	public Integer findcheckedout(@Param(value ="aalId") Integer aalId , @Param(value ="memberId") Integer memberId);
+
 	//找最新的前三筆資料
 	@Query(value = "SELECT TOP 3 * FROM ActivitiesandLesson WHERE topic ='les' ORDER BY theDayofSubmission DESC ", nativeQuery = true)
 	public List<ActivitiesandLesson> findLastest();
+	//找最新的活動資料
+	@Query(value = "SELECT TOP 1 * FROM ActivitiesandLesson WHERE topic ='act' ORDER BY theDayofSubmission DESC ", nativeQuery = true)
+	public ActivitiesandLesson findLastestAct();
 	//找活動
 	@Query(value = "SELECT * FROM ActivitiesandLesson where topic ='act'", nativeQuery = true)
 	public List<ActivitiesandLesson> findTheMostPopularAct();

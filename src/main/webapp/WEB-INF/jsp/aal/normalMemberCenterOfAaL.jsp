@@ -93,15 +93,15 @@
 																	
 																	
 																
-																<jstl:forEach var="checkout" items="${checkout.content}" >
-																	<jstl:if test="${checkout.aalId==signup.id}">
+																
+																	<jstl:if test="${signup.chekckedout>0}">
 																	<button disabled class="btn btn-primary">已完成付款</button>
 																	<a href="${contextRoot}/actandles/detail/showorder?aalid=${signup.id}">
 																	<button type="button" class="btn btn-primary">查看紀錄</button> </a>
 																	</jstl:if>
 																	
 																	
-																<jstl:if test="${checkout.aalId!=signup.id}">
+																<jstl:if test="${signup.chekckedout==0}">
 																	<form action="${contextRoot}/actandles/detail/cancal"
 																		method="post">
 																		<input type="hidden" name="_method" value="delete" />
@@ -122,10 +122,11 @@
 																		</jstl:when>
 																	</jstl:choose>
 																</jstl:if>
-																</jstl:forEach>
+																
 																
 																
 														</jstl:forEach>
+
 													</tbody>
 												</table>
 
@@ -217,13 +218,12 @@
 											<div class="d-flex justify-content-between">
 												<form method="GET"
 													action="${contextRoot}/actandles/MemberCenter">
-													<span><select name="aalid">
+													<select name="aalid" id="status">
 															<option value="" selected disabled>選擇ID:</option>
 															<jstl:forEach var="aalid" items="${openedaal}">
 																<option value="${aalid.id}">${aalid.id}</option>
 															</jstl:forEach>
-													</select></span>
-													<button type="submit">提交</button>
+													</select>
 												</form>
 
 												<form method="GET"
@@ -290,23 +290,10 @@
 		</div>
 	</section>
 	<jsp:include page="../layout/footer.jsp" />
-	<script>
-    //圖片上傳前預覽
-    const input = document.getElementById("target")
-    const preview = document.getElementById("preview")
-    input.addEventListener('change', () => {
-        const file = input.files[0];
-        const reader = new FileReader();
-
-        reader.addEventListener('load', () => {
-            preview.src = reader.result;
-        });
-
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            // preview.src = "";
-        }
+<script>
+     document.getElementById('status').addEventListener('change', function() {
+        // 提交表單
+        this.form.submit();
     });
 </script>
 </body>
