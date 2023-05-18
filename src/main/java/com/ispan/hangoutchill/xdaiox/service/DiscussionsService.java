@@ -49,7 +49,7 @@ public class DiscussionsService {
 	
 	//找所有討論 where
 	public Page<Discussions> findAllByPage(Integer pageNumber){
-		Pageable pgb =PageRequest.of(pageNumber-1, 20, Sort.Direction.DESC, "postDate");
+		Pageable pgb =PageRequest.of(pageNumber-1, 200, Sort.Direction.DESC, "postDate");
 		Page<Discussions> page = dssRepository.findAll(pgb);
 		return page;
 	}

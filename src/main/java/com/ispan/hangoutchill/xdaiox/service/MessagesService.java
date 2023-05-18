@@ -48,7 +48,7 @@ public class MessagesService {
 	
 	//找所有回覆byPage
 	public Page<Messages> findMessageByPage(Integer pageNumber,Integer d_id){
-		Pageable pgb =PageRequest.of(pageNumber-1, 10, Sort.Direction.ASC, "postDate");
+		Pageable pgb =PageRequest.of(pageNumber-1, 5, Sort.Direction.ASC, "postDate");
 		Discussions id = dssRepository.findById(d_id).orElse(null);
 		Page<Messages> page = mssRepository.findContentsByDiscussions(id,pgb);
 		return page;
