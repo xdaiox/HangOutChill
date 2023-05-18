@@ -12,6 +12,12 @@
 <title>個人活動管理</title>
 <jsp:include page="../layout/navbar.jsp" />
 
+<style>
+
+th{ width: 150px; }
+</style>
+
+
 </head>
 <body>
 	<div class="container content_view" style="background-color: #ffffff00">
@@ -24,8 +30,8 @@
 
 
 						<div class="d-flex justify-content-between">
-							<form method="GET" action="${contextRoot}/actandles/shop/postall" class="d-flex justify-content-between mb-3">
-								<select name="currentStatus"  class="form-select form-select-lg">
+							<form method="GET" action="${contextRoot}/actandles/shop/postall" class="mb-3">
+								<select name="currentStatus" id="status" class="form-control form-select form-select-lg">
 										<option value="" selected disabled>
 											<jstl:if test="${currentStatus=='approved'}">當前篩選：上架中</jstl:if>
 											<jstl:if test="${currentStatus=='opened'}">當前篩選：開放付款</jstl:if>
@@ -38,7 +44,7 @@
 										<option value="unreviewed" >審核中</option>			
 								</select>
 								
-								<button class="btn btn-primary" type="submit">篩選</button>
+								
 							</form>
 							<form action="${contextRoot}/actandles/shop/add">
 							<input type="submit" class="btn btn-primary" value="新增方案" />
@@ -73,24 +79,23 @@
 													test="${aal.topic=='act'}">活動</jstl:if> <jstl:if
 													test="${aal.topic=='les'}">課程</jstl:if>
 											<td class="align-middle"><fmt:formatDate
-													pattern="yyyy-MM-dd HH:mm:ss"
+													pattern="yyyy/MM/dd HH:mm:ss"
 													value="${aal.theDayofSubmission}" />
 											<td class="align-middle"><span><fmt:formatDate
-														pattern="yyyy-MM-dd" value="${aal.theDayofStarts}" /></span>
+														pattern="yyyy/MM/dd" value="${aal.theDayofStarts}" /></span>
 											<td class="align-middle">${aal.fee}
 											<td class="align-middle">${aal.quota}
 											<td class="align-middle">${aal.lowerLimit}
 											<td class="align-middle"><span><fmt:formatDate
 														pattern="yyyy-MM-dd" value="${aal.deadLine}" /></span>
 											<td class="align-middle">${aal.currentStatus}
-											<td class="align-middle"><img width="200px"
-												height="200px"
+											<td class="align-middle"><img width="100%"
 												src="data:image/png;base64,${aal.base64image}"> <br />
 											<td class="align-middle">
 												<div>
 													<form action="${contextRoot}/actandles/shop/edit">
 														<input type="hidden" name="id" value="${aal.id}" /> <input
-															type="submit" class="btn btn-primary" value="編輯"
+															type="submit" class="btn btn-primary mb-1" value="編輯"
 															onclick="return confirm('啟用編輯將重新審核，確定繼續?')" />
 													</form>
 
@@ -98,7 +103,7 @@
 														method="post">
 														<input type="hidden" name="_method" value="delete" /> <input
 															type="hidden" name="id" value="${aal.id}" /> <input
-															type="submit" class="btn btn-primary" value="刪除"
+															type="submit" class="btn btn-primary mb-1" value="刪除"
 															onclick="return confirm('確定刪除?')" />
 													</form>
 
@@ -107,7 +112,7 @@
 															action="${contextRoot}/actandles/shop/postall">
 															<input value="${aal.id}" type="hidden" name="id" />
 															<input value="opened" type="hidden" name="currentStatus" />
-															<button type="submit" class="btn btn-primary"
+															<button type="submit" class="btn btn-primary mb-1"
 																onclick="return confirm('確定開放?')">開放付款</button>
 														</form:form>
 													</jstl:if>
@@ -140,4 +145,11 @@
 	<jsp:include page="../layout/footer.jsp" />
 
 </body>
+
+<script>
+     document.getElementById('status').addEventListener('change', function() {
+        // 提交表單
+        this.form.submit();
+    });
+</script>
 </html>

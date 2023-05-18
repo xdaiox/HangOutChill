@@ -52,6 +52,8 @@ public class AALservice {
 			String base64Image = Base64.getEncoder().encodeToString(imageBytes); // 轉換為base64格式
 			aal.setBase64image(base64Image); // 設置到對應的實體類屬性中
 			aal.setRegistered(aalRepository.findregistered(aal.getId()));
+			aal.setCheckedout(aalRepository.findcheckedout(aal.getId(), id));
+			System.out.println(aal.getCheckedout());
 		}
 		return page;
 	}
@@ -116,7 +118,7 @@ public class AALservice {
 	
 //========================================針對核准與開放報名來搜索========================================
 	public Page<ActivitiesandLesson> findByStatusforguest(Integer pageNumber) {
-		Pageable pgb = PageRequest.of(pageNumber - 1, 100, Sort.Direction.ASC, "theDayofSubmission");
+		Pageable pgb = PageRequest.of(pageNumber - 1, 100, Sort.Direction.DESC ,"theDayofSubmission");
 		Page<ActivitiesandLesson> page = aalRepository.findPageByStatusForGuest(pgb);
 		List<ActivitiesandLesson> contentlist = page.getContent();
 		for (ActivitiesandLesson aal : contentlist) {
@@ -222,7 +224,7 @@ public class AALservice {
 		return aalRepository.findSignUpDetail(lesid, memberid);		
 	}
  
-//========================================查看最新的前5筆資料========================================
+//========================================查看最新的前3筆資料========================================
 	public List<ActivitiesandLesson> findLastest(){
 		return aalRepository.findLastest();
 	}
@@ -245,9 +247,13 @@ public class AALservice {
 			}
 		}	
 		System.out.println("取得id"+target);
-		ActivitiesandLesson top =(aalRepository.findById(target)).get();
-		
-		return top;
+		if(target!=null) {
+			ActivitiesandLesson top = (aalRepository.findById(target)).get();
+			return top;
+		}else {
+			ActivitiesandLesson top = aalRepository.findLastestAct();
+			return top;
+		}
 	}
 	
 	
