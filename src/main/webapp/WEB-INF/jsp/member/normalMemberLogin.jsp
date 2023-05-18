@@ -47,16 +47,18 @@
         <div class="box box-border">
             <div class="box-body">
                 <h4>登入</h4>
+                <span ><button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 20px;" id="nmemberBtn">一般會員</button></span> 
+                <span ><button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 20px;" id="adminBtn">管理者</button></span> 
                 <form action="${contextRoot}/member/login" method="post">
                     <div class="form-group">
                         <label>使用者信箱</label>
-                        <input type="text" name="username" class="form-control">
+                        <input type="text" name="username" class="form-control" id="usermail">
                     </div>
                     <div class="form-group">
                         <label class="fw">密碼
                             <a href="${contextRoot}/member/forgetPwd" class="pull-right">忘記密碼</a>
                         </label>
-                        <input type="password" name="password" class="form-control">
+                        <input type="password" name="password" class="form-control" id="userpwd">
                     </div>
                     <div class="form-group text-right" style="margin-bottom: 5px">
                         <button class="btn btn-primary btn-block" type="submit">登入</button>
@@ -76,6 +78,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('nmemberBtn').addEventListener('click',function(){
+        document.getElementById('usermail').value = 'esterturkeychen0815@gmail.com';
+        document.getElementById('userpwd').value = '!miki50230';
+
+    })
+    document.getElementById('adminBtn').addEventListener('click',function(){
+        document.getElementById('usermail').value = 'hsin@gmail.com';
+        document.getElementById('userpwd').value = '!miki50230';
+
+    })
+
+
+</script>
 
 
 </body>

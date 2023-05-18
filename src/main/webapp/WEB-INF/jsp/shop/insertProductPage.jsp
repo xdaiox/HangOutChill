@@ -35,6 +35,7 @@
 
 
 					<h3 style="text-align: center;">請輸入欲新增產品資訊：</h3>
+          <span ><button type="button" class="btn btn-primary btn-sm" id="demoBtn">Demo</button></span> 
 					<div class="content"
 						style="background-color: #ffffff00; height: 100%">
 						<div class="col-12" style="margin: auto">
@@ -116,7 +117,7 @@
 		                    				<label class="form-check-label" for="inlineRadio1">上架</label>
 		                  				</div>
 		                  				<div class="form-check form-check-inline">
-		                    				<form:radiobutton path="launchedState" class="form-check-input" name="" id="" value="0"/>
+		                    				<form:radiobutton path="launchedState" class="form-check-input" name="" id="offshelf" value="0"/>
 		                    				<label class="form-check-label" for="inlineRadio2">下架</label>
 		                  				</div>
 										<input class="btn btn-primary" type="submit" value="送出" id="submit" />
@@ -315,6 +316,24 @@
           flag7 = false;
         }
       }
+
+      // Demo時自動填入資訊
+      document.getElementById('demoBtn').addEventListener('click',function(){
+        document.getElementById('descrp').value = '萬眾矚目的[史達巴克斯咖啡館]鎮店之寶之一的巧克力磚隆重上市！授權本商鋪網路獨家專賣，你各位還不手刀搶起來！現在購買享折扣85折！';
+        document.getElementById('proname').value = '[特選]史達巴克斯咖啡館巧克力磚';
+        document.getElementById('category').value = '美味嚐點';
+        document.getElementById('content').value = '巧克力磚乙入( 20cm x 15 cm x 10 cm)';
+        document.getElementById('unitprice').value = '550';
+        document.getElementById('discount').value = '0.85';
+        document.getElementById('launchdate').value = '2023-05-18';
+        document.getElementById('offshelf').checked = true;
+        
+
+
+
+      })
+
+
     </script>
 </body>
 </html>
