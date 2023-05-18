@@ -18,6 +18,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 	@Query(value="select top(1) * from orders where member_id = :memberId order by order_id desc",nativeQuery=true)
 	public Order findLatestOrderByMemberId(@Param(value="memberId") Integer memberId);
 
-	@Query("from Order where member_id= :memberId")
+	@Query("from Order where member_id= :memberId order by orderdate desc")
 	public List<Order> findOrdersByMemberId(@Param(value="memberId") Integer memberId);
 }
