@@ -94,7 +94,7 @@
 								</c:when>
 								<c:otherwise>
 								<li class="page-item">
-                                  	<a href="${contextRoot}/shop/productcategory?p=${pageNum}" class="page-link">${pageNum}</a>
+                                  	<a href="${contextRoot}/shop/productcategory?category=${category}&p=${pageNum}" class="page-link">${pageNum}</a>
                               	</li>
 								</c:otherwise>
 								</c:choose>

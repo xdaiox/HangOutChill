@@ -111,7 +111,9 @@
 							
 						</div>
 						<div class="col-md-7">
-							<h3 style="text-align: left; margin: 20px 0px;">購買人資訊</h3>
+							<h3 style="text-align: left; margin: 20px 0px; display: inline-block">購買人資訊</h3>
+							<input type="button" value="Demo"
+								class="btn btn-secondary btn-sm" id="demoBtn">
 							<div class="form-row">
 								<div class="col">
 									<label for="buyer-name">購買人姓名</label> <input type="text"
@@ -255,7 +257,14 @@
 
 		})
 
+		// demo 一鍵輸入資訊
+		document.getElementById('demoBtn').addEventListener('click',function(){
+			document.getElementById('buyer-phone').value = '0988855855';
+			document.getElementById('recipient-address').value = '台南市大學路1號 (國立成功大學唯農大樓)資展國際收'
 
+		})
+		
+		
 	</script>
 </body>
 

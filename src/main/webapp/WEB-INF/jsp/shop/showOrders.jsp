@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +50,7 @@
 									<td>${order.paymentVia}</td>
 									<td class="paymentstate">${order.paymentState}</td>
 									<td>${order.shipVia}</td>
-									<td>${order.orderDate}</td>
+									<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${order.orderDate}"/></td>
 									<td class="shippedDate">${order.shippedDate}</td>
 <!-- 									<td> -->
 <%-- 										<form action="${contextRoot}/shop/delete/product" --%>
