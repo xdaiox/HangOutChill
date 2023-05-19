@@ -204,6 +204,13 @@ public class AALservice {
 		}
 		return null;
 	}
+//========================================管理員刪除用========================================
+	@Transactional
+	public void deleteByid(Integer id) {
+		aalRepository.deleteById(id);
+	}
+	
+	
 //========================================更改狀態用========================================
 	@Transactional
 	public ActivitiesandLesson updateStatus(Integer id, String currentStatus) {
