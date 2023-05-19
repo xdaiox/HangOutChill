@@ -57,7 +57,7 @@
                                             <jstl:forEach var="order" items="${orders}">
                                                 <tr>
                                                     <th scope="row">${orders.indexOf(order)+1}</th>
-                                                    <td>${order.orderNo}</td>
+                                                    <td><a href='${contextRoot}/member/order/orderdetail?orderno=${order.orderNo}'>${order.orderNo}</a></td>
                                                     <td>${order.orderDate}</td>
                                                     <td>${order.paymentVia}</td>
                                                     <td><jstl:choose>
@@ -79,6 +79,5 @@
     </div>
 </section>
 <jsp:include page="../layout/footer.jsp"/>
-</script>
 </body>
 </html>

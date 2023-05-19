@@ -118,7 +118,7 @@
     </div>
 	<jsp:include page="../layout/footer.jsp"/>
 	<script>
-		$(document).ready(function () {
+// 		$(document).ready(function () {
 			
 			$('.submitBtn').click(function (event) {
                 console.log(this.value);
@@ -172,7 +172,7 @@
 
             })
 			
-		})
+// 		})
 		
 		
 	</script>

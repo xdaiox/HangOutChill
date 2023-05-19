@@ -21,6 +21,7 @@
             <div class="box box-border">
                 <div class="box-body">
                     <h4>一般註冊</h4>
+                    <span ><button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 20px;" id="demoBtn">Demo</button></span> 
                     <form:form action="${contextRoot}/NormalMember/registed" method="post" modelAttribute="newNormalMember" enctype="multipart/form-data" id="NewMemberForm" onsubmit="checked(event);">
                         <div class="form-group">
                             <label class="fw">帳號 (信箱)<span id="wrongMail" style="color: red"></span></label>
@@ -43,12 +44,12 @@
                             <form:input  path="reallName" type="text" name="realname" class="form-control" id="realname"/>
                         </div>
                         <div class="form-group">
-                            <label class="fw">性別</label>
+                            <label class="fw" id="gender">性別</label>
                             <label>男
                                 <form:radiobutton path="gender" value="male" />
                             </label>
                             <label>女
-                                <form:radiobutton path="gender" value="female" />
+                                <form:radiobutton path="gender" value="female" id="femalradio" />
                             </label>
                         </div>
                             <div class="form-group">
@@ -244,6 +245,25 @@
                     event.preventDefault()
                 }
             }
+
+            // Demo -- 一鍵加入註冊資訊
+            document.getElementById('demoBtn').addEventListener('click',function(){
+
+                document.getElementById('phone').value = '0988152110';
+                document.getElementById('nickName').value = 'mimi'
+                document.getElementById('account').value = 'estherturkeychen0815@gmail.com';
+                document.getElementById("pwd").value = '!miki50230';
+                document.getElementById('pwd2').value = '!miki50230';
+                document.getElementById('date').value = '1995-11-12';
+                document.getElementById('realname').value = '陳曉苗';
+                document.getElementById('femalradio').checked = true;
+
+
+
+            })
+            
+
+
 
         </script>
 </body>

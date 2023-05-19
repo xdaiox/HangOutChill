@@ -167,7 +167,19 @@ public class OrderController {
 		return "shop/memberOrders";
 	}
 
-
+	@GetMapping("/member/order/orderdetail")
+	public String findOrderDetailByMemberId(@CurrentSecurityContext(expression = "authentication") Authentication authentication, 
+											@RequestParam("orderno") String orderNo,
+										    Model model) {
+		String name = authentication.getName();
+		NormalMember currentmember = nMemberService.findNormalUserByAccount(name);
+		Order order = orderService.findOrderByOrderNo(orderNo);
+		List<OrderDetail> ods = new ArrayList<>(order.getOrderDetails());
+		model.addAttribute("order", order);
+		model.addAttribute("orderDetails", ods);
+		model.addAttribute("result", currentmember);
+		return "shop/memberOrderDetail";
+	}
 
 	
 }
