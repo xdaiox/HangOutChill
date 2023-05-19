@@ -79,12 +79,16 @@ public class SignUpOrderDetailController {
 			 model.addAttribute("openedaal",openedaal);
 			 Page<SignUpOrderDetail> orderdetail = suoService.findPageByaalId(pagenumber, aalid);
 			model.addAttribute("orderdetail",orderdetail);
+			if(aalid!=null) {
+			model.addAttribute("showtheName",aalService.findAALById(aalid).getName());
+			}
 		//==================================給用戶的資料====================================
 			Page<ActivitiesandLesson> signup = aalService.findByaccountsId(result.getId(), pagenumber);
 			model.addAttribute("signup",signup);
 			Page<SignUpOrderDetail> checkout = suoService.findPageBymemberId(result.getId(), detailpagenumber);
 			model.addAttribute("checkout",checkout);
-			return "normalMemberCenterOfAaL";
+			
+			return "aal/normalMemberCenterOfAaL";
 		}
 		
 

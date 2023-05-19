@@ -107,7 +107,7 @@ color: #3e3e3e;
 									<td class="align-middle">${aal.lowerLimit}
 									<td class="align-middle"><span><fmt:formatDate
 												pattern="yyyy-MM-dd" value="${aal.deadLine}" /></span>
-									<td class="align-middle">${aal.currentStatus}
+									<td class="align-middle"><jstl:if test="${aal.currentStatus=='unreviewed'}">審核中</jstl:if> 
 									<td class="align-middle"><img width="200px" height="200px"
 										src="data:image/png;base64,${aal.base64image}"> <br />
 									<td class="align-middle">
