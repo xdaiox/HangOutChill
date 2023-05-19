@@ -14,64 +14,94 @@
 
 </head>
 <body>
-	<div class="container content_view" style="background-color: #ffffff00">
+	<div class="container content_view mb-3" style="background-color: #ffffff00">
 		<div class="content_box" style="width: 100%">
 			<div class="content"
 				style="background-color: #ffffff00; height: 100%;">
 				<div class="row justify-content-center">
-					<div class="" style="margin: auto;">
-						<h1 style="text-align: center;">報名資訊確認</h1>
-						<div class="table-responsive">
-							<table class="table table-hover table-bordered table-light">
-								<ins>報名活動確認:</ins>
-								<thead>
-									<tr>
-										<th>商家名稱
-										<th>活動名稱
-										<th>分類
-										<th>舉辦日
-										<th>報名費用
-								</thead>
-								<tbody>
-
-									<tr>
-										<td class="align-middle">${result.nickName}
-										<td class="align-middle">${aal.name}
-										<td class="align-middle"><jstl:if
-												test="${aal.topic=='act'}">活動</jstl:if> <jstl:if
-												test="${aal.topic=='les'}">課程</jstl:if>
-										<td class="align-middle"><span><fmt:formatDate
-													pattern="yyyy-MM-dd" value="${aal.theDayofStarts}" /></span>
-										<td class="align-middle" id="totalPreview">${aal.fee}
-								</tbody>
-							</table>
+					<div style="margin: auto;">
+					<jstl:choose>
+						<jstl:when test="${checksignup==1}">
+							<h1 style="text-align: center;">結帳資訊確認</h1>
+						</jstl:when>
+						<jstl:otherwise>
+							<h1 style="text-align: center;">報名資訊確認</h1>	
+						</jstl:otherwise>
+					</jstl:choose>
+						<div style="font-size: 20px;">
+							
+							<div class="card"  >
+								<div class="card-header" style="text-align: center;">報名活動資訊:</div>
+									<div class="card-body">
+										<div class="mb-3 row">
+									    <label  class="col-md-5 col-form-label">商家名稱:</label>
+										    <div class="col">
+										      <input type="text" readonly class="form-control-plaintext" value="${aal.normalMember.nickName}">
+								    	</div>
+				    				</div>								
+										<div class="mb-3 row">
+									    <label  class="col-md-5 col-form-label">活動名稱:</label>
+										    <div class="col">
+										      <input type="text" readonly class="form-control-plaintext" value="${aal.name}">
+								    	</div>
+				    				</div>
+										<div class="mb-3 row">
+									    <label  class="col-md-5 col-form-label">分類:</label>
+										    <div class="col">
+										     <jstl:if test="${aal.topic=='act'}"><input type="text" readonly class="form-control-plaintext" value="活動"></jstl:if>
+										     <jstl:if test="${aal.topic=='les'}"><input type="text" readonly class="form-control-plaintext" value="課程"></jstl:if>
+								    	</div>
+				    				</div>
+										<div class="mb-3 row">
+									    <label  class="col-md-5 col-form-label">舉辦日:</label>
+										    <div class="col">
+										      <input type="text" readonly class="form-control-plaintext" value="<fmt:formatDate
+													pattern="yyyy-MM-dd" value="${aal.theDayofStarts}" />">
+								    	</div>
+				    				</div>
+										<div class="mb-3 row">
+									    <label  class="col-md-5 col-form-label">報名費用:</label>
+										    <div class="col">
+										      <input type="text" readonly class="form-control-plaintext" id="totalPreview" value="${aal.fee}">
+								    	</div>
+				    				</div>
+			
 							<form:form method="post"
 								action="${contextRoot}/actandles/detail/lessignup">
-								<table class="table table-hover table-bordered table-light">
-									<ins>報名會員資訊:</ins>
-									<thead>
-										<tr>
-											<th>聯絡信箱:
-											<th>姓名:
-											<th>電話:
-											 <jstl:if test="${aal.topic=='act'}">
-													<th>人數:
-												</jstl:if>
-									</thead>
-									<tbody>
-										<tr>
-											<td class="align-middle">${result.account}
-											<td class="align-middle">${result.reallName}
-											<td class="align-middle">${result.tel}
-												<jstl:if test="${aal.topic=='act'}">
-													<td class="align-middle"><input name="numbersOfPeople" id="totalTarget"
-														type="number" value="1" size="5px" min="1" max="${aal.quota-aal.registered}" onkeydown="return false" />
-												</jstl:if> <jstl:if test="${aal.topic=='les'}">
-													<input name="numbersOfPeople" value="1" type="hidden" />
-												</jstl:if>
-									</tbody>
-								</table>
 								
+								<jstl:if test="${checksignup==1}">
+								<div class="card-header" style="text-align: center;">報名會員資訊:</div>
+									<div class="mb-3 row">
+									    <label  class="col-md-5 col-form-label">聯絡信箱:</label>
+										    <div class="col">
+										      <input type="text" readonly class="form-control-plaintext"  value="${result.account}">
+								    	</div>
+				    				</div>
+									<div class="mb-3 row">
+									    <label  class="col-md-5 col-form-label">姓名:</label>
+										    <div class="col">
+										      <input type="text" readonly class="form-control-plaintext"  value="${result.reallName}">
+								    	</div>
+				    				</div>
+									<div class="mb-3 row">
+									    <label  class="col-md-5 col-form-label">電話:</label>
+										    <div class="col">
+										      <input type="text" readonly class="form-control-plaintext"  value="${result.tel}">
+								    	</div>
+				    				</div>
+				    			 <jstl:if test="${aal.topic=='act'}">
+									<div class="mb-3 row">
+									    <label  class="col-md-5 col-form-label">人數:</label>
+										    <div class="col">
+										      <input type="number" class="form-control-plaintext" name="numbersOfPeople"  id="totalTarget" value="1" min="1" max="${aal.quota-aal.registered}" onkeydown="return false">
+								    	</div>
+				    				</div>
+								</jstl:if>	
+								<jstl:if test="${aal.topic=='les'}">
+										<input name="numbersOfPeople" value="1" type="hidden" />
+									</jstl:if>
+									
+								</jstl:if>
 								
 							<div style="text-align: center;">	
 								<jstl:choose>
@@ -104,13 +134,14 @@
 							</div>
 
 						</div>
-
+						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
 	</div>
-
+</div>
 	<jsp:include page="../../layout/footer.jsp" />
 
 <script>
@@ -120,12 +151,12 @@
 	document.getElementById("target").value=number;
 
 	}
-	const unit_price = document.getElementById("totalPreview").textContent
+	const unit_price = document.getElementById("totalPreview").value
 	document.getElementById("totalTarget").addEventListener('change',function(){
 		let multiplier = document.getElementById("totalTarget").value
 		const totalpre =document.getElementById("totalPreview")
 		let total = unit_price*multiplier
-		totalpre.innerText=total
+		totalpre.value=total
 	})
 
 

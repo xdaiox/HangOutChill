@@ -96,7 +96,7 @@ public class AALcontroller {
 //====================================狀態切換====================================
 	@Transactional
 	@PutMapping("/actandles/shop/postall")
-	public String closeTheRegistration(@RequestParam(name = "id") Integer id,@RequestParam(name = "currentStatus") String currentStatus,Model model,
+	public String closeTheRegistration(@RequestParam(name = "id") Integer id,@RequestParam(name = "currentStatus",defaultValue = "unreviewed" ) String currentStatus,Model model,
 			@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
 		
 		String name = authentication.getName();
@@ -106,7 +106,11 @@ public class AALcontroller {
 		if(result.getRole().getRoleId()==3) {
 			return "redirect:/actandles/shop/postall?currentStatus=overruled";
 		}
-		return "redirect:/actandles/shop/postall?currentStatus=unreviewed";
+		if(currentStatus=="deleted") {
+			return "redirect:/actandles/shop/postall?currentStatus=unreviewed";
+		}
+		return "redirect:/actandles/shop/postall?currentStatus="+currentStatus;
+		
 	}
 	
 
@@ -247,7 +251,7 @@ public class AALcontroller {
 		// 輸出畫面
 		suoService.createOrder(result, aal, uuNo, timestamp, numbersOfPeople);
 		String form = aio.aioCheckOut(aioCheck, null);
-		
+		 
 		return form;
 	}
 

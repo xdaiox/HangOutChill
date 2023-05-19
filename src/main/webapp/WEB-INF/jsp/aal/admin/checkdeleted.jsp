@@ -115,7 +115,7 @@ color: #3e3e3e;
 												method="DELETE" modelAttribute="aal" > 
 												<input type="hidden" name="id" value="${aal.id}" />
 												 <input	type="submit" class="btn btn-outline-danger btn-sm"
-													value="駁回" onclick="return confirm('確定刪除?')" />
+													value="刪除" onclick="return confirm('確定刪除?')" />
 											</form:form>	
 										</td>
 										<div id="popup-date" class="popup">
