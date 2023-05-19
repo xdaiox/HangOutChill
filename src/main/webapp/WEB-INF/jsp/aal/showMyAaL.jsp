@@ -65,7 +65,6 @@ th{ width: 150px; }
 										<th>預計名額
 										<th>最低開辦人數
 										<th>報名截止日
-										<th>當前狀態
 										<th>預覽圖
 										<th>
 								</thead>
@@ -88,7 +87,6 @@ th{ width: 150px; }
 											<td class="align-middle">${aal.lowerLimit}
 											<td class="align-middle"><span><fmt:formatDate
 														pattern="yyyy-MM-dd" value="${aal.deadLine}" /></span>
-											<td class="align-middle">${aal.currentStatus}
 											<td class="align-middle"><img width="100%"
 												src="data:image/png;base64,${aal.base64image}"> <br />
 											<td class="align-middle">

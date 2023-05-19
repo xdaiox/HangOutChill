@@ -38,6 +38,7 @@
         <div class="collapse" id="form-elements">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="${contextRoot}/actandles/admin/chackaal">待審核項目</a></li>
+            <li class="nav-item"> <a class="nav-link" href="${contextRoot}/actandles/admin/chackdeletdaal">已刪除項目</a></li>
           </ul>
         </div>
       </li>

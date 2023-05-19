@@ -96,7 +96,7 @@ public class AALcontroller {
 //====================================狀態切換====================================
 	@Transactional
 	@PutMapping("/actandles/shop/postall")
-	public String closeTheRegistration(@RequestParam(name = "id") Integer id,@RequestParam(name = "currentStatus") String currentStatus,Model model,
+	public String closeTheRegistration(@RequestParam(name = "id") Integer id,@RequestParam(name = "currentStatus",defaultValue = "unreviewed" ) String currentStatus,Model model,
 			@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
 		
 		String name = authentication.getName();
@@ -106,7 +106,11 @@ public class AALcontroller {
 		if(result.getRole().getRoleId()==3) {
 			return "redirect:/actandles/shop/postall?currentStatus=overruled";
 		}
-		return "redirect:/actandles/shop/postall?currentStatus=unreviewed";
+		if(currentStatus=="deleted") {
+			return "redirect:/actandles/shop/postall?currentStatus=unreviewed";
+		}
+		return "redirect:/actandles/shop/postall?currentStatus="+currentStatus;
+		
 	}
 	
 
@@ -180,6 +184,29 @@ public class AALcontroller {
 		aalService.updateStatus(id, currentStatus);
 		return "redirect:/actandles/admin/chackaal";
 	}
+	
+	//已刪除列表	
+	@GetMapping("/actandles/admin/chackdeletdaal")
+	public String goShowDeletedAAL(@RequestParam(name = "p", defaultValue = "1") Integer pagenumber, Model model,@CurrentSecurityContext(expression = "authentication") Authentication authentication) {
+		String name = authentication.getName();
+		NormalMember result = nMemberService.findNormalUserByAccount(name);
+		model.addAttribute("result", result);
+		
+		String value = "deleted";
+		Page<ActivitiesandLesson> page = aalService.findByStatus(pagenumber, value);
+		
+		model.addAttribute("page", page);
+
+		return "aal/admin/checkdeleted";
+	}
+	
+	@Transactional
+	@DeleteMapping("/actandles/admin/chackdeletdaal")
+	public String deleteDeletedAAL(@RequestParam(name = "id") Integer id) {
+
+		aalService.deleteByid(id);
+		return "redirect:/actandles/admin/chackdeletdaal";
+	}
 
 //===================================結帳測試=========================================	
 
@@ -218,13 +245,13 @@ public class AALcontroller {
 //		aioCheck.setReturnURL("https://0ebf-203-204-109-146.ngrok-free.app/hangoutchill/returnURL");
 		/* Client端回傳付款結果網址 */
 
-		aioCheck.setOrderResultURL("http://localhost:8080/hangoutchill/actandles/detail/showOrder?on=AaL"+aal.getId()+aal.getNormalMember().getId()+result.getId()+uuNo+timestamp);
+		aioCheck.setOrderResultURL("http://localhost:8080/hangoutchill/actandles/showOrder?on=AaL"+aal.getId()+aal.getNormalMember().getId()+result.getId()+uuNo+timestamp);
 //		aioCheck.setOrderResultURL("http://localhost:8080/hangoutchill/showOrder?ind="+uuNo+timestamp+aal.getId()+"&n="+numbersOfPeople);
 //		aioCheck.setOrderResultURL("https://0ebf-203-204-109-146.ngrok-free.app/hangoutchill/showHistoryOrder?id="+aal.getId());
 		// 輸出畫面
 		suoService.createOrder(result, aal, uuNo, timestamp, numbersOfPeople);
 		String form = aio.aioCheckOut(aioCheck, null);
-		
+		 
 		return form;
 	}
 
