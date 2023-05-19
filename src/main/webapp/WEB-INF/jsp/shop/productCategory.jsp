@@ -150,10 +150,12 @@
                              		$('.count').hide();
                              	}else{
                                 $('.count').text(result);
+                                $('.count').show();
                              	}
                             },
                             error: function (err) {
                                 console.log(err);
+                                
                                 $('.count').hide();
                             }
                         })
