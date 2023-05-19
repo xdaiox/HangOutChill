@@ -79,6 +79,9 @@ public class SignUpOrderDetailController {
 			 model.addAttribute("openedaal",openedaal);
 			 Page<SignUpOrderDetail> orderdetail = suoService.findPageByaalId(pagenumber, aalid);
 			model.addAttribute("orderdetail",orderdetail);
+			if(aalid!=null) {
+			model.addAttribute("showtheName",aalService.findAALById(aalid).getName());
+			}
 		//==================================給用戶的資料====================================
 			Page<ActivitiesandLesson> signup = aalService.findByaccountsId(result.getId(), pagenumber);
 			model.addAttribute("signup",signup);

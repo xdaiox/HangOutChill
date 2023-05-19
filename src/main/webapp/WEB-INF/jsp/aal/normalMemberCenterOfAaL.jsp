@@ -212,9 +212,10 @@
 												<form method="GET"
 													action="${contextRoot}/actandles/MemberCenter">
 													<select name="aalid" id="status">
-														<option value="" selected disabled>選擇ID:</option>
+														<option value="" selected disabled>選擇課程:
+														<jstl:if test="${not empty showtheName}"></jstl:if>${showtheName}</option>
 														<jstl:forEach var="aalid" items="${openedaal}">
-															<option value="${aalid.id}">${aalid.id}</option>
+															<option value="${aalid.id}">${aalid.name}</option>
 														</jstl:forEach>
 													</select>
 												</form>

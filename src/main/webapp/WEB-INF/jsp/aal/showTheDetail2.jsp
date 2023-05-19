@@ -148,6 +148,14 @@
                                     pattern="yyyy-MM-dd" value="${aal.theDayofStarts}"/></span></li>
                             <li><span class="d-flex">報名截止日： <fmt:formatDate
                                     pattern="yyyy-MM-dd" value="${aal.deadLine}"/></span></li>
+                             <li><span class="d-flex"><jstl:choose>
+								<jstl:when test="${(aal.quota-aal.registered)<5}">
+									<p style="color: red; font-weight: bold;">剩餘名額：${aal.quota-aal.registered}人
+								</jstl:when>
+								<jstl:when test="${(aal.quota-aal.registered)>5}">
+									<p>剩餘名額：${aal.quota-aal.registered}人
+								</jstl:when>
+							</jstl:choose></span></li>
                         </ul>
                     </aside>
                     <!--================右3 資訊 結束 =================-->

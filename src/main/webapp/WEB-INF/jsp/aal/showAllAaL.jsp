@@ -15,20 +15,15 @@
 </head>
 <body>
 	<jsp:include page="../layout/navbar.jsp" />
-	<h1 class="text-center">活動與課程</h1>
-
 	<div class="container content_view mb-3" 
 		style="background-color: #ffffff00;">
-		<div class="content_box" >
+		<div class="content_box" style="width:100%;" >
 			<div class="d-flex justify-content-around mb-3 "
 				style="background-color: #ffffff00;">
 			<input type="button" id="showall" class="btn btn-link" value="總覽"/>
 			<input type="button" id="showtheact" class="btn btn-link" value="僅活動"/>
 			<input type="button" id="showtheles" class="btn btn-link" value="僅課程"/>
-				<form action="${contextRoot}/actandles/MemberCenter">
-					<input type="submit" class="btn btn-link"
-						value="個人報名管理" />
-				</form>
+
 			<jstl:if test="${result.role.roleId==2}">
 				<form action="${contextRoot}/actandles/shop/postall">
 					<input type="submit" class="btn btn-link"
@@ -40,7 +35,7 @@
 				style="background-color: #ffffff00;width: 100%;flex-wrap: wrap;height: unset;">
 							<jstl:forEach var="aal" items="${page.content}">
 							
-							<div class="text-center  mb-3 aalBox" style="height:450px;width: 25%;border: 1px solid gray;">
+							<div class="text-center  mb-3 " style="height:450px;width: 20%;">
 							<div style="height:200px;width: 100%;">
 								<a href="${contextRoot}/actandles/${aal.id}"><img style="background-size: cover;height: 100%;" class="img-fluid img-thumbnail rounded" src="data:image/png;base64,${aal.base64image}"></a>
 							</div>
@@ -83,7 +78,7 @@
 				style="background-color: #ffffff00;  display: none;width: 100%;flex-wrap: wrap;height: unset;">
 							<jstl:forEach var="aal" items="${pageforAct.content}">
 							
-							<div class="text-center  mb-3" style="height:450px;width: 25%;border: 1px solid gray;">
+							<div class="text-center  mb-3" style="height:450px;width: 20%;">
 							<div style="height:200px;width: 100%;">
 								<a href="${contextRoot}/actandles/${aal.id}"><img style="background-size: cover;height: 100%;" class="img-fluid img-thumbnail rounded" src="data:image/png;base64,${aal.base64image}"></a>
 							</div>
@@ -126,7 +121,7 @@
 				style="background-color: #ffffff00; display: none;width: 100%;flex-wrap: wrap;height: unset;">
 							<jstl:forEach var="aal" items="${pageforLes.content}">
 							
-							<div class="text-center  mb-3" style="height:450px;width: 25%;border: 1px solid gray;">
+							<div class="text-center  mb-3" style="height:450px;width: 20%;">
 							<div style="height:200px;width: 100%;">
 								<a href="${contextRoot}/actandles/${aal.id}"><img style="background-size: cover;height: 100%;" class="img-fluid img-thumbnail rounded" src="data:image/png;base64,${aal.base64image}"></a>
 							</div>

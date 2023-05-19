@@ -53,7 +53,7 @@ $(document).ready(function() {
 				style="background-color: #ffffff00; height: 100%">
 				<div class="col-8" style="margin: auto">
 					<div class="card">
-						<div class="card-header text-center" style="font-size: 20px;" >活動/課程申辦頁面</div><button id="demo">DEMO</button>
+						<div class="card-header text-center" style="font-size: 20px;" >活動/課程申辦頁面</div>
 						<div class="card-body" style="font-size: 15px;">
 							<form:form class="col" modelAttribute="aal"
 								enctype="multipart/form-data" method="POST"
@@ -100,7 +100,7 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</div>
-	
+	<button id="demo" class="mb-3" style="float: left;" >DEMO</button>
 	<jsp:include page="../layout/footer.jsp" />
 
 	<script>
