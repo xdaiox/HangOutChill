@@ -31,11 +31,14 @@
 			                    <div class="article_font">
 			                        <p>${authart.article_name}</p>
 			                    </div>
+                                <div class="text">
+                                	<p>${authart.article_excerpt}</p>
+                            	</div>
 			                </div>
 	                	</div>
                    </c:forEach>
-
-                <!-- information -->
+				</div>
+				                <!-- information -->
                 <div class="article_metadata">
                     <div class="metadataWrapper" style="height: 600px;">
                         <div class="interactive">
@@ -49,7 +52,6 @@
                     </div>
                 </div>
                 <!-- information -->
-			</div>
             </div>
         </section>
     </div>

@@ -48,6 +48,22 @@ a {
     }
 }
 
+
+@media screen and (max-width:1300px) { 
+	
+	.main {
+		width: 86%; 
+	}
+}
+
+@media screen and (max-width:1000px) { 
+	
+	.main {
+		width: 92%; 
+	}
+}
+
+
 .pickers_li {
     cursor: pointer;
     display: inline-block;

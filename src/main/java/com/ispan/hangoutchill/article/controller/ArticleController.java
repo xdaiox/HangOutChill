@@ -326,6 +326,7 @@ public class ArticleController {
 		return "article/articleTheme";
 	}
 	
+	//作者投稿作品
 	@GetMapping("/article/authorArticle")
 	public String authorArticle(@RequestParam(name="auth_id") Integer auth_id,
 			@CurrentSecurityContext(expression = "authentication")Authentication authentication, Model model) {
@@ -340,14 +341,9 @@ public class ArticleController {
         model.addAttribute("authart",authart);
         model.addAttribute("authName",authName);
         model.addAttribute("result", result);
-        
-        System.out.println("00000000000000000000000000000000000");
-        System.out.println(authart);
 		
 		return "article/authArticle";
 	}
-	
-	
 	
 	@GetMapping("/article/AllArticle")
 	public String getAllFavorites(@CurrentSecurityContext(expression = "authentication")Authentication authentication, Model model) {

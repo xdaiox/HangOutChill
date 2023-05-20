@@ -75,17 +75,19 @@ section {
 .article_content {
     width: 75%;
     position: relative;
-    padding-top: 50px;
+    padding-top: 20px;
+    flex-wrap: wrap;
+    display: flex;
 }
 
 
 .article_title {
-    width: 82%;
-    margin: auto;
+    width: 31%;
+    margin-right: 2%;
 }
 
 .article_title .article_list {
-	width: 30%;
+	width: 100%;
 	margin-left: 5%;
 	margin-bottom: 5%;
 }
@@ -96,12 +98,28 @@ section {
 
 .article_photo img {
 	width: 100%;
+	height: 200px;
+    border-radius: 2px;
 }
 
 .article_list .article_font {
 	margin-top: 15px;
 }
 
+.text {
+    
+    line-height: 1.625rem;
+    text-align: justify;
+    letter-spacing: 0.1rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.text p {
+	font-size: 0.9rem;
+}
 
 .btnBox {
     position: relative;

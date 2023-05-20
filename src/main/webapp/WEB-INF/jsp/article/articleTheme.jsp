@@ -38,10 +38,7 @@
                     </ul>
                 </div>
                 <div class="searchbox">
-                    <input type="text" class="search_input" placeholder="專欄搜尋">
-                    <button class="search_submit" type="submit">
-                        <a href="#"><i class="ti-search"></i></a>
-                    </button>
+                	<a href="${contextRoot}/article/articleAttention">我要投稿</a>
                 </div>
             </section>
 

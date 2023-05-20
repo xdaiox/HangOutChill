@@ -74,7 +74,7 @@
 	
 	$('#profileEnter').click(function() {
         if(userName === 'anonymousUser') {
-        	alert('請登入會員')
+        	window.location.href = 'http://localhost:8080/hangoutchill/member/login';
         }
         else{
            window.location.href = 'http://localhost:8080/hangoutchill/article/articleForm';
