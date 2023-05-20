@@ -328,7 +328,14 @@
         document.getElementById('launchdate').value = '2023-05-18';
         document.getElementById('offshelf').checked = true;
         
-
+        // 格式確認
+        checkDesc();
+  	  	checkName();
+  	  	checkCategory();
+  	  	checkContent();
+  	  	checkUniprice();
+  	  	checkDiscount();
+  	  	checkDate();
 
 
       })
