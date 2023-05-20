@@ -171,7 +171,9 @@ public class NormalMember {
     
     @OneToMany(mappedBy="normalmember", cascade = CascadeType.PERSIST)
 	private Set<ArticleFavorite> favorite = new LinkedHashSet<>();
-    
+
+
+    @JsonIgnore
     @OneToMany(mappedBy="normalmember", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<Article> article = new LinkedHashSet<>();
     

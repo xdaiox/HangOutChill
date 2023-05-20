@@ -47,7 +47,8 @@
         <div class="box box-border">
             <div class="box-body">
                 <h4>登入</h4>
-                <span ><button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 20px;" id="nmemberBtn">一般會員</button></span> 
+                <span ><button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 20px;" id="nmemberBtn">一般會員</button></span>
+                <span ><button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 20px;" id="meow">陳可喵</button></span>
                 <span ><button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 20px;" id="adminBtn">管理者</button></span>
                 <span ><button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 20px;" id="locationMember">精選地點商家</button></span>
                 <span ><button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 20px;" id="locationActivity">精選活動商家</button></span>
@@ -95,12 +96,18 @@
 
     document.getElementById('locationMember').addEventListener('click',function(){
         document.getElementById('usermail').value = 'ray861213@gmail.com';
-        document.getElementById('userpwd').value = '1234';
+        document.getElementById('userpwd').value = '!miki50230';
 
     })
     document.getElementById('locationActivity').addEventListener('click',function(){
         document.getElementById('usermail').value = 'hangoutchillforeeit61@gmail.com';
         document.getElementById('userpwd').value = '1234@abc';
+
+    })
+
+    document.getElementById('meow').addEventListener('click',function(){
+        document.getElementById('usermail').value = 'iztuchen1987@gmail.com';
+        document.getElementById('userpwd').value = '1234';
 
     })
 

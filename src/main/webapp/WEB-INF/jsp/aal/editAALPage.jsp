@@ -66,17 +66,9 @@ $(document).ready(function() {
 								<form:input path="normalMember.id"
 									value="${aal.normalMember.id}" class="form-control"
 									type="hidden"></form:input>
-								<div>活動/課程名稱								
-									<jstl:choose>
-										<jstl:when test="${result.role.roleId==3}">
-											<input name="name" value="${aal.name}" class="form-control"
-												type="text" readonly></input>										
-										</jstl:when>
-										<jstl:otherwise>
+								<div>活動/課程名稱
 											<form:input path="name" value="${aal.name}" class="form-control"
 												type="text"></form:input>
-										</jstl:otherwise>
-									</jstl:choose>
 								</div>
 								<br>
 								<div class="mb-3">
@@ -87,56 +79,27 @@ $(document).ready(function() {
 								<div class="mb-3">
 									舉辦日: <span><fmt:formatDate pattern="yyyy-MM-dd"
 											value="${aal.theDayofStarts}" /></span>
-								
-								<jstl:if test="${result.role.roleId!=3}">
 											更新:<form:input path="theDayofStarts"
 											value="${aal.theDayofStarts}" class="form-control" type="date"></form:input>
-											</jstl:if>
 								</div>
 								<div class="mb-3">報名費用:
-									<jstl:choose>
-										<jstl:when test="${result.role.roleId==3}">										
-											<input name="fee" value="${aal.fee}" class="form-control"
-												type="text" readonly ></input>
-										</jstl:when>
-										<jstl:otherwise>
+
 											<form:input path="fee" value="${aal.fee}" class="form-control"
 												type="text"></form:input>
-										</jstl:otherwise>
-									</jstl:choose>
 								</div>
 								<div class="mb-3">預計名額:
-									<jstl:choose>
-										<jstl:when test="${result.role.roleId==3}">
-											<input name="quota" value="${aal.quota}"
-												class="form-control" type="text" readonly ></input>
-										</jstl:when>
-										<jstl:otherwise>
 											<form:input path="quota" value="${aal.quota}"
 												class="form-control" type="text"></form:input>
-										</jstl:otherwise>
-									</jstl:choose>
 								</div>
 								<div class="mb-3">最低開辦人數:
-									<jstl:choose>
-										<jstl:when test="${result.role.roleId==3}">
-											<input name="lowerLimit" value="${aal.lowerLimit}"
-												class="form-control" type="text" readonly ></input>
-										</jstl:when>
-										<jstl:otherwise>
 											<form:input path="lowerLimit" value="${aal.lowerLimit}"
 												class="form-control" type="text"></form:input>
-										</jstl:otherwise>
-									</jstl:choose>
 								</div>
 								<div class="mb-3">
 									報名截止日: <span><fmt:formatDate pattern="yyyy-MM-dd"
 											value="${aal.deadLine}" /></span></div>
-											
-									<jstl:if test="${result.role.roleId!=3}">
 										<form:input path="deadLine" value="${aal.deadLine}"
 												class="form-control" type="date"></form:input>
-									</jstl:if>
 								<jstl:choose>
 									<jstl:when test="${result.role.roleId!=3}">
 										<form:input path="currentStatus" class="form-control"
@@ -151,16 +114,8 @@ $(document).ready(function() {
 								<img width="200px" height="200px" id="preview"
 									src="data:image/png;base64,${aal.base64image}"></div>
 								<div class="mb-3">
-										<jstl:choose>
-										<jstl:when test="${result.role.roleId==3}">
-											<form:input path="imageFile" id="target" class="form-control"
-												type="hidden"></form:input>
-										</jstl:when>
-										<jstl:otherwise>
-											預覽圖更新:<form:input path="imageFile" id="target" class="form-control"
+										預覽圖更新:<form:input path="imageFile" id="target" class="form-control"
 												type="file"></form:input>
-										</jstl:otherwise>
-									</jstl:choose>
 								</div>
 								<div class="mb-3">文案內容:					
 									<form:textarea path="aalContent" id="summernote"

@@ -411,11 +411,11 @@ public class LocationInfoController {
     //會員商家地點刪除
     @DeleteMapping("/location/memberLocationInfo/delete")
     public String deleteMemberLocationInfo(@CurrentSecurityContext(expression = "authentication") Authentication authentication,
-                                           @RequestParam(name = "locId") Integer locId) {
+                                           @RequestParam(name = "locId") Integer locId,Model model) {
 
-//        String name = authentication.getName();
-//        NormalMember result = nMemberService.findNormalUserByAccount(name);
-//        model.addAttribute("result", result);
+        String name = authentication.getName();
+        NormalMember result = nMemberService.findNormalUserByAccount(name);
+        model.addAttribute("result", result);
 
 
         locationInfoService.deleteLocationInfoById(locId);
