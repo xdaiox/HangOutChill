@@ -21,8 +21,8 @@
 		<div class="main">
 			<div class="main-panel">
 				<div class="titleSpace d-flex">
-				    <h3 class="createContent col-8">新增專欄</h3>
-				    <h3 class="defaultImg col-4">預覽圖</h3>
+				    <h3 class="createContent col-12">專欄投稿</h3>
+
 				</div>
 			    <div class="content-wrapper">
 			      <div class="row cw">
@@ -30,10 +30,13 @@
 			          <div class="form-floating mb-3">
 			            <form:form class="row g-3" modelAttribute="articles" enctype="multipart/form-data" method="post" action="${contextRoot}/article/articleForm">
 			              
-			              <div class="col-12">
+			              <div class="col-11">
 			                <div class="titleName">
 			                  <form:input path="article_name" class="title" type="text" name="" id="articleName" placeholder="專欄名稱"/>
 			                </div>
+			              </div>
+			              <div class="col-1">
+			              	<button id="demo">Demo</button>
 			              </div>
 			              <div class="col-md-4">
 			                <label for="inputCity" class="form-label">主題</label>
@@ -56,21 +59,8 @@
 			                <label for="form-check-inline" class="form-label">內容</label>
 			                <form:textarea path="article_content" name="picturefile" class="form-control" id="summernote"></form:textarea>
 			              </div>
-<!-- 						  <div class="col-12"> -->
-<!-- 			                <label for="form-check-inline" class="form-label">狀態</label> -->
-<!-- 			                <div class="form-check-box"> -->
-<!-- 			                  <div class="form-check form-check-inline" id="form-check-inline"> -->
-<%-- 			                    <form:radiobutton path="status" class="form-check-input" name="inlineRadioOptions" id="inlineRadio1" value="1"/> --%>
-<!-- 			                    <label class="form-check-label" for="inlineRadio1">上架</label> -->
-<!-- 			                  </div> -->
-<!-- 			                  <div class="form-check form-check-inline"> -->
-<%-- 			                    <form:radiobutton path="status" class="form-check-input" name="inlineRadioOptions" id="inlineRadio2" value="2"/> --%>
-<!-- 			                    <label class="form-check-label" for="inlineRadio2">下架</label> -->
-<!-- 			                  </div> -->
-<!-- 			                </div> -->
-<!-- 			              </div> -->
 			              <div class="col-12">
-			                <button type="submit" class="btn btn-primary">Submit</button>
+			                <button type="submit" class="btn btn-primary">投稿</button>
 			              </div>
 			            </form:form>
 			          </div>
@@ -167,6 +157,25 @@ $(document).ready(function() {
   	const text = event.target.value;
     displayDiv.textContent = text;
   });
+</script>
+
+
+<script>
+	function demo() {
+		document.getElementById("articleName").value="那些精釀沒說的事，A2H精釀啤酒：飲酒是生活內涵的累積";
+		document.getElementById("articleExcerpt").value="鄰近台北實踐大學的複合型精釀啤酒咖啡館A2H，把德國啤酒文化帶進台北街頭，在城市中刻畫一幅源自歐洲的生活場景。它以德式精釀啤酒工藝為根基，融入台灣風土元素，創作獨樹一格的風味口感。無論純飲、搭配甜食，白天或黑夜，A2H令喝啤酒不再有時間與空間的界線，融入台灣人的日常。";
+		articleContent = document.getElementById("summernote");
+		let content = '「沒有啤酒的你不是你！」（Du bist nicht du, wenn du kein Bier hast.）一句流傳久遠的德國俗諺，卻道盡了啤酒之於德意志民族的意義。'
+						+'千年之前，德國修道院士本為興建教堂、修繕居所，而後開始精研啤酒釀製以換取報酬。如今釀製啤酒的工藝經過世代傳承、時間淬煉，成為舉世標竿。修道士或許始料未及，這些從酵母轉化為液體黃金的啤酒，現已深植德國人的DNA，更隨著德國的啤酒純釀工法遠播至世界各處，在台灣悄然生根。'
+						+'閒適騎乘單車，或漫步於陽光與林蔭中，再走進街邊小店來杯啤酒放鬆解渴的場景，正在大直A2H每日上演。這家複合型精釀啤酒咖啡館，源自於發展電動輔助自行車（E-Bike）起家的母集團達瑞創新BESV，創辦人蘇開建醉心於歐洲人文精神落實於生活的嚮往，進一步跨足餐飲並打造出A2H。'
+		$(articleContent).summernote('code', content);
+	}
+	
+	$('#demo').click(function() {
+	 	event.preventDefault();
+		demo();
+	});
+
 </script>
 
 

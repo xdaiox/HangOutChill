@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
   <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
@@ -54,21 +55,19 @@
                         <div class="article_info">
                             <div class="article_list">
                                 <div class="article_type"><a href="/hangoutchill/article/theme?article_theme=${article.article_theme}">${article.article_theme}</a></div>
-                                <div class="article_date"> 日期 ${article.createtime}</div>
+                                <div class="article_date">日期
+                                	<fmt:formatDate pattern="yyyy-MM-dd" value="${article.createtime}"/>
+                                </div>
                             </div>
                             <div class="article_list article_author">
                                 <div class="article_infoText">
-                                    圖片/
+                                    圖片/${article.normalmember.reallName}
                                     <span class="article_color"></span>
                                     提供
                                 </div>
-                                <div class="article_infoText">
-                                    核稿/
-                                    <span class="article_color"></span>
-                                </div>
                             </div>
                             <div class="article_list article_hashtag">
-                                <a href="">#酒吧</a>
+								<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-env="REAL" data-url="" data-color="default" data-size="small" data-count="false" data-ver="3" style="display: none;"></div>
                             </div>
                         </div>
                         <div class="interactive">
@@ -97,6 +96,9 @@
     }
 
     var articleId = getArticleIdFromCurrentURL();
+    var articleUrl = window.location.href;
+    $('.line-it-button').attr('data-url', articleUrl);
+    console.log(articleUrl);
     
     //取得userName
     $(document).ready(function() {
@@ -136,6 +138,7 @@
 
 	//加入收藏
     $('#favorBtn').click(function() {
+    	console.log("ssssss");
         if(userName === 'anonymousUser') {
         	alert('請登入會員')
 
@@ -178,7 +181,7 @@
 	
     
   </script>
-
+  <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 
 </body>
 

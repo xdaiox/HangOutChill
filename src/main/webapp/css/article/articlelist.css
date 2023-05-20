@@ -23,7 +23,7 @@
 }
 
 .selectbox {
-    width: 50%;
+    width: 90%;
 }
 
 .selectbox ul {
@@ -46,11 +46,25 @@
 }
 
 .searchbox {
-    width: 50%;
-    display: flex;
-    justify-content: flex-end;
     margin: 8px 10px;
+    align-self: center;
+    border: 1.6px solid;
+    padding: 5px 12px;
+    border-radius: 3px;
+    letter-spacing: 2px;
+}
 
+.searchbox a{
+	color: #000;
+}
+
+.searchbox:hover {
+	background-color: #a481c0;
+	
+}
+
+.searchbox a:hover{
+	color: #fff;
 }
 
 .search_input {
@@ -122,6 +136,38 @@
 	font-weight: 900;
     text-decoration: none;
     color: #0000009d;
+}
+
+@media screen and (max-width:1220px) { 
+	
+	.selectbox {
+    	width: 88%;
+	}
+	
+	
+
+}
+
+@media screen and (max-width:1220px) { 
+	
+	.selectbox {
+    	width: 88%;
+	}
+	
+	.article_box {
+    	width: 50%;
+	}
+	
+	
+}
+
+@media screen and (max-width:1000px) { 
+	
+	.selectbox {
+    	width: 84%;
+	}
+	
+	
 }
 
 

@@ -54,7 +54,7 @@ a {
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid #ffffff;
-    padding-top: 5%;
+    padding-top: 2%;
 }
 
 .contentbox {
@@ -138,6 +138,7 @@ a {
     font-size: 50px;
     letter-spacing: 0.6rem;
     margin-bottom: 55px;
+    color: #343434;
 }
 
 .content_wrapper {
@@ -391,6 +392,7 @@ color: #14D5B3;
     font-weight: 600;
     font-size: 24px;
     margin-bottom: 6px;
+    color: #343434;
 }
 
 .lesson_info {
@@ -401,6 +403,8 @@ color: #14D5B3;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    color: #343434;
+    font-size: 1rem;
 }
 
 .lesson_readmore {
@@ -430,3 +434,44 @@ color: #14D5B3;
         filter: blur(0);
     }
 }
+
+@media screen and (max-width:1000px) { 
+  .neon {
+
+    font-size: 120px;
+  }
+
+}
+
+@media screen and (max-width:900px) { 
+	.product_list {
+	    width: 42%;
+	    margin: auto;
+		margin-bottom: 9%;
+	}
+	
+	.les {
+	    width: 90%;
+	    margin: auto;
+	    margin-bottom: 5%;
+	}
+	
+	.les:last-child {
+	    width: 90%;
+	    margin: auto;
+	}
+	
+	.act {
+		margin-left: 10px;
+	}
+	
+	.article_lists {
+	    margin: 14px;
+	}
+	
+	.contentbox {
+	    margin: 0 0 30px;
+	}
+	
+}
+

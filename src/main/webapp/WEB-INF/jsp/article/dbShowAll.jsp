@@ -20,10 +20,6 @@
       <div class="main-panel">
       	<div class="top_content d-flex">
     		<h3>專欄管理</h3>
-    		<form class="d-flex searchbox">
-	          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-	          <button class="btn btn-outline-success" type="submit">Search</button>
-	        </form>
       	</div> 
       	
         <div class="content-wrapper">
@@ -31,7 +27,6 @@
 				<table class=" content table">
 				  <thead>
 				    <tr>
-				      <th scope="col">ID</th>
 				      <th scope="col">標題</th>
 				      <th scope="col">主題</th>
 				      <th scope="col">狀態</th>
@@ -42,7 +37,6 @@
 				  <jstl:forEach var="article" items="${page.content}">
 				  <tbody>
 				    <tr>
-				      <td scope="row">${article.article_id}</th>
 				      <td width="20px">${article.article_name}</td>
 				      <td>${article.article_theme}</td>
 				      <td>${article.status}</td>
@@ -66,22 +60,23 @@
 				  </tbody>
 				  </jstl:forEach>
 				</table>
-				<jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}">
-				  <jstl:choose>
-				     <jstl:when test="${page.number != pageNumber-1 }">
-				          <a href="${contextRoot}/article/dbShowAll?p=${pageNumber}">${pageNumber}</a>
-				     </jstl:when>
-				     <jstl:otherwise>
-				            ${pageNumber}
-				     </jstl:otherwise>
-				  
-				  </jstl:choose>
-			
-				  <jstl:if test="${pageNumber != page.totalPages }">
-				    -
-				  </jstl:if>
-				</jstl:forEach>
-			
+				<div style="text-align: center">
+					<jstl:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+					  <jstl:choose>
+					     <jstl:when test="${page.number != pageNumber-1 }">
+					          <a href="${contextRoot}/article/dbShowAll?p=${pageNumber}">${pageNumber}</a>
+					     </jstl:when>
+					     <jstl:otherwise>
+					            ${pageNumber}
+					     </jstl:otherwise>
+					  
+					  </jstl:choose>
+				
+					  <jstl:if test="${pageNumber != page.totalPages }">
+					    -
+					  </jstl:if>
+					</jstl:forEach>
+				</div>
           </div>
         </div>
       </div>

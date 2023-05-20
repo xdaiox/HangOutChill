@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
   <jstl:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
@@ -79,7 +80,9 @@
 		                            </div>
 		                        </div>
 		                        <div class="act_info">
-		                            <div class="art_text">報名截止日: ${al.deadLine}</div>     
+			                        <div class="art_text">報名截止日:
+			                        	<fmt:formatDate pattern="yyyy-MM-dd" value="${al.deadLine}"/>
+		                         	</div>     
 		                            <jstl:choose>
 									    <jstl:when test="${(al.quota-aal.registered)<5}">
 		                            		<div class="act_lavenum">剩餘人數: ${al.quota-aal.registered}</div>
@@ -142,6 +145,37 @@
 	            </div>
 	        </div>
 	    </section>
+	    
+       	<section class="content_wrapper">
+	        <div class="newArticle">
+	            <div class="titlebox">
+	                <h1>Article</h1>
+	            </div>
+	            <jstl:forEach var="art" items="${art}">
+		            <ul class="article_lists">
+		                <li class="art">
+		                    <a href="/hangoutchill/article/articleContent?article_id=${art.article_id}">
+		                        <div class="art_img">
+		                            <img src="${art.article_mainImg}" alt="">
+		                        </div>
+		                        <div class="art_content">
+		                            <div class="art_toptitle">
+		                                <p class="art_time">
+			                                <fmt:formatDate pattern="yyyy-MM-dd" value="${art.createtime}"/>
+		                                </p>
+		                                <p class="art theme">${art.article_theme}</p>
+		                            </div>
+		                            <div class="art_name">
+		                                <span>${art.article_excerpt}</span>
+		                            </div>
+		                        </div>
+		                        <div class="art_arrow"></div>
+		                    </a>
+		                </li>
+		            </ul>
+	            </jstl:forEach>
+	        </div>
+    	</section>
 
     <section class="content_wrapper">
         <div class="newArticle">
@@ -151,7 +185,7 @@
 
             <div class="contentBox act_box">
                 <!-- 課程 -->
-                <div class="lesson_list">
+                <div class="lesson_list les">
                     <div class="lesson_photo">
                         <a href="#">
                             <img src="/images/archipelago.jpg" alt="">
@@ -167,40 +201,27 @@
                         <a href=""><div class="lesson_readmore"> READMORE></div></a>
                     </div>
                 </div>
+                <div class="lesson_list les">
+                    <div class="lesson_photo">
+                        <a href="#">
+                            <img src="/images/archipelago.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="lesson">
+                        <div class="lesson_title">
+                            <p>高雄限定最浪漫酒吧——永心鳳茶推出《月光茗酊室》</p>
+                        </div>
+                        <div class="lesson_info">
+                            宵夜場所五花八門，從街邊攤販到餐廳和夜市，提供了各種各樣的美食選擇。夜市是最受歡迎的宵夜場所之一，這些夜市通常提供豐富多樣的小吃和特色美食，如滷肉飯、鹽酥雞、炒麵、燒烤和臭豆腐等。人們可以在夜市中品嚐到各種地道的台灣美食，並體驗到繁華熱鬧的夜晚氛圍。
+                        </div>
+                        <a href=""><div class="lesson_readmore"> READMORE></div></a>
+                    </div>
+                </div>
             </div>
 
         </div>
     </section>
 
-    <section class="content_wrapper">
-        <div class="newArticle">
-            <div class="titlebox">
-                <h1>Article</h1>
-            </div>
-            <jstl:forEach var="art" items="${art}">
-	            <ul class="article_lists">
-	                <li class="art">
-	                    <a href="#">
-	                        <div class="art_img">
-	                            <img src="${art.article_mainImg}" alt="">
-	                        </div>
-	                        <div class="art_content">
-	                            <div class="art_toptitle">
-	                                <p class="art_time">${art.createtime}</p>
-	                                <p class="art theme">${art.article_theme}</p>
-	                            </div>
-	                            <div class="art_name">
-	                                <span>${art.article_excerpt}</span>
-	                            </div>
-	                        </div>
-	                        <div class="art_arrow"></div>
-	                    </a>
-	                </li>
-	            </ul>
-            </jstl:forEach>
-
-        </div>
-    </section>
 
 
 

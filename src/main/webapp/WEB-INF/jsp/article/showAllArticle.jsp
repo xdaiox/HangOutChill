@@ -24,7 +24,7 @@
                 <div class="selectbox">
                     <ul>
                         <li>
-                            <a href="/hangoutchill/article/showAllArticle">全部專欄</a>
+                            <a href="/hangoutchill/article/AllArticle">全部專欄</a>
                         </li>
                         <li>
                             <a href="/hangoutchill/article/theme?article_theme=fun">消遣玩樂</a>
@@ -36,15 +36,12 @@
                             <a href="/hangoutchill/article/theme?article_theme=eats">深夜美食</a>
                         </li>
                         <li>
-                            <a href="${contextRoot}/article/articleAttention">我要投稿</a>
+                            
                         </li>
                     </ul>
                 </div>
                 <div class="searchbox">
-                    <input type="text" class="search_input" placeholder="專欄搜尋">
-                    <button class="search_submit" type="submit">
-                        <a href="#"><i class="ti-search"></i></a>
-                    </button>
+                	<a href="${contextRoot}/article/articleAttention">我要投稿</a>
                 </div>
             </section>
 

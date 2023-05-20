@@ -1,10 +1,11 @@
 .main {
     padding-top: 10px;
-    max-width: 1200px;
+    max-width: 1300px;
     width: 100%;
     margin: auto;
-    border: 1px solid #000;
-    margin-top: 120px;
+
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .main-panel {
@@ -81,8 +82,27 @@ span.icon-menu {
     padding-left: 20px;
 }
 
+.form-control {
+	height: 40px !important;
+}
+
+.form-select {
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
+}
+
+.note-editor.note-frame {
+    background-color: #fff;
+}
+
 .content-wrapper .cw {
     flex-wrap: unset;
+}
+
+.createContent {
+	text-align: center;
+	font-size: 32px;
+	letter-spacing: 0.6rem;
 }
 
 .titleName {
@@ -111,6 +131,10 @@ button.btn.btn-primary {
     background-color: #414141;
 }
 
+.btn {
+	margin-top: 20px;
+}
+
 .defaultImg {
 	padding-left: 0;
 }
@@ -124,7 +148,7 @@ button.btn.btn-primary {
 .defaultBox {
     background-color: #e1e1e1;
     padding-top: 40px;
-/*     height: 500px; */
+    height: 490px;
 }
 
 .uploadbox img {
@@ -152,23 +176,25 @@ textarea#articleExcerpt {
 .showArticleNameBox {
     height: unset;
     margin-top: 6px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     line-height: 2rem;
     letter-spacing: 0.1375rem;
     padding-left: 2px;
     font-weight: 600;
+    color: #343434;
 }
 
 .showArticleExcerptBox {
 	height: unset;
-	font-size: 1rem;
+	font-size: 1.1rem;
+	color: #343434;
     line-height: 1.625rem;
     text-align: justify;
     letter-spacing: 0.1rem;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
 }
 
 #showArticleName {
