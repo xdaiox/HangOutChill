@@ -20,7 +20,7 @@
     <div class="box box-border">
         <div class="box-body">
             <h4>請輸入新密碼</h4>
-            <span ><button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 20px;" id="nmemberBtn">重設密碼</button></span>
+            <span ><button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 20px;" id="reset">重設密碼</button></span>
             <form method="post" action="${contextRoot}/member/updatePwdForget " onblur="checkMail(event)">
                 <input type="hidden" name="_method" value="put">
                 <input type="hidden" value="${forgotM.id}" name="id">
